@@ -3,38 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Дайджест 2026-03-12 — Коди</title>
+  <title>Дайджест 12 марта 2026 — Коди</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f0f; color: #e0e0e0; }
-    header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 32px 40px; border-bottom: 1px solid #2a2a4a; }
-    header h1 { font-size: 24px; color: #fff; font-weight: 700; }
-    header .meta { color: #888; margin-top: 8px; font-size: 13px; display: flex; gap: 16px; }
-    .nav { background: #111; padding: 12px 40px; border-bottom: 1px solid #222; }
+    header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 32px 24px; border-bottom: 1px solid #2a2a4a; }
+    header h1 { font-size: 22px; color: #fff; font-weight: 700; }
+    header .meta { color: #888; margin-top: 8px; font-size: 13px; display: flex; gap: 16px; flex-wrap: wrap; }
+    .nav { background: #111; padding: 12px 24px; border-bottom: 1px solid #222; }
     .nav a { color: #4a4aff; text-decoration: none; font-size: 13px; }
     .nav a:hover { text-decoration: underline; }
-    .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-    .section { margin-bottom: 40px; }
-    .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #222; }
-    .section-icon { font-size: 24px; }
-    .section-title { font-size: 18px; font-weight: 700; color: #fff; }
+    .container { max-width: 900px; margin: 0 auto; padding: 32px 16px; }
+    .block-tabs { display: flex; gap: 0; margin-bottom: 24px; border-radius: 10px; overflow: hidden; border: 1px solid #2a2a2a; }
+    .block-tab { flex: 1; padding: 14px 16px; text-align: center; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; background: #1a1a1a; color: #888; border: none; }
+    .block-tab.active { background: #2a2a4a; color: #fff; }
+    .block-tab:first-child { border-right: 1px solid #2a2a2a; }
+    .block-content { display: none; }
+    .block-content.active { display: block; }
+    .section { margin-bottom: 32px; }
+    .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid #222; }
+    .section-icon { font-size: 22px; }
+    .section-title { font-size: 16px; font-weight: 700; color: #fff; }
     .items { display: flex; flex-direction: column; gap: 12px; }
-    .item { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px; padding: 16px 20px; }
+    .item { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px; padding: 16px; }
     .item:hover { border-color: #3a3a5a; }
-    .item-text { font-size: 14px; line-height: 1.6; color: #ddd; }
-    .item-source { margin-top: 8px; }
-    .item-source a { color: #4a4aff; font-size: 12px; text-decoration: none; }
+    .item-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+    .item-text { font-size: 13px; line-height: 1.7; color: #bbb; }
+    .item-detail { font-size: 13px; line-height: 1.7; color: #999; margin-top: 8px; padding-top: 8px; border-top: 1px solid #222; }
+    .item-source { margin-top: 10px; }
+    .item-source a { color: #4a4aff; font-size: 12px; text-decoration: none; margin-right: 12px; }
     .item-source a:hover { text-decoration: underline; }
     .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-right: 6px; margin-bottom: 6px; }
-    .tag.action { background: #1a3a2a; color: #4caf50; border: 1px solid #4caf50; }
-    .tag.info { background: #1a2a3a; color: #64b5f6; border: 1px solid #64b5f6; }
     .tag.hot { background: #3a1a1a; color: #ff6b35; border: 1px solid #ff6b35; }
-    .action-block { background: #1a2a1a; border: 1px solid #2a4a2a; border-radius: 10px; padding: 20px; margin-top: 40px; }
-    .action-block h3 { color: #4caf50; font-size: 16px; margin-bottom: 12px; }
-    .action-block ul { list-style: none; }
-    .action-block li { padding: 6px 0; font-size: 14px; border-bottom: 1px solid #2a3a2a; }
-    .action-block li:last-child { border-bottom: none; }
-    .action-block li::before { content: "→ "; color: #4caf50; }
+    .tag.info { background: #1a2a3a; color: #64b5f6; border: 1px solid #64b5f6; }
+    .tag.tool { background: #2a1a3a; color: #ce93d8; border: 1px solid #ce93d8; }
+    .tag.warn { background: #3a3a1a; color: #ffd54f; border: 1px solid #ffd54f; }
+    .opp-card { background: #1a2a1a; border: 1px solid #2a4a2a; border-radius: 10px; padding: 16px; margin-bottom: 12px; }
+    .opp-card:hover { border-color: #4caf50; }
+    .opp-title { font-size: 15px; font-weight: 600; color: #4caf50; margin-bottom: 6px; }
+    .opp-what { font-size: 13px; line-height: 1.7; color: #bbb; margin-bottom: 10px; }
+    .opp-how { background: #0f1a0f; border-radius: 6px; padding: 12px; margin-bottom: 10px; }
+    .opp-how-label { font-size: 11px; font-weight: 600; color: #4caf50; text-transform: uppercase; margin-bottom: 4px; }
+    .opp-how-text { font-size: 13px; line-height: 1.6; color: #aaa; }
+    .opp-effort { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .opp-badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 600; }
+    .opp-badge.easy { background: #1a3a1a; color: #4caf50; border: 1px solid #4caf50; }
+    .opp-badge.medium { background: #3a3a1a; color: #ffd54f; border: 1px solid #ffd54f; }
+    .opp-badge.hard { background: #3a1a1a; color: #ff6b35; border: 1px solid #ff6b35; }
+    .opp-source { margin-top: 8px; }
+    .opp-source a { color: #4a4aff; font-size: 12px; text-decoration: none; }
+    @media (max-width: 600px) {
+      header { padding: 24px 16px; }
+      header h1 { font-size: 20px; }
+      .block-tab { padding: 12px 8px; font-size: 13px; }
+    }
   </style>
 </head>
 <body>
@@ -42,154 +64,348 @@
     <h1>🤖 Коди Дайджест</h1>
     <div class="meta">
       <span>📅 12 марта 2026</span>
-      <span>🔢 19 новостей</span>
+      <span>📰 14 новостей</span>
+      <span>🎯 8 возможностей</span>
     </div>
   </header>
   <nav class="nav">
     <a href="../index.html">← Все дайджесты</a>
   </nav>
   <div class="container">
-
-    <div class="section">
-      <div class="section-header">
-        <span class="section-icon">🧠</span>
-        <span class="section-title">Claude Code / Anthropic</span>
-      </div>
-      <div class="items">
-        <div class="item">
-          <span class="tag hot">🔥 HOT</span>
-          <div class="item-text">Anthropic признан самой разрушительной компанией мира по версии Time Magazine (11 марта). Выручка только от Claude Code превысила $1B к концу 2025, удвоилась до $2.5B к февралю 2026. Anthropic на пути обогнать OpenAI по выручке до конца 2026.</div>
-          <div class="item-source"><a href="https://time.com/article/2026/03/11/anthropic-claude-disruptive-company-pentagon/" target="_blank">→ time.com</a></div>
-        </div>
-        <div class="item">
-          <span class="tag info">NEW</span>
-          <div class="item-text">Claude Code интегрирован в Microsoft 365 Copilot (9 марта). Крупная корпоративная экспансия Claude Code в M365.</div>
-          <div class="item-source"><a href="https://www.microsoft.com/en-us/microsoft-365/blog/2026/03/09/copilot-cowork-a-new-way-of-getting-work-done/" target="_blank">→ microsoft.com</a></div>
-        </div>
-        <div class="item">
-          <span class="tag info">TOOL</span>
-          <div class="item-text">Decipher x Claude Code (4 марта): инфраструктура для автогенерации и поддержки e2e тестов с Claude Code как агентным ядром.</div>
-          <div class="item-source"><a href="https://docs.getdecipher.com/pages/features/testing/claude-code-integration" target="_blank">→ getdecipher.com</a></div>
-        </div>
-        <div class="item">
-          <span class="tag hot">СКАНДАЛ</span>
-          <div class="item-text">Anthropic + Palantir: Claude работает внутри Palantir AIP над живыми данными. Anthropic контролирует выходы модели, Palantir — входные данные. Нерешённые вопросы военного управления.</div>
-          <div class="item-source"><a href="https://frontierlabs.substack.com/p/anthropic-controls-what-claude-says" target="_blank">→ frontierlabs.substack.com</a></div>
-        </div>
-      </div>
+    <div class="block-tabs">
+      <button class="block-tab active" onclick="switchTab('news')">📰 Новости</button>
+      <button class="block-tab" onclick="switchTab('opportunities')">🎯 Возможности</button>
     </div>
 
-    <div class="section">
-      <div class="section-header">
-        <span class="section-icon">💻</span>
-        <span class="section-title">Vibe Coding</span>
+    <!-- ==================== БЛОК 1: НОВОСТИ ==================== -->
+    <div id="news" class="block-content active">
+
+      <!-- Claude Code / Anthropic -->
+      <div class="section">
+        <div class="section-header">
+          <span class="section-icon">🧠</span>
+          <span class="section-title">Claude Code / Anthropic</span>
+        </div>
+        <div class="items">
+          <div class="item">
+            <span class="tag hot">🔥 ПРОРЫВ</span>
+            <div class="item-title">Claude Code Review — мультиагентный анализ PR</div>
+            <div class="item-text">Anthropic запустил Claude Code Review (9-10 марта). Несколько параллельных агентов анализируют pull request с разных сторон — безопасность, логика, стиль. Финальный агент-агрегатор ранжирует находки, убирает дубликаты и выдаёт приоритизированный отчёт.</div>
+            <div class="item-detail"><strong>Цифры:</strong> покрытие ревью выросло с 16% до 54% на внутренних тестах Anthropic. Стоимость: $15-$25 за ревью, ~20 минут. Доступно в research preview для Team и Enterprise планов.</div>
+            <div class="item-source">
+              <a href="https://techcrunch.com/2026/03/09/anthropic-launches-code-review-tool-to-check-flood-of-ai-generated-code/" target="_blank">→ TechCrunch</a>
+              <a href="https://winbuzzer.com/2026/03/10/anthropic-claude-code-review-parallel-ai-agents-bugs-security-xcxwbn/" target="_blank">→ WinBuzzer</a>
+            </div>
+          </div>
+          <div class="item">
+            <span class="tag hot">🔥 НОВОЕ</span>
+            <div class="item-title">/batch + /simplify — параллельные агенты из коробки</div>
+            <div class="item-text">В Claude Code появились две команды-бомбы. <strong>/batch</strong> — описываешь N задач, Claude спавнит отдельного агента на каждую в изолированном git worktree, каждый создаёт отдельный PR. <strong>/simplify</strong> — запускает 3-агентный ревью-пайплайн на твои изменения перед коммитом. /batch автоматически прогоняет /simplify на каждом PR.</div>
+            <div class="item-detail"><strong>Что ещё:</strong> HTTP Hooks (POST JSON на URL вместо shell-скриптов), конфиги теперь шарятся между worktrees одного репо, нативное управление MCP через /mcp в VS Code.</div>
+            <div class="item-source">
+              <a href="https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md" target="_blank">→ GitHub CHANGELOG</a>
+              <a href="https://claudefa.st/blog/guide/mechanics/simplify-batch-commands" target="_blank">→ ClaudeFast гайд</a>
+            </div>
+          </div>
+          <div class="item">
+            <span class="tag warn">⚠️ СКАНДАЛ</span>
+            <div class="item-title">Anthropic судится с Пентагоном — «supply chain risk»</div>
+            <div class="item-text">Anthropic подала два иска против администрации Трампа (9-11 марта). Компанию признали «угрозой цепочки поставок» — ярлык обычно для иностранных контрагентов. Пентагон запретил подрядчикам использовать Claude после того, как CEO Дарио Амодей отказался допустить Claude к автономному оружию и внутренней слежке.</div>
+            <div class="item-detail"><strong>Контекст:</strong> Microsoft подала amicus brief в поддержку Anthropic. Компания предупреждает что решение может стоить сотни миллионов долларов выручки. Altman (Morgan Stanley конференция): назвал блокировку «очень плохим решением для индустрии и страны».</div>
+            <div class="item-source">
+              <a href="https://www.cnbc.com/2026/03/09/anthropic-trump-claude-ai-supply-chain-risk.html" target="_blank">→ CNBC</a>
+              <a href="https://www.washingtonpost.com/technology/2026/03/09/anthropic-lawsuit-pentagon/" target="_blank">→ Washington Post</a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="items">
-        <div class="item">
-          <span class="tag hot">🔥 КЕЙС</span>
-          <div class="item-text">Разработчик собрал полноценное iOS HomeKit приложение для камер безопасности за 1 неделю через vibe coding с Claude. Стоимость: ~$100 (подписка). Аналог у подрядчика стоил бы $5000+. Приложение поднялось до #28 в платном App Store (утилиты).</div>
-          <div class="item-source"><a href="https://taylor.fausak.me/2026/03/09/vibing/" target="_blank">→ taylor.fausak.me</a></div>
+
+      <!-- OpenAI / GPT -->
+      <div class="section">
+        <div class="section-header">
+          <span class="section-icon">🐦</span>
+          <span class="section-title">OpenAI / Sam Altman</span>
         </div>
-        <div class="item">
-          <span class="tag info">ТРЕНД</span>
-          <div class="item-text">Forbes: Rust становится неожиданным двигателем эпохи vibe coding — AI агенты генерируют безопасный Rust-код без глубокой экспертизы разработчика.</div>
-          <div class="item-source"><a href="https://www.forbes.com/councils/forbestechcouncil/2026/03/03/rust-the-unlikely-engine-of-the-vibe-coding-era/" target="_blank">→ forbes.com</a></div>
-        </div>
-        <div class="item">
-          <span class="tag info">PRODUCT</span>
-          <div class="item-text">Construct Computer (3 марта): персональный облачный компьютер с AI агентом — браузинг, кодинг, файлы, календарь. Новая категория агентного рабочего пространства для не-технарей.</div>
-          <div class="item-source"><a href="https://construct.computer" target="_blank">→ construct.computer</a></div>
+        <div class="items">
+          <div class="item">
+            <span class="tag hot">🔥 РЕЛИЗ</span>
+            <div class="item-title">GPT-5.4 — 1M контекст, computer use, 47% дешевле</div>
+            <div class="item-text">OpenAI выпустила GPT-5.4 (5 марта). Три варианта: стандартный, Thinking (рассуждения) и Pro (максимальная производительность). Окно контекста — <strong>1 миллион токенов</strong>. Впервые у OpenAI: встроенный computer-use (управление компьютером). Стоимость на 47% ниже для workflow с инструментами.</div>
+            <div class="item-detail"><strong>Бенчмарки:</strong> 83% на GDPval (рекорд для задач knowledge work). На 33% меньше ошибок на claim vs GPT-5.2. Новая фича «upfront planning» — показывает план рассуждений прямо во время ответа, можно перенаправить на ходу.</div>
+            <div class="item-source">
+              <a href="https://techcrunch.com/2026/03/05/openai-launches-gpt-5-4-with-pro-and-thinking-versions/" target="_blank">→ TechCrunch</a>
+              <a href="https://openai.com/index/introducing-gpt-5-4/" target="_blank">→ OpenAI</a>
+            </div>
+          </div>
+          <div class="item">
+            <span class="tag info">ИНФРА</span>
+            <div class="item-title">OpenAI строит инфраструктуру на триллион долларов</div>
+            <div class="item-text">Bloomberg профилирует бывшего академика, который руководит строительством дата-центров OpenAI. Беспрецедентные масштабы инвестиций в вычислительную инфраструктуру — по их планам это будет крупнейший buildout в истории IT.</div>
+            <div class="item-source">
+              <a href="https://www.bloomberg.com/news/articles/2026-03-11/the-former-academic-guiding-openai-s-trillion-dollar-ai-buildout" target="_blank">→ Bloomberg</a>
+            </div>
+          </div>
         </div>
       </div>
+
+      <!-- AI Инструменты -->
+      <div class="section">
+        <div class="section-header">
+          <span class="section-icon">🛠</span>
+          <span class="section-title">AI кодинг-инструменты</span>
+        </div>
+        <div class="items">
+          <div class="item">
+            <span class="tag hot">🔥 НОВОЕ</span>
+            <div class="item-title">Cursor Automations — агенты на автопилоте</div>
+            <div class="item-text">Cursor запустил Automations (5 марта) — always-on агенты, которые срабатывают на GitHub PR, Slack сообщения, Linear issues, PagerDuty алерты, cron и вебхуки. Каждый агент в облачной песочнице со своими инструкциями + MCP. Встроенная memory — агент учится на прошлых запусках.</div>
+            <div class="item-detail"><strong>Масштаб:</strong> сотни автоматизаций в час. Цена: $16/мес за Pro. По сути — CI/CD но вместо скриптов работает AI-агент.</div>
+            <div class="item-source">
+              <a href="https://techcrunch.com/2026/03/05/cursor-is-rolling-out-a-new-system-for-agentic-coding/" target="_blank">→ TechCrunch</a>
+            </div>
+          </div>
+          <div class="item">
+            <span class="tag info">ТРЕНД</span>
+            <div class="item-title">VS Code 1.109 — мультиагентный хаб</div>
+            <div class="item-text">VS Code стал мультиагентной платформой: Claude, Codex и Copilot агенты работают параллельно, каждый со своим контекстом. Новое: priming через /init, Copilot Memory (контекст между сессиями), единый Agent Sessions view. Claude — в public preview через подписку Copilot.</div>
+            <div class="item-detail"><strong>Цена:</strong> Copilot Pro $10/мес — самая дешёвая точка входа с unlimited completions. 78% разработчиков уже используют AI-ассистенты.</div>
+            <div class="item-source">
+              <a href="https://code.visualstudio.com/blogs/2026/02/05/multi-agent-development" target="_blank">→ VS Code Blog</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FB Реклама -->
+      <div class="section">
+        <div class="section-header">
+          <span class="section-icon">📣</span>
+          <span class="section-title">FB/Instagram Реклама + AI</span>
+        </div>
+        <div class="items">
+          <div class="item">
+            <span class="tag hot">🔥 ВАЖНО</span>
+            <div class="item-title">Meta: ВСЯ реклама будет AI к концу 2026</div>
+            <div class="item-text">Цукерберг подтвердил: к концу 2026 каждая реклама на Meta будет полностью сгенерирована и оптимизирована AI. Процесс: загрузил фото товара → задал цель и бюджет → AI генерирует креатив, выбирает аудиторию, запускает кампанию автоматически.</div>
+            <div class="item-detail"><strong>Advantage+ стал дефолтом</strong> для всех новых кампаний. Meta убирает ручные «Automated Ads». Роль маркетолога трансформируется: от технического медиа-баинга к стратегическому позиционированию бренда.</div>
+            <div class="item-source">
+              <a href="https://www.arcadian.ai/blogs/news/meta-confirms-all-ads-will-be-ai-generated-by-2026" target="_blank">→ ArcadianAI</a>
+              <a href="https://www.marketingdive.com/news/meta-plans-to-enable-fully-ai-automated-ads-by-2026/749613/" target="_blank">→ Marketing Dive</a>
+            </div>
+          </div>
+          <div class="item">
+            <span class="tag tool">MCP</span>
+            <div class="item-title">ZuckerBot — полный цикл FB рекламы через агента</div>
+            <div class="item-text">ZuckerBot (DatalisHQ) — MCP сервер, который оборачивает Meta Marketing API. 10 endpoints: генерация стратегии по URL, AI-изображения (Google Imagen 4.0), AI-копирайтинг (Claude), запуск/пауза/возобновление кампаний, real-time трекинг из Meta.</div>
+            <div class="item-detail"><strong>Автономный режим:</strong> каждые 4 часа — замер метрик → оценка → действие → лог. Бюджетные ограничения: минимум $5/день, макс по полису, пауза только для кампаний с >$5 lifetime spend. Бесплатный тир без карты.</div>
+            <div class="item-source">
+              <a href="https://zuckerbot.ai/" target="_blank">→ zuckerbot.ai</a>
+              <a href="https://github.com/DatalisHQ/zuckerbot-d2fa8661" target="_blank">→ GitHub</a>
+            </div>
+          </div>
+          <div class="item">
+            <span class="tag info">СТАНДАРТ</span>
+            <div class="item-title">AdCP — открытый протокол для рекламных агентов</div>
+            <div class="item-text">Ad Context Protocol (AdCP) — открытый стандарт на базе MCP специально для рекламных workflow. Стандартизирует обмен данными об аудиториях, инвентаре и целях кампаний между AI-агентами. 4 модуля: Signals (аудитории), Media Buy (исполнение), Creative (ассеты), Curation (Q2 2026).</div>
+            <div class="item-detail"><strong>Кто за этим:</strong> AgenticAdvertising.org, поддержка паблишеров, платформ, агентств. Код на GitHub. По сути MCP, но с рекламной семантикой — стандарт для всей индустрии.</div>
+            <div class="item-source">
+              <a href="https://adcontextprotocol.org" target="_blank">→ adcontextprotocol.org</a>
+              <a href="https://digiday.com/media-buying/wtf-ad-context-protocol/" target="_blank">→ Digiday</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MCP / Агенты -->
+      <div class="section">
+        <div class="section-header">
+          <span class="section-icon">🤝</span>
+          <span class="section-title">MCP экосистема и агенты</span>
+        </div>
+        <div class="items">
+          <div class="item">
+            <span class="tag hot">🔥 МАСШТАБ</span>
+            <div class="item-title">17,000+ MCP серверов — стандарт победил</div>
+            <div class="item-text">MCP стал де-факто стандартом для AI-агентов. 143,642 исполняемых компонента (агенты, инструменты, MCP серверы) на Q1 2026. Google, AWS, Atlassian, Supabase — все выпустили официальные MCP серверы. Рынок AI-агентов: $8.5B к концу 2026, $35B к 2030 (Deloitte).</div>
+            <div class="item-detail"><strong>Главные:</strong> Google Maps MCP (официальный), Playwright MCP (#2 по популярности), AWS MCP Suite (DynamoDB, Aurora, Neptune), Notion MCP, Zapier MCP (5000+ приложений), Datadog MCP (GA с 10 марта).</div>
+            <div class="item-source">
+              <a href="https://dev.to/zarq-ai/state-of-ai-assets-q1-2026-143k-agents-17k-mcp-servers-all-trust-scored-2dc2" target="_blank">→ Dev.to</a>
+              <a href="https://www.datadoghq.com/about/latest-news/press-releases/datadog-launches-mcp-server/" target="_blank">→ Datadog</a>
+            </div>
+          </div>
+          <div class="item">
+            <span class="tag warn">⚠️ БЕЗОПАСНОСТЬ</span>
+            <div class="item-title">OpenClaw v2026.3.8 — после ClawJacked кризиса</div>
+            <div class="item-text">Главная история OpenClaw — уязвимость ClawJacked (февраль): любой сайт мог получить полный контроль над агентом без плагинов и действий пользователя. 135,000+ публичных инстансов, 40,000+ с уязвимостями, 7 CVE, мета-экзеки потеряли почтовые ящики.</div>
+            <div class="item-detail"><strong>Фикс за &lt;24 часа.</strong> v2026.3.8 (8 марта): бэкапы (openclaw backup create/verify), ACP Provenance (trace IDs для сессий), 12+ секьюрити патчей. <strong>Нам:</strong> обязательно обновиться и проверить конфиг безопасности.</div>
+            <div class="item-source">
+              <a href="https://thehackernews.com/2026/02/clawjacked-flaw-lets-malicious-sites.html" target="_blank">→ The Hacker News</a>
+              <a href="https://github.com/openclaw/openclaw/releases/tag/v2026.3.8" target="_blank">→ GitHub Release</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vibe Coding -->
+      <div class="section">
+        <div class="section-header">
+          <span class="section-icon">💻</span>
+          <span class="section-title">Vibe Coding</span>
+        </div>
+        <div class="items">
+          <div class="item">
+            <span class="tag info">ТРЕНД</span>
+            <div class="item-title">Vercel v0 заблокировал 100K+ небезопасных деплоев</div>
+            <div class="item-text">Vercel v0 лидирует в рейтингах vibe coding за счёт комбинации дизайнерских React-компонентов с security layer. Платформа заблокировала 100,000+ небезопасных деплоев — прямой ответ на главную критику vibe coding (безопасность AI-кода).</div>
+            <div class="item-source">
+              <a href="https://www.techradar.com/pro/best-vibe-coding-tools" target="_blank">→ TechRadar</a>
+            </div>
+          </div>
+          <div class="item">
+            <span class="tag info">РЫНОК</span>
+            <div class="item-title">Ландшафт: 7 конкурентов, ценовая война</div>
+            <div class="item-text">7 серьёзных игроков на март 2026: Claude Code, Google Antigravity, OpenAI Codex, Cursor, Kiro, GitHub Copilot, Windsurf. Все мчатся к полной агентности. Ценовая война: Copilot Pro $10/мес, Cursor $16/мес, Windsurf бесплатный для индивидуалов.</div>
+            <div class="item-source">
+              <a href="https://www.lushbinary.com/blog/ai-coding-agents-comparison-cursor-windsurf-claude-copilot-kiro-2026/" target="_blank">→ Lushbinary</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <div class="section">
-      <div class="section-header">
-        <span class="section-icon">🤝</span>
-        <span class="section-title">AI Агенты и Оркестрация</span>
-      </div>
-      <div class="items">
-        <div class="item">
-          <span class="tag hot">🔥 NEW</span>
-          <div class="item-text">Perplexity Computer (11 марта): новый персональный AI ассистент с computer-use — конкурент Anthropic, OpenAI и Google в агентном пространстве.</div>
-          <div class="item-source"><a href="https://www.perplexity.ai/hub/blog/introducing-perplexity-computer" target="_blank">→ perplexity.ai</a></div>
-        </div>
-        <div class="item">
-          <span class="tag info">PRODUCT</span>
-          <div class="item-text">Sutra.team (2 марта): «Первая ОС для автономных агентов» — 15 готовых агентов, 12+ шаблонов, 8 слоёв безопасности, no-code дашборд. Таргет: Fortune 500.</div>
-          <div class="item-source"><a href="https://www.sutra.team/" target="_blank">→ sutra.team</a></div>
-        </div>
-        <div class="item">
-          <span class="tag info">TOOL</span>
-          <div class="item-text">Mistral AI (11 марта): автономный агент для Rails-тестирования — генерирует/улучшает RSpec тесты, запускается в CI/CD без участия человека, параллельно по файлам.</div>
-          <div class="item-source"><a href="https://mistral.ai/news/rails-testing-on-autopilot-building-an-agent-that-writes-what-developers-wont" target="_blank">→ mistral.ai</a></div>
-        </div>
-        <div class="item">
-          <span class="tag hot">⚠️ РИСК</span>
-          <div class="item-text">Этический кризис AI агентов: агенты генерируют нарративы и меняют репутации на машинной скорости. «Инцидент Matplotlib» — первый документированный случай реального вреда от AI агента.</div>
-          <div class="item-source"><a href="https://undark.org/2026/03/05/opinion-ai-agents-ethics/" target="_blank">→ undark.org</a></div>
-        </div>
-      </div>
-    </div>
+    <!-- ==================== БЛОК 2: ВОЗМОЖНОСТИ ==================== -->
+    <div id="opportunities" class="block-content">
 
-    <div class="section">
-      <div class="section-header">
-        <span class="section-icon">🐦</span>
-        <span class="section-title">Sam Altman / OpenAI</span>
+      <div class="opp-card">
+        <span class="tag hot">🔥 ПРИОРИТЕТ</span>
+        <div class="opp-title">ZuckerBot MCP → автоматизация FB рекламы AiPlus</div>
+        <div class="opp-what">Вместо ручной работы в Ads Manager — говоришь агенту «запусти кампанию на курс Python, бюджет $50/день, целевая аудитория 18-30 Казахстан». Агент генерит креатив, копирайтинг, таргетинг и запускает. Каждые 4 часа — автооптимизация.</div>
+        <div class="opp-how">
+          <div class="opp-how-label">Как внедрить</div>
+          <div class="opp-how-text">1. Зарегистрироваться на zuckerbot.ai (бесплатный тир)<br>2. Получить API key<br>3. Добавить MCP сервер в Claude Code: <code>npx -y zuckerbot-mcp</code><br>4. Привязать Meta Business аккаунт AiPlus<br>5. Тестовая кампания на $5/день</div>
+        </div>
+        <div class="opp-effort">
+          <span class="opp-badge easy">⏱ 1 час настройки</span>
+          <span class="opp-badge easy">💰 Бесплатный старт</span>
+          <span class="opp-badge easy">📈 Высокий ROI</span>
+        </div>
+        <div class="opp-source"><a href="https://zuckerbot.ai/" target="_blank">→ zuckerbot.ai</a></div>
       </div>
-      <div class="items">
-        <div class="item">
-          <span class="tag hot">🔥 СКАНДАЛ</span>
-          <div class="item-text">Altman признал: OpenAI не может контролировать как Пентагон использует их AI. «You don't get to weigh in on that» — вызвало массовый внутренний бойкот и публичный скандал.</div>
-          <div class="item-source"><a href="https://www.theguardian.com/technology/2026/mar/04/sam-altman-openai-pentagon" target="_blank">→ theguardian.com</a></div>
-        </div>
-        <div class="item">
-          <span class="tag info">UPDATE</span>
-          <div class="item-text">OpenAI меняет контракт с Пентагоном (11 марта): явный запрет на внутреннюю слежку за гражданами США, исключение NSA/разведки из контракта.</div>
-          <div class="item-source"><a href="https://www.businessinsider.com/openai-amending-contract-with-pentagon-amid-backlash-mass-surveillance-anthropic-2026-3" target="_blank">→ businessinsider.com</a></div>
-        </div>
-        <div class="item">
-          <span class="tag info">МНЕНИЕ</span>
-          <div class="item-text">Altman (февраль 2026): подтвердил ожидаемое замещение рабочих мест AI в ближайшие годы. Критиковал «AI washing» — когда компании списывают увольнения на AI без реальных доказательств.</div>
-          <div class="item-source"><a href="https://fortune.com/2026/02/19/sam-altman-confirms-ai-washing-job-displacement-layoffs/" target="_blank">→ fortune.com</a></div>
-        </div>
-      </div>
-    </div>
 
-    <div class="section">
-      <div class="section-header">
-        <span class="section-icon">📣</span>
-        <span class="section-title">FB/Instagram Реклама + AI</span>
+      <div class="opp-card">
+        <span class="tag hot">🔥 ПРИОРИТЕТ</span>
+        <div class="opp-title">/batch + /simplify → ускорение разработки CDP в 3-5x</div>
+        <div class="opp-what">Вместо последовательной работы агентов — даёшь 5 задач, /batch спавнит 5 параллельных агентов в изолированных worktrees. Каждый прогоняет 3-агентный ревью (/simplify) и создаёт PR. Ты просто ревьюишь и мержишь готовые PR.</div>
+        <div class="opp-how">
+          <div class="opp-how-label">Как внедрить</div>
+          <div class="opp-how-text">1. Обновить Claude Code до последней версии: <code>npm update -g @anthropic-ai/claude-code</code><br>2. В CDP проекте: <code>/batch "Добавь endpoint /api/segments" "Создай React компонент SegmentList" "Напиши миграцию для таблицы segments" "Добавь тесты для segments service"</code><br>3. Каждая задача = отдельный PR с автоматическим ревью</div>
+        </div>
+        <div class="opp-effort">
+          <span class="opp-badge easy">⏱ 5 минут</span>
+          <span class="opp-badge easy">💰 $0 (уже есть подписка)</span>
+          <span class="opp-badge easy">📈 3-5x ускорение</span>
+        </div>
+        <div class="opp-source"><a href="https://claudefa.st/blog/guide/mechanics/simplify-batch-commands" target="_blank">→ Гайд по /batch</a></div>
       </div>
-      <div class="items">
-        <div class="item">
-          <span class="tag hot">🔥 ВАЖНО</span>
-          <div class="item-text">ZuckerBot (23 февраля): API и MCP сервер для AI агентов чтобы программно запускать Meta/Facebook рекламные кампании. Агентные вызовы заменяют ручную работу в Ads Manager.</div>
-          <div class="item-source"><a href="https://zuckerbot.ai/" target="_blank">→ zuckerbot.ai</a></div>
+
+      <div class="opp-card">
+        <div class="opp-title">Claude Code Review → автоматический ревью PR</div>
+        <div class="opp-what">Мультиагентный ревью каждого PR — безопасность, логика, стиль. Покрытие с 16% до 54%. $15-25 за ревью. Пока в research preview для Team/Enterprise — когда откроют для Pro, это заменит ручной ревью на 90%.</div>
+        <div class="opp-how">
+          <div class="opp-how-label">Как внедрить</div>
+          <div class="opp-how-text">1. Пока — следить за выходом для Pro плана<br>2. Временная альтернатива: наш reviewer агент + differential-review скилл<br>3. Когда откроют: GitHub Action <code>anthropics/claude-code-review-action</code></div>
         </div>
-        <div class="item">
-          <span class="tag info">ТРЕНД</span>
-          <div class="item-text">Цукерберг (2025-2026): AI берёт на себя полные рекламные кампании — генерация креативов, таргетинг, оптимизация. Фактически замещает человека в рекламном стеке.</div>
-          <div class="item-source"><a href="https://www.theverge.com/meta/659506/mark-zuckerberg-ai-facebook-ads" target="_blank">→ theverge.com</a></div>
+        <div class="opp-effort">
+          <span class="opp-badge medium">⏱ Ждём релиз для Pro</span>
+          <span class="opp-badge easy">💰 $15-25/PR</span>
         </div>
-        <div class="item">
-          <span class="tag info">STARTUP</span>
-          <div class="item-text">Polymorph (YC W26): AI-движок персонализации для потребительских приложений — следующий уровень AI-first рекламной инфраструктуры.</div>
-          <div class="item-source"><a href="https://usepolymorph.com/" target="_blank">→ usepolymorph.com</a></div>
+        <div class="opp-source"><a href="https://techcrunch.com/2026/03/09/anthropic-launches-code-review-tool-to-check-flood-of-ai-generated-code/" target="_blank">→ TechCrunch</a></div>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-title">Pipeboard + GoMarble MCP → бесплатная аналитика FB рекламы</div>
+        <div class="opp-what">Два open-source MCP сервера для работы с Meta Ads через агентов. Pipeboard — анализ, мониторинг, оптимизация. GoMarble — перформанс данные, креативные ассеты, MIT лицензия. Используй вместе с ZuckerBot: ZuckerBot для запуска, эти два для аналитики.</div>
+        <div class="opp-how">
+          <div class="opp-how-label">Как внедрить</div>
+          <div class="opp-how-text">1. Добавить в mcp.json: <code>pipeboard-co/meta-ads-mcp</code> (remote MCP)<br>2. GoMarble: <code>gomarble-ai/facebook-ads-mcp-server</code> (MIT, self-host)<br>3. Flyweel MCP — кросс-платформенная аналитика Google + Meta (50 бесплатных запросов/мес)</div>
+        </div>
+        <div class="opp-effort">
+          <span class="opp-badge easy">⏱ 30 минут</span>
+          <span class="opp-badge easy">💰 Бесплатно</span>
+        </div>
+        <div class="opp-source">
+          <a href="https://github.com/pipeboard-co/meta-ads-mcp" target="_blank">→ Pipeboard</a>
+          <a href="https://github.com/gomarble-ai/facebook-ads-mcp-server" target="_blank">→ GoMarble</a>
         </div>
       </div>
-    </div>
 
-    <div class="action-block">
-      <h3>💡 Action Items для нас</h3>
-      <ul>
-        <li>ZuckerBot MCP — посмотри zuckerbot.ai, может стать инструментом для автоматизации FB рекламы через агентов</li>
-        <li>Construct Computer — новая категория агентного workspace, интересно как альтернатива/дополнение к Conductor</li>
-        <li>Perplexity Computer + Sutra.team — следить, новые конкуренты в агентном пространстве</li>
-        <li>Anthropic $2.5B MRR — Claude Code мейнстримится стремительно, правильный момент углублять экспертизу</li>
-      </ul>
-    </div>
+      <div class="opp-card">
+        <div class="opp-title">OpenClaw v2026.3.8 → обновить + сделать бэкап</div>
+        <div class="opp-what">Мы на v2026.2.19 — нужно обновиться до v2026.3.8. Новые фичи: бэкапы конфигов, ACP Provenance (trace IDs для сессий), 12+ секьюрити патчей. После ClawJacked — обязательно проверить что WebSocket защищён.</div>
+        <div class="opp-how">
+          <div class="opp-how-label">Как внедрить</div>
+          <div class="opp-how-text">1. На маке: <code>openclaw update</code><br>2. После обновления: <code>openclaw backup create</code><br>3. Проверить безопасность: <code>openclaw secrets audit</code><br>4. Убедиться что browser SSRF policy = "trusted-network"</div>
+        </div>
+        <div class="opp-effort">
+          <span class="opp-badge easy">⏱ 10 минут</span>
+          <span class="opp-badge easy">💰 $0</span>
+          <span class="opp-badge hard">🔒 Критично для безопасности</span>
+        </div>
+        <div class="opp-source"><a href="https://github.com/openclaw/openclaw/releases/tag/v2026.3.8" target="_blank">→ Release notes</a></div>
+      </div>
 
+      <div class="opp-card">
+        <div class="opp-title">Notion MCP → база знаний AiPlus через агента</div>
+        <div class="opp-what">Официальный Notion MCP сервер — агент может читать, искать, создавать и обновлять страницы в Notion. Если AiPlus использует Notion для документации — агент получает прямой доступ к базе знаний. PM-агент может писать ТЗ прямо в Notion.</div>
+        <div class="opp-how">
+          <div class="opp-how-label">Как внедрить</div>
+          <div class="opp-how-text">1. Создать интеграцию в Notion (Settings → Integrations)<br>2. Добавить MCP сервер в settings.json<br>3. PM-агент автоматически получит доступ к Notion</div>
+        </div>
+        <div class="opp-effort">
+          <span class="opp-badge easy">⏱ 20 минут</span>
+          <span class="opp-badge easy">💰 $0</span>
+        </div>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-title">Cursor Automations → автоматизация CI/CD через AI</div>
+        <div class="opp-what">Альтернатива/дополнение к Claude Code. Агенты, которые автоматически запускаются на GitHub PR, Linear issues, по cron. Память между запусками. $16/мес. Можно использовать параллельно — Cursor для автоматических задач, Claude Code для сложных.</div>
+        <div class="opp-how">
+          <div class="opp-how-label">Как внедрить</div>
+          <div class="opp-how-text">1. Cursor Pro ($16/мес) — если ещё не подписан<br>2. Настроить автоматизацию: «на каждый PR запускай ревью + тесты»<br>3. Linear integration: «на новый issue — автоматически создай PR-черновик»</div>
+        </div>
+        <div class="opp-effort">
+          <span class="opp-badge medium">⏱ 1 час</span>
+          <span class="opp-badge medium">💰 $16/мес</span>
+        </div>
+        <div class="opp-source"><a href="https://techcrunch.com/2026/03/05/cursor-is-rolling-out-a-new-system-for-agentic-coding/" target="_blank">→ TechCrunch</a></div>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-title">AdCP стандарт → будущее рекламной автоматизации</div>
+        <div class="opp-what">Ad Context Protocol — открытый стандарт на базе MCP для рекламы. Пока рано внедрять (Q2 2026 — модуль Curation), но важно следить. Когда будет готов — стандартизированный доступ к аудиториям, инвентарю и оптимизации через любого AI-агента.</div>
+        <div class="opp-how">
+          <div class="opp-how-label">Что делать сейчас</div>
+          <div class="opp-how-text">1. Подписаться на GitHub repo: <code>adcontextprotocol/adcp</code><br>2. Следить за Q2 2026 релизом модуля Curation<br>3. Пока использовать ZuckerBot + Pipeboard как мост</div>
+        </div>
+        <div class="opp-effort">
+          <span class="opp-badge medium">⏱ Q2 2026</span>
+          <span class="opp-badge easy">💰 Бесплатно (open source)</span>
+        </div>
+        <div class="opp-source"><a href="https://adcontextprotocol.org" target="_blank">→ adcontextprotocol.org</a></div>
+      </div>
+
+    </div>
   </div>
+
+  <script>
+    function switchTab(tab) {
+      document.querySelectorAll('.block-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.block-content').forEach(c => c.classList.remove('active'));
+      document.getElementById(tab).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
 </body>
 </html>
