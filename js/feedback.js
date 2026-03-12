@@ -327,9 +327,12 @@ function updateFeedbackPanel(date) {
   // \u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u043a\u043d\u043e\u043f\u043a\u0443 \u043e\u0442\u043f\u0440\u0430\u0432\u043a\u0438
   const sendBtn = panel.querySelector('.feedback-send-btn');
   if (sendBtn) {
-    if (stats.sent) {
+    if (stats.sent && (stats.likes + stats.dislikes + stats.backlog) === 0) {
       sendBtn.classList.add('sent');
       sendBtn.textContent = '\u2713 \u041e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043e';
+    } else if (stats.sent) {
+      sendBtn.classList.remove('sent');
+      sendBtn.textContent = '\ud83d\udce4 \u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c \u0435\u0449\u0451 \u0440\u0430\u0437';
     } else {
       sendBtn.classList.remove('sent');
       sendBtn.textContent = '\ud83d\udce4 \u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c \u041a\u043e\u0434\u0438';
