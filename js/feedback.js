@@ -307,39 +307,31 @@ function updateDigestStats() {
   });
 }
 
-// V2: Real cloud sync via JSONBlob
-const BLOB_ID = '019ce1be-ff7c-7594-b069-57f384d8612c';
+// V2: Cloud sync via JSONBlob — читаем из FeedbackStore
+const BLOB_ID = '019ce1ad-c8bf-70cc-b2c5-2a0bc70df06f';
 const BLOB_URL = `https://jsonblob.com/api/jsonBlob/${BLOB_ID}`;
 
 async function syncToCloud() {
+    const stored = JSON.parse(localStorage.getItem('kodiDigest') || '{}');
     const data = {
-        feedback: getFeedback(),
-        syncedAt: new Date().toISOString(),
-        preferences: loadPreferences()
+        feedback: stored.feedbackData || {},
+        allLiked: stored.allLiked || [],
+        allBacklog: stored.allBacklog || [],
+        syncedAt: new Date().toISOString()
     };
     try {
-        await fetch(BLOB_URL, {
+        const resp = await fetch(BLOB_URL, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify(data)
         });
-        updateSyncStatus('✅ Синхронизировано');
+        if (resp.ok) {
+            updateSyncStatus('☁️ Синхронизировано', 'ok');
+        } else {
+            updateSyncStatus('⚠️ Ошибка синхронизации', 'error');
+        }
     } catch(e) {
-        updateSyncStatus('⚠️ Только локально');
+        updateSyncStatus('⚠️ Только локально', 'error');
     }
-}
-
-function getFeedback() {
-    return {
-        likes: JSON.parse(localStorage.getItem('digest_likes') || '{}'),
-        dislikes: JSON.parse(localStorage.getItem('digest_dislikes') || '{}'),
-        backlog: JSON.parse(localStorage.getItem('digest_backlog') || '[]')
-    };
-}
-
-function loadPreferences() {
-    return JSON.parse(localStorage.getItem('digest_preferences') || '{"boost":[],"suppress":[]}');
+    setTimeout(() => updateSyncStatus('', ''), 3000);
 }
