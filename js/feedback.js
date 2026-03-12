@@ -232,23 +232,37 @@ async function sendFeedback(date) {
   const text = FeedbackStore.getFeedbackText(date);
   if (!text) return;
 
+  // Попробовать Web Share API (нативный share sheet — один тап)
+  if (navigator.share) {
+    try {
+      await navigator.share({ text });
+      updateSyncStatus('✅ Отправлено', 'ok');
+      setTimeout(() => updateSyncStatus('', ''), 3000);
+      return;
+    } catch (e) {
+      // Юзер отменил или ошибка — fallback ниже
+    }
+  }
+
+  // Fallback: копируем в буфер + открываем Telegram
   try {
     await navigator.clipboard.writeText(text);
-    updateSyncStatus('✅ Скопировано — вставь мне в чат', 'ok');
   } catch {
-    // Fallback: textarea copy
     const ta = document.createElement('textarea');
     ta.value = text;
-    ta.style.position = 'fixed';
-    ta.style.opacity = '0';
+    ta.style.cssText = 'position:fixed;opacity:0';
     document.body.appendChild(ta);
     ta.select();
     document.execCommand('copy');
     document.body.removeChild(ta);
-    updateSyncStatus('✅ Скопировано — вставь мне в чат', 'ok');
   }
 
-  setTimeout(() => updateSyncStatus('', ''), 4000);
+  updateSyncStatus('📋 Скопировано — вставь в чат ↓', 'ok');
+  // Открываем Telegram с Коди
+  setTimeout(() => {
+    window.open('https://t.me/Kodi_v2_bot', '_blank');
+  }, 500);
+  setTimeout(() => updateSyncStatus('', ''), 5000);
 }
 
 /* === Рендер liked.html === */
@@ -307,31 +321,8 @@ function updateDigestStats() {
   });
 }
 
-// V2: Cloud sync via JSONBlob — читаем из FeedbackStore
-const BLOB_ID = '019ce1ad-c8bf-70cc-b2c5-2a0bc70df06f';
-const BLOB_URL = `https://jsonblob.com/api/jsonBlob/${BLOB_ID}`;
-
-async function syncToCloud() {
-    const stored = JSON.parse(localStorage.getItem('kodiDigest') || '{}');
-    const data = {
-        feedback: stored.feedbackData || {},
-        allLiked: stored.allLiked || [],
-        allBacklog: stored.allBacklog || [],
-        syncedAt: new Date().toISOString()
-    };
-    try {
-        const resp = await fetch(BLOB_URL, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify(data)
-        });
-        if (resp.ok) {
-            updateSyncStatus('☁️ Синхронизировано', 'ok');
-        } else {
-            updateSyncStatus('⚠️ Ошибка синхронизации', 'error');
-        }
-    } catch(e) {
-        updateSyncStatus('⚠️ Только локально', 'error');
-    }
-    setTimeout(() => updateSyncStatus('', ''), 3000);
+// Синхронизация: через Telegram (Web Share API → fallback clipboard + tg link)
+// Нет облачной БД — фидбэк приходит через чат, Коди обрабатывает
+function syncToCloud() {
+  // No-op: синк теперь через кнопку "Отправить Коди" → Telegram
 }
