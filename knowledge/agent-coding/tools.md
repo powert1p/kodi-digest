@@ -4,11 +4,16 @@
 
 ## Claude Code CLI
 - Версия: v2.1.74 (12 марта 2026)
+- Модель: Opus 4.6 (1M context window, medium effort по дефолту)
 - Agent Teams: experimental, env CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
 - Субагенты: Plan (Sonnet, read-only), Explore (Haiku), General-Purpose (Sonnet, все)
 - Кастомные агенты: .claude/agents/*.md
-- Скиллы: .claude/skills/*/SKILL.md
+- Скиллы: .claude/skills/*/SKILL.md (кроссплатформенный стандарт)
 - Хуки: 13 событий (SessionStart, Stop, SubagentStart, PreToolUse...)
+- `/loop` команда: повторяющиеся промпты по cron-расписанию
+- `/plan` принимает описание аргументом
+- `ExitWorktree` tool — выход из worktree сессий
+- Built-in git worktree поддержка для изоляции агентов
 
 ## Conductor.build
 - Mac app, бесплатный (Melty Labs, YC S24)
@@ -35,6 +40,9 @@
 - GitHub: ghcr.io/github/github-mcp-server
 - Exa: семантический поиск
 - Tavily: LLM-поиск
+- Datadog: мониторинг + алерты через MCP (9 марта 2026)
+- Neon: DB branching для параллельных агентов
+- Stripe: платежи + финансовая аналитика
 
 ## Cursor
 - ARR: $2B+ (март 2026), удвоился за 3 месяца
