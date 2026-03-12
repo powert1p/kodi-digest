@@ -6,67 +6,42 @@
   <title>Дайджест {{DATE}} — Коди</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f0f; color: #e0e0e0; }
-    header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 32px 24px; border-bottom: 1px solid #2a2a4a; }
-    header h1 { font-size: 22px; color: #fff; font-weight: 700; }
-    header .meta { color: #888; margin-top: 8px; font-size: 13px; display: flex; gap: 16px; flex-wrap: wrap; }
-    .nav { background: #111; padding: 12px 24px; border-bottom: 1px solid #222; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f0f; color: #e0e0e0; line-height: 1.6; }
+    header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 28px 24px; border-bottom: 1px solid #2a2a4a; }
+    header h1 { font-size: 20px; color: #fff; font-weight: 700; }
+    header .meta { color: #888; margin-top: 6px; font-size: 12px; display: flex; gap: 16px; flex-wrap: wrap; }
+    .nav { background: #111; padding: 10px 24px; border-bottom: 1px solid #222; }
     .nav a { color: #4a4aff; text-decoration: none; font-size: 13px; }
-    .nav a:hover { text-decoration: underline; }
-    .container { max-width: 900px; margin: 0 auto; padding: 32px 16px; }
+    .container { max-width: 720px; margin: 0 auto; padding: 24px 16px; }
 
-    /* Блок-переключатели */
-    .block-tabs { display: flex; gap: 0; margin-bottom: 24px; border-radius: 10px; overflow: hidden; border: 1px solid #2a2a2a; }
-    .block-tab { flex: 1; padding: 14px 16px; text-align: center; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; background: #1a1a1a; color: #888; border: none; }
-    .block-tab.active { background: #2a2a4a; color: #fff; }
-    .block-tab:first-child { border-right: 1px solid #2a2a2a; }
-    .block-content { display: none; }
-    .block-content.active { display: block; }
+    /* TL;DR */
+    .tldr { background: linear-gradient(135deg, #1a2a3a 0%, #1a1a2e 100%); border: 1px solid #2a4a6a; border-radius: 12px; padding: 20px; margin-bottom: 28px; }
+    .tldr-label { font-size: 11px; font-weight: 700; color: #64b5f6; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+    .tldr ul { list-style: none; }
+    .tldr li { font-size: 14px; color: #ddd; padding: 4px 0; padding-left: 20px; position: relative; }
+    .tldr li::before { content: '→'; position: absolute; left: 0; color: #64b5f6; }
 
-    /* Секции */
-    .section { margin-bottom: 32px; }
-    .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid #222; }
-    .section-icon { font-size: 22px; }
-    .section-title { font-size: 16px; font-weight: 700; color: #fff; }
-    .items { display: flex; flex-direction: column; gap: 12px; }
-
-    /* Карточка новости */
-    .item { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px; padding: 16px; }
+    /* Карточка */
+    .item { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px; padding: 16px; margin-bottom: 12px; }
     .item:hover { border-color: #3a3a5a; }
-    .item-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 8px; }
-    .item-text { font-size: 13px; line-height: 1.7; color: #bbb; }
-    .item-detail { font-size: 13px; line-height: 1.7; color: #999; margin-top: 8px; padding-top: 8px; border-top: 1px solid #222; }
-    .item-source { margin-top: 10px; }
-    .item-source a { color: #4a4aff; font-size: 12px; text-decoration: none; }
+    .item-num { font-size: 11px; font-weight: 700; color: #4a4aff; margin-bottom: 4px; }
+    .item-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 6px; }
+    .item-text { font-size: 13px; color: #bbb; margin-bottom: 8px; }
+    .item-us { background: #0f1a0f; border-left: 3px solid #4caf50; padding: 8px 12px; border-radius: 0 6px 6px 0; margin-bottom: 8px; }
+    .item-us-label { font-size: 10px; font-weight: 700; color: #4caf50; text-transform: uppercase; letter-spacing: 0.5px; }
+    .item-us-text { font-size: 13px; color: #aaa; margin-top: 2px; }
+    .item-source { font-size: 11px; }
+    .item-source a { color: #4a4aff; text-decoration: none; }
     .item-source a:hover { text-decoration: underline; }
+    .tag { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 10px; font-weight: 600; margin-right: 4px; }
+    .tag.hot { background: #3a1a1a; color: #ff6b35; }
+    .tag.tool { background: #2a1a3a; color: #ce93d8; }
+    .tag.biz { background: #3a3a1a; color: #ffd54f; }
+    .tag.warn { background: #3a2a1a; color: #ff9800; }
 
-    /* Теги */
-    .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-right: 6px; margin-bottom: 6px; }
-    .tag.hot { background: #3a1a1a; color: #ff6b35; border: 1px solid #ff6b35; }
-    .tag.info { background: #1a2a3a; color: #64b5f6; border: 1px solid #64b5f6; }
-    .tag.tool { background: #2a1a3a; color: #ce93d8; border: 1px solid #ce93d8; }
-    .tag.warn { background: #3a3a1a; color: #ffd54f; border: 1px solid #ffd54f; }
-
-    /* Карточка возможности */
-    .opp-card { background: #1a2a1a; border: 1px solid #2a4a2a; border-radius: 10px; padding: 16px; margin-bottom: 12px; }
-    .opp-card:hover { border-color: #4caf50; }
-    .opp-title { font-size: 15px; font-weight: 600; color: #4caf50; margin-bottom: 6px; }
-    .opp-what { font-size: 13px; line-height: 1.7; color: #bbb; margin-bottom: 10px; }
-    .opp-how { background: #0f1a0f; border-radius: 6px; padding: 12px; margin-bottom: 10px; }
-    .opp-how-label { font-size: 11px; font-weight: 600; color: #4caf50; text-transform: uppercase; margin-bottom: 4px; }
-    .opp-how-text { font-size: 13px; line-height: 1.6; color: #aaa; }
-    .opp-effort { display: flex; gap: 12px; flex-wrap: wrap; }
-    .opp-badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 600; }
-    .opp-badge.easy { background: #1a3a1a; color: #4caf50; border: 1px solid #4caf50; }
-    .opp-badge.medium { background: #3a3a1a; color: #ffd54f; border: 1px solid #ffd54f; }
-    .opp-badge.hard { background: #3a1a1a; color: #ff6b35; border: 1px solid #ff6b35; }
-    .opp-source a { color: #4a4aff; font-size: 12px; text-decoration: none; }
-
-    /* Мобильная адаптация */
     @media (max-width: 600px) {
-      header { padding: 24px 16px; }
-      header h1 { font-size: 20px; }
-      .block-tab { padding: 12px 8px; font-size: 13px; }
+      header { padding: 20px 16px; }
+      .container { padding: 16px 12px; }
     }
   </style>
 </head>
@@ -75,32 +50,19 @@
     <h1>🤖 Коди Дайджест</h1>
     <div class="meta">
       <span>📅 {{DATE_RU}}</span>
-      <span>📰 {{NEWS_COUNT}} новостей</span>
-      <span>🎯 {{OPP_COUNT}} возможностей</span>
+      <span>⏱ {{READ_TIME}} мин чтения</span>
+      <span>📰 {{ITEM_COUNT}} пунктов</span>
     </div>
   </header>
-  <nav class="nav">
-    <a href="../index.html">← Все дайджесты</a>
-  </nav>
+  <nav class="nav"><a href="../index.html">← Все дайджесты</a></nav>
   <div class="container">
-    <div class="block-tabs">
-      <button class="block-tab active" onclick="switchTab('news')">📰 Новости</button>
-      <button class="block-tab" onclick="switchTab('opportunities')">🎯 Возможности</button>
+    <div class="tldr">
+      <div class="tldr-label">TL;DR — 30 секунд</div>
+      <ul>
+        {{TLDR_ITEMS}}
+      </ul>
     </div>
-    <div id="news" class="block-content active">
-      {{NEWS_CONTENT}}
-    </div>
-    <div id="opportunities" class="block-content">
-      {{OPP_CONTENT}}
-    </div>
+    {{ITEMS}}
   </div>
-  <script>
-    function switchTab(tab) {
-      document.querySelectorAll('.block-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.block-content').forEach(c => c.classList.remove('active'));
-      document.getElementById(tab).classList.add('active');
-      event.target.classList.add('active');
-    }
-  </script>
 </body>
 </html>
