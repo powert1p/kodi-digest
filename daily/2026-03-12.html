@@ -4,56 +4,274 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Дайджест 12 марта 2026 — Коди</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f0f; color: #e0e0e0; line-height: 1.6; }
-    header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 28px 24px; border-bottom: 1px solid #2a2a4a; }
-    header h1 { font-size: 20px; color: #fff; font-weight: 700; }
-    header .meta { color: #888; margin-top: 6px; font-size: 12px; display: flex; gap: 16px; flex-wrap: wrap; }
-    .nav { background: #111; padding: 10px 24px; border-bottom: 1px solid #222; }
-    .nav a { color: #4a4aff; text-decoration: none; font-size: 13px; }
-    .container { max-width: 720px; margin: 0 auto; padding: 24px 16px; }
-    .tldr { background: linear-gradient(135deg, #1a2a3a 0%, #1a1a2e 100%); border: 1px solid #2a4a6a; border-radius: 12px; padding: 20px; margin-bottom: 28px; }
-    .tldr-label { font-size: 11px; font-weight: 700; color: #64b5f6; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+
+    body {
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #000;
+      color: #a1a1aa;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* — Header — */
+    .header {
+      padding: 48px 20px 40px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 1px solid rgba(124,58,237,0.3);
+      background: rgba(124,58,237,0.08);
+      font-size: 12px;
+      font-weight: 600;
+      color: #a78bfa;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .header-meta {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: #52525b;
+    }
+
+    /* — Nav — */
+    .nav {
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav a {
+      color: #7C3AED;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav a:hover { color: #a78bfa; }
+
+    /* — Container — */
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 32px 16px 64px;
+    }
+
+    /* — TL;DR — */
+    .tldr {
+      background: linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(0,0,0,0) 100%);
+      border-left: 3px solid #7C3AED;
+      border-radius: 0 12px 12px 0;
+      padding: 24px;
+      margin-bottom: 40px;
+    }
+    .tldr-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #7C3AED;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 14px;
+    }
     .tldr ul { list-style: none; }
-    .tldr li { font-size: 14px; color: #ddd; padding: 4px 0; padding-left: 20px; position: relative; }
-    .tldr li::before { content: '\2192'; position: absolute; left: 0; color: #64b5f6; }
-    .item { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px; padding: 16px; margin-bottom: 12px; }
-    .item:hover { border-color: #3a3a5a; }
-    .item-num { font-size: 11px; font-weight: 700; color: #4a4aff; margin-bottom: 4px; }
-    .item-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 6px; }
-    .item-text { font-size: 13px; color: #bbb; margin-bottom: 8px; }
-    .item-us { background: #0f1a0f; border-left: 3px solid #4caf50; padding: 8px 12px; border-radius: 0 6px 6px 0; margin-bottom: 8px; }
-    .item-us-label { font-size: 10px; font-weight: 700; color: #4caf50; text-transform: uppercase; letter-spacing: 0.5px; }
-    .item-us-text { font-size: 13px; color: #aaa; margin-top: 2px; }
-    .item-source { font-size: 11px; }
-    .item-source a { color: #4a4aff; text-decoration: none; }
-    .item-source a:hover { text-decoration: underline; }
-    .tag { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 10px; font-weight: 600; margin-right: 4px; }
-    .tag.hot { background: #3a1a1a; color: #ff6b35; }
-    .tag.tool { background: #2a1a3a; color: #ce93d8; }
-    .tag.biz { background: #3a3a1a; color: #ffd54f; }
-    .tag.warn { background: #3a2a1a; color: #ff9800; }
-    @media (max-width: 600px) {
-      header { padding: 20px 16px; }
-      .container { padding: 16px 12px; }
+    .tldr li {
+      font-size: 15px;
+      font-weight: 500;
+      color: #e4e4e7;
+      padding: 6px 0 6px 24px;
+      position: relative;
+      line-height: 1.6;
+    }
+    .tldr li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #7C3AED;
+      font-weight: 700;
+    }
+
+    /* — Sections — */
+    .section { margin-bottom: 40px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      white-space: nowrap;
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    /* — Card — */
+    .card {
+      background: #0a0a0a;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 12px;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(124,58,237,0.4);
+      box-shadow: 0 4px 24px rgba(124,58,237,0.1);
+    }
+    .card-num {
+      font-size: 11px;
+      font-weight: 600;
+      color: #52525b;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fafafa;
+      margin-bottom: 8px;
+      letter-spacing: -0.2px;
+    }
+    .card-text {
+      font-size: 14px;
+      color: #a1a1aa;
+      margin-bottom: 14px;
+      line-height: 1.7;
+    }
+
+    /* — Action block — */
+    .card-action {
+      background: rgba(16,185,129,0.06);
+      border-left: 3px solid #10B981;
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 12px;
+    }
+    .card-action-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #10B981;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .card-action-text {
+      font-size: 13px;
+      color: #d4d4d8;
+      margin-top: 4px;
+      line-height: 1.6;
+    }
+
+    /* — Source — */
+    .card-source { font-size: 12px; }
+    .card-source a {
+      color: #7C3AED;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .card-source a:hover { color: #a78bfa; }
+
+    /* — Tags — */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .tag.hot {
+      background: rgba(245,158,11,0.12);
+      color: #F59E0B;
+      border: 1px solid rgba(245,158,11,0.2);
+    }
+    .tag.tool {
+      background: rgba(124,58,237,0.12);
+      color: #a78bfa;
+      border: 1px solid rgba(124,58,237,0.2);
+    }
+    .tag.biz {
+      background: rgba(59,130,246,0.12);
+      color: #60a5fa;
+      border: 1px solid rgba(59,130,246,0.2);
+    }
+    .tag.warn {
+      background: rgba(239,68,68,0.12);
+      color: #f87171;
+      border: 1px solid rgba(239,68,68,0.2);
+    }
+
+    /* — Animations — */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* — Mobile — */
+    @media (max-width: 480px) {
+      .header { padding: 36px 16px 32px; }
+      .header h1 { font-size: 22px; }
+      .tldr { padding: 18px; }
+      .tldr li { font-size: 14px; }
+      .card { padding: 16px; }
+      .card-title { font-size: 15px; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🤖 Коди Дайджест</h1>
-    <div class="meta">
-      <span>📅 12 марта 2026</span>
-      <span>⏱ 5 мин чтения</span>
-      <span>📰 10 пунктов</span>
+  <div class="header">
+    <div class="header-badge">◆ Коди Дайджест</div>
+    <h1>12 марта 2026</h1>
+    <div class="header-meta">
+      <span>10 пунктов</span>
+      <span>·</span>
+      <span>5 мин чтения</span>
     </div>
-  </header>
-  <nav class="nav"><a href="../index.html">← Все дайджесты</a></nav>
+  </div>
+  <nav class="nav"><a href="../index.html">← Все выпуски</a></nav>
   <div class="container">
 
-    <div class="tldr">
-      <div class="tldr-label">TL;DR — 30 секунд</div>
+    <!-- TL;DR -->
+    <div class="tldr fade-in-up">
+      <div class="tldr-label">TL;DR</div>
       <ul>
         <li>Anthropic выпустил мультиагентный Code Review — несколько агентов сканируют PR параллельно, покрытие ревью 16% → 54%</li>
         <li>OpenClaw v2026.3.7 — ContextEngine Plugin Interface с lifecycle hooks, можно кастомизировать контекст агентов</li>
@@ -61,126 +279,161 @@
       </ul>
     </div>
 
-    <!-- 1 -->
-    <div class="item">
-      <div class="item-num"><span class="tag hot">🔥 HOT</span> #1</div>
-      <div class="item-title">Claude Code Review — мультиагентный анализ PR</div>
-      <div class="item-text">Anthropic выпустил Code Review для Claude Code. Несколько агентов сканируют PR параллельно — логика, безопасность, стиль. Финальный агрегатор ранжирует и дедуплицирует. Среднее время: 20 минут, $15-25 за PR. Покрытие ревью: с 16% до 54%.</div>
-      <div class="item-us">
-        <div class="item-us-label">💡 Нам</div>
-        <div class="item-us-text">Включить на CDP — автоматический ревью каждого PR. Критично для data pipeline кода с PII. Доступно на Team/Enterprise планах.</div>
+    <!-- 🌊 ВОЛНА -->
+    <div class="section">
+      <div class="section-header fade-in-up">
+        <span class="section-title">🌊 Волна</span>
+        <div class="section-line"></div>
       </div>
-      <div class="item-source"><a href="https://techcrunch.com/2026/03/09/anthropic-launches-code-review-tool-to-check-flood-of-ai-generated-code/" target="_blank">TechCrunch</a> · <a href="https://winbuzzer.com/2026/03/10/anthropic-claude-code-review-parallel-ai-agents-bugs-security-xcxwbn/" target="_blank">WinBuzzer</a></div>
+
+      <!-- #1 -->
+      <div class="card fade-in-up">
+        <div class="card-num"><span class="tag hot">HOT</span> #1</div>
+        <div class="card-title">Claude Code Review — мультиагентный анализ PR</div>
+        <div class="card-text">Anthropic выпустил Code Review для Claude Code. Несколько агентов сканируют PR параллельно — логика, безопасность, стиль. Финальный агрегатор ранжирует и дедуплицирует. Среднее время: 20 минут, $15-25 за PR. Покрытие ревью: с 16% до 54%.</div>
+        <div class="card-action">
+          <div class="card-action-label">Действие</div>
+          <div class="card-action-text">Включить на CDP — автоматический ревью каждого PR. Критично для data pipeline кода с PII. Доступно на Team/Enterprise планах.</div>
+        </div>
+        <div class="card-source"><a href="https://techcrunch.com/2026/03/09/anthropic-launches-code-review-tool-to-check-flood-of-ai-generated-code/" target="_blank">TechCrunch</a> · <a href="https://winbuzzer.com/2026/03/10/anthropic-claude-code-review-parallel-ai-agents-bugs-security-xcxwbn/" target="_blank">WinBuzzer</a></div>
+      </div>
+
+      <!-- #2 -->
+      <div class="card fade-in-up">
+        <div class="card-num"><span class="tag hot">HOT</span> #2</div>
+        <div class="card-title">OpenClaw v2026.3.7 — ContextEngine Plugin Interface</div>
+        <div class="card-text">Самое значимое архитектурное обновление: ContextEngine Plugin Interface с полным lifecycle (bootstrap, ingest, assemble, compact, afterTurn, prepareSubagentSpawn). OpenClaw перешагнул 250K звёзд на GitHub, обогнав React.</div>
+        <div class="card-action">
+          <div class="card-action-label">Действие</div>
+          <div class="card-action-text">ContextEngine hooks = кастомный контекст для CDP: инжектировать схемы данных, контролировать что видят субагенты при спавне. Нужно обновить gateway.</div>
+        </div>
+        <div class="card-source"><a href="https://eu.36kr.com/en/p/3715160552878469" target="_blank">36kr</a> · <a href="https://github.com/openclaw/openclaw/releases" target="_blank">GitHub</a></div>
+      </div>
+
+      <!-- #4 -->
+      <div class="card fade-in-up">
+        <div class="card-num"><span class="tag hot">HOT</span> #4</div>
+        <div class="card-title">GPT-5.4 — 1M токенов контекст + Computer Use</div>
+        <div class="card-text">OpenAI выпустил GPT-5.4 с нативным computer use и контекстом до 1M токенов. На 33% меньше ложных утверждений vs GPT-5.2. Есть Thinking и Pro варианты. Нет бесплатного доступа.</div>
+        <div class="card-action">
+          <div class="card-action-label">Действие</div>
+          <div class="card-action-text">1M контекст = весь CDP codebase + схема в одном промпте. Computer use = автоматический QA через UI. Давление на Anthropic → ускорит их фичи. Пока наблюдаем.</div>
+        </div>
+        <div class="card-source"><a href="https://openai.com/index/introducing-gpt-5-4/" target="_blank">OpenAI</a> · <a href="https://techcrunch.com/2026/03/05/openai-launches-gpt-5-4-with-pro-and-thinking-versions/" target="_blank">TechCrunch</a></div>
+      </div>
+
+      <!-- #5 -->
+      <div class="card fade-in-up">
+        <div class="card-num"><span class="tag biz">BIZ</span> #5</div>
+        <div class="card-title">72% enterprise AI-проектов используют мультиагентов</div>
+        <div class="card-text">Deloitte: мультиагентная архитектура в enterprise выросла с 23% (2024) до 72% (2026). Рынок AI-агентов: $7.8B → $52B к 2030. Доминируют LangGraph, CrewAI, MCP.</div>
+        <div class="card-action">
+          <div class="card-action-label">Действие</div>
+          <div class="card-action-text">Наша архитектура (PM → implementer → tester → reviewer) = мейнстрим. Можно позиционировать CDP с встроенными AI-агентами для сегментации и кампаний.</div>
+        </div>
+        <div class="card-source"><a href="https://www.deloitte.com/us/en/insights/industry/technology/technology-media-and-telecom-predictions/2026/ai-agent-orchestration.html" target="_blank">Deloitte</a></div>
+      </div>
+
+      <!-- #10 -->
+      <div class="card fade-in-up">
+        <div class="card-num"><span class="tag hot">HOT</span> #10</div>
+        <div class="card-title">NVIDIA GTC 16-19 марта — чип Feynman для агентного AI</div>
+        <div class="card-text">GTC 2026 через 4 дня. Jensen Huang обещает «удивить мир». Аналитики ждут Vera Rubin + первый deep dive в Feynman — чип оптимизированный для reasoning и долгосрочной памяти AI-агентов. Темы: физический AI, агентный inference, AI-фабрики.</div>
+        <div class="card-action">
+          <div class="card-action-label">Действие</div>
+          <div class="card-action-text">Если Feynman удешевит inference для агентов → мультиагентные CDP-воркфлоу станут дешевле. Keynote 17 марта — следить за ценами.</div>
+        </div>
+        <div class="card-source"><a href="https://blogs.nvidia.com/blog/gtc-2026-news/" target="_blank">NVIDIA</a> · <a href="https://www.tomsguide.com/computing/nvidia-gtc-2026-the-biggest-reveals-we-expect-to-see" target="_blank">Tom's Guide</a></div>
+      </div>
     </div>
 
-    <!-- 2 -->
-    <div class="item">
-      <div class="item-num"><span class="tag hot">🔥 HOT</span> #2</div>
-      <div class="item-title">OpenClaw v2026.3.7 — ContextEngine Plugin Interface</div>
-      <div class="item-text">Самое значимое архитектурное обновление: ContextEngine Plugin Interface с полным lifecycle (bootstrap, ingest, assemble, compact, afterTurn, prepareSubagentSpawn). OpenClaw перешагнул 250K звёзд на GitHub, обогнав React.</div>
-      <div class="item-us">
-        <div class="item-us-label">💡 Нам</div>
-        <div class="item-us-text">ContextEngine hooks = кастомный контекст для CDP: инжектировать схемы данных, контролировать что видят субагенты при спавне. Нужно обновить gateway.</div>
+    <!-- 🛠 ИНСТРУМЕНТЫ -->
+    <div class="section">
+      <div class="section-header fade-in-up">
+        <span class="section-title">🛠 Инструменты</span>
+        <div class="section-line"></div>
       </div>
-      <div class="item-source"><a href="https://eu.36kr.com/en/p/3715160552878469" target="_blank">36kr</a> · <a href="https://github.com/openclaw/openclaw/releases" target="_blank">GitHub</a></div>
+
+      <!-- #3 -->
+      <div class="card fade-in-up">
+        <div class="card-num"><span class="tag tool">TOOL</span> #3</div>
+        <div class="card-title">Claude Code: ExitWorktree, autoMemoryDirectory, /context suggestions</div>
+        <div class="card-text">Свежие обновления: ExitWorktree для выхода из worktree-сессий, настраиваемый autoMemoryDirectory для хранения памяти в проекте, /context показывает подсказки по раздутию контекста. Bash auto-approval расширен (lsof, pgrep, ss).</div>
+        <div class="card-action">
+          <div class="card-action-label">Действие</div>
+          <div class="card-action-text">autoMemoryDirectory → направить память агентов в CDP-специфичную папку. Каждый проект запоминает свои решения. Настроить в settings.json.</div>
+        </div>
+        <div class="card-source"><a href="https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md" target="_blank">CHANGELOG</a> · <a href="https://releasebot.io/updates/anthropic/claude-code" target="_blank">Releasebot</a></div>
+      </div>
+
+      <!-- #8 -->
+      <div class="card fade-in-up">
+        <div class="card-num"><span class="tag tool">TOOL</span> #8</div>
+        <div class="card-title">AdStellar AI — FB кампания за 60 секунд</div>
+        <div class="card-text">AdStellar строит полные Instagram/Facebook кампании за 60 сек через 7 маркетинговых агентов. Madgicx — AI сегментация аудитории. Revealbot — автоматизация правил (пауза при CPA выше порога). Meta Advantage+ удвоил GPU для рекомендаций.</div>
+        <div class="card-action">
+          <div class="card-action-label">Действие</div>
+          <div class="card-action-text">CDP + first-party данные → пайп в AdStellar/Madgicx через API. Или строить собственную фичу: AI-агент генерирует кампании из сегментов CDP.</div>
+        </div>
+        <div class="card-source"><a href="https://adsroid.com/what-is-the-best-ai-agent-for-meta-ads-in-2026-top-tools-compared/" target="_blank">Adsroid</a> · <a href="https://www.adstellar.ai/blog/best-ai-tools-for-facebook-advertising" target="_blank">AdStellar</a></div>
+      </div>
+
+      <!-- #9 -->
+      <div class="card fade-in-up">
+        <div class="card-num"><span class="tag tool">TOOL</span> #9</div>
+        <div class="card-title">Appier — Risk-Aware Framework для AI-агентов</div>
+        <div class="card-text">Appier Research опубликовал фреймворк конвертации решений LLM в количественные метрики риска. Адресует галлюцинации и надёжность решений в production-агентах.</div>
+        <div class="card-action">
+          <div class="card-action-label">Действие</div>
+          <div class="card-action-text">CDP-агенты принимают решения о сегментации/кампаниях → нужны гарантии. Фреймворк даёт методологию скоринга уверенности перед исполнением.</div>
+        </div>
+        <div class="card-source"><a href="https://www.prnewswire.com/news-releases/appier-research-unveils-agentic-ai-breakthrough-a-risk-aware-decision-framework-302709421.html" target="_blank">PR Newswire</a></div>
+      </div>
     </div>
 
-    <!-- 3 -->
-    <div class="item">
-      <div class="item-num"><span class="tag tool">🛠 TOOL</span> #3</div>
-      <div class="item-title">Claude Code: ExitWorktree, autoMemoryDirectory, /context suggestions</div>
-      <div class="item-text">Свежие обновления: ExitWorktree для выхода из worktree-сессий, настраиваемый autoMemoryDirectory для хранения памяти в проекте, /context показывает подсказки по раздутию контекста. Bash auto-approval расширен (lsof, pgrep, ss).</div>
-      <div class="item-us">
-        <div class="item-us-label">💡 Нам</div>
-        <div class="item-us-text">autoMemoryDirectory → направить память агентов в CDP-специфичную папку. Каждый проект запоминает свои решения. Настроить в settings.json.</div>
+    <!-- ⚡ КОНТР-СИГНАЛ -->
+    <div class="section">
+      <div class="section-header fade-in-up">
+        <span class="section-title">⚡ Контр-сигнал</span>
+        <div class="section-line"></div>
       </div>
-      <div class="item-source"><a href="https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md" target="_blank">CHANGELOG</a> · <a href="https://releasebot.io/updates/anthropic/claude-code" target="_blank">Releasebot</a></div>
-    </div>
 
-    <!-- 4 -->
-    <div class="item">
-      <div class="item-num"><span class="tag hot">🔥 HOT</span> #4</div>
-      <div class="item-title">GPT-5.4 — 1M токенов контекст + Computer Use</div>
-      <div class="item-text">OpenAI выпустил GPT-5.4 с нативным computer use и контекстом до 1M токенов. На 33% меньше ложных утверждений vs GPT-5.2. Есть Thinking и Pro варианты. Нет бесплатного доступа.</div>
-      <div class="item-us">
-        <div class="item-us-label">💡 Нам</div>
-        <div class="item-us-text">1M контекст = весь CDP codebase + схема в одном промпте. Computer use = автоматический QA через UI. Давление на Anthropic → ускорит их фичи. Пока наблюдаем.</div>
+      <!-- #6 -->
+      <div class="card fade-in-up">
+        <div class="card-num"><span class="tag warn">ALERT</span> #6</div>
+        <div class="card-title">Claude упал на 2 часа — OAuth outage 11 марта</div>
+        <div class="card-text">Claude.ai и Claude Code — мировой аутэйдж 11 марта, ~14:44 UTC. 10K+ репортов. CLI не работал из-за OAuth. API продолжал работать. Восстановлено через ~2 часа.</div>
+        <div class="card-action">
+          <div class="card-action-label">Действие</div>
+          <div class="card-action-text">Нужен fallback: если CLI упал → переключаться на API напрямую. Коммитить чаще. Мы это почувствовали вчера (твой час простоя).</div>
+        </div>
+        <div class="card-source"><a href="https://www.techradar.com/news/live/claude-anthropic-down-outage-march-11-2026" target="_blank">TechRadar</a> · <a href="https://www.bleepingcomputer.com/news/artificial-intelligence/anthropic-confirms-claude-is-down-in-a-worldwide-outage/" target="_blank">BleepingComputer</a></div>
       </div>
-      <div class="item-source"><a href="https://openai.com/index/introducing-gpt-5-4/" target="_blank">OpenAI</a> · <a href="https://techcrunch.com/2026/03/05/openai-launches-gpt-5-4-with-pro-and-thinking-versions/" target="_blank">TechCrunch</a></div>
-    </div>
 
-    <!-- 5 -->
-    <div class="item">
-      <div class="item-num"><span class="tag biz">📊 BIZ</span> #5</div>
-      <div class="item-title">72% enterprise AI-проектов используют мультиагентов</div>
-      <div class="item-text">Deloitte: мультиагентная архитектура в enterprise выросла с 23% (2024) до 72% (2026). Рынок AI-агентов: $7.8B → $52B к 2030. Доминируют LangGraph, CrewAI, MCP.</div>
-      <div class="item-us">
-        <div class="item-us-label">💡 Нам</div>
-        <div class="item-us-text">Наша архитектура (PM → implementer → tester → reviewer) = мейнстрим. Можно позиционировать CDP с встроенными AI-агентами для сегментации и кампаний.</div>
+      <!-- #7 -->
+      <div class="card fade-in-up">
+        <div class="card-num"><span class="tag warn">ALERT</span> #7</div>
+        <div class="card-title">Meta удалила 11M мошеннических аккаунтов</div>
+        <div class="card-text">Meta убрала 10.9M скам-аккаунтов, 159M скам-рекламы. Заблокировано 150K аккаунтов в ЮВА. Новые AI-powered алерты на подозрительные действия. Расширенная верификация рекламодателей.</div>
+        <div class="card-action">
+          <div class="card-action-label">Действие</div>
+          <div class="card-action-text">Если CDP интегрируется с Meta Ads — ожидай просадку в аудиториях и engagement метриках. Добавить в дашборд детекцию резких изменений audience size.</div>
+        </div>
+        <div class="card-source"><a href="https://9to5mac.com/2026/03/11/11m-facebook-and-instagram-scam-accounts-zapped-new-alerts-launched/" target="_blank">9to5Mac</a> · <a href="https://about.fb.com/news/2026/03/" target="_blank">Meta</a></div>
       </div>
-      <div class="item-source"><a href="https://www.deloitte.com/us/en/insights/industry/technology/technology-media-and-telecom-predictions/2026/ai-agent-orchestration.html" target="_blank">Deloitte</a></div>
-    </div>
-
-    <!-- 6 -->
-    <div class="item">
-      <div class="item-num"><span class="tag warn">⚠️ ALERT</span> #6</div>
-      <div class="item-title">Claude упал на 2 часа — OAuth outage 11 марта</div>
-      <div class="item-text">Claude.ai и Claude Code — мировой аутэйдж 11 марта, ~14:44 UTC. 10K+ репортов. CLI не работал из-за OAuth. API продолжал работать. Восстановлено через ~2 часа.</div>
-      <div class="item-us">
-        <div class="item-us-label">💡 Нам</div>
-        <div class="item-us-text">Нужен fallback: если CLI упал → переключаться на API напрямую. Коммитить чаще. Мы это почувствовали вчера (твой час простоя).</div>
-      </div>
-      <div class="item-source"><a href="https://www.techradar.com/news/live/claude-anthropic-down-outage-march-11-2026" target="_blank">TechRadar</a> · <a href="https://www.bleepingcomputer.com/news/artificial-intelligence/anthropic-confirms-claude-is-down-in-a-worldwide-outage/" target="_blank">BleepingComputer</a></div>
-    </div>
-
-    <!-- 7 -->
-    <div class="item">
-      <div class="item-num"><span class="tag warn">⚠️ ALERT</span> #7</div>
-      <div class="item-title">Meta удалила 11M мошеннических аккаунтов</div>
-      <div class="item-text">Meta убрала 10.9M скам-аккаунтов, 159M скам-рекламы. Заблокировано 150K аккаунтов в ЮВА. Новые AI-powered алерты на подозрительные действия. Расширенная верификация рекламодателей.</div>
-      <div class="item-us">
-        <div class="item-us-label">💡 Нам</div>
-        <div class="item-us-text">Если CDP интегрируется с Meta Ads — ожидай просадку в аудиториях и engagement метриках. Добавить в дашборд детекцию резких изменений audience size.</div>
-      </div>
-      <div class="item-source"><a href="https://9to5mac.com/2026/03/11/11m-facebook-and-instagram-scam-accounts-zapped-new-alerts-launched/" target="_blank">9to5Mac</a> · <a href="https://about.fb.com/news/2026/03/" target="_blank">Meta</a></div>
-    </div>
-
-    <!-- 8 -->
-    <div class="item">
-      <div class="item-num"><span class="tag tool">🛠 TOOL</span> #8</div>
-      <div class="item-title">AdStellar AI — FB кампания за 60 секунд</div>
-      <div class="item-text">AdStellar строит полные Instagram/Facebook кампании за 60 сек через 7 маркетинговых агентов. Madgicx — AI сегментация аудитории. Revealbot — автоматизация правил (пауза при CPA выше порога). Meta Advantage+ удвоил GPU для рекомендаций.</div>
-      <div class="item-us">
-        <div class="item-us-label">💡 Нам</div>
-        <div class="item-us-text">CDP + first-party данные → пайп в AdStellar/Madgicx через API. Или строить собственную фичу: AI-агент генерирует кампании из сегментов CDP.</div>
-      </div>
-      <div class="item-source"><a href="https://adsroid.com/what-is-the-best-ai-agent-for-meta-ads-in-2026-top-tools-compared/" target="_blank">Adsroid</a> · <a href="https://www.adstellar.ai/blog/best-ai-tools-for-facebook-advertising" target="_blank">AdStellar</a></div>
-    </div>
-
-    <!-- 9 -->
-    <div class="item">
-      <div class="item-num"><span class="tag tool">🛠 TOOL</span> #9</div>
-      <div class="item-title">Appier — Risk-Aware Framework для AI-агентов</div>
-      <div class="item-text">Appier Research опубликовал фреймворк конвертации решений LLM в количественные метрики риска. Адресует галлюцинации и надёжность решений в production-агентах.</div>
-      <div class="item-us">
-        <div class="item-us-label">💡 Нам</div>
-        <div class="item-us-text">CDP-агенты принимают решения о сегментации/кампаниях → нужны гарантии. Фреймворк даёт методологию скоринга уверенности перед исполнением.</div>
-      </div>
-      <div class="item-source"><a href="https://www.prnewswire.com/news-releases/appier-research-unveils-agentic-ai-breakthrough-a-risk-aware-decision-framework-302709421.html" target="_blank">PR Newswire</a></div>
-    </div>
-
-    <!-- 10 -->
-    <div class="item">
-      <div class="item-num"><span class="tag hot">🔥 HOT</span> #10</div>
-      <div class="item-title">NVIDIA GTC 16-19 марта — чип Feynman для агентного AI</div>
-      <div class="item-text">GTC 2026 через 4 дня. Jensen Huang обещает «удивить мир». Аналитики ждут Vera Rubin + первый deep dive в Feynman — чип оптимизированный для reasoning и долгосрочной памяти AI-агентов. Темы: физический AI, агентный inference, AI-фабрики.</div>
-      <div class="item-us">
-        <div class="item-us-label">💡 Нам</div>
-        <div class="item-us-text">Если Feynman удешевит inference для агентов → мультиагентные CDP-воркфлоу станут дешевле. Keynote 17 марта — следить за ценами.</div>
-      </div>
-      <div class="item-source"><a href="https://blogs.nvidia.com/blog/gtc-2026-news/" target="_blank">NVIDIA</a> · <a href="https://www.tomsguide.com/computing/nvidia-gtc-2026-the-biggest-reveals-we-expect-to-see" target="_blank">Tom's Guide</a></div>
     </div>
 
   </div>
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
+  </script>
 </body>
 </html>
