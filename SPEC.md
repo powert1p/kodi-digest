@@ -36,11 +36,22 @@ kodi-digest/
 - Фон: gradient с фиолетовым акцентом
 - Фиксированная высота, один viewport
 
+#### Секция "🤖 Агентский кодинг" (3-5 карточек, ОБЯЗАТЕЛЬНАЯ)
+- ПРИОРИТЕТНАЯ секция — идёт после TL;DR
+- 3-5 карточек ежедневно, без пропусков
+- Формат: полноразмерные карточки (не accordion)
+- Темы: Claude Code обновления, паттерны агентов, новые MCP серверы, Agent Teams, практические кейсы
+- Формат содержания: что → как применить в стеке Есета (Claude Code + Conductor + OpenClaw) → 1 действие
+- Тег: 🤖 AGENT
+- Каждая новость → дописывается в knowledge/agent-coding/ (patterns/tools/cases/changelog)
+- Источники: github.com/anthropics/claude-code releases, obra/superpowers releases, r/ClaudeAI, HN AI, Fireship YouTube
+- Кнопки фидбэка: [👍] [👎] [📋 В бэклог]
+
 #### Секция "Новости" (15-20 карточек)
 - Формат: accordion
 - Видно: заголовок + тег + 1 строка описания
 - Клик = раскрыть подробности (expand/collapse)
-- Теги: 🛠 TOOL, 🌊 WAVE, 📣 BIZ, 🧠 AI, 🎓 EDTECH, ⚠️ RISK, 💰 MONEY
+- Теги: 🛠 TOOL, 🌊 WAVE, 📣 BIZ, 🧠 AI, 🎓 EDTECH, ⚠️ RISK, 💰 MONEY, 🤖 AGENT
 - Внизу каждой карточки: кнопки [👍] [👎] [📋 В бэклог]
 - Кнопки подсвечиваются при нажатии (active state), данные в localStorage
 

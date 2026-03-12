@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>База знаний: Агентский кодинг — Коди Дайджест</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* — Accordion для knowledge base — */
+    .kb-accordion {
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.02);
+      transition: border-color 0.2s ease;
+    }
+    .kb-accordion[open] {
+      border-color: rgba(124,58,237,0.3);
+    }
+    .kb-accordion summary {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 20px;
+      cursor: pointer;
+      list-style: none;
+      -webkit-user-select: none;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+    .kb-accordion summary::-webkit-details-marker { display: none; }
+    .kb-accordion summary::marker { display: none; content: ''; }
+    .kb-accordion summary:hover {
+      background: rgba(255,255,255,0.03);
+    }
+    .kb-accordion-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+      width: 40px;
+      text-align: center;
+    }
+    .kb-accordion-title {
+      flex: 1;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fafafa;
+      letter-spacing: -0.2px;
+    }
+    .kb-accordion-count {
+      font-size: 11px;
+      color: #52525b;
+      padding: 3px 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+    .kb-accordion-chevron {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #52525b;
+      transition: transform 0.3s ease;
+    }
+    .kb-accordion[open] .kb-accordion-chevron {
+      transform: rotate(180deg);
+    }
+    .kb-accordion-body {
+      padding: 0 20px 24px;
+    }
+    /* — Markdown-like content — */
+    .kb-content h2 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #a78bfa;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 24px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(124,58,237,0.15);
+    }
+    .kb-content h2:first-child { margin-top: 0; }
+    .kb-content h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #e4e4e7;
+      margin: 18px 0 8px;
+    }
+    .kb-content p, .kb-content li {
+      font-size: 14px;
+      color: #a1a1aa;
+      line-height: 1.7;
+    }
+    .kb-content ul {
+      list-style: none;
+      padding: 0;
+    }
+    .kb-content li {
+      padding: 3px 0 3px 20px;
+      position: relative;
+    }
+    .kb-content li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #7c3aed;
+      font-weight: 700;
+    }
+    .kb-content strong {
+      color: #e4e4e7;
+      font-weight: 600;
+    }
+    .kb-content code {
+      font-size: 12px;
+      background: rgba(124,58,237,0.1);
+      border: 1px solid rgba(124,58,237,0.2);
+      padding: 1px 6px;
+      border-radius: 4px;
+      color: #a78bfa;
+    }
+    .kb-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 13px;
+    }
+    .kb-content th {
+      text-align: left;
+      color: #a78bfa;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 8px 12px;
+      border-bottom: 1px solid rgba(124,58,237,0.2);
+    }
+    .kb-content td {
+      padding: 8px 12px;
+      color: #a1a1aa;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: top;
+    }
+    .kb-content tr:hover td {
+      background: rgba(255,255,255,0.02);
+    }
+    .kb-updated {
+      font-size: 11px;
+      color: #3f3f46;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-badge">◆ Knowledge Base</div>
+    <h1>Агентский кодинг</h1>
+    <p>Паттерны, инструменты, кейсы и обновления</p>
+  </div>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-back">← Дайджесты</a>
+    <div class="nav-links">
+      <a href="liked.html">❤️ Лайки</a>
+      <a href="backlog.html">📋 Бэклог</a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- === ПАТТЕРНЫ === -->
+    <details class="kb-accordion fade-in-up" open>
+      <summary>
+        <span class="kb-accordion-icon">🧩</span>
+        <span class="kb-accordion-title">Паттерны</span>
+        <span class="kb-accordion-count">5 архитектурных + практические</span>
+        <span class="kb-accordion-chevron">▼</span>
+      </summary>
+      <div class="kb-accordion-body kb-content">
+        <h2>Архитектурные паттерны</h2>
+
+        <h3>1. Leader-Worker (Координатор → Исполнители)</h3>
+        <ul>
+          <li><strong>Что:</strong> Один агент-лидер декомпозирует задачу и раздаёт подзадачи worker-агентам</li>
+          <li><strong>Когда:</strong> Задача декомпозируется на 3+ независимых кусков</li>
+          <li><strong>Пример:</strong> Anthropic C-compiler — 16 агентов, 2000 сессий, $20K</li>
+          <li><strong>В стеке:</strong> Claude Code Agent Teams</li>
+        </ul>
+
+        <h3>2. Swarm (Самоорганизующийся рой)</h3>
+        <ul>
+          <li><strong>Что:</strong> Пул задач → воркеры сами берут следующую. Нет центрального координатора</li>
+          <li><strong>Когда:</strong> Исследовательские задачи, где scope неизвестен</li>
+          <li><strong>В стеке:</strong> SubAgent-driven development через superpowers skill</li>
+        </ul>
+
+        <h3>3. Pipeline (Конвейер)</h3>
+        <ul>
+          <li><strong>Что:</strong> A → B → C. Каждый агент принимает артефакт предыдущего</li>
+          <li><strong>Когда:</strong> Чёткий процесс: PM → Architect → Implementer → Tester → Reviewer</li>
+          <li><strong>В стеке:</strong> Superpowers skills chain (brainstorming → plans → TDD → verify)</li>
+        </ul>
+
+        <h3>4. Competitive (Конкурирующие гипотезы)</h3>
+        <ul>
+          <li><strong>Что:</strong> Несколько агентов решают одну задачу разными способами, лучшее побеждает</li>
+          <li><strong>Когда:</strong> Дебаг сложных проблем с множеством возможных причин</li>
+          <li><strong>В стеке:</strong> Agent Teams team-debug preset</li>
+        </ul>
+
+        <h3>5. Watchdog (Наблюдатель)</h3>
+        <ul>
+          <li><strong>Что:</strong> Отдельный агент мониторит работу других и вмешивается при проблемах</li>
+          <li><strong>Когда:</strong> Долгие задачи, где нужен quality gate</li>
+          <li><strong>В стеке:</strong> superpowers:requesting-code-review</li>
+        </ul>
+
+        <h2>SubAgent vs Teammate</h2>
+        <table>
+          <tr><th>Аспект</th><th>SubAgent</th><th>Teammate</th></tr>
+          <tr><td>Контекст</td><td>Только prompt</td><td>Shared task list + mailbox</td></tr>
+          <tr><td>Жизненный цикл</td><td>Одноразовый</td><td>Persistent между задачами</td></tr>
+          <tr><td>Координация</td><td>Через parent</td><td>SendMessage + TaskList</td></tr>
+          <tr><td>Когда</td><td>Простые параллельные</td><td>Сложная координация 3+</td></tr>
+        </table>
+
+        <h2>Практические паттерны</h2>
+        <ul>
+          <li><strong>File Ownership:</strong> Каждый файл = ровно один агент. Никогда два параллельно</li>
+          <li><strong>Think-then-Critique:</strong> Черновик → Критика → Ревизия (видимый цикл)</li>
+          <li><strong>TDD в агентах:</strong> RED → GREEN → REFACTOR per task, никогда не удалять тесты</li>
+          <li><strong>Error Recovery:</strong> 3 попытки → WebSearch → эскалация</li>
+        </ul>
+
+        <h2>Тренды 2026</h2>
+        <ul>
+          <li>Shift от кода к оркестрации агентов</li>
+          <li>Активная human-agent коллаборация (60% с AI, 0-20% полностью делегируется)</li>
+          <li>Multi-agent coordination mastery</li>
+          <li><strong>Ключевой сдвиг:</strong> «Монолитные агенты → оркестрированные команды специализированных агентов»</li>
+        </ul>
+
+        <div class="kb-updated">Обновлено: 12 марта 2026</div>
+      </div>
+    </details>
+
+    <!-- === ИНСТРУМЕНТЫ === -->
+    <details class="kb-accordion fade-in-up">
+      <summary>
+        <span class="kb-accordion-icon">🛠</span>
+        <span class="kb-accordion-title">Инструменты</span>
+        <span class="kb-accordion-count">8 инструментов</span>
+        <span class="kb-accordion-chevron">▼</span>
+      </summary>
+      <div class="kb-accordion-body kb-content">
+        <h3>Claude Code v2.1.74</h3>
+        <ul>
+          <li>Терминальный AI-ассистент от Anthropic</li>
+          <li>Модели: Opus 4.6 (основная), Sonnet 4.6 (быстрая), Haiku 4.5 (экономная)</li>
+          <li>Agent Teams: experimental, <code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1</code></li>
+          <li>SubAgent spawning, git worktrees, hooks, permission modes</li>
+          <li>~$5-50/сессия в зависимости от сложности</li>
+        </ul>
+
+        <h3>Conductor.build</h3>
+        <ul>
+          <li>Mac app для оркестрации Claude Code сессий (Melty Labs, YC S24)</li>
+          <li>Каждый агент = отдельный git worktree</li>
+          <li>Linear/GitHub интеграция</li>
+          <li>Ограничение: агенты НЕ общаются между собой</li>
+          <li>Бесплатный (бета)</li>
+        </ul>
+
+        <h3>OpenClaw v2026.3.8</h3>
+        <ul>
+          <li>Self-hosted платформа для Claude Code в Docker</li>
+          <li>Always-on агент, Telegram/WhatsApp/Discord/Slack</li>
+          <li>ACP: runtime для Claude Code сессий</li>
+          <li>Graphiti: граф знаний на Neo4j</li>
+          <li>Open source</li>
+        </ul>
+
+        <h3>Superpowers Plugin (obra)</h3>
+        <ul>
+          <li>42K⭐ GitHub, ~12 ядровых скиллов</li>
+          <li>brainstorming, TDD, verification, debugging, code review</li>
+          <li>Маршрутизатор: using-superpowers (1% вероятность = вызывай)</li>
+          <li>Бюджет: ~16K символов (~67 скиллов)</li>
+        </ul>
+
+        <h3>Agent Teams (Experimental)</h3>
+        <ul>
+          <li>Встроенная multi-agent координация в Claude Code</li>
+          <li>TeamCreate/Delete, SendMessage, TaskCreate/Update/List</li>
+          <li>Пресеты: review, debug, feature, fullstack, research, security, migration</li>
+        </ul>
+
+        <h3>acpx v0.1.15</h3>
+        <ul>
+          <li>CLI-обёртка для параллельных Claude Code агентов</li>
+          <li>Worktree management + auto-merge результатов</li>
+        </ul>
+
+        <h3>Cursor</h3>
+        <ul>
+          <li>ARR: $2B+ (март 2026), 1M+ пользователей</li>
+          <li>Automations: триггеры из GitHub PR, Slack, Linear, PagerDuty, cron</li>
+          <li>Background Agents работают в фоне</li>
+        </ul>
+
+        <h3>Google Antigravity</h3>
+        <ul>
+          <li>Agent-first IDE, бесплатный public preview</li>
+          <li>Manager view: оркестрация нескольких агентов параллельно</li>
+          <li>SWE-bench: 76.2%</li>
+        </ul>
+
+        <div class="kb-updated">Обновлено: 12 марта 2026</div>
+      </div>
+    </details>
+
+    <!-- === КЕЙСЫ === -->
+    <details class="kb-accordion fade-in-up">
+      <summary>
+        <span class="kb-accordion-icon">📦</span>
+        <span class="kb-accordion-title">Кейсы</span>
+        <span class="kb-accordion-count">9 кейсов</span>
+        <span class="kb-accordion-chevron">▼</span>
+      </summary>
+      <div class="kb-accordion-body kb-content">
+        <h3>Anthropic — C-компилятор</h3>
+        <ul>
+          <li>16 агентов Opus, 2000 сессий, $20K API, 2 млрд input-токенов</li>
+          <li>Результат: работающий C-compiler</li>
+          <li>Урок: агентный подход масштабируется, но стоимость растёт нелинейно</li>
+        </ul>
+
+        <h3>iOS приложение за $100</h3>
+        <ul>
+          <li>Vibe coding, 1 неделя, #28 в App Store</li>
+          <li>vs $5000 у подрядчика</li>
+          <li>Урок: vibe coding работает для MVP, ключ — чёткое видение + быстрые итерации</li>
+        </ul>
+
+        <h3>CDP Qadam — FastAPI + React + PostgreSQL</h3>
+        <ul>
+          <li>Claude Code + Agent Teams, PM-first workflow</li>
+          <li>PM → spec, Researcher → codebase, Implementer → worktrees, Tester → TDD</li>
+          <li>Урок: агентный подход работает для production, нужна дисциплина</li>
+        </ul>
+
+        <h3>Multi-agent PR Review (Anthropic)</h3>
+        <ul>
+          <li>Покрытие ревью: 16% → 54%</li>
+          <li>Несколько агентов параллельно анализируют PR</li>
+        </ul>
+
+        <h3>Compound Engineering (Every, Inc.)</h3>
+        <ul>
+          <li>26 специализированных агентов, 14+ ревью-агентов</li>
+          <li>Plan → Work → Review → Compound</li>
+          <li>Каждая единица работы делает следующую проще</li>
+        </ul>
+
+        <h3>TELUS — 13K AI solutions</h3>
+        <ul>
+          <li>Ускорение engineering velocity на 30%</li>
+          <li>Distributed agents внутри компании</li>
+        </ul>
+
+        <h3>Zapier — 89% AI adoption</h3>
+        <ul>
+          <li>800+ агентов внутри организации</li>
+          <li>Координация выходит за пределы engineering команд</li>
+        </ul>
+
+        <h3>Rakuten vLLM</h3>
+        <ul>
+          <li>99.9% numerical accuracy через агентный кодинг</li>
+          <li>Complex codebase navigation</li>
+        </ul>
+
+        <h3>Apple Xcode 26.3 + агенты</h3>
+        <ul>
+          <li>OpenAI Codex и Claude как coding agents в Xcode</li>
+          <li>MCP протокол для совместимости</li>
+        </ul>
+
+        <div class="kb-updated">Обновлено: 12 марта 2026</div>
+      </div>
+    </details>
+
+    <!-- === CHANGELOG === -->
+    <details class="kb-accordion fade-in-up">
+      <summary>
+        <span class="kb-accordion-icon">📋</span>
+        <span class="kb-accordion-title">Changelog</span>
+        <span class="kb-accordion-count">8 записей</span>
+        <span class="kb-accordion-chevron">▼</span>
+      </summary>
+      <div class="kb-accordion-body kb-content">
+        <h2>12 марта 2026</h2>
+
+        <h3>Claude Code v2.1.74</h3>
+        <ul>
+          <li><code>autoMemoryDirectory</code> — кастомное хранилище авто-памяти</li>
+          <li>Actionable suggestions в /context</li>
+          <li>Фикс memory leak в streaming API</li>
+        </ul>
+
+        <h3>OpenClaw v2026.3.8</h3>
+        <ul>
+          <li>Backup tool: <code>openclaw backup create/verify</code></li>
+          <li>ACP Provenance: субагенты сохраняют trace ID</li>
+          <li>12+ security patches</li>
+        </ul>
+
+        <h3>Multi-agent PR Review (Anthropic)</h3>
+        <ul>
+          <li>Покрытие ревью: 16% → 54%</li>
+          <li>Официальная фича от Anthropic</li>
+        </ul>
+
+        <h2>10 марта 2026</h2>
+
+        <h3>Claude Code v2.1.72</h3>
+        <ul>
+          <li><code>w</code> в /copy — запись selections прямо в файлы</li>
+          <li><code>ExitWorktree</code> tool — выход из worktree сессий</li>
+          <li>Бандл уменьшен на 510KB</li>
+        </ul>
+
+        <h2>7 марта 2026</h2>
+
+        <h3>Claude Code v2.1.71</h3>
+        <ul>
+          <li><code>/loop</code> команда — повторяющиеся промпты по расписанию</li>
+          <li>Cron scheduling tools</li>
+        </ul>
+
+        <h2>5 марта 2026</h2>
+
+        <h3>Claude Code v2.1.69</h3>
+        <ul>
+          <li>Claude API skill для билдинга приложений</li>
+          <li>Voice STT: 10 новых языков (20 всего)</li>
+          <li>40+ security fixes</li>
+        </ul>
+
+        <h3>Cursor Automations</h3>
+        <ul>
+          <li>Always-on агенты с триггерами: GitHub PR, Slack, Linear, PagerDuty, cron</li>
+          <li>Сотни автоматизаций в час</li>
+        </ul>
+
+        <h3>Google Antigravity (public preview)</h3>
+        <ul>
+          <li>Agent-first IDE: Editor view + Manager view</li>
+          <li>Gemini 3.1 Pro + Claude Sonnet 4.5 + GPT-OSS</li>
+          <li>SWE-bench: 76.2%, бесплатный</li>
+        </ul>
+
+        <div class="kb-updated">Обновлено: 12 марта 2026</div>
+      </div>
+    </details>
+
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>

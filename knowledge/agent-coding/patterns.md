@@ -1,0 +1,74 @@
+# Паттерны агентского кодинга
+
+> Обновляется ежедневно. Источник: дайджест + ресёрч.
+
+## Оркестрация
+
+### Leader-Worker
+Лид декомпозирует → воркеры исполняют параллельно.
+Пример: Anthropic C-compiler — 16 агентов, 2000 сессий, $20K.
+
+### Swarm (самоорганизующийся)
+Пул задач → воркеры сами берут следующую. Нет центрального координатора.
+Источник: kieranklaassen gist.
+
+### Pipeline
+A → B → C. Каждый агент принимает артефакт предыдущего.
+Пример: PM → Architect → Implementer → Tester.
+
+### Competitive
+Несколько агентов решают одну задачу, лучшее решение побеждает.
+
+### Watchdog
+Воркер + монитор качества параллельно.
+
+## Скиллы (качество)
+
+### Brainstorming → Planning → TDD
+Жёсткий гейт: думай → планируй → тестируй → кодь.
+obra/superpowers (42K⭐). Ключевой: "no code until design approved".
+
+### Verification-before-completion
+Запусти команду → прочитай вывод → ПОТОМ заявляй результат.
+
+### Dual Review Layer
+Claude self-review + Gemini cross-review. Разные модели ловят разные ошибки.
+
+## Субагенты
+
+- НЕ наследуют скиллы (нужно skills: в frontmatter)
+- UserPromptSubmit хук НЕ работает для субагентов
+- SubagentStart хук — единственный способ инжектить контекст
+- Свежий контекст на каждую задачу предотвращает деградацию
+
+## Бюджет скиллов
+- 16K символов метаданных
+- ~67 скиллов при 130 символов описания
+- Директивный формат ("ALWAYS invoke when...") = 100% активация
+- Пассивный ("Use when...") = 50-77%
+
+---
+Последнее обновление: 2026-03-12
+
+## Тренды 2026 (Anthropic + Google)
+
+### 8 трендов Anthropic
+1. Shift от кода к оркестрации агентов
+2. Активная human-agent коллаборация (60% работы с AI, но только 0-20% полностью делегируется)
+3. Multi-domain implementation (тестирование, дебаг, генерация — одним потоком)
+4. Масштабирование через distributed agents (TELUS: 13K custom AI solutions, +30% velocity)
+5. Broad adoption (Zapier: 89% AI adoption, 800+ агентов внутри компании)
+6. Multi-agent coordination mastery
+7. Human-agent oversight scaling
+8. Security from initial design
+
+### 8 паттернов Google ADK
+1. Sequential Pipeline — сборочная линия
+2. Parallel Fan-Out/Gather — параллельное исполнение
+3. Generator and Critic — генератор + валидатор
+4. Hierarchical Decomposition — разбиение на подзадачи
+5-8. Routing, Loop-based, State Machine, Event-driven
+
+### Ключевой сдвиг
+"Agentic coding = microservices revolution для AI"
+Монолитные агенты → оркестрированные команды специализированных агентов.
