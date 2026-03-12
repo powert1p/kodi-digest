@@ -1,85 +1,11 @@
-/* === Kodi Digest — Feedback System (localStorage + JSONBlob) === */
+/* === Kodi Digest — Feedback System (localStorage + Telegram) === */
+/* V1: localStorage + clipboard → Telegram. V2: Supabase auto-sync */
 
-// JSONBlob — бесплатная БД, без регистрации
-const JSONBLOB_ID = '019ce1ad-c8bf-70cc-b2c5-2a0bc70df06f';
-const JSONBLOB_URL = `https://jsonblob.com/api/jsonBlob/${JSONBLOB_ID}`;
-
-// Debounce sync — не шлём на каждый клик
-let syncTimer = null;
-function scheduleSync() {
-  clearTimeout(syncTimer);
-  syncTimer = setTimeout(syncToCloud, 2000);
-}
-
-// Sync localStorage → JSONBlob
-async function syncToCloud() {
-  try {
-    const local = JSON.parse(localStorage.getItem('kodiDigest')) || {};
-    const resp = await fetch(JSONBLOB_URL);
-    if (!resp.ok) return;
-    const remote = await resp.json();
-    // Мержим: локальные данные приоритетнее
-    const merged = {
-      feedback: mergeFeedback(remote.feedback || [], local.feedbackData || {}),
-      preferences: remote.preferences || { boost: [], suppress: [] },
-      lastSync: new Date().toISOString()
-    };
-    await fetch(JSONBLOB_URL, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(merged)
-    });
-    updateSyncStatus('synced');
-  } catch (e) {
-    updateSyncStatus('local');
-  }
-}
-
-// Конвертирует localStorage формат → массив для JSONBlob
-function mergeFeedback(remoteFeedback, localData) {
-  const result = [...remoteFeedback];
-  const existingIds = new Set(result.map(f => `${f.date}_${f.card_id}_${f.action}`));
-  for (const [date, day] of Object.entries(localData)) {
-    for (const cardId of (day.likes || [])) {
-      const key = `${date}_${cardId}_like`;
-      if (!existingIds.has(key)) {
-        const meta = getCardMeta(cardId);
-        result.push({ date, card_id: cardId, action: 'like', title: meta.title, category: meta.category, ts: Date.now() });
-        existingIds.add(key);
-      }
-    }
-    for (const cardId of (day.dislikes || [])) {
-      const key = `${date}_${cardId}_dislike`;
-      if (!existingIds.has(key)) {
-        const meta = getCardMeta(cardId);
-        result.push({ date, card_id: cardId, action: 'dislike', title: meta.title, category: meta.category, ts: Date.now() });
-        existingIds.add(key);
-      }
-    }
-    for (const cardId of (day.backlog || [])) {
-      const key = `${date}_${cardId}_backlog`;
-      if (!existingIds.has(key)) {
-        const meta = getCardMeta(cardId);
-        result.push({ date, card_id: cardId, action: 'backlog', title: meta.title, category: meta.category, ts: Date.now() });
-        existingIds.add(key);
-      }
-    }
-  }
-  return result;
-}
-
-function getCardMeta(cardId) {
-  const el = document.querySelector(`[data-card-id="${cardId}"]`);
-  return {
-    title: el?.dataset.cardTitle || cardId,
-    category: el?.dataset.cardCategory || ''
-  };
-}
-
-function updateSyncStatus(status) {
+function updateSyncStatus(text, type) {
   const el = document.querySelector('.feedback-sync-status');
   if (!el) return;
-  el.textContent = status === 'synced' ? '☁️ Синхронизировано' : '📱 Локально';
+  el.textContent = text;
+  el.className = 'feedback-sync-status' + (type ? ' sync-' + type : '');
 }
 
 /* === FeedbackStore === */
@@ -92,7 +18,6 @@ const FeedbackStore = {
   },
   _save(data) {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
-    scheduleSync();
   },
   _getDay(date) {
     const data = this._load();
@@ -114,6 +39,7 @@ const FeedbackStore = {
       this._addToAllLiked(data, date, cardId);
     }
     this._save(data);
+    setTimeout(syncToCloud, 2000);
     return day.likes.includes(cardId);
   },
 
@@ -131,6 +57,7 @@ const FeedbackStore = {
       }
     }
     this._save(data);
+    setTimeout(syncToCloud, 2000);
     return day.dislikes.includes(cardId);
   },
 
@@ -145,6 +72,7 @@ const FeedbackStore = {
       this._addToAllBacklog(data, date, cardId);
     }
     this._save(data);
+    setTimeout(syncToCloud, 2000);
     return day.backlog.includes(cardId);
   },
 
@@ -190,6 +118,7 @@ const FeedbackStore = {
     const cardId = cardParts.join('_');
     if (data.feedbackData?.[date]) data.feedbackData[date].likes = data.feedbackData[date].likes.filter(x => x !== cardId);
     this._save(data);
+    setTimeout(syncToCloud, 2000);
   },
   getAllBacklog() { return this._load().allBacklog || []; },
   removeBacklog(fullId) {
@@ -200,13 +129,40 @@ const FeedbackStore = {
     const cardId = cardParts.join('_');
     if (data.feedbackData?.[date]) data.feedbackData[date].backlog = data.feedbackData[date].backlog.filter(x => x !== cardId);
     this._save(data);
+    setTimeout(syncToCloud, 2000);
   },
   getDateStats(date) {
     const { day } = this._getDay(date);
     return { likes: day.likes.length };
   },
-  isConnected() { return !!JSONBLOB_ID; }
+
+  // Собрать текст фидбэка для отправки
+  getFeedbackText(date) {
+    const { day } = this._getDay(date);
+    const parts = [];
+    if (day.likes.length) {
+      const titles = day.likes.map(id => getCardMeta(id).title).filter(Boolean);
+      parts.push('👍 ' + titles.join(', '));
+    }
+    if (day.dislikes.length) {
+      const titles = day.dislikes.map(id => getCardMeta(id).title).filter(Boolean);
+      parts.push('👎 ' + titles.join(', '));
+    }
+    if (day.backlog.length) {
+      const titles = day.backlog.map(id => getCardMeta(id).title).filter(Boolean);
+      parts.push('📋 ' + titles.join(', '));
+    }
+    return parts.length ? `Дайджест ${date}:\n${parts.join('\n')}` : '';
+  }
 };
+
+function getCardMeta(cardId) {
+  const el = document.querySelector(`[data-card-id="${cardId}"]`);
+  return {
+    title: el?.dataset.cardTitle || cardId,
+    category: el?.dataset.cardCategory || ''
+  };
+}
 
 /* === Кнопки фидбэка === */
 function initFeedbackButtons(date) {
@@ -247,8 +203,6 @@ function handleFeedbackClick(date, cardId, action, btn) {
 
 /* === Sticky панель === */
 function initFeedbackPanel(date) {
-  const panel = document.getElementById('feedback-panel');
-  if (!panel) return;
   updateFeedbackPanel(date);
 }
 
@@ -258,10 +212,43 @@ function updateFeedbackPanel(date) {
   const stats = FeedbackStore.getStats(date);
   const total = stats.likes + stats.dislikes + stats.backlog;
   panel.classList.toggle('visible', total > 0);
+
   const statsEl = panel.querySelector('.feedback-stats');
   if (statsEl) statsEl.innerHTML = `<span>👍 ${stats.likes}</span><span>👎 ${stats.dislikes}</span><span>📋 ${stats.backlog}</span>`;
-  const syncEl = panel.querySelector('.feedback-sync-status');
-  if (syncEl) syncEl.textContent = FeedbackStore.isConnected() ? '☁️ Синхронизация' : '📱 Локально';
+
+  // Кнопка отправки
+  let sendBtn = panel.querySelector('.feedback-send-btn');
+  if (!sendBtn) {
+    sendBtn = document.createElement('button');
+    sendBtn.className = 'feedback-send-btn';
+    sendBtn.addEventListener('click', () => sendFeedback(date));
+    panel.querySelector('.feedback-panel-inner').appendChild(sendBtn);
+  }
+  sendBtn.textContent = total > 0 ? '📤 Отправить' : '';
+  sendBtn.style.display = total > 0 ? '' : 'none';
+}
+
+async function sendFeedback(date) {
+  const text = FeedbackStore.getFeedbackText(date);
+  if (!text) return;
+
+  try {
+    await navigator.clipboard.writeText(text);
+    updateSyncStatus('✅ Скопировано — вставь мне в чат', 'ok');
+  } catch {
+    // Fallback: textarea copy
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    updateSyncStatus('✅ Скопировано — вставь мне в чат', 'ok');
+  }
+
+  setTimeout(() => updateSyncStatus('', ''), 4000);
 }
 
 /* === Рендер liked.html === */
@@ -318,4 +305,41 @@ function updateDigestStats() {
     const likesEl = el.querySelector('.digest-likes');
     if (likesEl && stats.likes > 0) { likesEl.textContent = `❤️ ${stats.likes}`; likesEl.style.display = ''; }
   });
+}
+
+// V2: Real cloud sync via JSONBlob
+const BLOB_ID = '019ce1be-ff7c-7594-b069-57f384d8612c';
+const BLOB_URL = `https://jsonblob.com/api/jsonBlob/${BLOB_ID}`;
+
+async function syncToCloud() {
+    const data = {
+        feedback: getFeedback(),
+        syncedAt: new Date().toISOString(),
+        preferences: loadPreferences()
+    };
+    try {
+        await fetch(BLOB_URL, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        updateSyncStatus('✅ Синхронизировано');
+    } catch(e) {
+        updateSyncStatus('⚠️ Только локально');
+    }
+}
+
+function getFeedback() {
+    return {
+        likes: JSON.parse(localStorage.getItem('digest_likes') || '{}'),
+        dislikes: JSON.parse(localStorage.getItem('digest_dislikes') || '{}'),
+        backlog: JSON.parse(localStorage.getItem('digest_backlog') || '[]')
+    };
+}
+
+function loadPreferences() {
+    return JSON.parse(localStorage.getItem('digest_preferences') || '{"boost":[],"suppress":[]}');
 }
