@@ -1,233 +1,211 @@
-/* === Kodi Digest — Feedback System (localStorage + Supabase) === */
+/* === Kodi Digest — Feedback System (localStorage + JSONBlob) === */
 
-// Supabase конфиг — заполнится после setup
-const SUPABASE_URL = localStorage.getItem('kodi_supabase_url') || '';
-const SUPABASE_KEY = localStorage.getItem('kodi_supabase_key') || '';
+// JSONBlob — бесплатная БД, без регистрации
+const JSONBLOB_ID = '019ce1ad-c8bf-70cc-b2c5-2a0bc70df06f';
+const JSONBLOB_URL = `https://jsonblob.com/api/jsonBlob/${JSONBLOB_ID}`;
 
-// Sync в Supabase (fire and forget)
-async function syncToSupabase(action, date, cardId, cardTitle, cardCategory) {
-  if (!SUPABASE_URL || !SUPABASE_KEY) return;
+// Debounce sync — не шлём на каждый клик
+let syncTimer = null;
+function scheduleSync() {
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(syncToCloud, 2000);
+}
+
+// Sync localStorage → JSONBlob
+async function syncToCloud() {
   try {
-    await fetch(`${SUPABASE_URL}/rest/v1/feedback`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Prefer': 'resolution=merge-duplicates'
-      },
-      body: JSON.stringify({
-        digest_date: date,
-        card_id: cardId,
-        card_title: cardTitle || cardId,
-        card_category: cardCategory || '',
-        action: action
-      })
+    const local = JSON.parse(localStorage.getItem('kodiDigest')) || {};
+    const resp = await fetch(JSONBLOB_URL);
+    if (!resp.ok) return;
+    const remote = await resp.json();
+    // Мержим: локальные данные приоритетнее
+    const merged = {
+      feedback: mergeFeedback(remote.feedback || [], local.feedbackData || {}),
+      preferences: remote.preferences || { boost: [], suppress: [] },
+      lastSync: new Date().toISOString()
+    };
+    await fetch(JSONBLOB_URL, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(merged)
     });
-  } catch (e) { /* тихо — localStorage как fallback */ }
+    updateSyncStatus('synced');
+  } catch (e) {
+    updateSyncStatus('local');
+  }
 }
 
-async function deleteFromSupabase(action, date, cardId) {
-  if (!SUPABASE_URL || !SUPABASE_KEY) return;
-  try {
-    await fetch(
-      `${SUPABASE_URL}/rest/v1/feedback?digest_date=eq.${date}&card_id=eq.${cardId}&action=eq.${action}`,
-      {
-        method: 'DELETE',
-        headers: {
-          'apikey': SUPABASE_KEY,
-          'Authorization': `Bearer ${SUPABASE_KEY}`
-        }
+// Конвертирует localStorage формат → массив для JSONBlob
+function mergeFeedback(remoteFeedback, localData) {
+  const result = [...remoteFeedback];
+  const existingIds = new Set(result.map(f => `${f.date}_${f.card_id}_${f.action}`));
+  for (const [date, day] of Object.entries(localData)) {
+    for (const cardId of (day.likes || [])) {
+      const key = `${date}_${cardId}_like`;
+      if (!existingIds.has(key)) {
+        const meta = getCardMeta(cardId);
+        result.push({ date, card_id: cardId, action: 'like', title: meta.title, category: meta.category, ts: Date.now() });
+        existingIds.add(key);
       }
-    );
-  } catch (e) { /* тихо */ }
+    }
+    for (const cardId of (day.dislikes || [])) {
+      const key = `${date}_${cardId}_dislike`;
+      if (!existingIds.has(key)) {
+        const meta = getCardMeta(cardId);
+        result.push({ date, card_id: cardId, action: 'dislike', title: meta.title, category: meta.category, ts: Date.now() });
+        existingIds.add(key);
+      }
+    }
+    for (const cardId of (day.backlog || [])) {
+      const key = `${date}_${cardId}_backlog`;
+      if (!existingIds.has(key)) {
+        const meta = getCardMeta(cardId);
+        result.push({ date, card_id: cardId, action: 'backlog', title: meta.title, category: meta.category, ts: Date.now() });
+        existingIds.add(key);
+      }
+    }
+  }
+  return result;
 }
 
+function getCardMeta(cardId) {
+  const el = document.querySelector(`[data-card-id="${cardId}"]`);
+  return {
+    title: el?.dataset.cardTitle || cardId,
+    category: el?.dataset.cardCategory || ''
+  };
+}
+
+function updateSyncStatus(status) {
+  const el = document.querySelector('.feedback-sync-status');
+  if (!el) return;
+  el.textContent = status === 'synced' ? '☁️ Синхронизировано' : '📱 Локально';
+}
+
+/* === FeedbackStore === */
 const FeedbackStore = {
   STORAGE_KEY: 'kodiDigest',
 
   _load() {
-    try {
-      return JSON.parse(localStorage.getItem(this.STORAGE_KEY)) || {};
-    } catch { return {}; }
+    try { return JSON.parse(localStorage.getItem(this.STORAGE_KEY)) || {}; }
+    catch { return {}; }
   },
-
   _save(data) {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+    scheduleSync();
   },
-
   _getDay(date) {
     const data = this._load();
     if (!data.feedbackData) data.feedbackData = {};
-    if (!data.feedbackData[date]) {
-      data.feedbackData[date] = { likes: [], dislikes: [], backlog: [] };
-    }
+    if (!data.feedbackData[date]) data.feedbackData[date] = { likes: [], dislikes: [], backlog: [] };
     return { data, day: data.feedbackData[date] };
   },
 
-  _getCardMeta(cardId) {
-    const el = document.querySelector(`[data-card-id="${cardId}"]`);
-    return {
-      title: el?.dataset.cardTitle || cardId,
-      category: el?.dataset.cardCategory || ''
-    };
-  },
-
-  // --- Toggle лайк ---
   toggleLike(date, cardId) {
     const { data, day } = this._getDay(date);
-    const meta = this._getCardMeta(cardId);
     const idx = day.likes.indexOf(cardId);
     if (idx > -1) {
       day.likes.splice(idx, 1);
       this._removeFromAllLiked(data, date, cardId);
-      deleteFromSupabase('like', date, cardId);
     } else {
       day.likes.push(cardId);
       const dIdx = day.dislikes.indexOf(cardId);
-      if (dIdx > -1) {
-        day.dislikes.splice(dIdx, 1);
-        deleteFromSupabase('dislike', date, cardId);
-      }
+      if (dIdx > -1) day.dislikes.splice(dIdx, 1);
       this._addToAllLiked(data, date, cardId);
-      syncToSupabase('like', date, cardId, meta.title, meta.category);
     }
     this._save(data);
     return day.likes.includes(cardId);
   },
 
-  // --- Toggle дизлайк ---
   toggleDislike(date, cardId) {
     const { data, day } = this._getDay(date);
-    const meta = this._getCardMeta(cardId);
     const idx = day.dislikes.indexOf(cardId);
     if (idx > -1) {
       day.dislikes.splice(idx, 1);
-      deleteFromSupabase('dislike', date, cardId);
     } else {
       day.dislikes.push(cardId);
       const lIdx = day.likes.indexOf(cardId);
       if (lIdx > -1) {
         day.likes.splice(lIdx, 1);
         this._removeFromAllLiked(data, date, cardId);
-        deleteFromSupabase('like', date, cardId);
       }
-      syncToSupabase('dislike', date, cardId, meta.title, meta.category);
     }
     this._save(data);
     return day.dislikes.includes(cardId);
   },
 
-  // --- Toggle бэклог ---
   addToBacklog(date, cardId) {
     const { data, day } = this._getDay(date);
-    const meta = this._getCardMeta(cardId);
     const idx = day.backlog.indexOf(cardId);
     if (idx > -1) {
       day.backlog.splice(idx, 1);
       this._removeFromAllBacklog(data, date, cardId);
-      deleteFromSupabase('backlog', date, cardId);
     } else {
       day.backlog.push(cardId);
       this._addToAllBacklog(data, date, cardId);
-      syncToSupabase('backlog', date, cardId, meta.title, meta.category);
     }
     this._save(data);
     return day.backlog.includes(cardId);
   },
 
-  // --- Глобальные списки ---
   _addToAllLiked(data, date, cardId) {
     if (!data.allLiked) data.allLiked = [];
     const fullId = `${date}_${cardId}`;
     if (!data.allLiked.find(x => x.id === fullId)) {
-      const meta = this._getCardMeta(cardId);
+      const meta = getCardMeta(cardId);
       data.allLiked.push({ id: fullId, title: meta.title, date, category: meta.category });
     }
   },
-
   _removeFromAllLiked(data, date, cardId) {
     if (!data.allLiked) return;
     data.allLiked = data.allLiked.filter(x => x.id !== `${date}_${cardId}`);
   },
-
   _addToAllBacklog(data, date, cardId) {
     if (!data.allBacklog) data.allBacklog = [];
     const fullId = `${date}_${cardId}`;
     if (!data.allBacklog.find(x => x.id === fullId)) {
-      const meta = this._getCardMeta(cardId);
+      const meta = getCardMeta(cardId);
       data.allBacklog.push({ id: fullId, title: meta.title, date, status: 'new' });
     }
   },
-
   _removeFromAllBacklog(data, date, cardId) {
     if (!data.allBacklog) return;
     data.allBacklog = data.allBacklog.filter(x => x.id !== `${date}_${cardId}`);
   },
 
-  // --- Статистика ---
   getStats(date) {
     const { day } = this._getDay(date);
     return { likes: day.likes.length, dislikes: day.dislikes.length, backlog: day.backlog.length };
   },
-
   getState(date, cardId) {
     const { day } = this._getDay(date);
-    return {
-      liked: day.likes.includes(cardId),
-      disliked: day.dislikes.includes(cardId),
-      backlogged: day.backlog.includes(cardId)
-    };
+    return { liked: day.likes.includes(cardId), disliked: day.dislikes.includes(cardId), backlogged: day.backlog.includes(cardId) };
   },
-
-  // --- Для liked.html ---
-  getAllLiked() {
-    const data = this._load();
-    return data.allLiked || [];
-  },
-
+  getAllLiked() { return this._load().allLiked || []; },
   removeLike(fullId) {
     const data = this._load();
     if (!data.allLiked) return;
     data.allLiked = data.allLiked.filter(x => x.id !== fullId);
     const [date, ...cardParts] = fullId.split('_');
     const cardId = cardParts.join('_');
-    if (data.feedbackData?.[date]) {
-      data.feedbackData[date].likes = data.feedbackData[date].likes.filter(x => x !== cardId);
-    }
+    if (data.feedbackData?.[date]) data.feedbackData[date].likes = data.feedbackData[date].likes.filter(x => x !== cardId);
     this._save(data);
-    deleteFromSupabase('like', date, cardId);
   },
-
-  // --- Для backlog.html ---
-  getAllBacklog() {
-    const data = this._load();
-    return data.allBacklog || [];
-  },
-
+  getAllBacklog() { return this._load().allBacklog || []; },
   removeBacklog(fullId) {
     const data = this._load();
     if (!data.allBacklog) return;
     data.allBacklog = data.allBacklog.filter(x => x.id !== fullId);
     const [date, ...cardParts] = fullId.split('_');
     const cardId = cardParts.join('_');
-    if (data.feedbackData?.[date]) {
-      data.feedbackData[date].backlog = data.feedbackData[date].backlog.filter(x => x !== cardId);
-    }
+    if (data.feedbackData?.[date]) data.feedbackData[date].backlog = data.feedbackData[date].backlog.filter(x => x !== cardId);
     this._save(data);
-    deleteFromSupabase('backlog', date, cardId);
   },
-
-  // --- Для index ---
   getDateStats(date) {
     const { day } = this._getDay(date);
     return { likes: day.likes.length };
   },
-
-  // --- Supabase status ---
-  isConnected() {
-    return !!(SUPABASE_URL && SUPABASE_KEY);
-  }
+  isConnected() { return !!JSONBLOB_ID; }
 };
 
 /* === Кнопки фидбэка === */
@@ -263,7 +241,6 @@ function handleFeedbackClick(date, cardId, action, btn) {
     btn.classList.toggle('active-backlog', isActive);
   }
   updateFeedbackPanel(date);
-  // Мгновенный feedback — подсветка
   btn.style.transform = 'scale(1.3)';
   setTimeout(() => btn.style.transform = '', 150);
 }
@@ -282,14 +259,9 @@ function updateFeedbackPanel(date) {
   const total = stats.likes + stats.dislikes + stats.backlog;
   panel.classList.toggle('visible', total > 0);
   const statsEl = panel.querySelector('.feedback-stats');
-  if (statsEl) {
-    statsEl.innerHTML = `<span>👍 ${stats.likes}</span><span>👎 ${stats.dislikes}</span><span>📋 ${stats.backlog}</span>`;
-  }
-  // Статус sync
+  if (statsEl) statsEl.innerHTML = `<span>👍 ${stats.likes}</span><span>👎 ${stats.dislikes}</span><span>📋 ${stats.backlog}</span>`;
   const syncEl = panel.querySelector('.feedback-sync-status');
-  if (syncEl) {
-    syncEl.textContent = FeedbackStore.isConnected() ? '☁️ Синхронизация' : '📱 Локально';
-  }
+  if (syncEl) syncEl.textContent = FeedbackStore.isConnected() ? '☁️ Синхронизация' : '📱 Локально';
 }
 
 /* === Рендер liked.html === */
@@ -346,11 +318,4 @@ function updateDigestStats() {
     const likesEl = el.querySelector('.digest-likes');
     if (likesEl && stats.likes > 0) { likesEl.textContent = `❤️ ${stats.likes}`; likesEl.style.display = ''; }
   });
-}
-
-/* === Setup Supabase (one-time) === */
-function setupSupabase(url, key) {
-  localStorage.setItem('kodi_supabase_url', url);
-  localStorage.setItem('kodi_supabase_key', key);
-  location.reload();
 }
