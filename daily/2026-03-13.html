@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>13 марта 2026 — Коди Дайджест</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="header">
+    <div class="header-badge">◆ Коди Дайджест</div>
+    <h1>13 марта 2026</h1>
+    <div class="header-meta">
+      <span>24 карточки · 12 мин</span>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <a href="../index.html" class="nav-back">← Все выпуски</a>
+    <div class="nav-links">
+      <a href="../liked.html">❤️ Лайки</a>
+      <a href="../backlog.html">📋 Бэклог</a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- TL;DR -->
+    <div class="tldr fade-in-up">
+      <div class="tldr-label">За 15 секунд</div>
+      <ul>
+        <li>Meta заявила полную AI-автоматизацию рекламы к концу 2026: фото + бюджет = готовая кампания, первые тесты дают +40-50% конверсий — твой Andromeda-подход уже в правильном направлении</li>
+        <li>Claude Code вырос: /loop для автоматизации по расписанию, 10 новых языков интерфейса, фикс утечек памяти — вайб-кодинг официально превращается в "агентный инжиниринг"</li>
+        <li>OpenAI GPT-5.4 с 1М-токен контекстом + Anthropic $100M на партнёрскую сеть — AI-война инфраструктур ускоряется, выигрывает тот кто использует сейчас</li>
+      </ul>
+    </div>
+
+    <!-- ======== СЕКЦИЯ: АГЕНТСКИЙ КОДИНГ ======== -->
+    <div class="section fade-in-up">
+      <div class="section-header">
+        <div class="section-title">🤖 Агентский кодинг</div>
+        <div class="section-line"></div>
+      </div>
+
+      <!-- Карточка 1 -->
+      <details class="accordion-card" data-card-id="card_1" data-card-title="Claude Code /loop — автоматизация задач по cron-расписанию" data-card-category="🤖 AGENT">
+        <summary class="accordion-summary">
+          <span class="tag agent">🤖 AGENT</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Claude Code /loop: повторяющиеся задачи по расписанию</div>
+            <div class="accordion-card-preview">Cron-автоматизация прямо в Claude Code — heartbeat, дайджест, мониторинг</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            Claude Code запустил команду <code>/loop</code> — теперь можно задать повторяющуюся задачу с cron-расписанием прямо из IDE. Агент будет запускаться по таймеру: ежечасно, ежедневно, по триггеру.<br><br>
+            Параллельно добавлена поддержка 10 новых языков интерфейса (включая русский) и rebindable voice keybindings. Это не маленький апдейт — это Claude Code перестаёт быть "ответь на вопрос" и становится постоянно работающим агентом.
+          </div>
+          <div class="card-action">
+            <div class="card-action-label">Применить в стеке</div>
+            <div class="card-action-text">OpenClaw heartbeat + /loop в Claude Code = двойная система автоматизации. Попробуй настроить /loop для автоматического запуска тестов CDP Qadam при изменениях в репо. Это 5 минут настройки.</div>
+          </div>
+          <div class="card-source"><a href="https://releasebot.io/updates/anthropic/claude-code">Claude Code Release Notes</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_1" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_1" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_1" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Карточка 2 -->
+      <details class="accordion-card" data-card-id="card_2" data-card-title="Claude Code: фикс утечки памяти стриминга — production-ready" data-card-category="🤖 AGENT">
+        <summary class="accordion-summary">
+          <span class="tag agent">🤖 AGENT</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Claude Code: критические фиксы стабильности — утечки памяти, LSP, RTL</div>
+            <div class="accordion-card-preview">RSS рос без ограничений при стриминге — теперь починено</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            Мартовский апдейт закрыл несколько критических багов: утечка памяти в буфере стриминга API (RSS рос unbounded при длинных сессиях), LSP-сервер падал на Windows, RTL-текст рендерился некорректно на иврите/арабском.<br><br>
+            Что это значит: Claude Code в длинных агентных сессиях больше не будет пожирать память. Для OpenClaw + Claude Code связки — это прямой выигрыш в стабильности overnight агентов.
+          </div>
+          <div class="card-action">
+            <div class="card-action-label">Применить в стеке</div>
+            <div class="card-action-text">Если ты замечал что Claude Code зависает при длинных сессиях (например overnight Conductor-прогоны) — обнови до последней версии. Фикс применяется автоматически при следующем <code>npm update -g @anthropic-ai/claude-code</code>.</div>
+          </div>
+          <div class="card-source"><a href="https://releasebot.io/updates/anthropic/claude-code">Claude Code Changelog</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_2" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_2" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_2" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Карточка 3 -->
+      <details class="accordion-card" data-card-id="card_3" data-card-title="Vibe Coding → Agentic Engineering: Plan→Execute→Verify как стандарт 2026" data-card-category="🤖 AGENT">
+        <summary class="accordion-summary">
+          <span class="tag agent">🤖 AGENT</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Vibe Coding мёртв — живёт Agentic Engineering</div>
+            <div class="accordion-card-preview">78% организаций интегрировали AI в core dev. Plan→Execute→Verify = новый стандарт</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            Отчёт InfoQ/Medium 2026: "вайб-кодинг" (попросил AI, надеешься на лучшее) уступил место "агентному инжинирингу" — AI-агенты планируют, пишут, тестируют и деплоят под человеческим надзором. 78% организаций интегрировали AI в ключевые dev-потоки.<br><br>
+            Три главных антипаттерна: "AI Slopageddon" (низкокачественный флуд), агенты без big-picture thinking, "haunted codebases" — кодовые базы где никто не понимает что делает AI-написанный код.
+          </div>
+          <div class="card-action">
+            <div class="card-action-label">Применить в стеке</div>
+            <div class="card-action-text">Твой superpowers workflow (brainstorm → plan → TDD → verify) — это и есть Agentic Engineering по определению. Ты уже на правильной стороне. Добавь только один слой: агентный code review перед каждым merge в CDP Qadam.</div>
+          </div>
+          <div class="card-source"><a href="https://medium.com/towards-agentic-ai/vibe-coding-tools-2026-c84a5ddc198f">Medium: Towards Agentic AI</a> · <a href="https://www.infoq.com/articles/agentic-engineering-beyond-vibe-coding/">InfoQ</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_3" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_3" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_3" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Карточка 4 -->
+      <details class="accordion-card" data-card-id="card_4" data-card-title="Claude Opus 4.6 × Mozilla: 22 уязвимости Firefox за одну сессию" data-card-category="🤖 AGENT">
+        <summary class="accordion-summary">
+          <span class="tag agent">🤖 AGENT</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Claude Opus 4.6 нашёл 22 критических бага в Firefox</div>
+            <div class="accordion-card-preview">20% всех high-severity патчей Firefox за 2025 — через AI security research</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            Партнёрство Anthropic × Mozilla: Claude Opus 4.6 идентифицировал 22 новых уязвимости в Firefox — это почти 20% всех high-severity багов, закрытых в Firefox за 2025 год. Чистая AI security research без участия человека в поиске.<br><br>
+            Это доказательство: не "AI помогает программистам", а "AI как автономный security researcher". Следующий шаг — такие же агенты для аудита твоего собственного кода.
+          </div>
+          <div class="card-action">
+            <div class="card-action-label">Применить в стеке</div>
+            <div class="card-action-text">Claude Code + semgrep skill = готовый security audit для CDP Qadam API. Запусти <code>/semgrep</code> на backend-коде раз в спринт — это то же что Mozilla сделала для Firefox, но для твоего проекта.</div>
+          </div>
+          <div class="card-source"><a href="https://news.ycombinator.com/front">Hacker News</a> · <a href="https://www.anthropic.com/news">Anthropic News</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_4" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_4" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_4" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Карточка 5 -->
+      <details class="accordion-card" data-card-id="card_5" data-card-title="GPT-5.4 Thinking: 1М токен контекст для агентных воркфлоу" data-card-category="🤖 AGENT">
+        <summary class="accordion-summary">
+          <span class="tag agent">🤖 AGENT</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">GPT-5.4 Thinking: 1 миллион токен контекст + reasoning</div>
+            <div class="accordion-card-preview">Вся кодовая база в одном промпте — агентные воркфлоу меняются</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            OpenAI выпустил GPT-5.4 Thinking: 1 миллион токен контекст (весь средний проект целиком), reasoning + agentic workflows в одной модели, 33% меньше фактических ошибок чем GPT-5.2. API: $2.50 за миллион input токенов.<br><br>
+            Для агентного кодинга: ты можешь передать всю кодовую базу Qadam в один промпт и попросить найти архитектурные проблемы. Claude Sonnet 4.6 это пока не умеет — это реальное конкурентное преимущество GPT-5.4 прямо сейчас.
+          </div>
+          <div class="card-action">
+            <div class="card-action-label">Применить в стеке</div>
+            <div class="card-action-text">Тест на эту неделю: загрузи весь backend CDP Qadam в GPT-5.4 через API и попроси "найди архитектурные проблемы и security risks". $2-3 на тест. Сравни с тем что выдаёт Claude Code review.</div>
+          </div>
+          <div class="card-source"><a href="https://releasebot.io/updates/openai">OpenAI Release Notes</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_5" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_5" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_5" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+    </div>
+
+    <!-- ======== СЕКЦИЯ: ВОЛНА ======== -->
+    <div class="section fade-in-up">
+      <div class="section-header">
+        <div class="section-title">🌊 Волна</div>
+        <div class="section-line"></div>
+      </div>
+
+      <!-- Карточка 6 -->
+      <details class="accordion-card" data-card-id="card_6" data-card-title="Meta: полная AI-автоматизация рекламы к декабрю 2026" data-card-category="🌊 ВОЛНА">
+        <summary class="accordion-summary">
+          <span class="tag wave">🌊 ВОЛНА</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Meta автоматизирует весь рекламный цикл к декабрю 2026</div>
+            <div class="accordion-card-preview">Фото + бюджет = кампания. +40-50% конверсий у ранних пользователей</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            Официальная цель Meta на 2026: полная автоматизация рекламных кампаний. Алгоритм работает так — ты загружаешь изображение продукта и бюджет, AI генерирует креативы, копирайтинг, заголовки, настраивает таргетинг и оптимизацию. Без маркетолога в процессе.<br><br>
+            Данные ранних тестов: +40-50% к конверсии по сравнению с ручной настройкой у первых пользователей инструментов серии Advantage+/GEM. YoY рост использования AI-инструментов в Meta Ads: +30%.
+          </div>
+          <div class="card-action">
+            <div class="card-action-label">Тебе</div>
+            <div class="card-action-text">Ты уже применяешь Andromeda — широкие аудитории + AI оптимизация. Это та же методология. Следующий шаг до конца марта: протестировать Meta AI Creative Studio для генерации вариантов креативов AiPlus прямо в Ads Manager.</div>
+          </div>
+          <div class="card-source"><a href="https://www.adtaxi.com/blog/metas-ai-advertising-plans-what-to-expect-in-2026-and-how-to-prepare/">AdTaxi</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_6" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_6" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_6" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Карточка 7 -->
+      <details class="accordion-card" data-card-id="card_7" data-card-title="Anthropic $100M Partner Network — экосистема Claude расширяется" data-card-category="💰 MONEY">
+        <summary class="accordion-summary">
+          <span class="tag money">💰 MONEY</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Anthropic вкладывает $100M в партнёрскую сеть Claude</div>
+            <div class="accordion-card-preview">Корпоративная экосистема растёт — больше интеграций, больше инструментов</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            Anthropic объявил вложение $100 миллионов в партнёрскую сеть для ускорения enterprise-внедрения Claude. Программа поддерживает организации, строящие на API Claude — финансирование, co-marketing, техническая поддержка.<br><br>
+            Для вайб-кодеров: больше интеграций значит больше готовых MCP-серверов, плагинов для IDE, библиотек для FastAPI. Экосистема Claude = всё богаче инструментами для Qadam и OpenClaw.
+          </div>
+          <div class="card-action">
+            <div class="card-action-label">Тебе</div>
+            <div class="card-action-text">Следи за тем что партнёры строят на Claude — часто лучшие MCP-серверы и интеграции появляются именно из partner network раньше официальных анонсов. Подпишись на Anthropic Newsroom.</div>
+          </div>
+          <div class="card-source"><a href="https://www.anthropic.com/news">Anthropic Newsroom</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_7" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_7" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_7" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Карточка 8 -->
+      <details class="accordion-card" data-card-id="card_8" data-card-title="OpenAI закрыл раунд $110B — рекорд в истории стартапов" data-card-category="💰 MONEY">
+        <summary class="accordion-summary">
+          <span class="tag money">💰 MONEY</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">OpenAI: $110 миллиардов в одном раунде — абсолютный рекорд</div>
+            <div class="accordion-card-preview">AI-инвестиции на максимуме — война за инфраструктуру продолжается</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            OpenAI закрыл инвестиционный раунд на $110 миллиардов — рекорд в истории венчурных инвестиций. Деньги идут в инфраструктуру: вычислительные мощности, собственные чипы, расширение датацентров.<br><br>
+            Контекст: это прямой ответ на $600B план Meta и агрессивное расширение Anthropic. AI-война перешла в инфраструктурную фазу — кто первый построит достаточно мощностей, тот диктует цену и возможности.
+          </div>
+          <div class="card-action">
+            <div class="card-action-label">Тебе</div>
+            <div class="card-action-text">Твоя ставка — API-first: ты потребляешь мощности по pay-per-use, не строишь инфраструктуру. При этой войне API-цены могут только падать. Это хорошо для CDP Qadam с AI-фичами.</div>
+          </div>
+          <div class="card-source"><a href="https://openai.com/news/">OpenAI News</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_8" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_8" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_8" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+    </div>
+
+    <!-- ======== СЕКЦИЯ: НОВОСТИ ======== -->
+    <div class="section fade-in-up">
+      <div class="section-header">
+        <div class="section-title">📡 Новости</div>
+        <div class="section-line"></div>
+      </div>
+
+      <!-- Карточка 9 -->
+      <details class="accordion-card" data-card-id="card_9" data-card-title="Anthropic Institute — исследовательский институт по безопасности AI" data-card-category="🧠 AI">
+        <summary class="accordion-summary">
+          <span class="tag ai">🧠 AI</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Anthropic открывает институт по AI-безопасности</div>
+            <div class="accordion-card-preview">Dedicated research org для вызовов, которые несут мощные AI-системы</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            Anthropic анонсировал создание Anthropic Institute — отдельной исследовательской организации, фокусированной на ключевых вызовах от мощных AI-систем для общества. Отдельный бюджет, отдельная команда.<br><br>
+            Это сигнал: Anthropic разделяет "строить продукт" и "понимать риски". Такой подход влияет на то как регуляторы воспринимают компанию — более доверительно чем конкуренты без safety labs.
+          </div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_9" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_9" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_9" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Карточка 10 -->
+      <details class="accordion-card" data-card-id="card_10" data-card-title="30+ сотрудников OpenAI и Google защищают Anthropic в суде с Пентагоном" data-card-category="⚠️ RISK">
+        <summary class="accordion-summary">
+          <span class="tag warn">⚠️ РИСК</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Индустрия встала за Anthropic против Пентагона</div>
+            <div class="accordion-card-preview">30+ сотрудников OpenAI/DeepMind подали заявления в суд в поддержку</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            Продолжение истории: Anthropic отказалась убрать из военного контракта запрет на массовую слежку → Пентагон назвал Anthropic "supply chain risk" → Anthropic подала в суд. Теперь 30+ сотрудников конкурентов (OpenAI, Google DeepMind) поддержали Anthropic в суде официальными заявлениями.<br><br>
+            Это беспрецедентно: конкуренты публично защищают Anthropic. Сигнал: индустрия держит границу против использования AI для слежки даже под государственным давлением.
+          </div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_10" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_10" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_10" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Карточка 11 -->
+      <details class="accordion-card" data-card-id="card_11" data-card-title="Meta разработала 4 собственных AI-чипа для рекламы и рекомендаций" data-card-category="🛠 TOOL">
+        <summary class="accordion-summary">
+          <span class="tag tool">🛠 TOOL</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Meta: четыре собственных чипа для AI-рекомендаций и рекламы</div>
+            <div class="accordion-card-preview">Полная независимость от Nvidia. Реклама становится быстрее и дешевле для Meta</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            Meta объявила о четырёх кастомных AI-чипах: один для рекомендательных систем (ленты Facebook/Instagram), один для рекламной оптимизации, два для generative AI inference. Собственное железо = независимость от поставок Nvidia + снижение cost per inference.<br><br>
+            Для рекламодателей: оптимизация рекламных аукционов будет быстрее и точнее. Meta может позволить себе более сложные модели оценки аудиторий без роста затрат.
+          </div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_11" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_11" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_11" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Карточка 12 -->
+      <details class="accordion-card" data-card-id="card_12" data-card-title="Disney × OpenAI Sora — персонажи Disney в генерации видео" data-card-category="📣 BIZ">
+        <summary class="accordion-summary">
+          <span class="tag biz">📣 BIZ</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Disney + OpenAI: персонажи Disney в Sora video generation</div>
+            <div class="accordion-card-preview">Первый крупный IP-лицензионный deal в AI-видео. Меняет EdTech контент</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            Walt Disney Company и OpenAI подписали историческое соглашение: персонажи Disney доступны через Sora для лицензированного использования. Это первый крупный IP-deal в сфере AI видеогенерации.<br><br>
+            Для EdTech: следующий шаг — образовательные платформы смогут генерировать контент с любимыми персонажами для детей. Это меняет ценностное предложение онлайн-образования для K-12.
+          </div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_12" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_12" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_12" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Карточка 13 -->
+      <details class="accordion-card" data-card-id="card_13" data-card-title="ChatGPT: интерактивные визуальные объяснения 70+ математических концепций" data-card-category="🎓 EDTECH">
+        <summary class="accordion-summary">
+          <span class="tag edtech">🎓 EDTECH</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">ChatGPT: интерактивная математика с живыми графиками</div>
+            <div class="accordion-card-preview">70+ STEM концепций с манипулируемыми переменными — конкурент для AiPlus</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            OpenAI запустила интерактивные визуальные объяснения в ChatGPT: 70+ ключевых математических и научных концепций теперь отображаются как живые графики и диаграммы где студент может менять переменные и видеть результат в реальном времени.<br><br>
+            Это прямой конкурент для образовательных платформ подготовки к НИШ и ЕНТ. Студент в ChatGPT может понять функцию лучше чем на стандартном уроке — это угроза не только для tutor-рынка, но и для всего AiPlus формата.
+          </div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_13" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_13" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_13" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Карточка 14 -->
+      <details class="accordion-card" data-card-id="card_14" data-card-title="ChatGPT: 20 файлов за раз — двойной лимит" data-card-category="🛠 TOOL">
+        <summary class="accordion-summary">
+          <span class="tag tool">🛠 TOOL</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">ChatGPT поднял лимит файлов до 20 за сообщение</div>
+            <div class="accordion-card-preview">Было 10 — стало 20. Batch-анализ документов становится удобнее</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            ChatGPT теперь принимает до 20 файлов в одном сообщении (было 10). Полезно для batch-анализа: загрузить весь набор учебных материалов, сравнить несколько версий документа, проанализировать данные из множества источников за раз.
+          </div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_14" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_14" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_14" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Карточка 15 -->
+      <details class="accordion-card" data-card-id="card_15" data-card-title="Nvidia $2B инвестирует в Nebius — neocloud AI инфраструктура" data-card-category="💰 MONEY">
+        <summary class="accordion-summary">
+          <span class="tag money">💰 MONEY</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Nvidia вложил $2B в Nebius — региональные AI-облака как новый слой</div>
+            <div class="accordion-card-preview">8.3% доля. Nvidia диверсифицирует в "neocloud" — вне AWS/Azure/GCP</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            Nvidia инвестировал $2 миллиарда в амстердамскую Nebius AI, получив 8.3% компании. Nebius строит "neocloud" — региональные AI-датацентры вне большой тройки гиперскейлеров. Nvidia ставит не только на продажу чипов, но и на ownership в инфраструктуре.<br><br>
+            Долгосрочный эффект: появление конкурентной инфраструктуры снижает монополию AWS/Azure/GCP и давит API-цены вниз.
+          </div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_15" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_15" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_15" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Карточка 16 -->
+      <details class="accordion-card" data-card-id="card_16" data-card-title="OpenAI переходит на AWS Tranium чипы — уход от Nvidia?" data-card-category="🛠 TOOL">
+        <summary class="accordion-summary">
+          <span class="tag tool">🛠 TOOL</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">OpenAI будет использовать AWS Tranium чипы для инференса</div>
+            <div class="accordion-card-preview">Диверсификация от Nvidia. AWS партнёрство крепнет</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            OpenAI объявил о партнёрстве с Amazon: AWS Tranium чипы войдут в AI-инфраструктуру OpenAI. Это снижает зависимость от дефицитных Nvidia GPU и укрепляет отношения с Amazon.<br><br>
+            AWS Tranium — собственные AI-чипы Amazon, оптимизированные для inference. Дешевле Nvidia H100 для стандартных задач. Для конечного пользователя: стабильность доступа к API.
+          </div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_16" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_16" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_16" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Карточка 17 -->
+      <details class="accordion-card" data-card-id="card_17" data-card-title="Meta: $600 миллиардов в AI-инфраструктуру через 2028 год" data-card-category="💰 MONEY">
+        <summary class="accordion-summary">
+          <span class="tag money">💰 MONEY</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Meta: $600B в AI к 2028 — самая большая ставка в истории</div>
+            <div class="accordion-card-preview">Включает $14-15B за 49% Scale AI. Всё на AI-рекламу и Llama</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            Аналитическая оценка: суммарные инвестиции Meta в AI-инфраструктуру, расширение мощностей и sustainability через 2028 год составят около $600 миллиардов. Уже сейчас: $14-15B за 49% в Scale AI.<br><br>
+            Meta делает ставку на AI-рекламу как главный revenue driver и открытый Llama как ecosystem play против OpenAI/Anthropic. Масштаб ставки сам по себе является сигналом.
+          </div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_17" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_17" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_17" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Карточка 18 -->
+      <details class="accordion-card" data-card-id="card_18" data-card-title="OpenAI списал GPT-5.1 — автомиграция на GPT-5.3/5.4" data-card-category="🛠 TOOL">
+        <summary class="accordion-summary">
+          <span class="tag tool">🛠 TOOL</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">GPT-5.1 уходит на пенсию — автомиграция на 5.3/5.4</div>
+            <div class="accordion-card-preview">11 марта 2026: GPT-5.1 Instant, Thinking, Pro — все deprecated</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            OpenAI deprecate GPT-5.1 (Instant, Thinking, Pro) с 11 марта 2026. Все активные сессии автоматически перенесены на GPT-5.3 или GPT-5.4. API-интеграции: проверь что не pinned на конкретную версию модели.
+          </div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_18" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_18" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_18" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+    </div>
+
+    <!-- ======== СЕКЦИЯ: ВНЕДРИТЬ ======== -->
+    <div class="section fade-in-up">
+      <div class="section-header">
+        <div class="section-title">🛠 Внедрить</div>
+        <div class="section-line"></div>
+      </div>
+
+      <!-- Карточка 19 -->
+      <details class="accordion-card" data-card-id="card_19" data-card-title="Обновить Claude Code и настроить /loop для автотестов Qadam" data-card-category="🛠 ВНЕДРИТЬ">
+        <summary class="accordion-summary">
+          <span class="tag tool">🛠 TOOL</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Claude Code /loop: настроить автозапуск тестов CDP Qadam</div>
+            <div class="accordion-card-preview">5 минут настройки → тесты запускаются при каждом изменении кода</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            Новый /loop в Claude Code позволяет настроить агента на автоматический запуск при изменениях в репо. Для CDP Qadam: агент может запускать pytest и tsc при каждом push, репортить о падениях прямо в чат.
+          </div>
+          <div class="card-action">
+            <div class="card-action-label">Одно действие</div>
+            <div class="card-action-text">Обнови Claude Code: <code>npm update -g @anthropic-ai/claude-code</code>. Затем в проекте Qadam: <code>/loop "run pytest and report failures" --on git-push</code>. Это заменит ручной запуск тестов.</div>
+          </div>
+          <div class="card-source"><a href="https://releasebot.io/updates/anthropic/claude-code">Claude Code Docs</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_19" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_19" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_19" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Карточка 20 -->
+      <details class="accordion-card" data-card-id="card_20" data-card-title="Meta AI Creative Studio — тест генерации рекламных креативов для AiPlus" data-card-category="🛠 ВНЕДРИТЬ">
+        <summary class="accordion-summary">
+          <span class="tag wave">🌊 ВОЛНА</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Протестировать Meta AI Creative Studio для AiPlus</div>
+            <div class="accordion-card-preview">Загрузи фото продукта → AI генерирует 10 вариантов креативов. Бесплатно в Ads Manager</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            Meta AI Creative Studio доступен прямо в Ads Manager — бесплатный инструмент для генерации вариаций рекламных изображений и видео. Загружаешь исходный визуал, промпт — получаешь 10 вариантов для A/B теста.
+          </div>
+          <div class="card-action">
+            <div class="card-action-label">Одно действие</div>
+            <div class="card-action-text">Открой Meta Ads Manager → Creative Hub → AI Creative Studio. Возьми лучший текущий креатив AiPlus, загрузи в AI Studio, попроси сгенерировать 8 вариаций. Запусти A/B тест против оригинала этой неделе. Бюджет на тест: 5-10% от обычной кампании.</div>
+          </div>
+          <div class="card-source"><a href="https://www.facebook.com/business/help/creative-hub">Meta Creative Hub</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_20" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_20" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_20" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Карточка 21 -->
+      <details class="accordion-card" data-card-id="card_21" data-card-title="GPT-5.4 архитектурный аудит CDP Qadam — тест $2-3" data-card-category="🛠 ВНЕДРИТЬ">
+        <summary class="accordion-summary">
+          <span class="tag tool">🛠 TOOL</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">GPT-5.4: архитектурный аудит Qadam за $2-3</div>
+            <div class="accordion-card-preview">1М токен контекст = вся кодовая база в одном промпте. Найдёт что Claude пропустил</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            GPT-5.4 с 1М-токен контекстом даёт уникальную возможность: загрузить всю кодовую базу CDP Qadam целиком и попросить найти архитектурные проблемы, security risks, N+1 queries, отсутствующие индексы — за один запрос.
+          </div>
+          <div class="card-action">
+            <div class="card-action-label">Одно действие</div>
+            <div class="card-action-text">Через OpenAI API: <code>git ls-files | xargs cat</code> → передай весь output в GPT-5.4 c промптом "найди критические архитектурные проблемы, security vulnerabilities и N+1 запросы". Цена ~$2-3. Сравни с Claude Code review.</div>
+          </div>
+          <div class="card-source"><a href="https://platform.openai.com/docs/models">OpenAI Platform</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_21" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_21" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_21" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Карточка 22 -->
+      <details class="accordion-card" data-card-id="card_22" data-card-title="Добавить агентный code review перед каждым merge в CDP Qadam" data-card-category="🛠 ВНЕДРИТЬ">
+        <summary class="accordion-summary">
+          <span class="tag tool">🛠 TOOL</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Агентный code review как gate перед merge в Qadam</div>
+            <div class="accordion-card-preview">Без review layer опытные разработчики с AI иногда медленнее — это данные, не гипотеза</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            GitHub данные 2026: разработчики без системного review layer с AI иногда медленнее чем без AI — время на исправление AI-кода съедает выигрыш от генерации. Победная комбинация: AI-генерация + автоматический review + TDD.
+          </div>
+          <div class="card-action">
+            <div class="card-action-label">Одно действие</div>
+            <div class="card-action-text">Добавь в рабочий процесс Qadam: перед каждым PR запускай <code>/code-review</code> в Claude Code. Это 2-3 минуты + потенциально находит баги до production. Если Claude Code настроен с superpowers — скилл уже есть.</div>
+          </div>
+          <div class="card-source"><a href="https://github.blog/2026-03-developer-survey-ai-tools/">GitHub Blog</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_22" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_22" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_22" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+    </div>
+
+    <!-- ======== СЕКЦИЯ: КОНТР-СИГНАЛ ======== -->
+    <div class="section fade-in-up">
+      <div class="section-header">
+        <div class="section-title">⚡ Контр-сигнал</div>
+        <div class="section-line"></div>
+      </div>
+
+      <!-- Карточка 23 -->
+      <details class="accordion-card risk-card" data-card-id="card_23" data-card-title="ChatGPT интерактивная математика — прямая угроза репетиторским платформам" data-card-category="⚡ КОНТР-СИГНАЛ">
+        <summary class="accordion-summary">
+          <span class="tag risk">⚡ РИСК</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">ChatGPT учит математике лучше репетитора — за бесплатно</div>
+            <div class="accordion-card-preview">70+ STEM концепций интерактивно. Ценностное предложение AiPlus нужно уточнять</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            ChatGPT с интерактивными визуальными объяснениями — это не "ещё один AI-помощник". Это прямой конкурент для подготовки к НИШ/ЕНТ: студент в бесплатном ChatGPT Plus ($20/мес) может разобрать функции, производные, тригонометрию через живые графики — лучше чем в учебнике и без репетитора.<br><br>
+            Ответный вопрос: что AiPlus даёт студенту, чего не даёт ChatGPT? Мотивация, структура программы, ответственность перед преподавателем, казахстанская специфика ЕНТ, социальная среда сверстников — это не заменяется AI. Но это нужно проговаривать явно.
+          </div>
+          <div class="card-risk">
+            <div class="card-risk-label">Контр-сигнал</div>
+            <div class="card-risk-text">Дифференциация AiPlus должна быть в outcome-guarantee и структуре, не в "у нас тоже есть AI". ChatGPT не мотивирует студента завтра сесть и решить задачи — AiPlus с живым преподавателем и дедлайнами делает именно это.</div>
+          </div>
+          <div class="card-source"><a href="https://releasebot.io/updates/openai/chatgpt">OpenAI ChatGPT Updates</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_23" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_23" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_23" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Карточка 24 -->
+      <details class="accordion-card risk-card" data-card-id="card_24" data-card-title="AI Slopageddon: скорость кодинга без review = технический долг через 3 месяца" data-card-category="⚡ КОНТР-СИГНАЛ">
+        <summary class="accordion-summary">
+          <span class="tag risk">⚡ РИСК</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">"Haunted codebase": AI пишет быстро, но кто понимает что написано?</div>
+            <div class="accordion-card-preview">78% организаций с AI в dev. Новая болезнь: никто не понимает свой же код</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            Индустриальный паттерн 2026: "haunted codebase" — кодовая база где AI написал большую часть кода, никто из команды не понимает почему он так устроен, любое изменение ломает что-то непредсказуемо. 78% организаций интегрировали AI в dev, большинство без системного quality gate.<br><br>
+            Проблема не в AI, а в отсутствии двух вещей: TDD (тесты объясняют намерение кода) и code review (человек должен понять что принимает в main).
+          </div>
+          <div class="card-risk">
+            <div class="card-risk-label">Контр-сигнал</div>
+            <div class="card-risk-text">CDP Qadam строится быстро с AI — это хорошо. Но через 3 месяца без тестов: каждая новая фича будет ломать старую и ты будешь тратить больше времени на отладку чем на разработку. Один день на настройку pytest + pre-commit review сейчас = месяцы сохранённого времени потом.</div>
+          </div>
+          <div class="card-source"><a href="https://www.infoq.com/articles/agentic-engineering-beyond-vibe-coding/">InfoQ</a> · <a href="https://github.blog/2026-03-developer-survey-ai-tools/">GitHub Blog</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_24" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_24" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_24" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+    </div>
+
+  </div>
+
+  <!-- Sticky панель фидбэка -->
+  <div id="feedback-panel" class="feedback-panel">
+    <div class="feedback-panel-inner">
+      <div class="feedback-stats"></div>
+      <div class="feedback-sync-status"></div>
+    </div>
+  </div>
+
+  <script src="../js/feedback.js"></script>
+  <script src="../js/app.js"></script>
+  <script>
+    initFeedbackButtons('2026-03-13');
+  </script>
+</body>
+</html>

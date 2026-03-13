@@ -65,3 +65,19 @@
 - Gemini 3.1 Pro + Claude Sonnet 4.5 + GPT-OSS
 - SWE-bench: 76.2%
 - Бесплатный для индивидуальных разработчиков
+
+## 2026-03-13
+
+### Claude Code
+- `/loop` command: cron-scheduled recurring tasks directly in Claude Code IDE
+- 10 new UI languages: Russian, Polish, Turkish, Dutch, Ukrainian, Greek, Czech, Danish, Swedish, Norwegian
+- Rebindable voice keybindings
+- FIXED: Memory leak in streaming API response buffers (unbounded RSS growth)
+- FIXED: RTL text rendering (Hebrew/Arabic)
+- FIXED: LSP server failures on Windows
+
+### OpenAI
+- GPT-5.4 Thinking: 1M token context + reasoning + agentic workflows, 33% fewer factual errors vs GPT-5.2, $2.50/1M input tokens
+- GPT-5.1 deprecated March 11: Instant/Thinking/Pro → auto-migrated to GPT-5.3/5.4
+- ChatGPT: 20 file uploads per message (was 10)
+- ChatGPT: interactive visual STEM explanations for 70+ math/science concepts (live graph manipulation)

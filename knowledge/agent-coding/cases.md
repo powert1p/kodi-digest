@@ -66,3 +66,10 @@
 - Подход: Claude Code + Agent Teams, PM-first workflow
 - PM-агент → spec, Researcher → codebase, Implementer → worktrees, Tester → TDD, Reviewer → merge
 - Урок: агентный подход работает для production, но нужна дисциплина (TDD, file ownership, verification)
+
+## 2026-03-13: Claude Opus 4.6 × Mozilla Firefox Security
+
+- Anthropic + Mozilla partnership: Claude Opus 4.6 autonomously identified 22 new Firefox vulnerabilities
+- ~20% of all high-severity Firefox patches in 2025 came from this AI security research
+- Pattern: AI as autonomous security researcher, not just "helps programmers"
+- Actionable: Claude Code + semgrep skill = same capability for any FastAPI project
