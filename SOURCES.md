@@ -54,9 +54,21 @@
 
 ## Уровень 4: Специфика
 
-### FB Ads + AI
-- Jon Loomer: https://www.jonloomer.com/feed/
+### FB Ads / Meta
+- Jon Loomer Blog: https://www.jonloomer.com/feed/
+- Social Media Examiner: https://www.socialmediaexaminer.com/feed/
+- r/googleads: https://www.reddit.com/r/googleads/top/.rss?t=day
+- AdEspresso Blog: https://adespresso.com/blog/feed/
 - web_search: "AI facebook ads automation" еженедельно
+
+### Контент / Креативы
+- Creator Economy Newsletter: https://rameezusmani.beehiiv.com/feed
+- r/content_marketing: https://www.reddit.com/r/content_marketing/top/.rss?t=day
+- r/Reels: https://www.reddit.com/r/Reels/top/.rss?t=day
+
+### CDP / Data
+- Segment Blog: https://segment.com/blog/rss/
+- RudderStack Blog: https://www.rudderstack.com/blog/rss/
 
 ### EdTech
 - eSchool News: https://www.eschoolnews.com/feed/

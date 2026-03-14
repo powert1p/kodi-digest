@@ -36,6 +36,9 @@ USER_AGENT = "KodiDigest/1.0 (by /u/kodiassist)"
 # Лимиты по секциям
 LIMITS = {
     "agent_cards": 5,
+    "meta_cards": 3,
+    "content_cards": 3,
+    "cdp_cards": 2,
     "implement_cards": 5,
     "counter_signal": 2,
     "news_cards": 20,
@@ -57,6 +60,11 @@ IMPLEMENT_KEYWORDS = [
     "automation workflow", "roi", "i built", "show hn", "how i ", "case study",
     "revenue", "conversion rate", "cpm", "roas", "performance marketing",
     "advantage+", "advantage plus",
+    # Новые: контент, CDP, таргетинг
+    "content factory", "reels", "ugc", "creative automation", "content workflow",
+    "customer data platform", "cdp", "segment", "rudderstack", "attribution",
+    "lookalike audience", "custom audience", "retargeting", "a/b test",
+    "creative testing", "landing page", "funnel",
 ]
 
 COUNTER_KEYWORDS = [
@@ -81,8 +89,18 @@ def classify_tags(title: str, description: str, source_type: str = "") -> tuple[
 
     if any(k in text for k in ["risk", "warning", "fail", "ban", "blocked", "danger"]):
         return "⚠️", "RISK", "risk"
-    if any(k in text for k in ["meta ads", "facebook ads", "fb ads", "advantage+"]):
+    # META — приоритет выше AGENT и TOOL
+    if any(k in text for k in [
+        "meta ads", "facebook ads", "fb ads", "advantage+", "advantage plus",
+        "meta business", "ads manager", "рекламный кабинет",
+    ]):
         return "💼", "META", "biz"
+    # CONTENT — контент и креативы
+    if any(k in text for k in [
+        "reels", "content factory", "ugc", "creative", "tiktok",
+        "youtube shorts", "content automation",
+    ]):
+        return "🎬", "CONTENT", "biz"
     if any(k in text for k in ["claude", "anthropic", "mcp", "agent", "agentic", "cursor", "windsurf"]):
         return "🤖", "AGENT", "agent"
     if any(k in text for k in ["tool", "library", "sdk", "framework", "github", "open source"]):
@@ -99,7 +117,8 @@ def classify_tags(title: str, description: str, source_type: str = "") -> tuple[
 
 def classify_section(title: str, description: str) -> str:
     """
-    Определяет секцию для карточки: agent_cards / implement_cards / counter_signal / news_cards
+    Определяет секцию для карточки.
+    Порядок: suppress → counter → agent → meta → content → cdp → implement → news
     """
     text = (title + " " + description).lower()
 
@@ -115,7 +134,33 @@ def classify_section(title: str, description: str) -> str:
     if any(k in text for k in AGENT_KEYWORDS):
         return "agent_cards"
 
-    # Внедрить
+    # Meta / FB реклама
+    META_SECTION_KW = [
+        "meta ads", "facebook ads", "fb ads", "advantage+", "advantage plus",
+        "meta business", "ads manager", "рекламный кабинет", "google ads",
+        "lookalike audience", "custom audience", "retargeting", "roas",
+        "performance marketing", "ad creative", "creative testing",
+    ]
+    if any(k in text for k in META_SECTION_KW):
+        return "meta_cards"
+
+    # Контент / Креативы
+    CONTENT_SECTION_KW = [
+        "reels", "content factory", "ugc", "creative automation",
+        "content workflow", "tiktok", "youtube shorts", "content marketing",
+    ]
+    if any(k in text for k in CONTENT_SECTION_KW):
+        return "content_cards"
+
+    # CDP / Data
+    CDP_SECTION_KW = [
+        "customer data platform", "cdp", "segment", "rudderstack",
+        "attribution", "data pipeline",
+    ]
+    if any(k in text for k in CDP_SECTION_KW):
+        return "cdp_cards"
+
+    # Внедрить (оставшиеся implement_keywords)
     if any(k in text for k in IMPLEMENT_KEYWORDS):
         return "implement_cards"
 
@@ -167,6 +212,14 @@ RSS_SOURCES = [
     {"url": "https://mshibanami.github.io/GitHubTrendingRSS/daily/typescript.xml", "source": "GitHub Trending TypeScript"},
     {"url": "https://rss.beehiiv.com/feeds/2R3C6Bt5wj.xml", "source": "The Rundown AI"},
     {"url": "https://hnrss.org/frontpage?points=100", "source": "HackerNews 100+"},
+    # FB Ads / Meta
+    {"url": "https://www.socialmediaexaminer.com/feed/", "source": "Social Media Examiner"},
+    {"url": "https://adespresso.com/blog/feed/", "source": "AdEspresso Blog"},
+    # Контент / Креативы
+    {"url": "https://rameezusmani.beehiiv.com/feed", "source": "Creator Economy Newsletter"},
+    # CDP / Data
+    {"url": "https://segment.com/blog/rss/", "source": "Segment Blog"},
+    {"url": "https://www.rudderstack.com/blog/rss/", "source": "RudderStack Blog"},
 ]
 
 
@@ -244,6 +297,11 @@ REDDIT_SOURCES = [
     {"url": "https://www.reddit.com/r/FacebookAds/top.json?t=day&limit=10", "source": "r/FacebookAds", "min_upvotes": 10},
     {"url": "https://www.reddit.com/r/PPC/top.json?t=day&limit=8", "source": "r/PPC", "min_upvotes": 10},
     {"url": "https://www.reddit.com/r/ChatGPTCoding/top.json?t=day&limit=10", "source": "r/ChatGPTCoding", "min_upvotes": 10},
+    # FB Ads / Meta
+    {"url": "https://www.reddit.com/r/googleads/top.json?t=day&limit=10", "source": "r/googleads", "min_upvotes": 5},
+    # Контент / Креативы
+    {"url": "https://www.reddit.com/r/content_marketing/top.json?t=day&limit=10", "source": "r/content_marketing", "min_upvotes": 5},
+    {"url": "https://www.reddit.com/r/Reels/top.json?t=day&limit=10", "source": "r/Reels", "min_upvotes": 5},
 ]
 
 
@@ -527,6 +585,9 @@ def collect(date: str) -> dict:
     # Классификация
     buckets: dict[str, list[dict]] = {
         "agent_cards": [],
+        "meta_cards": [],
+        "content_cards": [],
+        "cdp_cards": [],
         "implement_cards": [],
         "counter_signal": [],
         "news_cards": [],
@@ -574,6 +635,30 @@ def collect(date: str) -> dict:
         news_html_parts.append(html_accordion_card(item, cid, tag_e, tag_l, tag_c))
     news_html = "\n".join(news_html_parts)
 
+    # meta_cards — полноразмерные
+    meta_html_parts = []
+    for i, item in enumerate(buckets["meta_cards"], 1):
+        cid = f"meta_{i}"
+        tag_e, tag_l, tag_c = classify_tags(item["title"], item["description"])
+        meta_html_parts.append(html_full_card(item, cid, tag_e, tag_l, tag_c))
+    meta_html = "\n".join(meta_html_parts)
+
+    # content_cards — полноразмерные
+    content_html_parts = []
+    for i, item in enumerate(buckets["content_cards"], 1):
+        cid = f"content_{i}"
+        tag_e, tag_l, tag_c = classify_tags(item["title"], item["description"])
+        content_html_parts.append(html_full_card(item, cid, tag_e, tag_l, tag_c))
+    content_html = "\n".join(content_html_parts)
+
+    # cdp_cards — полноразмерные
+    cdp_html_parts = []
+    for i, item in enumerate(buckets["cdp_cards"], 1):
+        cid = f"cdp_{i}"
+        tag_e, tag_l, tag_c = classify_tags(item["title"], item["description"])
+        cdp_html_parts.append(html_full_card(item, cid, "📊", "CDP", "biz"))
+    cdp_html = "\n".join(cdp_html_parts)
+
     # counter_signal — risk cards
     risk_html_parts = []
     for i, item in enumerate(buckets["counter_signal"], 1):
@@ -613,12 +698,7 @@ def collect(date: str) -> dict:
 
     # ── Подсчёт статистики ─────────────────────────────────────────────────────
 
-    total_cards = (
-        len(buckets["agent_cards"])
-        + len(buckets["implement_cards"])
-        + len(buckets["news_cards"])
-        + len(buckets["counter_signal"])
-    )
+    total_cards = sum(len(v) for v in buckets.values())
     read_time = max(5, total_cards // 2)  # ~30 сек на карточку
 
     # Русская дата
@@ -643,17 +723,21 @@ def collect(date: str) -> dict:
         "items_count": str(total_cards),
         "read_time": str(read_time),
         "tldr": tldr_items,
-        # HTML секции (ключи совпадают с generate.sh)
-        "agent_cards": agent_html if agent_html else "<!-- нет данных -->",
-        "news_cards": news_html if news_html else "<!-- нет данных -->",
-        "implement_cards": impl_html if impl_html else "<!-- нет данных -->",
-        "counter_signal": risk_html if risk_html else "<!-- нет данных -->",
-        # Доп. секции шаблона — пустые, не мешаем
-        "meta_cards": "<!-- собрано в implement_cards -->",
+        # HTML секции
+        "agent_cards": agent_html or "<!-- нет данных -->",
+        "meta_cards": meta_html or "<!-- нет данных -->",
+        "content_cards": content_html or "<!-- нет данных -->",
+        "cdp_cards": cdp_html or "<!-- нет данных -->",
+        "news_cards": news_html or "<!-- нет данных -->",
+        "implement_cards": impl_html or "<!-- нет данных -->",
+        "counter_signal": risk_html or "<!-- нет данных -->",
         "community_cards": "<!-- собрано в news_cards -->",
         # Мета для отладки
         "_stats": {
             "agent": len(buckets["agent_cards"]),
+            "meta": len(buckets["meta_cards"]),
+            "content": len(buckets["content_cards"]),
+            "cdp": len(buckets["cdp_cards"]),
             "implement": len(buckets["implement_cards"]),
             "news": len(buckets["news_cards"]),
             "risk": len(buckets["counter_signal"]),
