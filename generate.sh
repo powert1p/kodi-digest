@@ -2,9 +2,10 @@
 # === Генератор дайджеста из шаблона ===
 # Использование: ./generate.sh YYYY-MM-DD [content.json]
 #
-# Два режима:
-#   1) ./generate.sh 2026-03-15            — создаёт заготовку с плейсхолдерами
-#   2) ./generate.sh 2026-03-15 content.json — заполняет контентом из JSON
+# Три режима:
+#   1) ./generate.sh 2026-03-15                   — создаёт заготовку с плейсхолдерами
+#   2) ./generate.sh 2026-03-15 content.json       — заполняет контентом из JSON
+#   3) ./generate.sh 2026-03-15 --pipeline         — полный pipeline: collect → enrich → generate
 #
 # Формат content.json:
 # {
@@ -38,6 +39,13 @@ fi
 
 DATE="$1"
 CONTENT_FILE="${2:-}"
+PIPELINE_MODE=false
+
+# Проверка режима --pipeline
+if [ "$CONTENT_FILE" = "--pipeline" ]; then
+  PIPELINE_MODE=true
+  CONTENT_FILE=""
+fi
 
 # Валидация формата даты
 if ! echo "$DATE" | grep -qE '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'; then
@@ -55,6 +63,38 @@ fi
 mkdir -p "$OUTPUT_DIR"
 
 OUTPUT_FILE="$OUTPUT_DIR/$DATE.html"
+
+# --- Режим 3: Полный pipeline (collect → enrich → generate) ---
+if [ "$PIPELINE_MODE" = true ]; then
+  echo "=== Полный pipeline для $DATE ==="
+
+  COLLECTED="$SCRIPT_DIR/scripts/collected.json"
+  ENRICHED="$SCRIPT_DIR/scripts/enriched.json"
+
+  # Шаг 1: Сбор данных
+  echo ""
+  echo "--- Шаг 1/3: Сбор данных (collect.py) ---"
+  python3 "$SCRIPT_DIR/scripts/collect.py" --date "$DATE" --output "$COLLECTED"
+  if [ $? -ne 0 ]; then
+    echo "Ошибка: collect.py завершился с ошибкой"
+    exit 1
+  fi
+
+  # Шаг 2: LLM-обогащение
+  echo ""
+  echo "--- Шаг 2/3: LLM-обогащение (enrich.py) ---"
+  python3 "$SCRIPT_DIR/scripts/enrich.py" --input "$COLLECTED" --output "$ENRICHED"
+  if [ $? -ne 0 ]; then
+    echo "Ошибка: enrich.py завершился с ошибкой"
+    exit 1
+  fi
+
+  # Шаг 3: Генерация HTML (рекурсивный вызов себя с enriched.json)
+  echo ""
+  echo "--- Шаг 3/3: Генерация HTML ---"
+  CONTENT_FILE="$ENRICHED"
+  # Продолжаем в режим 2 (заполнение из JSON)
+fi
 
 # --- Русская дата ---
 format_date_ru() {

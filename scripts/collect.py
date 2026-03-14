@@ -89,6 +89,36 @@ def truncate_at_word(text: str, max_len: int) -> str:
         truncated = truncated[:last_space]
     return truncated.rstrip(".,;:!? ") + "..."
 
+
+def clean_description(text: str) -> str:
+    """
+    Очищает описание от Reddit markdown мусора и URL изображений.
+    Убирает: *курсив*, URL изображений (preview.redd.it, i.redd.it),
+    Markdown-ссылки [text](url), лишние пробелы.
+    """
+    if not text:
+        return text
+    # Убираем URL изображений Reddit (preview.redd.it, i.redd.it)
+    text = re.sub(
+        r'https?://(?:preview|i)\.redd\.it/\S+',
+        '', text
+    )
+    # Убираем Markdown-ссылки: [text](url) → text
+    text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
+    # Убираем standalone URL (http/https)
+    text = re.sub(r'https?://\S+', '', text)
+    # Убираем Reddit markdown: *курсив* → курсив, **жирный** → жирный
+    text = re.sub(r'\*\*([^*]+)\*\*', r'\1', text)
+    text = re.sub(r'\*([^*]+)\*', r'\1', text)
+    # Убираем \\* (экранированные звёздочки)
+    text = text.replace('\\*', '')
+    # Убираем # заголовки markdown
+    text = re.sub(r'^#{1,6}\s+', '', text, flags=re.MULTILINE)
+    # Убираем лишние пробелы и пустые строки
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    text = re.sub(r'  +', ' ', text)
+    return text.strip()
+
 # ── Теги ───────────────────────────────────────────────────────────────────────
 
 def classify_tags(title: str, description: str, source_type: str = "") -> tuple[str, str, str]:
@@ -292,7 +322,8 @@ def fetch_rss(url: str, source_name: str) -> list[dict]:
                 desc = re.sub(r"<[^>]+>", " ", entry.summary).strip()
             elif hasattr(entry, "content") and entry.content:
                 desc = re.sub(r"<[^>]+>", " ", entry.content[0].value).strip()
-            desc = truncate_at_word(desc, 400)
+            # 800 символов — достаточно для LLM-обработки без потери контекста
+            desc = truncate_at_word(desc, 800)
 
             link = entry.get("link", "")
             if not link:
@@ -382,7 +413,8 @@ def fetch_reddit(url: str, source_name: str, min_upvotes: int = 10) -> list[dict
 
             # Описание: selftext или ""
             selftext = p.get("selftext", "") or ""
-            desc = truncate_at_word(selftext.strip(), 400)
+            # 800 символов — достаточно для LLM-обработки
+            desc = truncate_at_word(selftext.strip(), 800)
 
             items.append({
                 "title": title,
@@ -453,7 +485,8 @@ def fetch_hn_algolia() -> list[dict]:
                 seen_urls.add(link)
 
                 story_text = hit.get("story_text") or ""
-                desc = truncate_at_word(re.sub(r"<[^>]+>", " ", story_text).strip(), 400)
+                # 800 символов для HN — LLM обработает в enrich.py
+                desc = truncate_at_word(re.sub(r"<[^>]+>", " ", story_text).strip(), 800)
 
                 # Дата
                 pub_ts = None
@@ -493,6 +526,65 @@ def deduplicate(items: list[dict]) -> list[dict]:
     return result
 
 
+# ── Перевод на русский ─────────────────────────────────────────────────────────
+
+def translate_items_to_russian(items: list[dict]) -> list[dict]:
+    """Переводит title и description на русский через Google Translate (deep_translator)."""
+    if not items:
+        return items
+    try:
+        from deep_translator import GoogleTranslator
+    except ImportError:
+        print("deep_translator не установлен, пропускаем перевод", file=sys.stderr)
+        return items
+
+    translator = GoogleTranslator(source="auto", target="ru")
+
+    # Батчи по 8 элементов (лимит translate_batch ~5000 символов суммарно)
+    BATCH_SIZE = 8
+
+    def safe_translate_batch(texts: list[str]) -> list[str]:
+        try:
+            result = translator.translate_batch([t[:400] if t else "" for t in texts])
+            return result or texts
+        except Exception as e:
+            print(f"  Ошибка батч-перевода: {e}", file=sys.stderr)
+            return texts
+
+    titles = [item.get("title", "") for item in items]
+    descs = [item.get("description", "") for item in items]
+
+    translated_titles: list[str] = []
+    translated_descs: list[str] = []
+
+    for i in range(0, len(items), BATCH_SIZE):
+        chunk_t = titles[i:i + BATCH_SIZE]
+        chunk_d = descs[i:i + BATCH_SIZE]
+        translated_titles.extend(safe_translate_batch(chunk_t))
+        translated_descs.extend(safe_translate_batch(chunk_d))
+        time.sleep(0.3)  # небольшая пауза между батчами
+
+    for i, item in enumerate(items):
+        if i < len(translated_titles) and translated_titles[i]:
+            item["title"] = translated_titles[i]
+        if i < len(translated_descs) and translated_descs[i]:
+            item["description"] = translated_descs[i]
+
+    return items
+
+
+def translate_all_buckets(buckets: dict) -> dict:
+    """Переводит все карточки во всех bucket'ах на русский."""
+    print("\n=== Перевод на русский ===", file=sys.stderr)
+    total = sum(len(v) for v in buckets.values())
+    print(f"  Переводим {total} карточек...", file=sys.stderr)
+    for section, items in buckets.items():
+        if items:
+            buckets[section] = translate_items_to_russian(items)
+    print("  Перевод завершён", file=sys.stderr)
+    return buckets
+
+
 # ── Генерация HTML карточек ────────────────────────────────────────────────────
 
 def make_card_id(prefix: str, n: int, date: str) -> str:
@@ -503,16 +595,27 @@ def make_card_id(prefix: str, n: int, date: str) -> str:
 def html_full_card(item: dict, card_id: str, tag_emoji: str, tag_label: str, tag_css: str) -> str:
     """Полноразмерная карточка (для agent_cards и implement_cards)."""
     title = item["title"].replace('"', "&quot;").replace("<", "&lt;").replace(">", "&gt;")
-    desc = item["description"].replace("<", "&lt;").replace(">", "&gt;")
+    desc = clean_description(item["description"]).replace("<", "&lt;").replace(">", "&gt;")
     url = item["url"]
     source = item["source"].replace("<", "&lt;").replace(">", "&gt;")
     category = f"{tag_emoji} {tag_label}"
+
+    # Блок card-action (если есть поле action)
+    action_text = item.get("action", "")
+    action_html = ""
+    if action_text:
+        action_escaped = action_text.replace("<", "&lt;").replace(">", "&gt;")
+        action_html = f"""
+  <div class="card-action">
+    <div class="card-action-label">Одно действие</div>
+    <div class="card-action-text">{action_escaped}</div>
+  </div>"""
 
     return f"""
 <div class="card" data-card-id="{card_id}" data-card-title="{title}" data-card-category="{category}">
   <div class="card-num"><span class="tag {tag_css}">{tag_emoji} {tag_label}</span></div>
   <div class="card-title">{title}</div>
-  <div class="card-text">{desc}</div>
+  <div class="card-text">{desc}</div>{action_html}
   <div class="card-source"><a href="{url}" target="_blank" rel="noopener">{source}</a></div>
   <div class="feedback-buttons">
     <button class="feedback-btn" data-card-id="{card_id}" data-action="like">👍</button>
@@ -525,12 +628,23 @@ def html_full_card(item: dict, card_id: str, tag_emoji: str, tag_label: str, tag
 def html_accordion_card(item: dict, card_id: str, tag_emoji: str, tag_label: str, tag_css: str) -> str:
     """Accordion-карточка (для news_cards)."""
     title = item["title"].replace('"', "&quot;").replace("<", "&lt;").replace(">", "&gt;")
-    desc = item["description"].replace("<", "&lt;").replace(">", "&gt;")
+    desc = clean_description(item["description"]).replace("<", "&lt;").replace(">", "&gt;")
     url = item["url"]
     source = item["source"].replace("<", "&lt;").replace(">", "&gt;")
     category = f"{tag_emoji} {tag_label}"
-    # Превью — первые 100 символов описания
-    preview = desc[:100] + ("..." if len(desc) > 100 else "")
+    # Превью по границе слова — не режем посередине
+    preview = truncate_at_word(desc, 120)
+
+    # Блок card-action (если есть поле action)
+    action_text = item.get("action", "")
+    action_html = ""
+    if action_text:
+        action_escaped = action_text.replace("<", "&lt;").replace(">", "&gt;")
+        action_html = f"""
+    <div class="card-action">
+      <div class="card-action-label">Одно действие</div>
+      <div class="card-action-text">{action_escaped}</div>
+    </div>"""
 
     return f"""
 <details class="accordion-card" data-card-id="{card_id}" data-card-title="{title}" data-card-category="{category}">
@@ -543,7 +657,7 @@ def html_accordion_card(item: dict, card_id: str, tag_emoji: str, tag_label: str
     <div class="accordion-chevron">▼</div>
   </summary>
   <div class="accordion-body">
-    <div class="card-text">{desc}</div>
+    <div class="card-text">{desc}</div>{action_html}
     <div class="card-source"><a href="{url}" target="_blank" rel="noopener">{source}</a></div>
     <div class="feedback-buttons">
       <button class="feedback-btn" data-card-id="{card_id}" data-action="like">👍</button>
@@ -560,7 +674,8 @@ def html_risk_card(item: dict, card_id: str) -> str:
     desc = item["description"].replace("<", "&lt;").replace(">", "&gt;")
     url = item["url"]
     source = item["source"].replace("<", "&lt;").replace(">", "&gt;")
-    preview = desc[:100] + ("..." if len(desc) > 100 else "")
+    # Превью по границе слова
+    preview = truncate_at_word(desc, 120)
 
     return f"""
 <details class="accordion-card risk-card" data-card-id="{card_id}" data-card-title="{title}" data-card-category="⚠️ КОНТР-СИГНАЛ">
@@ -644,6 +759,9 @@ def collect(date: str) -> dict:
     print("\n=== Распределение ===", file=sys.stderr)
     for section, items in buckets.items():
         print(f"  {section}: {len(items)}", file=sys.stderr)
+
+    # ── Перевод на русский ─────────────────────────────────────────────────────
+    buckets = translate_all_buckets(buckets)
 
     # ── Генерация HTML ─────────────────────────────────────────────────────────
 
@@ -732,6 +850,24 @@ def collect(date: str) -> dict:
     while len(tldr_items) < 3:
         tldr_items.append("Источники недоступны — добавь контент вручную")
 
+    # ── Сырые данные для enrich.py ──────────────────────────────────────────────
+    # Сохраняем items без HTML для последующей LLM-обработки
+    raw_items: dict[str, list[dict]] = {}
+    for section, items in buckets.items():
+        raw_items[section] = [
+            {
+                "title": item["title"],
+                "description": clean_description(item["description"]),
+                "url": item["url"],
+                "source": item["source"],
+                "source_type": item.get("source_type", ""),
+                "upvotes": item.get("upvotes", 0),
+                "points": item.get("points", 0),
+                "_score": item.get("_score", 0),
+            }
+            for item in items
+        ]
+
     # ── Подсчёт статистики ─────────────────────────────────────────────────────
 
     total_cards = sum(len(v) for v in buckets.values())
@@ -778,6 +914,8 @@ def collect(date: str) -> dict:
             "risk": len(buckets["counter_signal"]),
             "total": total_cards,
         },
+        # Сырые данные для enrich.py (LLM-обработка)
+        "_raw_items": raw_items,
     }
 
 
