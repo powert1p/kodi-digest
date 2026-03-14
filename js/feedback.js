@@ -251,7 +251,7 @@ function initFeedbackButtons(date) {
       handleFeedbackClick(date, cardId, action, btn);
     });
   });
-  initFeedbackPanel(date);
+  updateStickyPanel(date);
 }
 
 function handleFeedbackClick(date, cardId, action, btn) {

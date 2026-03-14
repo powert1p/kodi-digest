@@ -733,3 +733,19 @@ a:hover { color: #a78bfa; }
   .feedback-panel-inner { flex-direction: column; align-items: stretch; }
   .feedback-send-btn { justify-content: center; }
 }
+
+/* --- TL;DR section (один viewport) --- */
+.tldr-section {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 16px;
+}
+
+/* --- Risk card (красный акцент, НЕ фиолетовый) --- */
+.risk-card {
+  border-left: 3px solid #ef4444;
+  background: rgba(239,68,68,0.04);
+}

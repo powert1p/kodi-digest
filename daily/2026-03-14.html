@@ -28,8 +28,8 @@
 
   <div class="container">
 
-    <!-- TL;DR -->
-    <div class="tldr tldr-viewport fade-in-up">
+    <!-- ======== TL;DR (один viewport, без скролла) ======== -->
+    <div class="tldr tldr-section tldr-viewport fade-in-up">
       <div class="tldr-label">За 15 секунд</div>
       <ul>
         <li>Anthropic запустил мультиагентный Code Review прямо в Claude Code — параллельные агенты проверяют каждый PR на баги и уязвимости автоматически</li>
@@ -38,122 +38,90 @@
       </ul>
     </div>
 
-    <!-- ======== СЕКЦИЯ: АГЕНТСКИЙ КОДИНГ ======== -->
+    <!-- ======== СЕКЦИЯ: АГЕНТСКИЙ КОДИНГ (полноразмерные карточки) ======== -->
     <div class="section fade-in-up">
       <div class="section-header">
         <div class="section-title">🤖 AI & Агенты</div>
         <div class="section-line"></div>
       </div>
 
-      <!-- Карточка 1 -->
-      <details class="accordion-card" data-card-id="card_1" data-card-title="Anthropic запустил Claude Code Review — мультиагентный инструмент для проверки кода" data-card-category="🤖 AGENT">
-        <summary class="accordion-summary">
-          <span class="tag agent">🤖 AGENT</span>
-          <div class="accordion-summary-content">
-            <div class="accordion-card-title">Claude Code Review: параллельные агенты на каждый PR</div>
-            <div class="accordion-card-preview">Anthropic запустил мультиагентную проверку кода — баги, ошибки, уязвимости без участия разработчика</div>
-          </div>
-          <div class="accordion-chevron">▼</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="card-text">
-            Anthropic представил функцию Code Review в Claude Code: параллельные AI-агенты анализируют каждый pull request одновременно, ища баги, логические ошибки и уязвимости безопасности. Инструмент использует продвинутые многошаговые agentic reasoning loops без участия разработчика.<br><br>
-            Это прямое продолжение тренда на агентный инжиниринг — теперь не только написание кода, но и его проверка становится агентной задачей.
-          </div>
-          <div class="card-action">
-            <div class="card-action-label">Применить в стеке</div>
-            <div class="card-action-text">Подключи Code Review к CDP Qadam репо — пусть агенты проверяют каждый PR автоматически. Это разгружает ревью и ловит баги до мержа.</div>
-          </div>
-          <div class="card-source"><a href="https://thenewstack.io/anthropic-launches-a-multi-agent-code-review-tool-for-claude-code/">The New Stack / MarkTechPost</a></div>
-          <div class="feedback-buttons">
-            <button class="feedback-btn" data-card-id="card_1" data-action="like">👍</button>
-            <button class="feedback-btn" data-card-id="card_1" data-action="dislike">👎</button>
-            <button class="feedback-btn" data-card-id="card_1" data-action="backlog">📋 В бэклог</button>
-          </div>
+      <!-- Агент 1: Claude Code Review -->
+      <div class="card" data-card-id="card_1" data-card-title="Anthropic запустил Claude Code Review — мультиагентный инструмент для проверки кода" data-card-category="🤖 AGENT">
+        <div class="card-num"><span class="tag agent">🤖 AGENT</span></div>
+        <div class="card-title">Claude Code Review: параллельные агенты на каждый PR</div>
+        <div class="card-text">
+          Anthropic представил функцию Code Review в Claude Code: параллельные AI-агенты анализируют каждый pull request одновременно, ища баги, логические ошибки и уязвимости безопасности. Инструмент использует продвинутые многошаговые agentic reasoning loops без участия разработчика.<br><br>
+          Это прямое продолжение тренда на агентный инжиниринг — теперь не только написание кода, но и его проверка становится агентной задачей.
         </div>
-      </details>
+        <div class="card-action">
+          <div class="card-action-label">Применить в стеке</div>
+          <div class="card-action-text">Подключи Code Review к CDP Qadam репо — пусть агенты проверяют каждый PR автоматически. Это разгружает ревью и ловит баги до мержа.</div>
+        </div>
+        <div class="card-source"><a href="https://thenewstack.io/anthropic-launches-a-multi-agent-code-review-tool-for-claude-code/">The New Stack / MarkTechPost</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="card_1" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="card_1" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="card_1" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
 
-      <!-- Карточка 2 -->
-      <details class="accordion-card" data-card-id="card_2" data-card-title="Microsoft объединил AutoGen и Semantic Kernel в единый Microsoft Agent Framework" data-card-category="🤖 AGENT">
-        <summary class="accordion-summary">
-          <span class="tag agent">🤖 AGENT</span>
-          <div class="accordion-summary-content">
-            <div class="accordion-card-title">Microsoft Agent Framework: AutoGen + Semantic Kernel слились в один SDK</div>
-            <div class="accordion-card-preview">GA в Q1 2026, AutoGen уходит в режим поддержки — крупнейшая enterprise-консолидация фреймворков</div>
-          </div>
-          <div class="accordion-chevron">▼</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="card-text">
-            Microsoft завершил слияние AutoGen и Semantic Kernel в единый SDK — Microsoft Agent Framework, с GA в Q1 2026. AutoGen переходит в режим поддержки без новых фич. Это крупнейшая консолидация в enterprise-пространстве агентных AI-фреймворков.<br><br>
-            Сигнал для рынка: enterprise-агентный стек начинает стабилизироваться. OpenClaw и Claude Code остаются в indie/prosumer сегменте с более быстрыми обновлениями.
-          </div>
-          <div class="card-source"><a href="https://www.alphamatch.ai/blog/top-agentic-ai-frameworks-2026">AlphaMatch / Flobotics</a></div>
-          <div class="feedback-buttons">
-            <button class="feedback-btn" data-card-id="card_2" data-action="like">👍</button>
-            <button class="feedback-btn" data-card-id="card_2" data-action="dislike">👎</button>
-            <button class="feedback-btn" data-card-id="card_2" data-action="backlog">📋 В бэклог</button>
-          </div>
+      <!-- Агент 2: Microsoft Agent Framework -->
+      <div class="card" data-card-id="card_2" data-card-title="Microsoft объединил AutoGen и Semantic Kernel в единый Microsoft Agent Framework" data-card-category="🤖 AGENT">
+        <div class="card-num"><span class="tag agent">🤖 AGENT</span></div>
+        <div class="card-title">Microsoft Agent Framework: AutoGen + Semantic Kernel слились в один SDK</div>
+        <div class="card-text">
+          Microsoft завершил слияние AutoGen и Semantic Kernel в единый SDK — Microsoft Agent Framework, с GA в Q1 2026. AutoGen переходит в режим поддержки без новых фич. Это крупнейшая консолидация в enterprise-пространстве агентных AI-фреймворков.<br><br>
+          Сигнал для рынка: enterprise-агентный стек начинает стабилизироваться. OpenClaw и Claude Code остаются в indie/prosumer сегменте с более быстрыми обновлениями.
         </div>
-      </details>
+        <div class="card-source"><a href="https://www.alphamatch.ai/blog/top-agentic-ai-frameworks-2026">AlphaMatch / Flobotics</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="card_2" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="card_2" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="card_2" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
 
-      <!-- Карточка 3 -->
-      <details class="accordion-card" data-card-id="card_3" data-card-title="Волна моделей марта 2026: GPT-5.4, Gemini 3.1 Pro, Claude Sonnet 4.6" data-card-category="🧠 AI">
-        <summary class="accordion-summary">
-          <span class="tag hot">🔥 HOT</span>
-          <div class="accordion-summary-content">
-            <div class="accordion-card-title">Март 2026: GPT-5.4 с 1М токенов, Gemini 3.1 Pro, Claude Sonnet 4.6 в гонке</div>
-            <div class="accordion-card-preview">Релизы каждые 2-3 недели, Sonnet 4.6 лидирует на реальных задачах — 1633 Elo на GDPval-AA</div>
-          </div>
-          <div class="accordion-chevron">▼</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="card-text">
-            GPT-5.4 вышел с контекстом 1 млн токенов и -33% фактических ошибок. Gemini 3.1 Pro лидирует в 13/16 бенчмарков с рекордным 77.1% на ARC-AGI-2. Claude Sonnet 4.6 первый по реальным рабочим задачам: 1633 очков на GDPval-AA Elo.<br><br>
-            Лаборатории релизят каждые 2-3 недели. Контекст в 1М токенов становится новым стандартом.
-          </div>
-          <div class="card-source"><a href="https://integratedcognition.com/blog/march-2026s-ai-launch-wave-what-lawyers-should-make-of-gpt-54-claude-sonnet-46-gemini-31-pro-grok-420-glm-5-minimax-m25-and-the-deepseek-question">LLM Stats / Integrated Cognition</a></div>
-          <div class="feedback-buttons">
-            <button class="feedback-btn" data-card-id="card_3" data-action="like">👍</button>
-            <button class="feedback-btn" data-card-id="card_3" data-action="dislike">👎</button>
-            <button class="feedback-btn" data-card-id="card_3" data-action="backlog">📋 В бэклог</button>
-          </div>
+      <!-- Агент 3: Волна моделей марта -->
+      <div class="card" data-card-id="card_3" data-card-title="Волна моделей марта 2026: GPT-5.4, Gemini 3.1 Pro, Claude Sonnet 4.6" data-card-category="🧠 AI">
+        <div class="card-num"><span class="tag hot">🔥 HOT</span></div>
+        <div class="card-title">Март 2026: GPT-5.4 с 1М токенов, Gemini 3.1 Pro, Claude Sonnet 4.6 в гонке</div>
+        <div class="card-text">
+          GPT-5.4 вышел с контекстом 1 млн токенов и -33% фактических ошибок. Gemini 3.1 Pro лидирует в 13/16 бенчмарков с рекордным 77.1% на ARC-AGI-2. Claude Sonnet 4.6 первый по реальным рабочим задачам: 1633 очков на GDPval-AA Elo.<br><br>
+          Лаборатории релизят каждые 2-3 недели. Контекст в 1М токенов становится новым стандартом.
         </div>
-      </details>
+        <div class="card-source"><a href="https://integratedcognition.com/blog/march-2026s-ai-launch-wave-what-lawyers-should-make-of-gpt-54-claude-sonnet-46-gemini-31-pro-grok-420-glm-5-minimax-m25-and-the-deepseek-question">LLM Stats / Integrated Cognition</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="card_3" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="card_3" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="card_3" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
 
-      <!-- Карточка 4 -->
-      <details class="accordion-card" data-card-id="card_4" data-card-title="Luma запустила творческих AI-агентов на базе Unified Intelligence моделей" data-card-category="🤖 AGENT">
-        <summary class="accordion-summary">
-          <span class="tag agent">🤖 AGENT</span>
-          <div class="accordion-summary-content">
-            <div class="accordion-card-title">Luma AI: агенты генерируют текст + изображения + видео + аудио в одной цепочке</div>
-            <div class="accordion-card-preview">Рынок агентного AI: $7.8B сейчас → $52B к 2030, мультимодальность как новый стандарт</div>
-          </div>
-          <div class="accordion-chevron">▼</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="card-text">
-            Luma AI выпустила мультимодальных агентов на базе Unified Intelligence: планирование → текст → изображения → видео → аудио в единой цепочке. Агенты координируются с Ray 3.14, Google Veo 3, ByteDance Seedream и ElevenLabs.<br><br>
-            Рынок агентного AI прогнозируется: $7.8 млрд → $52 млрд к 2030 году.
-          </div>
-          <div class="card-source"><a href="https://techcrunch.com/2026/03/05/exclusive-luma-launches-creative-ai-agents-powered-by-its-new-unified-intelligence-models/">TechCrunch</a></div>
-          <div class="feedback-buttons">
-            <button class="feedback-btn" data-card-id="card_4" data-action="like">👍</button>
-            <button class="feedback-btn" data-card-id="card_4" data-action="dislike">👎</button>
-            <button class="feedback-btn" data-card-id="card_4" data-action="backlog">📋 В бэклог</button>
-          </div>
+      <!-- Агент 4: Luma AI -->
+      <div class="card" data-card-id="card_4" data-card-title="Luma запустила творческих AI-агентов на базе Unified Intelligence моделей" data-card-category="🤖 AGENT">
+        <div class="card-num"><span class="tag agent">🤖 AGENT</span></div>
+        <div class="card-title">Luma AI: агенты генерируют текст + изображения + видео + аудио в одной цепочке</div>
+        <div class="card-text">
+          Luma AI выпустила мультимодальных агентов на базе Unified Intelligence: планирование → текст → изображения → видео → аудио в единой цепочке. Агенты координируются с Ray 3.14, Google Veo 3, ByteDance Seedream и ElevenLabs.<br><br>
+          Рынок агентного AI прогнозируется: $7.8 млрд → $52 млрд к 2030 году.
         </div>
-      </details>
+        <div class="card-source"><a href="https://techcrunch.com/2026/03/05/exclusive-luma-launches-creative-ai-agents-powered-by-its-new-unified-intelligence-models/">TechCrunch</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="card_4" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="card_4" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="card_4" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
     </div>
 
-    <!-- ======== СЕКЦИЯ: ВАЙБ-КОДИНГ ======== -->
+    <!-- ======== СЕКЦИЯ: НОВОСТИ (accordion) ======== -->
     <div class="section fade-in-up">
       <div class="section-header">
-        <div class="section-title">💻 Вайб-кодинг</div>
+        <div class="section-title">📰 Новости</div>
         <div class="section-line"></div>
       </div>
 
-      <!-- Карточка 5 -->
+      <!-- Новость 5: Windsurf -->
       <details class="accordion-card" data-card-id="card_5" data-card-title="Windsurf Wave 13: Arena Mode и параллельные агентные сессии" data-card-category="🛠 TOOL">
         <summary class="accordion-summary">
           <span class="tag tool">🛠 TOOL</span>
@@ -180,10 +148,10 @@
         </div>
       </details>
 
-      <!-- Карточка 6 -->
+      <!-- Новость 6: Lovable -->
       <details class="accordion-card" data-card-id="card_6" data-card-title="Lovable достиг $300M ARR и оценки $6.6B — лидер вайб-кодинга 2026" data-card-category="💰 MONEY">
         <summary class="accordion-summary">
-          <span class="tag biz">💰 BIZ</span>
+          <span class="tag money">💰 MONEY</span>
           <div class="accordion-summary-content">
             <div class="accordion-card-title">Lovable: $300M ARR, $6.6B оценка — рынок вайб-кодинга $4.7B → $12.3B к 2027</div>
             <div class="accordion-card-preview">Bolt.new на $40M ARR — «браузер → деплой за минуты» как новый стандарт</div>
@@ -204,7 +172,7 @@
         </div>
       </details>
 
-      <!-- Карточка 7 -->
+      <!-- Новость 7: Claude Sonnet 4.6 -->
       <details class="accordion-card" data-card-id="card_7" data-card-title="Claude Sonnet 4.6 стал новой дефолтной бесплатной моделью в Claude Code" data-card-category="🛠 TOOL">
         <summary class="accordion-summary">
           <span class="tag tool">🛠 TOOL</span>
@@ -227,7 +195,7 @@
         </div>
       </details>
 
-      <!-- Карточка 8 -->
+      <!-- Новость 8: Cursor 2.0 -->
       <details class="accordion-card" data-card-id="card_8" data-card-title="Cursor 2.0: 8 параллельных агентов и переработанный мультиагентный интерфейс" data-card-category="🛠 TOOL">
         <summary class="accordion-summary">
           <span class="tag tool">🛠 TOOL</span>
@@ -249,19 +217,11 @@
           </div>
         </div>
       </details>
-    </div>
 
-    <!-- ======== СЕКЦИЯ: EDTECH ======== -->
-    <div class="section fade-in-up">
-      <div class="section-header">
-        <div class="section-title">📚 EdTech</div>
-        <div class="section-line"></div>
-      </div>
-
-      <!-- Карточка 9 -->
+      <!-- Новость 9: Казахстан на Bett UK -->
       <details class="accordion-card" data-card-id="card_9" data-card-title="Казахстан вышел на мировой рынок EdTech: презентация на Bett UK 2026" data-card-category="🎓 EDTECH">
         <summary class="accordion-summary">
-          <span class="tag tool">🎓 EDTECH</span>
+          <span class="tag edtech">🎓 EDTECH</span>
           <div class="accordion-summary-content">
             <div class="accordion-card-title">9 казахстанских вузов на Bett UK 2026 — Казахстан заявляет о себе в мировом EdTech</div>
             <div class="accordion-card-preview">Фокус на AI: персонализированные траектории, аналитика данных, новые подходы к оценке</div>
@@ -282,10 +242,10 @@
         </div>
       </details>
 
-      <!-- Карточка 10 -->
+      <!-- Новость 10: AI в образовании -->
       <details class="accordion-card" data-card-id="card_10" data-card-title="AI в образовании: переход от экспериментов к системной интеграции" data-card-category="🎓 EDTECH">
         <summary class="accordion-summary">
-          <span class="tag tool">🎓 EDTECH</span>
+          <span class="tag edtech">🎓 EDTECH</span>
           <div class="accordion-summary-content">
             <div class="accordion-card-title">2026: AI-тьюторы, адаптивное обучение и предиктивная аналитика — из пилота в базовую инфраструктуру</div>
             <div class="accordion-card-preview">Рынок EdTech растёт до $375 млрд к 2033 году</div>
@@ -309,7 +269,7 @@
         </div>
       </details>
 
-      <!-- Карточка 11 -->
+      <!-- Новость 11: Казахстан AI-навыки -->
       <details class="accordion-card" data-card-id="card_11" data-card-title="Казахстан: 1 миллион человек обучится AI-навыкам к 2030 году" data-card-category="🎓 EDTECH">
         <summary class="accordion-summary">
           <span class="tag biz">📣 BIZ</span>
@@ -332,16 +292,8 @@
           </div>
         </div>
       </details>
-    </div>
 
-    <!-- ======== СЕКЦИЯ: META РЕКЛАМА ======== -->
-    <div class="section fade-in-up">
-      <div class="section-header">
-        <div class="section-title">📱 Meta реклама</div>
-        <div class="section-line"></div>
-      </div>
-
-      <!-- Карточка 12 -->
+      <!-- Новость 12: Meta Advantage+ -->
       <details class="accordion-card" data-card-id="card_12" data-card-title="Meta Advantage+: снижение порога конверсий до 15 в неделю для малого бизнеса" data-card-category="📣 BIZ">
         <summary class="accordion-summary">
           <span class="tag biz">📣 BIZ</span>
@@ -368,10 +320,10 @@
         </div>
       </details>
 
-      <!-- Карточка 13 -->
+      <!-- Новость 13: Andromeda -->
       <details class="accordion-card" data-card-id="card_13" data-card-title="Алгоритм Andromeda: creative теперь главный сигнал таргетинга в Meta" data-card-category="🌊 WAVE">
         <summary class="accordion-summary">
-          <span class="tag hot">🌊 WAVE</span>
+          <span class="tag wave">🌊 WAVE</span>
           <div class="accordion-summary-content">
             <div class="accordion-card-title">Andromeda финально: креатив = таргетинг. Creative Similarity повышает CPM, однообразие штрафуется</div>
             <div class="accordion-card-preview">Ручные настройки сворачиваются, Advantage+ экосистема поглощает всё</div>
@@ -396,7 +348,7 @@
         </div>
       </details>
 
-      <!-- Карточка 14 -->
+      <!-- Новость 14: Meta image-to-video -->
       <details class="accordion-card" data-card-id="card_14" data-card-title="Meta запустила image-to-video и AI-дублирование для рекламодателей" data-card-category="🛠 TOOL">
         <summary class="accordion-summary">
           <span class="tag tool">🛠 TOOL</span>
@@ -422,16 +374,8 @@
           </div>
         </div>
       </details>
-    </div>
 
-    <!-- ======== СЕКЦИЯ: КАЗАХСТАН ======== -->
-    <div class="section fade-in-up">
-      <div class="section-header">
-        <div class="section-title">🇰🇿 Казахстан</div>
-        <div class="section-line"></div>
-      </div>
-
-      <!-- Карточка 15 -->
+      <!-- Новость 15: Токаев -->
       <details class="accordion-card" data-card-id="card_15" data-card-title="Токаев поручил ускорить цифровизацию и внедрение AI в ключевые отрасли" data-card-category="📣 BIZ">
         <summary class="accordion-summary">
           <span class="tag biz">📣 BIZ</span>
@@ -454,10 +398,10 @@
         </div>
       </details>
 
-      <!-- Карточка 16 -->
+      <!-- Новость 16: Нацбанк крипто -->
       <details class="accordion-card" data-card-id="card_16" data-card-title="Нацбанк Казахстана: $350 млн из ЗВР в криптоактивы к маю 2026" data-card-category="💰 MONEY">
         <summary class="accordion-summary">
-          <span class="tag hot">💰 MONEY</span>
+          <span class="tag money">💰 MONEY</span>
           <div class="accordion-summary-content">
             <div class="accordion-card-title">Нацбанк KZ: $350M из ЗВР в крипто-индексные фонды и цифровую инфраструктуру</div>
             <div class="accordion-card-preview">Старт портфеля: апрель-май 2026 — Казахстан легализует крипто на государственном уровне</div>
@@ -477,7 +421,7 @@
         </div>
       </details>
 
-      <!-- Карточка 17 -->
+      <!-- Новость 17: Стартап-экосистема -->
       <details class="accordion-card" data-card-id="card_17" data-card-title="Казахстан №1 в ЦА по стартап-экосистеме, №70 в мире" data-card-category="📣 BIZ">
         <summary class="accordion-summary">
           <span class="tag biz">📣 BIZ</span>
@@ -499,16 +443,8 @@
           </div>
         </div>
       </details>
-    </div>
 
-    <!-- ======== СЕКЦИЯ: ЗДОРОВЬЕ ======== -->
-    <div class="section fade-in-up">
-      <div class="section-header">
-        <div class="section-title">💪 Здоровье</div>
-        <div class="section-line"></div>
-      </div>
-
-      <!-- Карточка 18 -->
+      <!-- Новость 18: Whoop 5.0 -->
       <details class="accordion-card" data-card-id="card_18" data-card-title="Whoop 5.0: FDA-одобренный ЭКГ-скринер и 14-дневная батарея" data-card-category="🛠 TOOL">
         <summary class="accordion-summary">
           <span class="tag tool">🛠 TOOL</span>
@@ -531,10 +467,10 @@
         </div>
       </details>
 
-      <!-- Карточка 19 -->
+      <!-- Новость 19: Биохакинг -->
       <details class="accordion-card" data-card-id="card_19" data-card-title="Биохакинг-рынок: $38B сейчас → $216B к 2035, CGM как новый стандарт" data-card-category="🌊 WAVE">
         <summary class="accordion-summary">
-          <span class="tag hot">🌊 WAVE</span>
+          <span class="tag wave">🌊 WAVE</span>
           <div class="accordion-summary-content">
             <div class="accordion-card-title">Биохакинг: $38B → $216B к 2035. CGM и глюкоза — новый базовый ориентир</div>
             <div class="accordion-card-preview">Носимая диагностика, персонализированная оптимизация здоровья — главные драйверы роста</div>
@@ -554,10 +490,10 @@
         </div>
       </details>
 
-      <!-- Карточка 20 -->
+      <!-- Новость 20: Urolithin A -->
       <details class="accordion-card" data-card-id="card_20" data-card-title="Urolithin A (Mitopure) омолодил иммунную систему — Nature Aging" data-card-category="🧠 AI">
         <summary class="accordion-summary">
-          <span class="tag tool">💊 LONGEVITY</span>
+          <span class="tag ai">💊 LONGEVITY</span>
           <div class="accordion-summary-content">
             <div class="accordion-card-title">Mitopure (Urolithin A) в Nature Aging: восстанавливает иммунные клетки, снижает воспаление</div>
             <div class="accordion-card-preview">Витамин D3 ежедневно = -3 года биологического старения по AJCN</div>
@@ -576,16 +512,8 @@
           </div>
         </div>
       </details>
-    </div>
 
-    <!-- ======== СЕКЦИЯ: СПОРТ ======== -->
-    <div class="section fade-in-up">
-      <div class="section-header">
-        <div class="section-title">🥊 Спорт</div>
-        <div class="section-line"></div>
-      </div>
-
-      <!-- Карточка 21 -->
+      <!-- Новость 21: UFC 326 -->
       <details class="accordion-card" data-card-id="card_21" data-card-title="UFC 326: Оливейра победил Холлоуэя — забрал титул BMF" data-card-category="🥊 SPORT">
         <summary class="accordion-summary">
           <span class="tag hot">🥊 UFC</span>
@@ -608,7 +536,7 @@
         </div>
       </details>
 
-      <!-- Карточка 22 -->
+      <!-- Новость 22: UFC Fight Night -->
       <details class="accordion-card" data-card-id="card_22" data-card-title="UFC Fight Night сегодня: Эммет (41 лет) vs Вальехос (24 года) — главный кард" data-card-category="🥊 SPORT">
         <summary class="accordion-summary">
           <span class="tag hot">🥊 СЕГОДНЯ</span>
@@ -631,7 +559,7 @@
         </div>
       </details>
 
-      <!-- Карточка 23 -->
+      <!-- Новость 23: Indian Wells -->
       <details class="accordion-card" data-card-id="card_23" data-card-title="Indian Wells Masters: Алькарас, Синнер, Зверев, Медведев в полуфинале" data-card-category="🎾 TENNIS">
         <summary class="accordion-summary">
           <span class="tag hot">🎾 ТЕННИС</span>
@@ -655,7 +583,7 @@
       </details>
     </div>
 
-    <!-- ======== СЕКЦИЯ: ВНЕДРИТЬ ======== -->
+    <!-- ======== СЕКЦИЯ: ВНЕДРИТЬ (полноразмерные карточки) ======== -->
     <div class="section fade-in-up">
       <div class="section-header">
         <div class="section-title">🛠 Внедрить</div>
@@ -717,7 +645,7 @@
       </div>
     </div>
 
-    <!-- ======== СЕКЦИЯ: КОНТР-СИГНАЛ ======== -->
+    <!-- ======== СЕКЦИЯ: КОНТР-СИГНАЛ (красноватый акцент) ======== -->
     <div class="section fade-in-up">
       <div class="section-header">
         <div class="section-title">⚡ Контр-сигнал</div>
