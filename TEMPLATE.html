@@ -3,287 +3,169 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Дайджест {{DATE}} — Коди</title>
+  <title>{{DATE_TITLE}} — Коди Дайджест</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #000;
-      color: #a1a1aa;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* — Header — */
-    .header {
-      padding: 48px 20px 40px;
-      text-align: center;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .header-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border-radius: 100px;
-      border: 1px solid rgba(124,58,237,0.3);
-      background: rgba(124,58,237,0.08);
-      font-size: 12px;
-      font-weight: 600;
-      color: #a78bfa;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-    .header h1 {
-      font-size: 28px;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: -0.5px;
-      margin-bottom: 8px;
-    }
-    .header-meta {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      font-size: 13px;
-      color: #52525b;
-    }
-    .header-meta span { display: flex; align-items: center; gap: 4px; }
-
-    /* — Nav — */
-    .nav {
-      padding: 12px 20px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .nav a {
-      color: #7C3AED;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav a:hover { color: #a78bfa; }
-
-    /* — Container — */
-    .container {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 32px 16px 64px;
-    }
-
-    /* — TL;DR — */
-    .tldr {
-      background: linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(0,0,0,0) 100%);
-      border-left: 3px solid #7C3AED;
-      border-radius: 0 12px 12px 0;
-      padding: 24px;
-      margin-bottom: 40px;
-    }
-    .tldr-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: #7C3AED;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 14px;
-    }
-    .tldr ul { list-style: none; }
-    .tldr li {
-      font-size: 15px;
-      font-weight: 500;
-      color: #e4e4e7;
-      padding: 6px 0 6px 24px;
-      position: relative;
-      line-height: 1.6;
-    }
-    .tldr li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: #7C3AED;
-      font-weight: 700;
-    }
-
-    /* — Sections — */
-    .section { margin-bottom: 40px; }
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 20px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .section-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-    }
-    .section-line {
-      flex: 1;
-      height: 1px;
-      background: rgba(255,255,255,0.06);
-    }
-
-    /* — Card — */
-    .card {
-      background: #0a0a0a;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 12px;
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-    .card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(124,58,237,0.4);
-      box-shadow: 0 4px 24px rgba(124,58,237,0.1);
-    }
-    .card-num {
-      font-size: 11px;
-      font-weight: 600;
-      color: #52525b;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .card-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: #fafafa;
-      margin-bottom: 8px;
-      letter-spacing: -0.2px;
-    }
-    .card-text {
-      font-size: 14px;
-      color: #a1a1aa;
-      margin-bottom: 14px;
-      line-height: 1.7;
-    }
-
-    /* — Action block — */
-    .card-action {
-      background: rgba(16,185,129,0.06);
-      border-left: 3px solid #10B981;
-      padding: 12px 16px;
-      border-radius: 0 8px 8px 0;
-      margin-bottom: 12px;
-    }
-    .card-action-label {
-      font-size: 10px;
-      font-weight: 700;
-      color: #10B981;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .card-action-text {
-      font-size: 13px;
-      color: #d4d4d8;
-      margin-top: 4px;
-      line-height: 1.6;
-    }
-
-    /* — Source — */
-    .card-source { font-size: 12px; }
-    .card-source a {
-      color: #7C3AED;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .card-source a:hover { color: #a78bfa; }
-
-    /* — Tags — */
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 8px;
-      border-radius: 6px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-    .tag.hot {
-      background: rgba(245,158,11,0.12);
-      color: #F59E0B;
-      border: 1px solid rgba(245,158,11,0.2);
-    }
-    .tag.tool {
-      background: rgba(124,58,237,0.12);
-      color: #a78bfa;
-      border: 1px solid rgba(124,58,237,0.2);
-    }
-    .tag.biz {
-      background: rgba(59,130,246,0.12);
-      color: #60a5fa;
-      border: 1px solid rgba(59,130,246,0.2);
-    }
-    .tag.warn {
-      background: rgba(239,68,68,0.12);
-      color: #f87171;
-      border: 1px solid rgba(239,68,68,0.2);
-    }
-
-    /* — Animations — */
-    .fade-in-up {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .fade-in-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* — Mobile — */
-    @media (max-width: 480px) {
-      .header { padding: 36px 16px 32px; }
-      .header h1 { font-size: 22px; }
-      .tldr { padding: 18px; }
-      .tldr li { font-size: 14px; }
-      .card { padding: 16px; }
-      .card-title { font-size: 15px; }
-    }
-  </style>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
   <div class="header">
     <div class="header-badge">◆ Коди Дайджест</div>
-    <h1>{{DATE}}</h1>
+    <h1>{{DATE_TITLE}}</h1>
     <div class="header-meta">
-      <span>{{ITEMS_COUNT}} пунктов</span>
+      <span>{{ITEMS_COUNT}} карточек · {{READ_TIME}} мин</span>
     </div>
   </div>
-  <nav class="nav"><a href="../index.html">← Все выпуски</a></nav>
+
+  <nav class="nav">
+    <a href="../index.html" class="nav-back">← Все выпуски</a>
+    <div class="nav-links">
+      <a href="../liked.html">❤️ Лайки</a>
+      <a href="../backlog.html">📋 Бэклог</a>
+    </div>
+  </nav>
+
   <div class="container">
-    <div class="tldr fade-in-up">
-      <div class="tldr-label">TL;DR</div>
+
+    <!-- ======== TL;DR (один viewport, без скролла) ======== -->
+    <div class="tldr tldr-viewport fade-in-up">
+      <div class="tldr-label">За 15 секунд</div>
       <ul>
         {{TLDR}}
       </ul>
     </div>
-    {{ITEMS}}
+
+    <!-- ======== СЕКЦИЯ: АГЕНТСКИЙ КОДИНГ (3-5 карточек, ОБЯЗАТЕЛЬНАЯ) ======== -->
+    <div class="section fade-in-up">
+      <div class="section-header">
+        <div class="section-title">🤖 AI & Агенты</div>
+        <div class="section-line"></div>
+      </div>
+      {{AGENT_CARDS}}
+    </div>
+
+    <!-- ======== СЕКЦИЯ: НОВОСТИ (accordion) ======== -->
+    <div class="section fade-in-up">
+      <div class="section-header">
+        <div class="section-title">📰 Новости</div>
+        <div class="section-line"></div>
+      </div>
+      {{NEWS_CARDS}}
+    </div>
+
+    <!-- ======== СЕКЦИЯ: ВНЕДРИТЬ (полноразмерные карточки) ======== -->
+    <div class="section fade-in-up">
+      <div class="section-header">
+        <div class="section-title">🛠 Внедрить</div>
+        <div class="section-line"></div>
+      </div>
+      {{IMPLEMENT_CARDS}}
+    </div>
+
+    <!-- ======== СЕКЦИЯ: КОНТР-СИГНАЛ (красноватый акцент) ======== -->
+    <div class="section fade-in-up">
+      <div class="section-header">
+        <div class="section-title">⚡ Контр-сигнал</div>
+        <div class="section-line"></div>
+      </div>
+      {{COUNTER_SIGNAL}}
+    </div>
+
   </div>
+
+  <!-- Sticky панель фидбэка -->
+  <div id="feedback-panel" class="feedback-panel">
+    <div class="feedback-panel-inner">
+      <div class="feedback-stats"></div>
+      <div class="feedback-sync-status"></div>
+    </div>
+  </div>
+
+  <script src="../js/feedback.js"></script>
+  <script src="../js/app.js"></script>
   <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
+    initFeedbackButtons('{{DATE}}');
   </script>
 </body>
 </html>
+
+<!--
+  === ШАБЛОНЫ КАРТОЧЕК ===
+
+  --- Accordion карточка (для секции Новости) ---
+  <details class="accordion-card" data-card-id="card_N" data-card-title="TITLE" data-card-category="TAG">
+    <summary class="accordion-summary">
+      <span class="tag TAG_CLASS">TAG_EMOJI TAG_TEXT</span>
+      <div class="accordion-summary-content">
+        <div class="accordion-card-title">SHORT_TITLE</div>
+        <div class="accordion-card-preview">PREVIEW_LINE</div>
+      </div>
+      <div class="accordion-chevron">▼</div>
+    </summary>
+    <div class="accordion-body">
+      <div class="card-text">FULL_TEXT</div>
+      <div class="card-action">
+        <div class="card-action-label">Применить</div>
+        <div class="card-action-text">ACTION_TEXT</div>
+      </div>
+      <div class="card-source"><a href="URL">SOURCE</a></div>
+      <div class="feedback-buttons">
+        <button class="feedback-btn" data-card-id="card_N" data-action="like">👍</button>
+        <button class="feedback-btn" data-card-id="card_N" data-action="dislike">👎</button>
+        <button class="feedback-btn" data-card-id="card_N" data-action="backlog">📋 В бэклог</button>
+      </div>
+    </div>
+  </details>
+
+  --- Полноразмерная карточка (для секций Агенты и Внедрить) ---
+  <div class="card implement-card" data-card-id="impl_N" data-card-title="TITLE" data-card-category="🛠 ВНЕДРИТЬ">
+    <div class="card-num"><span class="tag TAG_CLASS">TAG</span></div>
+    <div class="card-title">TITLE</div>
+    <div class="card-text">TEXT</div>
+    <div class="card-action">
+      <div class="card-action-label">Одно действие</div>
+      <div class="card-action-text">ACTION</div>
+    </div>
+    <div class="feedback-buttons">
+      <button class="feedback-btn" data-card-id="impl_N" data-action="like">👍</button>
+      <button class="feedback-btn" data-card-id="impl_N" data-action="dislike">👎</button>
+      <button class="feedback-btn" data-card-id="impl_N" data-action="backlog">📋 В бэклог</button>
+    </div>
+  </div>
+
+  --- Контр-сигнал карточка (красный акцент) ---
+  <details class="accordion-card risk-card" data-card-id="risk_N" data-card-title="TITLE" data-card-category="⚡ КОНТР-СИГНАЛ">
+    <summary class="accordion-summary">
+      <span class="tag risk">⚡ РИСК</span>
+      <div class="accordion-summary-content">
+        <div class="accordion-card-title">SHORT_TITLE</div>
+        <div class="accordion-card-preview">PREVIEW</div>
+      </div>
+      <div class="accordion-chevron">▼</div>
+    </summary>
+    <div class="accordion-body">
+      <div class="card-text">FULL_TEXT</div>
+      <div class="card-risk">
+        <div class="card-risk-label">Контр-сигнал</div>
+        <div class="card-risk-text">RISK_TEXT</div>
+      </div>
+      <div class="feedback-buttons">
+        <button class="feedback-btn" data-card-id="risk_N" data-action="like">👍</button>
+        <button class="feedback-btn" data-card-id="risk_N" data-action="dislike">👎</button>
+        <button class="feedback-btn" data-card-id="risk_N" data-action="backlog">📋 В бэклог</button>
+      </div>
+    </div>
+  </details>
+
+  === ПЛЕЙСХОЛДЕРЫ ===
+  {{DATE}}              — YYYY-MM-DD (для JS)
+  {{DATE_TITLE}}        — "14 марта 2026" (для заголовка)
+  {{ITEMS_COUNT}}       — число карточек
+  {{READ_TIME}}         — минуты чтения
+  {{TLDR}}              — 3 пункта <li>...</li>
+  {{AGENT_CARDS}}       — 3-5 полноразмерных карточек агентов
+  {{NEWS_CARDS}}        — 15-20 accordion карточек
+  {{IMPLEMENT_CARDS}}   — 3-5 полноразмерных карточек "внедрить"
+  {{COUNTER_SIGNAL}}    — 1-2 risk-card с красным акцентом
+-->

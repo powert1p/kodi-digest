@@ -90,7 +90,7 @@ a:hover { color: #a78bfa; }
 .container {
   max-width: 640px;
   margin: 0 auto;
-  padding: 32px 16px 120px; /* 120px \u0434\u043b\u044f sticky \u043f\u0430\u043d\u0435\u043b\u0438 */
+  padding: 32px 16px 120px; /* 120px для sticky панели */
 }
 
 /* --- Section headers --- */
@@ -159,6 +159,23 @@ a:hover { color: #a78bfa; }
   font-weight: 700;
 }
 
+/* --- TL;DR viewport (фиксированная высота — один экран) --- */
+.tldr-viewport {
+  min-height: calc(100vh - 200px);
+  min-height: calc(100dvh - 200px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.tldr-viewport .tldr-label {
+  margin-bottom: 20px;
+}
+.tldr-viewport li {
+  font-size: 16px;
+  padding: 10px 0 10px 28px;
+  line-height: 1.7;
+}
+
 /* --- Tags --- */
 .tag {
   display: inline-flex;
@@ -191,6 +208,9 @@ a:hover { color: #a78bfa; }
 }
 .accordion-card[open] {
   border-color: rgba(124,58,237,0.3);
+}
+.accordion-card.risk-card {
+  border-color: rgba(239,68,68,0.15);
 }
 .accordion-card.risk-card[open] {
   border-color: rgba(239,68,68,0.3);
@@ -253,7 +273,7 @@ a:hover { color: #a78bfa; }
   margin-bottom: 14px;
 }
 
-/* --- Full Card (\u0434\u043b\u044f "\u0412\u043d\u0435\u0434\u0440\u0438\u0442\u044c" \u0438 index) --- */
+/* --- Full Card (для "Внедрить", "Агенты" и index) --- */
 .card {
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.06);
@@ -289,6 +309,15 @@ a:hover { color: #a78bfa; }
   line-height: 1.7;
 }
 
+/* --- Implement card (секция "Внедрить") --- */
+.implement-card {
+  border-color: rgba(16,185,129,0.15);
+}
+.implement-card:hover {
+  border-color: rgba(16,185,129,0.3);
+  box-shadow: 0 4px 24px rgba(16,185,129,0.08);
+}
+
 /* --- Action block --- */
 .card-action {
   background: rgba(16,185,129,0.06);
@@ -311,7 +340,7 @@ a:hover { color: #a78bfa; }
   line-height: 1.6;
 }
 
-/* --- Risk block --- */
+/* --- Risk block (секция "Контр-сигнал") --- */
 .card-risk {
   background: rgba(239,68,68,0.06);
   border-left: 3px solid #ef4444;
@@ -442,6 +471,16 @@ a:hover { color: #a78bfa; }
   pointer-events: none;
 }
 
+/* --- Sync status text --- */
+.feedback-sync-status {
+  font-size: 12px;
+  color: #52525b;
+  min-height: 16px;
+}
+.feedback-sync-status.sync-ok {
+  color: #22c55e;
+}
+
 /* --- Digest list card (index.html) --- */
 .digest-card {
   display: block;
@@ -471,6 +510,16 @@ a:hover { color: #a78bfa; }
   letter-spacing: 0.5px;
   white-space: nowrap;
 }
+.digest-count {
+  font-size: 12px;
+  color: #52525b;
+}
+.digest-card-preview {
+  font-size: 14px;
+  color: #71717a;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
 .badge-new {
   display: inline-flex;
   padding: 2px 8px;
@@ -482,6 +531,11 @@ a:hover { color: #a78bfa; }
   background: rgba(16,185,129,0.12);
   color: #10b981;
   border: 1px solid rgba(16,185,129,0.2);
+}
+.digest-likes {
+  font-size: 12px;
+  color: #22c55e;
+  font-weight: 600;
 }
 .digest-title {
   font-size: 16px;
@@ -521,6 +575,11 @@ a:hover { color: #a78bfa; }
 }
 .page-empty-text {
   font-size: 15px;
+  margin-bottom: 8px;
+}
+.page-empty-hint {
+  font-size: 13px;
+  color: #27272a;
 }
 
 .date-group { margin-bottom: 32px; }
@@ -563,6 +622,10 @@ a:hover { color: #a78bfa; }
 .backlog-card-meta {
   font-size: 12px;
   color: #52525b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 .remove-btn {
   min-width: 44px;
@@ -586,13 +649,21 @@ a:hover { color: #a78bfa; }
   color: #f87171;
 }
 
-/* --- Backlog statuses --- */
+/* --- Backlog statuses (кликабельные кнопки) --- */
 .backlog-status {
   font-size: 11px;
   font-weight: 600;
   padding: 2px 8px;
   border-radius: 6px;
   white-space: nowrap;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.backlog-status:active {
+  transform: scale(1.1);
 }
 .backlog-status.new {
   background: rgba(59,130,246,0.12);
@@ -645,11 +716,15 @@ a:hover { color: #a78bfa; }
 @media (min-width: 481px) {
   .header { padding: 64px 20px 48px; }
   .header h1 { font-size: 36px; }
+  .tldr-viewport { min-height: calc(100vh - 240px); min-height: calc(100dvh - 240px); }
+  .tldr-viewport li { font-size: 17px; }
 }
 
 @media (max-width: 480px) {
   .tldr { padding: 18px; }
   .tldr li { font-size: 14px; }
+  .tldr-viewport { min-height: calc(100vh - 180px); min-height: calc(100dvh - 180px); }
+  .tldr-viewport li { font-size: 14px; padding: 8px 0 8px 24px; }
   .card { padding: 16px; }
   .card-title { font-size: 15px; }
   .accordion-card-title { font-size: 14px; }

@@ -29,7 +29,7 @@
   <div class="container">
 
     <!-- TL;DR -->
-    <div class="tldr fade-in-up">
+    <div class="tldr tldr-viewport fade-in-up">
       <div class="tldr-label">За 15 секунд</div>
       <ul>
         <li>Anthropic запустил мультиагентный Code Review прямо в Claude Code — параллельные агенты проверяют каждый PR на баги и уязвимости автоматически</li>
@@ -655,9 +655,142 @@
       </details>
     </div>
 
+    <!-- ======== СЕКЦИЯ: ВНЕДРИТЬ ======== -->
+    <div class="section fade-in-up">
+      <div class="section-header">
+        <div class="section-title">🛠 Внедрить</div>
+        <div class="section-line"></div>
+      </div>
+
+      <!-- Внедрить 1 -->
+      <div class="card implement-card" data-card-id="impl_1" data-card-title="Подключить Claude Code Review к CDP Qadam" data-card-category="🛠 ВНЕДРИТЬ">
+        <div class="card-num"><span class="tag tool">🛠 СЕЙЧАС</span></div>
+        <div class="card-title">Подключить Claude Code Review к CDP Qadam</div>
+        <div class="card-text">
+          Code Review теперь поддерживает параллельных агентов — каждый PR анализируется несколькими агентами одновременно. Инлайн-комменты + сводный обзор с severity-ранжированием. Настройка: 30 минут.
+        </div>
+        <div class="card-action">
+          <div class="card-action-label">Одно действие</div>
+          <div class="card-action-text">anthropic.com/claude-code-review → Connect Repository → qadam-cdp → готово. 30 минут.</div>
+        </div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="impl_1" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="impl_1" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="impl_1" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
+
+      <!-- Внедрить 2 -->
+      <div class="card implement-card" data-card-id="impl_2" data-card-title="Проверить Creative Similarity Score в Ads Manager" data-card-category="🛠 ВНЕДРИТЬ">
+        <div class="card-num"><span class="tag biz">📣 META</span></div>
+        <div class="card-title">Проверить Creative Similarity Score в AiPlus кампаниях</div>
+        <div class="card-text">
+          Andromeda штрафует за однообразие креативов: высокая Creative Similarity повышает CPM. Проверь текущие кампании и ротируй форматы: видео + карусель + single image каждые 2 недели.
+        </div>
+        <div class="card-action">
+          <div class="card-action-label">Одно действие</div>
+          <div class="card-action-text">Ads Manager → Columns → Customize → добавить Creative Similarity → проверить топ-5 adsets. Если score > 0.7 — срочно ротировать.</div>
+        </div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="impl_2" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="impl_2" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="impl_2" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
+
+      <!-- Внедрить 3 -->
+      <div class="card implement-card" data-card-id="impl_3" data-card-title="Тест image-to-video Meta для AiPlus рекламы" data-card-category="🛠 ВНЕДРИТЬ">
+        <div class="card-num"><span class="tag wave">🌊 ВОЛНА</span></div>
+        <div class="card-title">Тест: image-to-video для AiPlus рекламы ($500 бюджет)</div>
+        <div class="card-text">
+          20 фото (скриншоты курсов, результаты студентов) → Meta image-to-video → автоматический видеоролик. Гипотеза: видео для образования даёт CPL ниже на 15-30%.
+        </div>
+        <div class="card-action">
+          <div class="card-action-label">Одно действие</div>
+          <div class="card-action-text">Собери 20 фото AiPlus → Advantage+ → Image to Video → $500 тест → через 7 дней сравни CPL с baseline.</div>
+        </div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="impl_3" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="impl_3" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="impl_3" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======== СЕКЦИЯ: КОНТР-СИГНАЛ ======== -->
+    <div class="section fade-in-up">
+      <div class="section-header">
+        <div class="section-title">⚡ Контр-сигнал</div>
+        <div class="section-line"></div>
+      </div>
+
+      <!-- Контр-сигнал 1 -->
+      <details class="accordion-card risk-card" data-card-id="risk_1" data-card-title="AI-кодинг без review = haunted codebase через 3 месяца" data-card-category="⚡ КОНТР-СИГНАЛ">
+        <summary class="accordion-summary">
+          <span class="tag risk">⚡ РИСК</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Скорость без review: каждый второй AI-проект ломается через 3 месяца</div>
+            <div class="accordion-card-preview">78% dev-команд с AI, но без TDD+review = технический долг быстрее чем без AI</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            Свежие данные GitHub: разработчики с AI без системного review layer иногда медленнее чем без AI вообще. Время на исправление AI-кода съедает выигрыш от генерации. «Haunted codebase» — кодовая база где никто не понимает почему код так устроен.
+          </div>
+          <div class="card-risk">
+            <div class="card-risk-label">Контр-сигнал</div>
+            <div class="card-risk-text">CDP Qadam строится быстро — но Code Review + TDD обязательны. Один день на pytest + pre-commit сейчас = месяцы сохранённого времени потом.</div>
+          </div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="risk_1" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="risk_1" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="risk_1" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+
+      <!-- Контр-сигнал 2 -->
+      <details class="accordion-card risk-card" data-card-id="risk_2" data-card-title="Creative Similarity может взорвать CPM если не ротировать креативы" data-card-category="⚡ КОНТР-СИГНАЛ">
+        <summary class="accordion-summary">
+          <span class="tag risk">⚡ РИСК</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Andromeda штрафует за однообразие — CPM может вырасти незаметно</div>
+            <div class="accordion-card-preview">Если все креативы AiPlus визуально похожи, алгоритм повышает цену показа</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">
+            Andromeda использует Creative Similarity как фактор ранжирования: если твои креативы визуально и текстово похожи друг на друга, алгоритм считает что ты «не вносишь разнообразие» и повышает CPM. Это скрытый налог на ленивый креатив.
+          </div>
+          <div class="card-risk">
+            <div class="card-risk-label">Контр-сигнал</div>
+            <div class="card-risk-text">Проверь Ads Manager прямо сейчас: если CPM вырос в последние 2 недели без видимой причины — вероятно Creative Similarity. Решение: ротация форматов каждые 2 недели.</div>
+          </div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="risk_2" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="risk_2" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="risk_2" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+    </div>
+
+  </div>
+
+  <!-- Sticky панель фидбэка -->
+  <div id="feedback-panel" class="feedback-panel">
+    <div class="feedback-panel-inner">
+      <div class="feedback-stats"></div>
+      <div class="feedback-sync-status"></div>
+    </div>
   </div>
 
   <script src="../js/feedback.js"></script>
   <script src="../js/app.js"></script>
+  <script>
+    initFeedbackButtons('2026-03-14');
+  </script>
 </body>
 </html>

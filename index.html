@@ -7,155 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #000;
-      color: #a1a1aa;
-      line-height: 1.7;
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* — Header — */
-    .header {
-      padding: 64px 20px 48px;
-      text-align: center;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .header-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border-radius: 100px;
-      border: 1px solid rgba(124,58,237,0.3);
-      background: rgba(124,58,237,0.08);
-      font-size: 12px;
-      font-weight: 600;
-      color: #a78bfa;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-    .header h1 {
-      font-size: 36px;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: -1px;
-      margin-bottom: 10px;
-    }
-    .header p {
-      font-size: 15px;
-      color: #52525b;
-      max-width: 400px;
-      margin: 0 auto;
-    }
-
-    /* — Container — */
-    .container {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 40px 16px 64px;
-    }
-
-    .list-header {
-      font-size: 11px;
-      font-weight: 700;
-      color: #52525b;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 16px;
-    }
-
-    /* — Digest Card — */
-    .digest-card {
-      display: block;
-      background: #0a0a0a;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 12px;
-      text-decoration: none;
-      color: inherit;
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-    .digest-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(124,58,237,0.4);
-      box-shadow: 0 4px 24px rgba(124,58,237,0.1);
-    }
-    .digest-card-top {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-    .digest-date {
-      font-size: 12px;
-      font-weight: 700;
-      color: #7C3AED;
-      letter-spacing: 0.5px;
-      white-space: nowrap;
-    }
-    .badge-new {
-      display: inline-flex;
-      padding: 2px 8px;
-      border-radius: 6px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      background: rgba(16,185,129,0.12);
-      color: #10B981;
-      border: 1px solid rgba(16,185,129,0.2);
-    }
-    .digest-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: #fafafa;
-      margin-bottom: 6px;
-      letter-spacing: -0.2px;
-    }
-    .digest-desc {
-      font-size: 14px;
-      color: #71717a;
-      margin-bottom: 10px;
-    }
-    .digest-stats {
-      display: flex;
-      gap: 12px;
-    }
-    .digest-stat {
-      font-size: 11px;
-      color: #3f3f46;
-      padding: 3px 10px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 6px;
-    }
-
-    /* — Animations — */
-    .fade-in-up {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .fade-in-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* — Mobile — */
-    @media (max-width: 480px) {
-      .header { padding: 48px 16px 36px; }
-      .header h1 { font-size: 28px; }
-      .digest-card { padding: 16px; }
-      .digest-title { font-size: 15px; }
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <div class="header">
@@ -163,26 +15,35 @@
     <h1>Коди Дайджест</h1>
     <p>Новости AI + что это значит для нас</p>
   </div>
-  <nav style="display:flex;align-items:center;gap:16px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.06);max-width:680px;margin:0 auto;">
-    <div style="display:flex;gap:16px;margin-left:auto;">
-      <a href="knowledge.html" style="font-size:13px;font-weight:500;color:#52525b;text-decoration:none;">🧠 База знаний</a>
-      <a href="liked.html" style="font-size:13px;font-weight:500;color:#52525b;text-decoration:none;">❤️ Лайки</a>
-      <a href="backlog.html" style="font-size:13px;font-weight:500;color:#52525b;text-decoration:none;">📋 Бэклог</a>
+  <nav class="nav" style="max-width:640px;margin:0 auto;">
+    <div class="nav-links" style="margin-left:auto;">
+      <a href="liked.html">❤️ Лайки</a>
+      <a href="backlog.html">📋 Бэклог</a>
     </div>
   </nav>
   <div class="container">
     <div class="list-header">Выпуски</div>
-    <a href="daily/2026-03-14.html" class="digest-card fade-in-up">
+
+    <!-- 14 марта 2026 -->
+    <a href="daily/2026-03-14.html" class="digest-card fade-in-up" data-digest-date="2026-03-14">
       <div class="digest-card-top">
         <span class="digest-date">14 МАР 2026</span>
-        <span class="digest-count">23 карточки</span>
+        <span class="badge-new">NEW</span>
+        <span class="digest-likes" style="display:none;font-size:12px;color:#22c55e;font-weight:600;"></span>
       </div>
-      <div class="digest-card-preview">Claude Code Review с параллельными агентами · Meta Andromeda финально · UFC Эммет vs Вальехос сегодня · Indian Wells полуфиналы</div>
+      <div class="digest-title">Claude Code Review с параллельными агентами, Meta Andromeda финально, UFC и Indian Wells</div>
+      <div class="digest-desc">Мультиагентный code review, креатив как таргетинг, спортивные события дня</div>
+      <div class="digest-stats">
+        <span class="digest-stat">23 карточки</span>
+        <span class="digest-stat">12 мин</span>
+      </div>
     </a>
-    <a href="daily/2026-03-13.html" class="digest-card fade-in-up">
+
+    <!-- 13 марта 2026 -->
+    <a href="daily/2026-03-13.html" class="digest-card fade-in-up" data-digest-date="2026-03-13">
       <div class="digest-card-top">
         <span class="digest-date">13 МАР 2026</span>
-        <span class="badge-new">NEW</span>
+        <span class="digest-likes" style="display:none;font-size:12px;color:#22c55e;font-weight:600;"></span>
       </div>
       <div class="digest-title">Claude Code /loop, Meta AI автоматизация рекламы, GPT-5.4</div>
       <div class="digest-desc">Агентный инжиниринг побеждает вайб-кодинг, мета-ставка $600B, EdTech под угрозой от ChatGPT</div>
@@ -191,20 +52,27 @@
         <span class="digest-stat">12 мин</span>
       </div>
     </a>
-    <a href="daily/2026-03-12.html" class="digest-card fade-in-up">
+
+    <!-- 12 марта 2026 -->
+    <a href="daily/2026-03-12.html" class="digest-card fade-in-up" data-digest-date="2026-03-12">
       <div class="digest-card-top">
         <span class="digest-date">12 МАР 2026</span>
-        
+        <span class="digest-likes" style="display:none;font-size:12px;color:#22c55e;font-weight:600;"></span>
       </div>
       <div class="digest-title">Code Review, OpenClaw ContextEngine, GTC Feynman</div>
       <div class="digest-desc">Мультиагентный ревью PR, кастомный контекст, чип для агентного AI</div>
       <div class="digest-stats">
-        <span class="digest-stat">10 пунктов</span>
-        <span class="digest-stat">5 мин</span>
+        <span class="digest-stat">25 карточек</span>
+        <span class="digest-stat">12 мин</span>
       </div>
     </a>
   </div>
+
+  <script src="js/feedback.js"></script>
   <script>
+    // Показать кол-во лайков рядом с каждым дайджестом
+    updateDigestStats();
+    // Fade-in анимация
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
