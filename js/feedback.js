@@ -429,11 +429,10 @@ async function sendFeedback(date) {
   }
 
   updateFeedbackPanel(date);
-  updateSyncStatus('\u{1F4CB} \u{0421}\u{043A}\u{043E}\u{043F}\u{0438}\u{0440}\u{043E}\u{0432}\u{0430}\u{043D}\u{043E} \u2014 \u{0432}\u{0441}\u{0442}\u{0430}\u{0432}\u{044C} \u{0432} \u{0447}\u{0430}\u{0442} \u2193', 'ok');
+  updateSyncStatus('\u{1F4CB} \u{0422}\u{0435}\u{043A}\u{0441}\u{0442} \u{0441}\u{043A}\u{043E}\u{043F}\u{0438}\u{0440}\u{043E}\u{0432}\u{0430}\u{043D}, \u{0432}\u{0441}\u{0442}\u{0430}\u{0432}\u{044C} \u{0432} \u{0447}\u{0430}\u{0442} \u{0441} @esya_st', 'ok');
 
-  // Открываем Telegram deep link с start-параметром
-  const feedbackDate = date.replace(/-/g, '');
-  const tgUrl = `https://t.me/KodiAssistBot?start=FEEDBACK_${feedbackDate}`;
+  // Открываем чат с владельцем — текст уже скопирован в clipboard
+  const tgUrl = `https://t.me/esya_st`;
   setTimeout(() => {
     window.open(tgUrl, '_blank');
   }, 300);
