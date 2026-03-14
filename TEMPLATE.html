@@ -14,7 +14,7 @@
     <div class="header-badge">◆ Коди Дайджест</div>
     <h1>{{DATE_TITLE}}</h1>
     <div class="header-meta">
-      <span>{{ITEMS_COUNT}} карточек · {{READ_TIME}} мин</span>
+      <span>{{CARD_COUNT}} карточек · {{READ_TIME}} мин</span>
     </div>
   </div>
 
@@ -27,16 +27,15 @@
   </nav>
 
   <div class="container">
-
-    <!-- ======== TL;DR (один viewport, без скролла) ======== -->
-    <div class="tldr tldr-viewport fade-in-up">
+    <!-- TL;DR (один viewport) -->
+    <div class="tldr tldr-section tldr-viewport fade-in-up">
       <div class="tldr-label">За 15 секунд</div>
       <ul>
-        {{TLDR}}
+        {{TLDR_ITEMS}}
       </ul>
     </div>
 
-    <!-- ======== СЕКЦИЯ: АГЕНТСКИЙ КОДИНГ (3-5 карточек, ОБЯЗАТЕЛЬНАЯ) ======== -->
+    <!-- Секция: AI & Агенты (полноразмерные карточки) -->
     <div class="section fade-in-up">
       <div class="section-header">
         <div class="section-title">🤖 AI & Агенты</div>
@@ -45,7 +44,7 @@
       {{AGENT_CARDS}}
     </div>
 
-    <!-- ======== СЕКЦИЯ: НОВОСТИ (accordion) ======== -->
+    <!-- Секция: Новости (accordion) -->
     <div class="section fade-in-up">
       <div class="section-header">
         <div class="section-title">📰 Новости</div>
@@ -54,62 +53,103 @@
       {{NEWS_CARDS}}
     </div>
 
-    <!-- ======== СЕКЦИЯ: ВНЕДРИТЬ (полноразмерные карточки) ======== -->
+    <!-- Секция: Внедрить (полноразмерные) -->
     <div class="section fade-in-up">
       <div class="section-header">
-        <div class="section-title">🛠 Внедрить</div>
+        <div class="section-title">🚀 Внедрить</div>
         <div class="section-line"></div>
       </div>
       {{IMPLEMENT_CARDS}}
     </div>
 
-    <!-- ======== СЕКЦИЯ: КОНТР-СИГНАЛ (красноватый акцент) ======== -->
+    <!-- Секция: Контр-сигнал (красный акцент) -->
     <div class="section fade-in-up">
       <div class="section-header">
-        <div class="section-title">⚡ Контр-сигнал</div>
+        <div class="section-title counter-signal-title">⚠️ Контр-сигнал</div>
         <div class="section-line"></div>
       </div>
       {{COUNTER_SIGNAL}}
     </div>
-
   </div>
 
-  <!-- Sticky панель фидбэка -->
-  <div id="feedback-panel" class="feedback-panel">
-    <div class="feedback-panel-inner">
-      <div class="feedback-stats"></div>
-      <div class="feedback-sync-status"></div>
-    </div>
-  </div>
+  <!-- Sticky панель фидбэка создаётся автоматически через initFeedbackButtons() в feedback.js -->
 
   <script src="../js/feedback.js"></script>
   <script src="../js/app.js"></script>
   <script>
-    initFeedbackButtons('{{DATE}}');
+    // Инициализация кнопок фидбэка с привязкой к дате дайджеста
+    if (typeof initFeedbackButtons === 'function') initFeedbackButtons('{{DATE}}');
   </script>
 </body>
 </html>
 
 <!--
-  === ШАБЛОНЫ КАРТОЧЕК ===
+  ============================================================
+  ИНСТРУКЦИИ ДЛЯ ГЕНЕРАТОРА ДАЙДЖЕСТОВ
+  ============================================================
 
-  --- Accordion карточка (для секции Новости) ---
-  <details class="accordion-card" data-card-id="card_N" data-card-title="TITLE" data-card-category="TAG">
+  === ПЛЕЙСХОЛДЕРЫ ===
+
+  {{DATE}}           — Дата в формате YYYY-MM-DD (для JS, например: 2026-03-14)
+  {{DATE_TITLE}}     — Дата по-русски для заголовка (например: "14 марта 2026")
+  {{CARD_COUNT}}     — Общее количество карточек (число)
+  {{READ_TIME}}      — Время чтения в минутах (число)
+  {{TLDR_ITEMS}}     — 3-5 пунктов <li>...</li> для блока TL;DR
+  {{AGENT_CARDS}}    — 3-5 полноразмерных карточек секции "AI & Агенты"
+  {{NEWS_CARDS}}     — 10-20 accordion-карточек секции "Новости"
+  {{IMPLEMENT_CARDS}} — 3-5 полноразмерных карточек секции "Внедрить"
+  {{COUNTER_SIGNAL}} — 1-2 карточки контр-сигнала с красным акцентом
+
+  Имя файла: daily/YYYY-MM-DD.html (совпадает с {{DATE}})
+
+  ============================================================
+  ШАБЛОН: Полноразмерная карточка
+  ============================================================
+  Используется в секциях: AI & Агенты, Внедрить.
+  Префикс card-id: agent_N для агентов, impl_N для внедрить.
+  TAG_CLASS: один из — ai, tool, business, strategy, product, data (CSS-класс тега)
+
+  <div class="card" data-card-id="ПРЕФИКС_N" data-card-title="ЗАГОЛОВОК" data-card-category="КАТЕГОРИЯ">
+    <div class="card-num"><span class="tag TAG_CLASS">ЭМОДЗИ ТЕГ</span></div>
+    <div class="card-title">ЗАГОЛОВОК КАРТОЧКИ</div>
+    <div class="card-text">
+      ОСНОВНОЙ ТЕКСТ КАРТОЧКИ. Поддерживает HTML: <strong>, <em>, <br>, <a href="">.
+    </div>
+    <div class="card-action">
+      <div class="card-action-label">Одно действие</div>
+      <div class="card-action-text">КОНКРЕТНОЕ ДЕЙСТВИЕ ДЛЯ ЧИТАТЕЛЯ</div>
+    </div>
+    <div class="card-source"><a href="URL_ИСТОЧНИКА">НАЗВАНИЕ ИСТОЧНИКА</a></div>
+    <div class="feedback-buttons">
+      <button class="feedback-btn" data-card-id="ПРЕФИКС_N" data-action="like">👍</button>
+      <button class="feedback-btn" data-card-id="ПРЕФИКС_N" data-action="dislike">👎</button>
+      <button class="feedback-btn" data-card-id="ПРЕФИКС_N" data-action="backlog">📋 В бэклог</button>
+    </div>
+  </div>
+
+  ============================================================
+  ШАБЛОН: Accordion карточка (для секции Новости)
+  ============================================================
+  Компактная карточка со сворачиваемым содержимым.
+  Префикс card-id: card_N.
+  TAG_CLASS: один из — ai, tool, business, strategy, product, data, media
+
+  <details class="accordion-card" data-card-id="card_N" data-card-title="ЗАГОЛОВОК" data-card-category="КАТЕГОРИЯ">
     <summary class="accordion-summary">
-      <span class="tag TAG_CLASS">TAG_EMOJI TAG_TEXT</span>
+      <span class="tag TAG_CLASS">ЭМОДЗИ ТЕГ</span>
       <div class="accordion-summary-content">
-        <div class="accordion-card-title">SHORT_TITLE</div>
-        <div class="accordion-card-preview">PREVIEW_LINE</div>
+        <div class="accordion-card-title">КОРОТКИЙ ЗАГОЛОВОК</div>
+        <div class="accordion-card-preview">ПРЕВЬЮ (1 строка, видно в свёрнутом виде)</div>
       </div>
       <div class="accordion-chevron">▼</div>
     </summary>
     <div class="accordion-body">
-      <div class="card-text">FULL_TEXT</div>
+      <div class="card-text">ПОЛНЫЙ ТЕКСТ КАРТОЧКИ</div>
       <div class="card-action">
         <div class="card-action-label">Применить</div>
-        <div class="card-action-text">ACTION_TEXT</div>
+        <div class="card-action-text">КОНКРЕТНОЕ ДЕЙСТВИЕ</div>
       </div>
-      <div class="card-source"><a href="URL">SOURCE</a></div>
+      <div class="card-source"><a href="URL_ИСТОЧНИКА">НАЗВАНИЕ ИСТОЧНИКА</a></div>
       <div class="feedback-buttons">
         <button class="feedback-btn" data-card-id="card_N" data-action="like">👍</button>
         <button class="feedback-btn" data-card-id="card_N" data-action="dislike">👎</button>
@@ -118,38 +158,29 @@
     </div>
   </details>
 
-  --- Полноразмерная карточка (для секций Агенты и Внедрить) ---
-  <div class="card implement-card" data-card-id="impl_N" data-card-title="TITLE" data-card-category="🛠 ВНЕДРИТЬ">
-    <div class="card-num"><span class="tag TAG_CLASS">TAG</span></div>
-    <div class="card-title">TITLE</div>
-    <div class="card-text">TEXT</div>
-    <div class="card-action">
-      <div class="card-action-label">Одно действие</div>
-      <div class="card-action-text">ACTION</div>
-    </div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="impl_N" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="impl_N" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="impl_N" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
+  ============================================================
+  ШАБЛОН: Контр-сигнал карточка (красный акцент)
+  ============================================================
+  Карточка с предупреждением/риском. Класс counter-signal добавляет
+  красноватый акцент через CSS.
+  Префикс card-id: risk_N.
 
-  --- Контр-сигнал карточка (красный акцент) ---
-  <details class="accordion-card risk-card" data-card-id="risk_N" data-card-title="TITLE" data-card-category="⚡ КОНТР-СИГНАЛ">
+  <details class="accordion-card counter-signal" data-card-id="risk_N" data-card-title="ЗАГОЛОВОК" data-card-category="⚠️ КОНТР-СИГНАЛ">
     <summary class="accordion-summary">
-      <span class="tag risk">⚡ РИСК</span>
+      <span class="tag risk">⚠️ РИСК</span>
       <div class="accordion-summary-content">
-        <div class="accordion-card-title">SHORT_TITLE</div>
-        <div class="accordion-card-preview">PREVIEW</div>
+        <div class="accordion-card-title">КОРОТКИЙ ЗАГОЛОВОК</div>
+        <div class="accordion-card-preview">ПРЕВЬЮ ПРЕДУПРЕЖДЕНИЯ</div>
       </div>
       <div class="accordion-chevron">▼</div>
     </summary>
     <div class="accordion-body">
-      <div class="card-text">FULL_TEXT</div>
+      <div class="card-text">ПОЛНЫЙ ТЕКСТ: что происходит и почему это важно</div>
       <div class="card-risk">
         <div class="card-risk-label">Контр-сигнал</div>
-        <div class="card-risk-text">RISK_TEXT</div>
+        <div class="card-risk-text">КОНКРЕТНЫЙ РИСК ИЛИ ПРЕДУПРЕЖДЕНИЕ</div>
       </div>
+      <div class="card-source"><a href="URL_ИСТОЧНИКА">НАЗВАНИЕ ИСТОЧНИКА</a></div>
       <div class="feedback-buttons">
         <button class="feedback-btn" data-card-id="risk_N" data-action="like">👍</button>
         <button class="feedback-btn" data-card-id="risk_N" data-action="dislike">👎</button>
@@ -158,14 +189,17 @@
     </div>
   </details>
 
-  === ПЛЕЙСХОЛДЕРЫ ===
-  {{DATE}}              — YYYY-MM-DD (для JS)
-  {{DATE_TITLE}}        — "14 марта 2026" (для заголовка)
-  {{ITEMS_COUNT}}       — число карточек
-  {{READ_TIME}}         — минуты чтения
-  {{TLDR}}              — 3 пункта <li>...</li>
-  {{AGENT_CARDS}}       — 3-5 полноразмерных карточек агентов
-  {{NEWS_CARDS}}        — 15-20 accordion карточек
-  {{IMPLEMENT_CARDS}}   — 3-5 полноразмерных карточек "внедрить"
-  {{COUNTER_SIGNAL}}    — 1-2 risk-card с красным акцентом
+  ============================================================
+  ЗАМЕТКИ ДЛЯ ГЕНЕРАТОРА
+  ============================================================
+
+  1. Все card-id должны быть УНИКАЛЬНЫМИ в рамках одного дайджеста.
+     Формат: agent_1, agent_2, ... | card_1, card_2, ... | impl_1, ... | risk_1, ...
+  2. data-card-title — текст заголовка карточки (используется в liked/backlog).
+  3. data-card-category — название секции (используется в liked.html для группировки).
+  4. feedback-buttons с data-card-id ДОЛЖНЫ совпадать с data-card-id родительского элемента.
+  5. Файл сохраняется как daily/YYYY-MM-DD.html.
+  6. После генерации добавить запись в index.html (блок .container).
+  7. TL;DR должен помещаться в один viewport без скролла (3-5 коротких пунктов).
+  8. Класс counter-signal (не risk-card) — для CSS-стилизации контр-сигнальных карточек.
 -->

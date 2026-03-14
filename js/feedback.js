@@ -1,11 +1,18 @@
 /* === Kodi Digest — Feedback System (localStorage + Telegram) === */
-/* V2: localStorage + Telegram deep link + статусы бэклога */
+/* V3: localStorage + Telegram deep link + sticky panel + статусы бэклога */
 
 function updateSyncStatus(text, type) {
   const el = document.querySelector('.feedback-sync-status');
   if (!el) return;
   el.textContent = text;
   el.className = 'feedback-sync-status' + (type ? ' sync-' + type : '');
+}
+
+/* === Утилита: определить дату дайджеста из URL === */
+function getDigestDateFromUrl() {
+  // Паттерн: daily/YYYY-MM-DD.html
+  const match = window.location.pathname.match(/daily\/(\d{4}-\d{2}-\d{2})\.html/);
+  return match ? match[1] : null;
 }
 
 /* === FeedbackStore === */
@@ -141,7 +148,7 @@ const FeedbackStore = {
     this._save(data);
   },
 
-  // Обновить статус задачи бэклога (new → in_progress → done)
+  // Обновить статус задачи бэклога (new -> in_progress -> done)
   updateBacklogStatus(fullId, newStatus) {
     const data = this._load();
     if (!data.allBacklog) return;
@@ -152,7 +159,7 @@ const FeedbackStore = {
     }
   },
 
-  // Циклический переход статуса: new → in_progress → done → new
+  // Циклический переход статуса: new -> in_progress -> done -> new
   cycleBacklogStatus(fullId) {
     const data = this._load();
     if (!data.allBacklog) return 'new';
@@ -186,20 +193,41 @@ const FeedbackStore = {
   // Собрать текст фидбэка для отправки в Telegram
   getFeedbackText(date) {
     const { day } = this._getDay(date);
+    const data = this._load();
+    const allLiked = data.allLiked || [];
+    const allBacklog = data.allBacklog || [];
     const parts = [];
+
+    // Лайки — берём title из allLiked
     if (day.likes.length) {
-      const titles = day.likes.map(id => getCardMeta(id).title).filter(Boolean);
-      parts.push('👍 ' + titles.join(', '));
+      const titles = day.likes.map(id => {
+        const fullId = `${date}_${id}`;
+        const stored = allLiked.find(x => x.id === fullId);
+        if (stored) return stored.title;
+        // Фоллбэк на DOM если нет в allLiked
+        return getCardMeta(id).title;
+      }).filter(Boolean);
+      if (titles.length) parts.push('\u{1F44D} ' + titles.join(', '));
     }
+
+    // Дизлайки — только в feedbackData (без allDisliked), берём из DOM
     if (day.dislikes.length) {
       const titles = day.dislikes.map(id => getCardMeta(id).title).filter(Boolean);
-      parts.push('👎 ' + titles.join(', '));
+      if (titles.length) parts.push('\u{1F44E} ' + titles.join(', '));
     }
+
+    // Бэклог — берём title из allBacklog
     if (day.backlog.length) {
-      const titles = day.backlog.map(id => getCardMeta(id).title).filter(Boolean);
-      parts.push('📋 ' + titles.join(', '));
+      const titles = day.backlog.map(id => {
+        const fullId = `${date}_${id}`;
+        const stored = allBacklog.find(x => x.id === fullId);
+        if (stored) return stored.title;
+        return getCardMeta(id).title;
+      }).filter(Boolean);
+      if (titles.length) parts.push('\u{1F4CB} ' + titles.join(', '));
     }
-    return parts.length ? `Дайджест ${date}:\n${parts.join('\n')}` : '';
+
+    return parts.length ? `\u{0414}\u{0430}\u{0439}\u{0434}\u{0436}\u{0435}\u{0441}\u{0442} ${date}:\n${parts.join('\n')}` : '';
   }
 };
 
@@ -238,79 +266,134 @@ function updateStickyPanel(date) {
 
 /* === Кнопки фидбэка на странице дайджеста === */
 function initFeedbackButtons(date) {
+  // Если дата не передана — определяем из URL или data-атрибута
+  if (!date) {
+    date = getDigestDateFromUrl();
+  }
+  if (!date) return;
+
   document.querySelectorAll('.feedback-btn').forEach(btn => {
     const cardId = btn.dataset.cardId;
     const action = btn.dataset.action;
+    if (!cardId || !action) return;
+
     const state = FeedbackStore.getState(date, cardId);
     // Восстановить состояние из localStorage
-    if (action === 'like' && state.liked) btn.classList.add('active-like');
-    if (action === 'dislike' && state.disliked) btn.classList.add('active-dislike');
-    if (action === 'backlog' && state.backlogged) btn.classList.add('active-backlog');
+    if (action === 'like' && state.liked) btn.classList.add('active', 'active-like');
+    if (action === 'dislike' && state.disliked) btn.classList.add('active', 'active-dislike');
+    if (action === 'backlog' && state.backlogged) btn.classList.add('active', 'active-backlog');
+
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       handleFeedbackClick(date, cardId, action, btn);
     });
   });
+
+  // Инициализировать sticky panel
+  initStickyPanel();
   updateStickyPanel(date);
 }
 
 function handleFeedbackClick(date, cardId, action, btn) {
   const card = btn.closest('[data-card-id]');
-  const allBtns = card.querySelectorAll('.feedback-btn');
+  const allBtns = card ? card.querySelectorAll('.feedback-btn') : [];
+
   if (action === 'like') {
     const isActive = FeedbackStore.toggleLike(date, cardId);
+    btn.classList.toggle('active', isActive);
     btn.classList.toggle('active-like', isActive);
-    allBtns.forEach(b => { if (b.dataset.action === 'dislike') b.classList.remove('active-dislike'); });
+    allBtns.forEach(b => {
+      if (b.dataset.action === 'dislike') {
+        b.classList.remove('active', 'active-dislike');
+      }
+    });
   } else if (action === 'dislike') {
     const isActive = FeedbackStore.toggleDislike(date, cardId);
+    btn.classList.toggle('active', isActive);
     btn.classList.toggle('active-dislike', isActive);
-    allBtns.forEach(b => { if (b.dataset.action === 'like') b.classList.remove('active-like'); });
+    allBtns.forEach(b => {
+      if (b.dataset.action === 'like') {
+        b.classList.remove('active', 'active-like');
+      }
+    });
   } else if (action === 'backlog') {
     const isActive = FeedbackStore.addToBacklog(date, cardId);
+    btn.classList.toggle('active', isActive);
     btn.classList.toggle('active-backlog', isActive);
   }
+
   updateFeedbackPanel(date);
+
   // Анимация нажатия
   btn.style.transform = 'scale(1.3)';
   setTimeout(() => btn.style.transform = '', 150);
 }
 
-/* === Sticky панель фидбэка === */
-function initFeedbackPanel(date) {
+/* === Sticky панель фидбэка (создание DOM-элемента) === */
+function initStickyPanel() {
+  // Не создаём повторно если уже есть
+  if (document.querySelector('.sticky-feedback-panel')) return;
+
+  const date = getDigestDateFromUrl();
+  if (!date) return;
+
+  const panel = document.createElement('div');
+  panel.className = 'sticky-feedback-panel';
+  panel.id = 'feedback-panel';
+  panel.innerHTML = `
+    <div class="feedback-panel-inner">
+      <div class="panel-stats feedback-stats">
+        <span>\u{1F44D} 0</span>
+        <span>\u{1F44E} 0</span>
+        <span>\u{1F4CB} 0</span>
+      </div>
+      <button class="panel-send-btn feedback-send-btn" onclick="sendFeedback()">\u{1F4E4} \u{041E}\u{0442}\u{043F}\u{0440}\u{0430}\u{0432}\u{0438}\u{0442}\u{044C} \u{041A}\u{043E}\u{0434}\u{0438}</button>
+    </div>
+  `;
+  document.body.appendChild(panel);
+  document.body.classList.add('has-sticky-panel');
+
+  // Начальное обновление счётчиков
   updateFeedbackPanel(date);
 }
 
+/* === Sticky панель: обновление === */
 function updateFeedbackPanel(date) {
   const panel = document.getElementById('feedback-panel');
   if (!panel) return;
+  if (!date) date = getDigestDateFromUrl();
+  if (!date) return;
+
   const stats = FeedbackStore.getStats(date);
   const total = stats.likes + stats.dislikes + stats.backlog;
+
   // Показать панель при первом фидбэке (slide-up)
   panel.classList.toggle('visible', total > 0);
 
   // Обновить счётчики
-  const statsEl = panel.querySelector('.feedback-stats');
+  const statsEl = panel.querySelector('.panel-stats, .feedback-stats');
   if (statsEl) {
-    statsEl.innerHTML = `<span>Отмечено:</span><span>👍 ${stats.likes}</span><span>👎 ${stats.dislikes}</span><span>📋 ${stats.backlog}</span>`;
+    statsEl.innerHTML = `<span>\u{1F44D} ${stats.likes}</span><span>\u{1F44E} ${stats.dislikes}</span><span>\u{1F4CB} ${stats.backlog}</span>`;
   }
 
   // Кнопка отправки в Telegram
-  let sendBtn = panel.querySelector('.feedback-send-btn');
+  let sendBtn = panel.querySelector('.panel-send-btn, .feedback-send-btn');
   if (!sendBtn) {
     sendBtn = document.createElement('button');
-    sendBtn.className = 'feedback-send-btn';
-    sendBtn.addEventListener('click', () => sendFeedback(date));
-    panel.querySelector('.feedback-panel-inner').appendChild(sendBtn);
+    sendBtn.className = 'panel-send-btn feedback-send-btn';
+    sendBtn.addEventListener('click', () => sendFeedback());
+    const inner = panel.querySelector('.feedback-panel-inner');
+    if (inner) inner.appendChild(sendBtn);
   }
 
   // Если уже отправлено — показать «Отправлено»
   const isSent = FeedbackStore.isSent(date);
   if (isSent && total > 0) {
-    sendBtn.textContent = '✅ Отправлено';
+    sendBtn.textContent = '\u2705 \u{041E}\u{0442}\u{043F}\u{0440}\u{0430}\u{0432}\u{043B}\u{0435}\u{043D}\u{043E}';
     sendBtn.classList.add('sent');
     sendBtn.style.display = '';
   } else if (total > 0) {
-    sendBtn.textContent = '📤 Отправить Коди';
+    sendBtn.textContent = '\u{1F4E4} \u{041E}\u{0442}\u{043F}\u{0440}\u{0430}\u{0432}\u{0438}\u{0442}\u{044C} \u{041A}\u{043E}\u{0434}\u{0438}';
     sendBtn.classList.remove('sent');
     sendBtn.style.display = '';
   } else {
@@ -321,33 +404,21 @@ function updateFeedbackPanel(date) {
 
 /* === Отправка фидбэка через Telegram deep link === */
 async function sendFeedback(date) {
-  const text = FeedbackStore.getFeedbackText(date);
+  // Если дата не передана — определяем из URL
+  if (!date) date = getDigestDateFromUrl();
+  if (!date) return;
+
+  const text = generateFeedbackMessage(date);
   if (!text) return;
 
   // Пометить как отправленное
   FeedbackStore.markSent(date);
 
-  // Telegram web link с предзаполненным текстом
-  const encoded = encodeURIComponent(text);
-  const tgUrl = `https://t.me/esya_st?text=${encoded}`;
-
-  // Попробовать Web Share API (нативный share sheet на мобилке)
-  if (navigator.share) {
-    try {
-      await navigator.share({ text });
-      updateFeedbackPanel(date);
-      updateSyncStatus('✅ Отправлено', 'ok');
-      setTimeout(() => updateSyncStatus('', ''), 3000);
-      return;
-    } catch (e) {
-      // Юзер отменил — fallback на tg deep link
-    }
-  }
-
-  // Fallback: копируем + открываем Telegram
+  // Копируем текст в clipboard
   try {
     await navigator.clipboard.writeText(text);
   } catch {
+    // Фоллбэк для старых браузеров
     const ta = document.createElement('textarea');
     ta.value = text;
     ta.style.cssText = 'position:fixed;opacity:0';
@@ -358,11 +429,15 @@ async function sendFeedback(date) {
   }
 
   updateFeedbackPanel(date);
-  updateSyncStatus('📋 Скопировано — вставь в чат ↓', 'ok');
-  // Открываем Telegram с предзаполненным текстом
+  updateSyncStatus('\u{1F4CB} \u{0421}\u{043A}\u{043E}\u{043F}\u{0438}\u{0440}\u{043E}\u{0432}\u{0430}\u{043D}\u{043E} \u2014 \u{0432}\u{0441}\u{0442}\u{0430}\u{0432}\u{044C} \u{0432} \u{0447}\u{0430}\u{0442} \u2193', 'ok');
+
+  // Открываем Telegram deep link с start-параметром
+  const feedbackDate = date.replace(/-/g, '');
+  const tgUrl = `https://t.me/KodiAssistBot?start=FEEDBACK_${feedbackDate}`;
   setTimeout(() => {
     window.open(tgUrl, '_blank');
   }, 300);
+
   setTimeout(() => updateSyncStatus('', ''), 5000);
 }
 
@@ -374,7 +449,7 @@ function renderLikedPage() {
 
   // Пустое состояние
   if (!items.length) {
-    container.innerHTML = '<div class="page-empty"><div class="page-empty-icon">❤️</div><div class="page-empty-text">Пока нет лайкнутых карточек</div><div class="page-empty-hint">Лайкни карточки в дайджесте — они появятся здесь</div></div>';
+    container.innerHTML = '<div class="page-empty"><div class="page-empty-icon">\u2764\uFE0F</div><div class="page-empty-text">\u{041F}\u{043E}\u{043A}\u{0430} \u{043D}\u{0438}\u{0447}\u{0435}\u{0433}\u{043E} \u{043D}\u{0435} \u{043B}\u{0430}\u{0439}\u{043A}\u{043D}\u{0443}\u{0442}\u{043E}</div><div class="page-empty-hint">\u{041B}\u{0430}\u{0439}\u{043A}\u{043D}\u{0438} \u{043A}\u{0430}\u{0440}\u{0442}\u{043E}\u{0447}\u{043A}\u{0438} \u{0432} \u{0434}\u{0430}\u{0439}\u{0434}\u{0436}\u{0435}\u{0441}\u{0442}\u{0435} \u2014 \u{043E}\u{043D}\u{0438} \u{043F}\u{043E}\u{044F}\u{0432}\u{044F}\u{0442}\u{0441}\u{044F} \u{0437}\u{0434}\u{0435}\u{0441}\u{044C}</div></div>';
     return;
   }
 
@@ -387,15 +462,15 @@ function renderLikedPage() {
   const dates = Object.keys(groups).sort().reverse();
 
   container.innerHTML = dates.map(date => `
-    <div class="date-group">
-      <div class="date-group-header">${formatDateRu(date)}</div>
+    <div class="liked-date-group">
+      <h3>${formatDateRu(date)}</h3>
       ${groups[date].map(item => `
         <div class="liked-card" data-id="${item.id}">
-          <div class="liked-card-info">
-            <div class="liked-card-title">${escapeHtml(item.title)}</div>
-            <div class="liked-card-meta">${escapeHtml(item.category || '')}</div>
+          <div class="card-info">
+            <div class="card-title-sm">${escapeHtml(item.title)}</div>
+            ${item.category ? `<span class="category-tag">${escapeHtml(item.category)}</span>` : ''}
           </div>
-          <button class="remove-btn" onclick="removeLiked('${item.id}')" aria-label="Убрать лайк">✕</button>
+          <button class="remove-btn" onclick="removeLiked('${item.id}')" aria-label="\u{0423}\u{0431}\u{0440}\u{0430}\u{0442}\u{044C} \u{043B}\u{0430}\u{0439}\u{043A}">\u2715</button>
         </div>
       `).join('')}
     </div>
@@ -415,29 +490,29 @@ function renderBacklogPage() {
 
   // Пустое состояние
   if (!items.length) {
-    container.innerHTML = '<div class="page-empty"><div class="page-empty-icon">📋</div><div class="page-empty-text">Бэклог пуст</div><div class="page-empty-hint">Нажми [📋 В бэклог] на карточке в дайджесте</div></div>';
+    container.innerHTML = '<div class="page-empty"><div class="page-empty-icon">\u{1F4CB}</div><div class="page-empty-text">\u{0411}\u{044D}\u{043A}\u{043B}\u{043E}\u{0433} \u{043F}\u{0443}\u{0441}\u{0442}</div><div class="page-empty-hint">\u{041D}\u{0430}\u{0436}\u{043C}\u{0438} [\u{1F4CB} \u{0412} \u{0431}\u{044D}\u{043A}\u{043B}\u{043E}\u{0433}] \u{043D}\u{0430} \u{043A}\u{0430}\u{0440}\u{0442}\u{043E}\u{0447}\u{043A}\u{0435} \u{0432} \u{0434}\u{0430}\u{0439}\u{0434}\u{0436}\u{0435}\u{0441}\u{0442}\u{0435}</div></div>';
     return;
   }
 
   // Карта статусов
   const statusMap = {
-    'new': { label: '🆕 новое', cls: 'new' },
-    'in_progress': { label: '🔄 в работе', cls: 'in-progress' },
-    'done': { label: '✅ готово', cls: 'done' }
+    'new': { label: '\u{1F195} \u{043D}\u{043E}\u{0432}\u{043E}\u{0435}', cls: 'new' },
+    'in_progress': { label: '\u{1F504} \u{0432} \u{0440}\u{0430}\u{0431}\u{043E}\u{0442}\u{0435}', cls: 'in-progress' },
+    'done': { label: '\u2705 \u{0433}\u{043E}\u{0442}\u{043E}\u{0432}\u{043E}', cls: 'done' }
   };
 
   container.innerHTML = items.map(item => {
     const st = statusMap[item.status] || statusMap['new'];
     return `
       <div class="backlog-card" data-id="${item.id}">
-        <div class="backlog-card-info">
-          <div class="backlog-card-title">${escapeHtml(item.title)}</div>
-          <div class="backlog-card-meta">
-            ${formatDateRu(item.date)}
-            <button class="backlog-status ${st.cls}" onclick="cycleStatus('${item.id}')" aria-label="Сменить статус">${st.label}</button>
-          </div>
+        <div class="card-info">
+          <div class="card-title-sm">${escapeHtml(item.title)}</div>
+          ${item.category ? `<span class="category-tag">${escapeHtml(item.category)}</span>` : ''}
         </div>
-        <button class="remove-btn" onclick="removeBacklog('${item.id}')" aria-label="Убрать из бэклога">✕</button>
+        <div class="backlog-actions">
+          <button class="backlog-status ${st.cls}" onclick="cycleStatus('${item.id}')" aria-label="\u{0421}\u{043C}\u{0435}\u{043D}\u{0438}\u{0442}\u{044C} \u{0441}\u{0442}\u{0430}\u{0442}\u{0443}\u{0441}">${st.label}</button>
+          <button class="status-btn remove-btn" onclick="removeBacklog('${item.id}')" aria-label="\u{0423}\u{0431}\u{0440}\u{0430}\u{0442}\u{044C} \u{0438}\u{0437} \u{0431}\u{044D}\u{043A}\u{043B}\u{043E}\u{0433}\u{0430}">\u2715</button>
+        </div>
       </div>
     `;
   }).join('');
@@ -456,16 +531,19 @@ function cycleStatus(fullId) {
 
 /* === Статы для index.html === */
 function updateDigestStats() {
-  document.querySelectorAll('[data-digest-date]').forEach(el => {
+  document.querySelectorAll('.digest-card[data-digest-date]').forEach(el => {
     const date = el.dataset.digestDate;
     const stats = FeedbackStore.getDateStats(date);
-    const likesEl = el.querySelector('.digest-likes');
-    if (likesEl) {
+    const likesEl = el.querySelector('.digest-likes span');
+    // Фоллбэк на .digest-likes если span не найден
+    const target = likesEl || el.querySelector('.digest-likes');
+    if (target) {
       if (stats.likes > 0) {
-        likesEl.textContent = `❤️ ${stats.likes}`;
-        likesEl.style.display = '';
+        target.textContent = `${stats.likes} \u2764\uFE0F`;
+        target.style.display = '';
       } else {
-        likesEl.style.display = 'none';
+        target.textContent = '';
+        target.style.display = 'none';
       }
     }
   });
@@ -473,9 +551,9 @@ function updateDigestStats() {
 
 /* === Утилиты === */
 
-// Форматирование даты: 2026-03-12 → "12 марта 2026"
+// Форматирование даты: 2026-03-12 -> "12 марта 2026"
 function formatDateRu(dateStr) {
-  const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+  const months = ['\u{044F}\u{043D}\u{0432}\u{0430}\u{0440}\u{044F}','\u{0444}\u{0435}\u{0432}\u{0440}\u{0430}\u{043B}\u{044F}','\u{043C}\u{0430}\u{0440}\u{0442}\u{0430}','\u{0430}\u{043F}\u{0440}\u{0435}\u{043B}\u{044F}','\u{043C}\u{0430}\u{044F}','\u{0438}\u{044E}\u{043D}\u{044F}','\u{0438}\u{044E}\u{043B}\u{044F}','\u{0430}\u{0432}\u{0433}\u{0443}\u{0441}\u{0442}\u{0430}','\u{0441}\u{0435}\u{043D}\u{0442}\u{044F}\u{0431}\u{0440}\u{044F}','\u{043E}\u{043A}\u{0442}\u{044F}\u{0431}\u{0440}\u{044F}','\u{043D}\u{043E}\u{044F}\u{0431}\u{0440}\u{044F}','\u{0434}\u{0435}\u{043A}\u{0430}\u{0431}\u{0440}\u{044F}'];
   const [y, m, d] = dateStr.split('-').map(Number);
   return `${d} ${months[m - 1]} ${y}`;
 }
