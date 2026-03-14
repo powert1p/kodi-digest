@@ -30,11 +30,15 @@
 - r/LocalLLaMA: https://www.reddit.com/r/LocalLLaMA/top/.rss?t=day
 - r/FacebookAds: https://www.reddit.com/r/FacebookAds/top/.rss?t=day
 - r/MachineLearning: https://www.reddit.com/r/MachineLearning/top/.rss?t=day
+- r/PPC: https://www.reddit.com/r/PPC/top/.rss?t=day
+- r/ChatGPTCoding: https://www.reddit.com/r/ChatGPTCoding/top/.rss?t=day
 
 ### Ньюслеттеры
 - The Rundown AI (2M): https://rss.beehiiv.com/feeds/2R3C6Bt5wj.xml
 - TLDR AI: https://bullrich.dev/tldr-rss/
 - MarkTechPost: https://www.marktechpost.com/feed/
+- Simon Willison: https://simonwillison.net/atom/everything/
+- Latent Space: https://www.latent.space/feed
 
 ## Уровень 3: YouTube
 

@@ -1,1 +1,14 @@
-{"boost":[],"suppress":[],"source_quality":{},"updated":"2026-03-12"}
+{
+  "boost": ["claude agent", "mcp", "vibe coding", "meta ads", "facebook ads", "content automation", "cdp", "agentic", "реклама", "креатив", "agentic coding", "multiagent"],
+  "suppress": ["политика", "crypto", "bitcoin", "stock market", "SEC", "IPO", "crypto"],
+  "source_quality": {
+    "reddit_ClaudeAI": 0.9,
+    "reddit_vibecoding": 0.85,
+    "reddit_FacebookAds": 0.85,
+    "reddit_PPC": 0.8,
+    "hn_algolia": 0.9,
+    "anthropic_rss": 1.0,
+    "meta_ai_rss": 0.9
+  },
+  "updated": "2026-03-14"
+}

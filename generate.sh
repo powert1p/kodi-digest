@@ -152,13 +152,21 @@ tldr_html = '\n        '.join(f'<li>{item}</li>' for item in tldr_items)
 result = template
 result = result.replace('{{DATE}}', date)
 result = result.replace('{{DATE_TITLE}}', content.get('date_title', date_title))
-result = result.replace('{{ITEMS_COUNT}}', str(content.get('items_count', len(tldr_items))))
+# Поддержка обоих вариантов плейсхолдера для счётчика карточек
+items_count = str(content.get('items_count', len(tldr_items)))
+result = result.replace('{{ITEMS_COUNT}}', items_count)
+result = result.replace('{{CARD_COUNT}}', items_count)
 result = result.replace('{{READ_TIME}}', str(content.get('read_time', '10')))
+# Поддержка обоих вариантов плейсхолдера для TL;DR
 result = result.replace('{{TLDR}}', tldr_html)
+result = result.replace('{{TLDR_ITEMS}}', tldr_html)
 result = result.replace('{{AGENT_CARDS}}', content.get('agent_cards', '<!-- нет карточек -->'))
 result = result.replace('{{NEWS_CARDS}}', content.get('news_cards', '<!-- нет карточек -->'))
 result = result.replace('{{IMPLEMENT_CARDS}}', content.get('implement_cards', '<!-- нет карточек -->'))
 result = result.replace('{{COUNTER_SIGNAL}}', content.get('counter_signal', '<!-- нет карточек -->'))
+# Дополнительные секции шаблона
+result = result.replace('{{META_CARDS}}', content.get('meta_cards', '<!-- нет карточек -->'))
+result = result.replace('{{COMMUNITY_CARDS}}', content.get('community_cards', '<!-- нет карточек -->'))
 
 # Записать результат
 with open(output_file, 'w', encoding='utf-8') as f:
