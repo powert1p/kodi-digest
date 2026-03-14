@@ -196,7 +196,7 @@ const FeedbackStore = {
     const data = this._load();
     const allLiked = data.allLiked || [];
     const allBacklog = data.allBacklog || [];
-    const parts = [];
+    const sections = [];
 
     // Лайки — берём title из allLiked
     if (day.likes.length) {
@@ -204,16 +204,19 @@ const FeedbackStore = {
         const fullId = `${date}_${id}`;
         const stored = allLiked.find(x => x.id === fullId);
         if (stored) return stored.title;
-        // Фоллбэк на DOM если нет в allLiked
         return getCardMeta(id).title;
       }).filter(Boolean);
-      if (titles.length) parts.push('\u{1F44D} ' + titles.join(', '));
+      if (titles.length) {
+        sections.push('\u{1F44D} \u{041B}\u{0430}\u{0439}\u{043A}\u{0438}:\n' + titles.map(t => '- ' + t).join('\n'));
+      }
     }
 
-    // Дизлайки — только в feedbackData (без allDisliked), берём из DOM
+    // Дизлайки — берём из DOM
     if (day.dislikes.length) {
       const titles = day.dislikes.map(id => getCardMeta(id).title).filter(Boolean);
-      if (titles.length) parts.push('\u{1F44E} ' + titles.join(', '));
+      if (titles.length) {
+        sections.push('\u{1F44E} \u{0414}\u{0438}\u{0437}\u{043B}\u{0430}\u{0439}\u{043A}\u{0438}:\n' + titles.map(t => '- ' + t).join('\n'));
+      }
     }
 
     // Бэклог — берём title из allBacklog
@@ -224,10 +227,12 @@ const FeedbackStore = {
         if (stored) return stored.title;
         return getCardMeta(id).title;
       }).filter(Boolean);
-      if (titles.length) parts.push('\u{1F4CB} ' + titles.join(', '));
+      if (titles.length) {
+        sections.push('\u{1F4CB} \u{0411}\u{044D}\u{043A}\u{043B}\u{043E}\u{0433}:\n' + titles.map(t => '- ' + t).join('\n'));
+      }
     }
 
-    return parts.length ? `\u{0414}\u{0430}\u{0439}\u{0434}\u{0436}\u{0435}\u{0441}\u{0442} ${date}:\n${parts.join('\n')}` : '';
+    return sections.length ? `\u{1F4CA} \u{0424}\u{0438}\u{0434}\u{0431}\u{044D}\u{043A} \u{0434}\u{0430}\u{0439}\u{0434}\u{0436}\u{0435}\u{0441}\u{0442} ${date}\n\n${sections.join('\n\n')}` : '';
   }
 };
 
@@ -247,11 +252,10 @@ function generateFeedbackMessage(date) {
   return FeedbackStore.getFeedbackText(date);
 }
 
-// Открыть Telegram deep link с сообщением
+// Открыть Telegram deep link с ботом @Kodi_v2_bot
 function openTelegram(message) {
   if (!message) return;
-  const encoded = encodeURIComponent(message);
-  window.open(`https://t.me/esya_st?text=${encoded}`, '_blank');
+  window.open('https://t.me/Kodi_v2_bot?start=feedback', '_blank');
 }
 
 // Получить статистику для index.html
@@ -429,10 +433,10 @@ async function sendFeedback(date) {
   }
 
   updateFeedbackPanel(date);
-  updateSyncStatus('\u{1F4CB} \u{0422}\u{0435}\u{043A}\u{0441}\u{0442} \u{0441}\u{043A}\u{043E}\u{043F}\u{0438}\u{0440}\u{043E}\u{0432}\u{0430}\u{043D}, \u{0432}\u{0441}\u{0442}\u{0430}\u{0432}\u{044C} \u{0432} \u{0447}\u{0430}\u{0442} \u{0441} @esya_st', 'ok');
+  updateSyncStatus('\u{1F4CB} \u{0422}\u{0435}\u{043A}\u{0441}\u{0442} \u{0441}\u{043A}\u{043E}\u{043F}\u{0438}\u{0440}\u{043E}\u{0432}\u{0430}\u{043D}, \u{0432}\u{0441}\u{0442}\u{0430}\u{0432}\u{044C} \u{0432} \u{0447}\u{0430}\u{0442} \u{0441} @Kodi_v2_bot', 'ok');
 
-  // Открываем чат с владельцем — текст уже скопирован в clipboard
-  const tgUrl = `https://t.me/esya_st`;
+  // Открываем бота @Kodi_v2_bot — текст уже скопирован в clipboard
+  const tgUrl = 'https://t.me/Kodi_v2_bot?start=feedback';
   setTimeout(() => {
     window.open(tgUrl, '_blank');
   }, 300);
@@ -538,7 +542,7 @@ function updateDigestStats() {
     const target = likesEl || el.querySelector('.digest-likes');
     if (target) {
       if (stats.likes > 0) {
-        target.textContent = `${stats.likes} \u2764\uFE0F`;
+        target.textContent = `${stats.likes} \u{1F44D}`;
         target.style.display = '';
       } else {
         target.textContent = '';
