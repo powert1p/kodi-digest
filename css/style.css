@@ -159,15 +159,11 @@ a:hover { color: #a78bfa; }
   font-weight: 700;
 }
 
-/* --- TL;DR viewport (фиксированная высота — один экран) --- */
+/* --- TL;DR viewport --- */
 .tldr-viewport {
-  min-height: calc(100vh - 200px);
-  min-height: calc(100dvh - 200px);
-  max-height: calc(100dvh - 200px);
-  overflow-y: auto;
+  min-height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 .tldr-viewport .tldr-label {
   margin-bottom: 20px;
@@ -723,14 +719,14 @@ a:hover { color: #a78bfa; }
 @media (min-width: 481px) {
   .header { padding: 64px 20px 48px; }
   .header h1 { font-size: 36px; }
-  .tldr-viewport { min-height: calc(100vh - 240px); min-height: calc(100dvh - 240px); }
+  .tldr-viewport { min-height: auto; }
   .tldr-viewport li { font-size: 17px; }
 }
 
 @media (max-width: 480px) {
   .tldr { padding: 18px; }
   .tldr li { font-size: 14px; }
-  .tldr-viewport { min-height: calc(100vh - 180px); min-height: calc(100dvh - 180px); }
+  .tldr-viewport { min-height: auto; }
   .tldr-viewport li { font-size: 14px; padding: 8px 0 8px 24px; }
   .card { padding: 16px; }
   .card-title { font-size: 15px; }
@@ -741,13 +737,11 @@ a:hover { color: #a78bfa; }
   .sticky-feedback-panel .panel-send-btn { justify-content: center; }
 }
 
-/* --- TL;DR section (один viewport) --- */
+/* --- TL;DR section --- */
 .tldr-section {
-  min-height: 100vh;
-  min-height: 100dvh;
+  min-height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   padding: 0 16px;
 }
 
@@ -827,10 +821,9 @@ body.has-sticky-panel {
 
 /* === TL;DR Viewport === */
 .tldr-viewport {
-  min-height: calc(100vh - 200px);
+  min-height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 /* === Контр-сигнал (красный акцент) === */

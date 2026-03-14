@@ -56,13 +56,12 @@ AGENT_KEYWORDS = [
 
 IMPLEMENT_KEYWORDS = [
     "meta ads", "facebook ads", "fb ads", "ad creative", "reels automation",
-    "content automation", "ai creative", "cdp customer data", "data pipeline",
+    "content automation", "ai creative", "data pipeline",
     "automation workflow", "roi", "i built", "show hn", "how i ", "case study",
     "revenue", "conversion rate", "cpm", "roas", "performance marketing",
     "advantage+", "advantage plus",
-    # Новые: контент, CDP, таргетинг
+    # Контент, таргетинг
     "content factory", "reels", "ugc", "creative automation", "content workflow",
-    "customer data platform", "cdp", "segment", "rudderstack", "attribution",
     "lookalike audience", "custom audience", "retargeting", "a/b test",
     "creative testing", "landing page", "funnel",
 ]
@@ -77,6 +76,18 @@ SUPPRESS_KEYWORDS = [
     "bitcoin", "crypto", "ethereum", "stock market", "sec ", "ipo ",
     "nft", "blockchain", "defi",
 ]
+
+
+def truncate_at_word(text: str, max_len: int) -> str:
+    """Обрезает текст по границе слова, не дальше max_len символов."""
+    if len(text) <= max_len:
+        return text
+    truncated = text[:max_len]
+    # Ищем последний пробел, чтобы не резать слово
+    last_space = truncated.rfind(" ")
+    if last_space > max_len // 2:
+        truncated = truncated[:last_space]
+    return truncated.rstrip(".,;:!? ") + "..."
 
 # ── Теги ───────────────────────────────────────────────────────────────────────
 
@@ -115,10 +126,20 @@ def classify_tags(title: str, description: str, source_type: str = "") -> tuple[
     return "🧠", "AI", "ai"
 
 
-def classify_section(title: str, description: str) -> str:
+def _is_meta_source(source: str) -> bool:
+    """Проверяет, является ли источник Meta/FB-специфичным."""
+    meta_sources = [
+        "jon loomer", "jonloomer", "social media examiner",
+        "adespresso", "r/facebookads",
+    ]
+    src = source.lower()
+    return any(ms in src for ms in meta_sources)
+
+
+def classify_section(title: str, description: str, source: str = "") -> str:
     """
     Определяет секцию для карточки.
-    Порядок: suppress → counter → agent → meta → content → cdp → implement → news
+    Порядок: suppress → counter → source-based → agent → meta → content → cdp → implement → news
     """
     text = (title + " " + description).lower()
 
@@ -129,6 +150,10 @@ def classify_section(title: str, description: str) -> str:
     # Контр-сигнал
     if any(k in text for k in COUNTER_KEYWORDS):
         return "counter_signal"
+
+    # Источник Meta/FB (Jon Loomer, Social Media Examiner, r/FacebookAds) → meta_cards
+    if _is_meta_source(source):
+        return "meta_cards"
 
     # Агентский кодинг
     if any(k in text for k in AGENT_KEYWORDS):
@@ -141,6 +166,8 @@ def classify_section(title: str, description: str) -> str:
         "lookalike audience", "custom audience", "retargeting", "roas",
         "performance marketing", "ad creative", "creative testing",
         "meta ai", "facebook", "cpm", "a/b test", "landing page", "funnel",
+        "meta announces", "location fees", "conversions lost", "attribution",
+        "ad account", "ad set", "campaign budget",
     ]
     if any(k in text for k in META_SECTION_KW):
         return "meta_cards"
@@ -153,12 +180,20 @@ def classify_section(title: str, description: str) -> str:
     if any(k in text for k in CONTENT_SECTION_KW):
         return "content_cards"
 
-    # CDP / Data
+    # CDP / Data — только реальные CDP-продукты и data pipeline
     CDP_SECTION_KW = [
-        "customer data platform", "cdp", "segment", "rudderstack",
-        "attribution", "data pipeline",
+        "customer data platform", "mparticle", "data pipeline",
     ]
-    if any(k in text for k in CDP_SECTION_KW):
+    # "segment" и "rudderstack" только как точные совпадения (не как часть другого слова)
+    cdp_exact = ["segment", "rudderstack"]
+    is_cdp = any(k in text for k in CDP_SECTION_KW)
+    if not is_cdp:
+        for kw in cdp_exact:
+            # Проверяем как отдельное слово через regex
+            if re.search(r'\b' + re.escape(kw) + r'\b', text):
+                is_cdp = True
+                break
+    if is_cdp:
         return "cdp_cards"
 
     # Внедрить (оставшиеся implement_keywords)
@@ -257,7 +292,7 @@ def fetch_rss(url: str, source_name: str) -> list[dict]:
                 desc = re.sub(r"<[^>]+>", " ", entry.summary).strip()
             elif hasattr(entry, "content") and entry.content:
                 desc = re.sub(r"<[^>]+>", " ", entry.content[0].value).strip()
-            desc = desc[:200]
+            desc = truncate_at_word(desc, 400)
 
             link = entry.get("link", "")
             if not link:
@@ -347,7 +382,7 @@ def fetch_reddit(url: str, source_name: str, min_upvotes: int = 10) -> list[dict
 
             # Описание: selftext или ""
             selftext = p.get("selftext", "") or ""
-            desc = selftext[:200].strip()
+            desc = truncate_at_word(selftext.strip(), 400)
 
             items.append({
                 "title": title,
@@ -418,7 +453,7 @@ def fetch_hn_algolia() -> list[dict]:
                 seen_urls.add(link)
 
                 story_text = hit.get("story_text") or ""
-                desc = re.sub(r"<[^>]+>", " ", story_text).strip()[:200]
+                desc = truncate_at_word(re.sub(r"<[^>]+>", " ", story_text).strip(), 400)
 
                 # Дата
                 pub_ts = None
@@ -595,7 +630,7 @@ def collect(date: str) -> dict:
     }
 
     for item in all_items:
-        section = classify_section(item["title"], item["description"])
+        section = classify_section(item["title"], item["description"], item.get("source", ""))
         if section == "skip":
             continue
         item["_score"] = compute_score(item)
@@ -689,8 +724,8 @@ def collect(date: str) -> dict:
     tldr_items = []
     for item in top_items:
         # Формат: "Заголовок → краткое описание"
-        title_short = item["title"][:80]
-        desc_short = item["description"][:100] if item["description"] else item["source"]
+        title_short = truncate_at_word(item["title"], 120)
+        desc_short = truncate_at_word(item["description"], 200) if item["description"] else item["source"]
         tldr_items.append(f"{title_short} → {desc_short}")
 
     # Если источники вернули мало данных — добавляем заглушку
