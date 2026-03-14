@@ -134,12 +134,13 @@ def classify_section(title: str, description: str) -> str:
     if any(k in text for k in AGENT_KEYWORDS):
         return "agent_cards"
 
-    # Meta / FB реклама
+    # Meta / FB реклама — широкий список, чтобы не утекали в implement
     META_SECTION_KW = [
         "meta ads", "facebook ads", "fb ads", "advantage+", "advantage plus",
         "meta business", "ads manager", "рекламный кабинет", "google ads",
         "lookalike audience", "custom audience", "retargeting", "roas",
         "performance marketing", "ad creative", "creative testing",
+        "meta ai", "facebook", "cpm", "a/b test", "landing page", "funnel",
     ]
     if any(k in text for k in META_SECTION_KW):
         return "meta_cards"
@@ -715,7 +716,7 @@ def collect(date: str) -> dict:
     # agent_cards, news_cards, implement_cards, counter_signal
     # TEMPLATE.html использует плейсхолдеры: {{TLDR_ITEMS}}, {{CARD_COUNT}},
     # {{AGENT_CARDS}}, {{NEWS_CARDS}}, {{IMPLEMENT_CARDS}}, {{COUNTER_SIGNAL}},
-    # {{META_CARDS}}, {{COMMUNITY_CARDS}}
+    # {{META_CARDS}}, {{CONTENT_CARDS}}, {{CDP_CARDS}}
 
     return {
         "date": date,
@@ -731,7 +732,6 @@ def collect(date: str) -> dict:
         "news_cards": news_html or "<!-- нет данных -->",
         "implement_cards": impl_html or "<!-- нет данных -->",
         "counter_signal": risk_html or "<!-- нет данных -->",
-        "community_cards": "<!-- собрано в news_cards -->",
         # Мета для отладки
         "_stats": {
             "agent": len(buckets["agent_cards"]),

@@ -680,6 +680,11 @@ a:hover { color: #a78bfa; }
   color: #22c55e;
 }
 
+/* --- Скрываем пустые секции (только HTML-комментарий, без карточек) --- */
+.section:not(:has(.card, .accordion-card, details)) {
+  display: none;
+}
+
 /* --- Animations --- */
 .fade-in-up {
   opacity: 0;

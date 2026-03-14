@@ -87,6 +87,9 @@ if [ -z "$CONTENT_FILE" ]; then
     -e "s|{{NEWS_CARDS}}|<!-- TODO: добавить 15-20 карточек новостей -->|g" \
     -e "s|{{IMPLEMENT_CARDS}}|<!-- TODO: добавить 3-5 карточек внедрения -->|g" \
     -e "s|{{COUNTER_SIGNAL}}|<!-- TODO: добавить 1-2 контр-сигнала -->|g" \
+    -e "s|{{META_CARDS}}|<!-- TODO: добавить 2-3 карточки Meta/FB -->|g" \
+    -e "s|{{CONTENT_CARDS}}|<!-- TODO: добавить 2-3 карточки контента -->|g" \
+    -e "s|{{CDP_CARDS}}|<!-- TODO: добавить 1-2 карточки CDP -->|g" \
     "$TEMPLATE" > "$OUTPUT_FILE"
 
   # Убрать комментарии с шаблонами карточек (всё после закрывающего </html>)
@@ -166,7 +169,8 @@ result = result.replace('{{IMPLEMENT_CARDS}}', content.get('implement_cards', '<
 result = result.replace('{{COUNTER_SIGNAL}}', content.get('counter_signal', '<!-- нет карточек -->'))
 # Дополнительные секции шаблона
 result = result.replace('{{META_CARDS}}', content.get('meta_cards', '<!-- нет карточек -->'))
-result = result.replace('{{COMMUNITY_CARDS}}', content.get('community_cards', '<!-- нет карточек -->'))
+result = result.replace('{{CONTENT_CARDS}}', content.get('content_cards', '<!-- нет карточек -->'))
+result = result.replace('{{CDP_CARDS}}', content.get('cdp_cards', '<!-- нет карточек -->'))
 
 # Записать результат
 with open(output_file, 'w', encoding='utf-8') as f:
