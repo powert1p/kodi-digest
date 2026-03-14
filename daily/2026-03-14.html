@@ -14,7 +14,7 @@
     <div class="header-badge">◆ Коди Дайджест</div>
     <h1>14 марта 2026</h1>
     <div class="header-meta">
-      <span>32 карточки · 16 мин</span>
+      <span>28 карточек · 14 мин</span>
     </div>
   </div>
 
@@ -28,32 +28,32 @@
 
   <div class="container">
 
-    <!-- ======== TL;DR (один viewport, без скролла) ======== -->
+    <!-- TL;DR -->
     <div class="tldr tldr-section tldr-viewport fade-in-up">
       <div class="tldr-label">За 15 секунд</div>
       <ul>
-        <li>Claude Opus 4.6 получил 1М контекст на стандартной цене + Code Review через Agent Teams — агентный стек стабилизируется, пора переводить Qadam на Agent Teams для параллельной разработки</li>
-        <li>Meta запускает «Describe Your Audience» — текстовое описание вместо интересов, полная AI-автоматизация рекламы к концу 2026 — ручной таргетинг уходит, выигрывает тот кто адаптируется раньше</li>
-        <li>AI-контент фабрики: 7+ Reels/неделю = +340% охвата, clickable links в Reels — контент-автоматизация из хайпа превращается в обязательный инструмент</li>
+        <li>Claude Code запустил Code Review на Agent Teams — команда агентов находит баги в PR параллельно, Auto Mode убирает permission-промпты, Skills 2.0 превращают скиллы в программируемых агентов</li>
+        <li>Opus 4.6 и Sonnet 4.6 получили 1М контекст по стандартной цене — 78.3% на MRCR v2, лучший результат среди frontier-моделей. MCP-сервер снижает потребление контекста на 98%</li>
+        <li>Meta планирует полную AI-автоматизацию рекламы: фото + бюджет → готовая кампания. Jon Loomer разобрал новую модель атрибуции — click-through теперь требует реальный клик по ссылке</li>
       </ul>
     </div>
 
-    <!-- ======== СЕКЦИЯ: АГЕНТСКИЙ КОДИНГ (полноразмерные карточки) ======== -->
+    <!-- ======== СЕКЦИЯ: АГЕНТСКИЙ КОДИНГ ======== -->
     <div class="section fade-in-up">
       <div class="section-header">
         <div class="section-title">🤖 Агентский кодинг</div>
         <div class="section-line"></div>
       </div>
 
-      <!-- Агент 1: Claude 1M Context -->
-      <div class="card" data-card-id="agent_1" data-card-title="Claude Opus 4.6: 1 миллион контекст теперь GA на стандартной цене" data-card-category="🤖 AGENT">
+      <div class="card" data-card-id="agent_1" data-card-title="Claude Code Review — команда агентов ревьюит PR" data-card-category="🤖 AGENT">
         <div class="card-num"><span class="tag agent">🤖 AGENT</span></div>
-        <div class="card-title">Claude Opus 4.6: 1М контекст стал стандартом — 78.3% MRCR v2, лучший среди frontier-моделей</div>
-        <div class="card-text">
-          Anthropic сделал 1 миллион токенов контекста generally available для Opus 4.6 и Sonnet 4.6 без изменения цены ($15/$75 и $3/$15). Opus 4.6 набирает 78.3% на MRCR v2 при 1М токенов — лучший результат среди frontier-моделей.<br><br>
-          Для Claude Code это означает: 5x больше кода в одной сессии без потери качества. MAX-подписчики получили 1М по умолчанию без доплаты.
+        <div class="card-title">Claude Code Review — команда агентов ревьюит PR</div>
+        <div class="card-text">Anthropic запустил Code Review для Claude Code. На каждый PR отправляется <strong>команда агентов</strong>, которые ищут баги параллельно, верифицируют находки для фильтрации false positives и ранжируют по severity. Результат — один высокосигнальный комментарий + inline-комментарии на PR.</div>
+        <div class="card-action">
+          <div class="card-action-label">Попробовать</div>
+          <div class="card-action-text">Подключи Code Review на свои репо через gh CLI. Бесплатно на open source проектах.</div>
         </div>
-        <div class="card-source"><a href="https://releasebot.io/updates/anthropic/claude-code" target="_blank" rel="noopener">Anthropic / r/ClaudeAI</a></div>
+        <div class="card-source"><a href="https://claude.com/blog/code-review" target="_blank" rel="noopener">Anthropic Blog</a></div>
         <div class="feedback-buttons">
           <button class="feedback-btn" data-card-id="agent_1" data-action="like">👍</button>
           <button class="feedback-btn" data-card-id="agent_1" data-action="dislike">👎</button>
@@ -61,15 +61,15 @@
         </div>
       </div>
 
-      <!-- Агент 2: MCP Context Reduction -->
       <div class="card" data-card-id="agent_2" data-card-title="MCP-сервер снижает потребление контекста Claude Code на 98%" data-card-category="🤖 AGENT">
         <div class="card-num"><span class="tag agent">🤖 AGENT</span></div>
-        <div class="card-title">MCP-сервер Context Mode: -98% потребления контекста в Claude Code</div>
-        <div class="card-text">
-          Новый MCP-сервер Context Mode кэширует и сжимает контекст между вызовами, сокращая потребление на 98%. Вместо повторной загрузки всего проекта агент работает с дельтами.<br><br>
-          При работе с крупными кодовыми базами (Qadam: 200+ файлов) это означает: в 50 раз больше полезных итераций до исчерпания контекста.
+        <div class="card-title">MCP-сервер снижает потребление контекста Claude Code на 98%</div>
+        <div class="card-text">Context Mode — MCP-сервер, который кеширует и сжимает контекст для Claude Code. Вместо того чтобы перечитывать файлы каждый раз, агент работает с дельтами. Автор показывает реальные замеры: с 200K токенов до 4K на типичную задачу.</div>
+        <div class="card-action">
+          <div class="card-action-label">Проверить</div>
+          <div class="card-action-text">Установи context-mode MCP и замерь потребление на своём проекте. Если работает — это экономия x50 на длинных сессиях.</div>
         </div>
-        <div class="card-source"><a href="https://mksg.lu/blog/context-mode" target="_blank" rel="noopener">mksg.lu / HackerNews</a></div>
+        <div class="card-source"><a href="https://mksg.lu/blog/context-mode" target="_blank" rel="noopener">HackerNews</a></div>
         <div class="feedback-buttons">
           <button class="feedback-btn" data-card-id="agent_2" data-action="like">👍</button>
           <button class="feedback-btn" data-card-id="agent_2" data-action="dislike">👎</button>
@@ -77,15 +77,15 @@
         </div>
       </div>
 
-      <!-- Агент 3: Code Review Agent Teams -->
-      <div class="card" data-card-id="agent_3" data-card-title="Claude Code Review: команда агентов ревьюит каждый PR параллельно" data-card-category="🤖 AGENT">
+      <div class="card" data-card-id="agent_3" data-card-title="Opus 4.6 — 1M контекст по стандартной цене" data-card-category="🤖 AGENT">
         <div class="card-num"><span class="tag agent">🤖 AGENT</span></div>
-        <div class="card-title">Claude Code Review: Agent Teams находят баги параллельно, верифицируют и ранжируют по severity</div>
-        <div class="card-text">
-          Anthropic запустил Code Review — при открытии PR dispatches команда агентов которые ищут баги параллельно, верифицируют каждый найденный баг (фильтрация false positives), и ранжируют по severity. Результат — один обзорный комментарий + inline-замечания по конкретным строкам.<br><br>
-          Построен на Agent Teams — той же системе что доступна через Claude Code CLI. Фокус на глубину, а не скорость.
+        <div class="card-title">Opus 4.6 — 1M контекст по стандартной цене</div>
+        <div class="card-text">Claude Opus 4.6 и Sonnet 4.6 получили полное окно в 1 миллион токенов без доплаты. Opus 4.6 показывает 78.3% на MRCR v2 benchmark — лучший результат среди frontier-моделей. MAX-план автоматически обновлён.</div>
+        <div class="card-action">
+          <div class="card-action-label">Использовать</div>
+          <div class="card-action-text">Больше не нужно экономить контекст на больших проектах. Загружай целые кодовые базы в одну сессию.</div>
         </div>
-        <div class="card-source"><a href="https://claude.com/blog/code-review" target="_blank" rel="noopener">Anthropic Blog</a></div>
+        <div class="card-source"><a href="https://reddit.com/r/ClaudeAI" target="_blank" rel="noopener">r/ClaudeAI</a></div>
         <div class="feedback-buttons">
           <button class="feedback-btn" data-card-id="agent_3" data-action="like">👍</button>
           <button class="feedback-btn" data-card-id="agent_3" data-action="dislike">👎</button>
@@ -93,13 +93,13 @@
         </div>
       </div>
 
-      <!-- Агент 4: Auto Mode -->
-      <div class="card" data-card-id="agent_4" data-card-title="Claude Code Auto Mode: агент сам решает нужно ли разрешение" data-card-category="🤖 AGENT">
+      <div class="card" data-card-id="agent_4" data-card-title="Auto Mode — Claude Code решает сам, когда спрашивать permission" data-card-category="🤖 AGENT">
         <div class="card-num"><span class="tag agent">🤖 AGENT</span></div>
-        <div class="card-title">Auto Mode (research preview): Claude Code сам решает какие действия требуют одобрения</div>
-        <div class="card-text">
-          Anthropic выкатывает research preview Auto Mode — вместо подтверждения каждого файла и shell-команды, агент сам оценивает риск действия и запрашивает одобрение только для опасных операций.<br><br>
-          Это шаг от «ассистент-с-пермишнами» к полноценному автономному агенту. Rollout начался 12 марта.
+        <div class="card-title">Auto Mode — Claude Code решает сам, когда спрашивать permission</div>
+        <div class="card-text">Research preview Auto Mode уже в роллауте. Агент сам решает, нужно ли подтверждение для каждого действия. Для безопасных операций (чтение, анализ) — работает без промптов. Для деструктивных — запрашивает.</div>
+        <div class="card-action">
+          <div class="card-action-label">Попробовать</div>
+          <div class="card-action-text">Включи Auto Mode через настройки Claude Code. Начни с read-only задач — пусть агент привыкнет к твоему проекту.</div>
         </div>
         <div class="card-source"><a href="https://awesomeagents.ai/news/claude-code-auto-mode-research-preview/" target="_blank" rel="noopener">Awesome Agents</a></div>
         <div class="feedback-buttons">
@@ -108,28 +108,40 @@
           <button class="feedback-btn" data-card-id="agent_4" data-action="backlog">📋 В бэклог</button>
         </div>
       </div>
+
+      <div class="card" data-card-id="agent_5" data-card-title="Skills 2.0 — от инструкций к программируемым агентам" data-card-category="🤖 AGENT">
+        <div class="card-num"><span class="tag agent">🤖 AGENT</span></div>
+        <div class="card-title">Skills 2.0 — от инструкций к программируемым агентам</div>
+        <div class="card-text">Система скиллов Claude Code эволюционировала: субагенты с изолированным контекстом, shell-хуки для инъекции данных, ограничение инструментов, переключение моделей, lifecycle events. Skills = программируемая платформа агентов.</div>
+        <div class="card-action">
+          <div class="card-action-label">Изучить</div>
+          <div class="card-action-text">Разбери свои .claude/skills/ — есть ли скиллы которые можно превратить в субагентов? Superpowers уже делает это.</div>
+        </div>
+        <div class="card-source"><a href="https://medium.com/@richardhightower/claude-code-agent-skills-2-0-from-custom-instructions-to-programmable-agents-ab6e4563c176" target="_blank" rel="noopener">Medium</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="agent_5" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="agent_5" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="agent_5" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
     </div>
 
-    <!-- ======== СЕКЦИЯ: META/FB РЕКЛАМА (полноразмерные карточки) ======== -->
+    <!-- ======== СЕКЦИЯ: META/FB РЕКЛАМА ======== -->
     <div class="section fade-in-up">
       <div class="section-header">
         <div class="section-title">💼 Meta/FB реклама</div>
         <div class="section-line"></div>
       </div>
 
-      <!-- Meta 1: Describe Your Audience -->
-      <div class="card" data-card-id="meta_1" data-card-title="Meta «Describe Your Audience» — текстовое описание вместо детального таргетинга" data-card-category="💼 META">
+      <div class="card" data-card-id="meta_1" data-card-title="Малый бизнес зависит от качества трафика Meta Ads" data-card-category="💼 META">
         <div class="card-num"><span class="tag biz">💼 META</span></div>
-        <div class="card-title">Meta запустила «Describe Your Audience» — таргетинг текстом вместо интересов</div>
-        <div class="card-text">
-          Вместо выбора интересов и демографии Meta теперь предлагает текстовое поле: «опишите людей, которых хотите достичь». Алгоритм Andromeda сам определяет аудиторию на основе описания.<br><br>
-          Рекламодатели теряют ручной контроль над таргетингом — но ранние тесты показывают снижение CPA на 15-25% по сравнению с ручными настройками. Advantage+ экосистема продолжает поглощать ручные инструменты.
-        </div>
+        <div class="card-title">Малый бизнес зависит от качества трафика Meta Ads — а Meta этого не понимает</div>
+        <div class="card-text">Горячая дискуссия на r/FacebookAds: для малого бизнеса Meta — не просто канал, а единственный источник выживания. AI-автоматизация двигает Meta к «фото + бюджет = кампания», что может ещё больше размыть контроль.</div>
         <div class="card-action">
-          <div class="card-action-label">Для Есета</div>
-          <div class="card-action-text">Протестируй Describe Your Audience для кампаний AiPlus: «Родители школьников 14-17 лет в Алматы и Астане, интересующиеся подготовкой к НИШ и математикой». Сравни CPA с обычным таргетингом за 2 недели.</div>
+          <div class="card-action-label">Что делать</div>
+          <div class="card-action-text">Диверсифицируй каналы. Если 80%+ бюджета в Meta — это risk. Добавь Google Ads или direct outreach.</div>
         </div>
-        <div class="card-source"><a href="https://reddit.com/r/FacebookAds/comments/1rsslus/metas_new_describe_your_audience_thing_made_me/" target="_blank" rel="noopener">r/FacebookAds</a></div>
+        <div class="card-source"><a href="https://reddit.com/r/FacebookAds" target="_blank" rel="noopener">r/FacebookAds</a></div>
         <div class="feedback-buttons">
           <button class="feedback-btn" data-card-id="meta_1" data-action="like">👍</button>
           <button class="feedback-btn" data-card-id="meta_1" data-action="dislike">👎</button>
@@ -137,13 +149,13 @@
         </div>
       </div>
 
-      <!-- Meta 2: Attribution Changes -->
-      <div class="card" data-card-id="meta_2" data-card-title="Meta Attribution 2026: click-through теперь требует link click" data-card-category="💼 META">
+      <div class="card" data-card-id="meta_2" data-card-title="Jon Loomer: как работает атрибуция Meta Ads в 2026" data-card-category="💼 META">
         <div class="card-num"><span class="tag biz">💼 META</span></div>
-        <div class="card-title">Meta обновила attribution: click-through теперь считает только link clicks, конверсии могут «пропасть»</div>
-        <div class="card-text">
-          Meta обновила модели атрибуции: click-through теперь требует реальный клик по ссылке (не просто engagement). Это означает что некоторые рекламодатели увидят «падение» конверсий в отчётности — хотя реальные продажи не изменились.<br><br>
-          Jon Loomer детально разобрал engage-through, view-through и новые attribution windows. Ключевое: считай реальные продажи, не метрики в Ads Manager.
+        <div class="card-title">Jon Loomer: как работает атрибуция Meta Ads в 2026</div>
+        <div class="card-text">Полный разбор: click-through теперь требует реальный клик по ссылке (не любое взаимодействие). Engage-through, view-through, attribution models и conversion count — всё обновилось. Кампании с Advantage+ могут показывать другие цифры.</div>
+        <div class="card-action">
+          <div class="card-action-label">Проверить</div>
+          <div class="card-action-text">Открой Ads Manager → сравни конверсии за последнюю неделю с предыдущей. Если провал — это атрибуция, не реальные продажи.</div>
         </div>
         <div class="card-source"><a href="https://www.jonloomer.com/meta-ads-attribution-2026/" target="_blank" rel="noopener">Jon Loomer</a></div>
         <div class="feedback-buttons">
@@ -153,15 +165,15 @@
         </div>
       </div>
 
-      <!-- Meta 3: Full AI Automation -->
-      <div class="card" data-card-id="meta_3" data-card-title="Meta: полная AI-автоматизация рекламы к концу 2026" data-card-category="💼 META">
+      <div class="card" data-card-id="meta_3" data-card-title="Когда ограничивать аудиторию в Meta Ads" data-card-category="💼 META">
         <div class="card-num"><span class="tag biz">💼 META</span></div>
-        <div class="card-title">Meta к концу 2026: фото + бюджет = готовая кампания. AI генерирует креатив, текст, видео и таргетинг</div>
-        <div class="card-text">
-          Meta планирует полную AI-автоматизацию рекламы к концу 2026: рекламодатель загружает фото продукта и бюджет — AI генерирует креатив, текст, видео и определяет аудиторию. $14-15B инвестиций в Scale AI (49% доля) для ускорения AI-инфраструктуры.<br><br>
-          Оптимизированные кампании уже показывают +10-20% эффективности по данным Meta Business Help Center.
+        <div class="card-title">Когда ограничивать аудиторию в Meta Ads</div>
+        <div class="card-text">Jon Loomer разбирает: возраст, пол, детальный таргетинг, lookalike и ремаркетинг — когда имеет смысл сужать, а когда AI-оптимизация работает лучше на широкой аудитории. Для Advantage+ — почти никогда не сужай.</div>
+        <div class="card-action">
+          <div class="card-action-label">Применить</div>
+          <div class="card-action-text">Проверь свои кампании: используешь детальный таргетинг с Advantage+? Попробуй убрать ограничения и дай AI неделю.</div>
         </div>
-        <div class="card-source"><a href="https://www.marketingdive.com/news/meta-plans-to-enable-fully-ai-automated-ads-by-2026/749613/" target="_blank" rel="noopener">Marketing Dive / ODSC</a></div>
+        <div class="card-source"><a href="https://www.jonloomer.com/restrict-audience-meta-advertising/" target="_blank" rel="noopener">Jon Loomer</a></div>
         <div class="feedback-buttons">
           <button class="feedback-btn" data-card-id="meta_3" data-action="like">👍</button>
           <button class="feedback-btn" data-card-id="meta_3" data-action="dislike">👎</button>
@@ -170,24 +182,20 @@
       </div>
     </div>
 
-    <!-- ======== СЕКЦИЯ: КОНТЕНТ И РИЛСЫ (полноразмерные карточки) ======== -->
+    <!-- ======== СЕКЦИЯ: КОНТЕНТ И РИЛСЫ ======== -->
     <div class="section fade-in-up">
       <div class="section-header">
         <div class="section-title">🎬 Контент и рилсы</div>
         <div class="section-line"></div>
       </div>
 
-      <!-- Контент 1: Clickable Reels Links -->
-      <div class="card" data-card-id="content_1" data-card-title="Instagram Reels: clickable links и лимит хэштегов — стратегия 2026" data-card-category="🎬 CONTENT">
+      <div class="card" data-card-id="content_1" data-card-title="Кликабельные ссылки в Reels и лимиты хэштегов — Instagram 2026" data-card-category="🎬 CONTENT">
         <div class="card-num"><span class="tag biz">🎬 CONTENT</span></div>
-        <div class="card-title">Instagram добавил clickable links в Reels + лимит 5 хэштегов — воронка продаж прямо из ленты</div>
-        <div class="card-text">
-          Instagram запустил link overlays в Reels — теперь можно ставить кликабельные ссылки прямо в видео. Параллельно ввели лимит 5 хэштегов на пост (раньше до 30). Early access content для подписчиков.<br><br>
-          Для маркетологов: Reels становятся полноценной воронкой «видео → клик → лендинг». Это меняет ROI расчёты для контент-маркетинга.
-        </div>
+        <div class="card-title">Кликабельные ссылки в Reels и лимиты хэштегов — что это значит для Instagram 2026</div>
+        <div class="card-text">Social Media Examiner: Instagram добавил link overlays в Reels и ограничил количество хэштегов. Теперь можно вести трафик напрямую из рилсов — без «ссылка в шапке». Но лимиты хэштегов меняют стратегию дискаверинга.</div>
         <div class="card-action">
-          <div class="card-action-label">Действие</div>
-          <div class="card-action-text">Добавь clickable links в следующие 3 Reels AiPlus: ссылка на страницу записи. Измерь CTR по сравнению с «link in bio» подходом. Если CTR > 2% — масштабируй.</div>
+          <div class="card-action-label">Тестировать</div>
+          <div class="card-action-text">Сделай 3 рилса с link overlay → замерь CTR vs обычный CTA «ссылка в bio». Если CTR выше 2% — масштабируй.</div>
         </div>
         <div class="card-source"><a href="https://www.socialmediaexaminer.com/what-clickable-reels-links-and-hashtag-limits-mean-for-your-2026-instagram-strategy/" target="_blank" rel="noopener">Social Media Examiner</a></div>
         <div class="feedback-buttons">
@@ -197,59 +205,39 @@
         </div>
       </div>
 
-      <!-- Контент 2: AI Content Factory -->
-      <div class="card" data-card-id="content_2" data-card-title="AI-контент фабрика: 7+ Reels/неделю = +340% охвата" data-card-category="🎬 CONTENT">
+      <div class="card" data-card-id="content_2" data-card-title="Meta «Describe Your Audience» — таргетинг текстом вместо интересов" data-card-category="🎬 CONTENT">
         <div class="card-num"><span class="tag biz">🎬 CONTENT</span></div>
-        <div class="card-title">Данные 2026: 7+ Reels в неделю дают 340% больше охвата — AI-батчинг единственный способ держать темп</div>
-        <div class="card-text">
-          Свежая статистика: креаторы постящие 7+ Reels в неделю получают 340% больше среднего охвата чем постящие 1-2. Объём Reels вырос на 3.8% при падении обычных постов на 6.4%.<br><br>
-          AI-инструменты (Scenith, Canva AI, Grok) позволяют генерировать 50 коротких видео за одну сессию. Creator economy прогнозируется 1.1B креаторов к 2032 — AI снижает барьер входа.
+        <div class="card-title">Meta «Describe Your Audience» — таргетинг текстом вместо интересов</div>
+        <div class="card-text">Вместо выбора интересов Meta просит <strong>описать аудиторию текстом</strong>. «RV owners looking for upgrades» — и AI сам подбирает. Это следующий шаг к полной автоматизации: креатив + описание → кампания.</div>
+        <div class="card-action">
+          <div class="card-action-label">Попробовать</div>
+          <div class="card-action-text">Опиши аудиторию как другу: «владельцы малого бизнеса, тратят 500-5000$/мес на рекламу». Сравни с классическим таргетингом.</div>
         </div>
-        <div class="card-source"><a href="https://scenith.in/tools/viral-content-creation" target="_blank" rel="noopener">Scenith / Analytics Vidhya</a></div>
+        <div class="card-source"><a href="https://reddit.com/r/FacebookAds" target="_blank" rel="noopener">r/FacebookAds</a></div>
         <div class="feedback-buttons">
           <button class="feedback-btn" data-card-id="content_2" data-action="like">👍</button>
           <button class="feedback-btn" data-card-id="content_2" data-action="dislike">👎</button>
           <button class="feedback-btn" data-card-id="content_2" data-action="backlog">📋 В бэклог</button>
         </div>
       </div>
-
-      <!-- Контент 3: Creator Economy Report -->
-      <div class="card" data-card-id="content_3" data-card-title="Creator Economy Report 2026: AI меняет правила UGC и контента" data-card-category="🎬 CONTENT">
-        <div class="card-num"><span class="tag biz">🎬 CONTENT</span></div>
-        <div class="card-title">Creator Economy 2026: AI-креаторы и faceless accounts — новый средний класс контента</div>
-        <div class="card-text">
-          Influencer Marketing Factory опубликовала отчёт 2026: AI создал волну «faceless creators» — аккаунтов без лица автора, генерирующих контент автоматически. Средний класс креаторов ($10K-$100K/год) растёт быстрее топ-тира.<br><br>
-          AI-инструменты для идеации, планирования и производства снижают порог входа. Качество уже не главный фактор — частота и consistency побеждают.
-        </div>
-        <div class="card-source"><a href="https://www.pressrelease.com/news/the-influencer-marketing-factory-releases-2026-creator-economy-report-revealing" target="_blank" rel="noopener">Influencer Marketing Factory</a></div>
-        <div class="feedback-buttons">
-          <button class="feedback-btn" data-card-id="content_3" data-action="like">👍</button>
-          <button class="feedback-btn" data-card-id="content_3" data-action="dislike">👎</button>
-          <button class="feedback-btn" data-card-id="content_3" data-action="backlog">📋 В бэклог</button>
-        </div>
-      </div>
     </div>
 
-    <!-- ======== СЕКЦИЯ: CDP И ДАННЫЕ (полноразмерные карточки) ======== -->
+    <!-- ======== СЕКЦИЯ: CDP И ДАННЫЕ ======== -->
     <div class="section fade-in-up">
       <div class="section-header">
         <div class="section-title">📊 CDP и данные</div>
         <div class="section-line"></div>
       </div>
 
-      <!-- CDP 1: Gartner MQ -->
-      <div class="card" data-card-id="cdp_1" data-card-title="Gartner MQ 2026: CDP разделились на платформы и агентов" data-card-category="📊 CDP">
+      <div class="card" data-card-id="cdp_1" data-card-title="Meta вводит Location Fees в Европе + 4 обновления атрибуции" data-card-category="📊 CDP">
         <div class="card-num"><span class="tag biz">📊 CDP</span></div>
-        <div class="card-title">Gartner MQ 2026: CDP рынок раскололся — «платформизация» vs «агентификация»</div>
-        <div class="card-text">
-          Gartner's 2026 Magic Quadrant для CDP показал фундаментальный раскол рынка: платформы (Salesforce Data 360 — единственный Leader) vs агентные CDP (Treasure Data Treasure Code, Infobip AgentOS). CDP теперь обязаны предлагать AI-агентов для конкретных бизнес-функций.<br><br>
-          Salesforce Data 360 показал +141% рост платящих клиентов. Новые игроки: Hightouch, Oracle, Uniphore. Агенты автоматически предсказывают churn, purchase propensity и LTV.
-        </div>
+        <div class="card-title">Meta вводит Location Fees в Европе + 4 обновления атрибуции</div>
+        <div class="card-text">Meta анонсировала платы за геолокацию в Европе. Плюс обновления: автоувеличение бюджета, AI-описания аудиторий, ограничения аудитории, новая модель атрибуции. Тренд на монетизацию данных виден.</div>
         <div class="card-action">
-          <div class="card-action-label">Для Qadam CDP</div>
-          <div class="card-action-text">Qadam строит собственную CDP. Изучи подход Hightouch (composable CDP) — они вошли в MQ без классической CDP-инфраструктуры, работая поверх data warehouse. Это ближе к архитектуре Qadam чем Salesforce.</div>
+          <div class="card-action-label">Отслеживать</div>
+          <div class="card-action-text">Если работаешь на EU-аудиторию — проверь новые fees в Ads Manager. Для СНГ — следи за трендом.</div>
         </div>
-        <div class="card-source"><a href="https://www.cxtoday.com/customer-analytics-intelligence/gartner-magic-quadrant-cdp-2026/" target="_blank" rel="noopener">CX Today / Gartner</a></div>
+        <div class="card-source"><a href="https://www.jonloomer.com/meta-location-fees/" target="_blank" rel="noopener">Jon Loomer</a></div>
         <div class="feedback-buttons">
           <button class="feedback-btn" data-card-id="cdp_1" data-action="like">👍</button>
           <button class="feedback-btn" data-card-id="cdp_1" data-action="dislike">👎</button>
@@ -257,15 +245,15 @@
         </div>
       </div>
 
-      <!-- CDP 2: Agentic CDP -->
-      <div class="card" data-card-id="cdp_2" data-card-title="Treasure Data запустил agentic AI для Customer Data Operations" data-card-category="📊 CDP">
+      <div class="card" data-card-id="cdp_2" data-card-title="Конверсии «пропали» после изменений атрибуции — разбор" data-card-category="📊 CDP">
         <div class="card-num"><span class="tag biz">📊 CDP</span></div>
-        <div class="card-title">Treasure Code: первый agentic AI для customer data — агенты работают с данными автономно</div>
-        <div class="card-text">
-          Treasure Data представил Treasure Code — agentic AI слой для CDP. Агенты автономно создают аудитории, запускают персонализацию, прогнозируют churn и управляют journey orchestration без ручной настройки.<br><br>
-          Infobip запустил AgentOS — аналогичную систему где AI-агенты переводят маркетинг от статичных кампаний к «goal-driven, self-optimising interactions». CDP 2026 = data + AI-агенты.
+        <div class="card-title">Конверсии «пропали» после изменений атрибуции — разбор</div>
+        <div class="card-text">Meta обновила click-through атрибуцию: теперь требуется реальный клик по ссылке. Часть рекламодателей видит резкое падение конверсий — но это не реальное падение, а пересчёт метрики.</div>
+        <div class="card-action">
+          <div class="card-action-label">Проверить</div>
+          <div class="card-action-text">Сравни отчёты за последние 2 недели в разных окнах атрибуции (1-day, 7-day). Расхождение >20% = пересчёт.</div>
         </div>
-        <div class="card-source"><a href="https://www.hpcwire.com/bigdatawire/this-just-in/treasure-data-unveils-treasure-code-bringing-agentic-ai-to-customer-data-operations/" target="_blank" rel="noopener">BigDATAwire</a></div>
+        <div class="card-source"><a href="https://www.jonloomer.com/qvt/conversions-lost-due-to-attribution-changes/" target="_blank" rel="noopener">Jon Loomer</a></div>
         <div class="feedback-buttons">
           <button class="feedback-btn" data-card-id="cdp_2" data-action="like">👍</button>
           <button class="feedback-btn" data-card-id="cdp_2" data-action="dislike">👎</button>
@@ -274,458 +262,176 @@
       </div>
     </div>
 
-    <!-- ======== СЕКЦИЯ: НОВОСТИ (accordion) ======== -->
+    <!-- ======== СЕКЦИЯ: НОВОСТИ ======== -->
     <div class="section fade-in-up">
       <div class="section-header">
         <div class="section-title">📰 Новости</div>
         <div class="section-line"></div>
       </div>
 
-      <!-- Новость 1 -->
-      <details class="accordion-card" data-card-id="card_1" data-card-title="Claude Code Skills 2.0: от инструкций к программируемым агентам" data-card-category="🤖 AGENT">
-        <summary class="accordion-summary">
-          <span class="tag agent">🤖 AGENT</span>
-          <div class="accordion-summary-content">
-            <div class="accordion-card-title">Claude Code Skills 2.0: subagent execution, lifecycle hooks, skill marketplace</div>
-            <div class="accordion-card-preview">Система скиллов эволюционировала из markdown-инструкций в полноценную agent platform</div>
-          </div>
-          <div class="accordion-chevron">▼</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="card-text">
-            Claude Code Skills 2.0 — скиллы теперь поддерживают subagent execution, dynamic context injection, lifecycle hooks и формальную оценку. Экосистема включает официальные скиллы Anthropic, верифицированные сторонние и тысячи community-contributed скиллов в формате SKILL.md.
-          </div>
-          <div class="card-source"><a href="https://medium.com/@richardhightower/claude-code-agent-skills-2-0-from-custom-instructions-to-programmable-agents-ab6e4563c176" target="_blank" rel="noopener">Medium / Rick Hightower</a></div>
-          <div class="feedback-buttons">
-            <button class="feedback-btn" data-card-id="card_1" data-action="like">👍</button>
-            <button class="feedback-btn" data-card-id="card_1" data-action="dislike">👎</button>
-            <button class="feedback-btn" data-card-id="card_1" data-action="backlog">📋 В бэклог</button>
-          </div>
-        </div>
+      <details class="accordion-card" data-card-id="card_1" data-card-title="После двух лет вайбкодинга — обратно к ручному коду" data-card-category="🧠 AI">
+        <summary class="accordion-summary"><span class="tag ai">🧠 AI</span><div class="accordion-summary-content"><div class="accordion-card-title">После двух лет вайбкодинга — обратно к ручному коду</div><div class="accordion-card-preview">AI-кодинг ускоряет прототипирование, но замедляет глубокое понимание системы</div></div><div class="accordion-chevron">▼</div></summary>
+        <div class="accordion-body"><div class="card-text">Автор два года использовал AI для всего кода, потом вернулся к ручному программированию. Вайбкодинг создаёт иллюзию продуктивности, но снижает глубинное понимание. Не анти-AI — про баланс.</div><div class="card-source"><a href="https://atmoio.substack.com/p/after-two-years-of-vibecoding-im" target="_blank" rel="noopener">HackerNews</a></div><div class="feedback-buttons"><button class="feedback-btn" data-card-id="card_1" data-action="like">👍</button><button class="feedback-btn" data-card-id="card_1" data-action="dislike">👎</button><button class="feedback-btn" data-card-id="card_1" data-action="backlog">📋 В бэклог</button></div></div>
       </details>
 
-      <!-- Новость 2 -->
-      <details class="accordion-card" data-card-id="card_2" data-card-title="AI coding agents повторяют 10-летние ошибки безопасности" data-card-category="🛠 TOOL">
-        <summary class="accordion-summary">
-          <span class="tag tool">🛠 TOOL</span>
-          <div class="accordion-summary-content">
-            <div class="accordion-card-title">Claude Code, OpenAI Codex, Gemini: все AI-агенты генерируют уязвимый код</div>
-            <div class="accordion-card-preview">SQL injection, XSS, hardcoded secrets — десятилетние проблемы в новом формате</div>
-          </div>
-          <div class="accordion-chevron">▼</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="card-text">
-            Help Net Security: все крупные AI coding agents (Claude Code, OpenAI Codex, Gemini) систематически генерируют код с уязвимостями OWASP Top-10. SQL injection, XSS, hardcoded credentials — те же ошибки что делали разработчики 10 лет назад.
-          </div>
-          <div class="card-source"><a href="https://www.helpnetsecurity.com/2026/03/13/claude-code-openai-codex-google-gemini-ai-coding-agent-security/" target="_blank" rel="noopener">Help Net Security</a></div>
-          <div class="feedback-buttons">
-            <button class="feedback-btn" data-card-id="card_2" data-action="like">👍</button>
-            <button class="feedback-btn" data-card-id="card_2" data-action="dislike">👎</button>
-            <button class="feedback-btn" data-card-id="card_2" data-action="backlog">📋 В бэклог</button>
-          </div>
-        </div>
+      <details class="accordion-card" data-card-id="card_2" data-card-title="Claude исполнилось 3 года" data-card-category="🤖 AGENT">
+        <summary class="accordion-summary"><span class="tag agent">🤖 AGENT</span><div class="accordion-summary-content"><div class="accordion-card-title">Claude исполнилось 3 года</div><div class="accordion-card-preview">От chatbot к платформе агентов за 3 года</div></div><div class="accordion-chevron">▼</div></summary>
+        <div class="accordion-body"><div class="card-text">Claude отмечает 3 года: от чат-бота → Agent SDK, MCP-протокол, Skills 2.0, Agent Teams. Полноценная платформа для агентного программирования.</div><div class="card-source"><a href="https://reddit.com/r/ClaudeAI" target="_blank" rel="noopener">r/ClaudeAI</a></div><div class="feedback-buttons"><button class="feedback-btn" data-card-id="card_2" data-action="like">👍</button><button class="feedback-btn" data-card-id="card_2" data-action="dislike">👎</button><button class="feedback-btn" data-card-id="card_2" data-action="backlog">📋 В бэклог</button></div></div>
       </details>
 
-      <!-- Новость 3 -->
-      <details class="accordion-card" data-card-id="card_3" data-card-title="claude-code-best-practice: 15,000 звёзд, trending на GitHub" data-card-category="🤖 AGENT">
-        <summary class="accordion-summary">
-          <span class="tag agent">🤖 AGENT</span>
-          <div class="accordion-summary-content">
-            <div class="accordion-card-title">claude-code-best-practice набрал 15K★ и попал в GitHub Trending Monthly</div>
-            <div class="accordion-card-preview">Репозиторий с лучшими практиками Claude Code — от tips до полных workflow</div>
-          </div>
-          <div class="accordion-chevron">▼</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="card-text">
-            Коммьюнити-репозиторий с best practices для Claude Code набрал 15,000 звёзд и попал в GitHub Trending Monthly. Содержит workflows, tips, patterns от создателей Claude Code и сообщества.
-          </div>
-          <div class="card-source"><a href="https://github.com/shanraisshan/claude-code-best-practices" target="_blank" rel="noopener">r/ClaudeAI</a></div>
-          <div class="feedback-buttons">
-            <button class="feedback-btn" data-card-id="card_3" data-action="like">👍</button>
-            <button class="feedback-btn" data-card-id="card_3" data-action="dislike">👎</button>
-            <button class="feedback-btn" data-card-id="card_3" data-action="backlog">📋 В бэклог</button>
-          </div>
-        </div>
+      <details class="accordion-card" data-card-id="card_3" data-card-title="Вайбкодер потерял $87,500 — API-ключи в фронтенде" data-card-category="⚠️ RISK">
+        <summary class="accordion-summary"><span class="tag risk">⚠️ RISK</span><div class="accordion-summary-content"><div class="accordion-card-title">Вайбкодер потерял $87,500 — API-ключи в фронтенде</div><div class="accordion-card-preview">Claude Code без ревью → хакеры нашли Stripe API ключи</div></div><div class="accordion-chevron">▼</div></summary>
+        <div class="accordion-body"><div class="card-text">Фаундер использовал Claude Code для всего SaaS, без code review и тестов. Хакеры нашли Stripe API ключи в фронтенд-коде и украли $87,500.</div><div class="card-source"><a href="https://reddit.com/r/vibecoding" target="_blank" rel="noopener">r/vibecoding</a></div><div class="feedback-buttons"><button class="feedback-btn" data-card-id="card_3" data-action="like">👍</button><button class="feedback-btn" data-card-id="card_3" data-action="dislike">👎</button><button class="feedback-btn" data-card-id="card_3" data-action="backlog">📋 В бэклог</button></div></div>
       </details>
 
-      <!-- Новость 4 -->
-      <details class="accordion-card" data-card-id="card_4" data-card-title="NanoClaw: Claude Agent Swarms в контейнерах" data-card-category="🤖 AGENT">
-        <summary class="accordion-summary">
-          <span class="tag agent">🤖 AGENT</span>
-          <div class="accordion-summary-content">
-            <div class="accordion-card-title">NanoClaw запустил поддержку Claude Agent Swarms в Docker-контейнерах</div>
-            <div class="accordion-card-preview">Изоляция агентных команд в контейнерах — безопасность + масштабирование</div>
-          </div>
-          <div class="accordion-chevron">▼</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="card-text">
-            NanoClaw добавил поддержку Agent Swarms (мультиагентных команд Claude) в Docker-контейнерах. Каждый агент работает в изолированном контейнере с собственным filesystem. Безопасность + масштабирование для production-сценариев.
-          </div>
-          <div class="card-source"><a href="https://twitter.com/Gavriel_Cohen/status/2020701159175155874" target="_blank" rel="noopener">HN: claude agent</a></div>
-          <div class="feedback-buttons">
-            <button class="feedback-btn" data-card-id="card_4" data-action="like">👍</button>
-            <button class="feedback-btn" data-card-id="card_4" data-action="dislike">👎</button>
-            <button class="feedback-btn" data-card-id="card_4" data-action="backlog">📋 В бэклог</button>
-          </div>
-        </div>
+      <details class="accordion-card" data-card-id="card_4" data-card-title="AI-агенты повторяют ошибки безопасности 10-летней давности" data-card-category="⚠️ RISK">
+        <summary class="accordion-summary"><span class="tag risk">⚠️ RISK</span><div class="accordion-summary-content"><div class="accordion-card-title">AI-агенты повторяют ошибки безопасности 10-летней давности</div><div class="accordion-card-preview">Claude Code, Codex, Gemini — все допускают SQL injection и XSS</div></div><div class="accordion-chevron">▼</div></summary>
+        <div class="accordion-body"><div class="card-text">Исследование: все major AI coding agents регулярно генерируют код с SQL injection, XSS и другими OWASP Top 10 уязвимостями. Code review обязателен.</div><div class="card-source"><a href="https://www.helpnetsecurity.com/2026/03/13/claude-code-openai-codex-google-gemini-ai-coding-agent-security/" target="_blank" rel="noopener">Help Net Security</a></div><div class="feedback-buttons"><button class="feedback-btn" data-card-id="card_4" data-action="like">👍</button><button class="feedback-btn" data-card-id="card_4" data-action="dislike">👎</button><button class="feedback-btn" data-card-id="card_4" data-action="backlog">📋 В бэклог</button></div></div>
       </details>
 
-      <!-- Новость 5 -->
-      <details class="accordion-card" data-card-id="card_5" data-card-title="Claudeskills.cc — маркетплейс скиллов для Claude Code" data-card-category="🛠 TOOL">
-        <summary class="accordion-summary">
-          <span class="tag tool">🛠 TOOL</span>
-          <div class="accordion-summary-content">
-            <div class="accordion-card-title">Claudeskills.cc: Share, Discover and Reuse Claude/OpenAI Agent Skills</div>
-            <div class="accordion-card-preview">Коммьюнити-маркетплейс скиллов для Claude Code и OpenAI агентов</div>
-          </div>
-          <div class="accordion-chevron">▼</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="card-text">
-            Запущен claudeskills.cc — коммьюнити-маркетплейс для обмена скиллами между Claude Code и OpenAI агентами. Каталог, поиск, установка одной командой.
-          </div>
-          <div class="card-source"><a href="https://claudeskills.cc" target="_blank" rel="noopener">HN: claude agent</a></div>
-          <div class="feedback-buttons">
-            <button class="feedback-btn" data-card-id="card_5" data-action="like">👍</button>
-            <button class="feedback-btn" data-card-id="card_5" data-action="dislike">👎</button>
-            <button class="feedback-btn" data-card-id="card_5" data-action="backlog">📋 В бэклог</button>
-          </div>
-        </div>
+      <details class="accordion-card" data-card-id="card_5" data-card-title="claude-code-best-practice набрал 15,000★ на GitHub" data-card-category="🤖 AGENT">
+        <summary class="accordion-summary"><span class="tag agent">🤖 AGENT</span><div class="accordion-summary-content"><div class="accordion-card-title">claude-code-best-practice набрал 15,000★ на GitHub</div><div class="accordion-card-preview">Репозиторий с best practices от комьюнити трендит monthly</div></div><div class="accordion-chevron">▼</div></summary>
+        <div class="accordion-body"><div class="card-text">Репо с best practices для Claude Code вышел в GitHub Trending (Monthly). 15K звёзд, лучшие практики + tips/workflows.</div><div class="card-source"><a href="https://reddit.com/r/ClaudeAI" target="_blank" rel="noopener">r/ClaudeAI</a></div><div class="feedback-buttons"><button class="feedback-btn" data-card-id="card_5" data-action="like">👍</button><button class="feedback-btn" data-card-id="card_5" data-action="dislike">👎</button><button class="feedback-btn" data-card-id="card_5" data-action="backlog">📋 В бэклог</button></div></div>
       </details>
 
-      <!-- Новость 6 -->
-      <details class="accordion-card" data-card-id="card_6" data-card-title="Claude turns 3 today — 3 года Claude" data-card-category="🤖 AGENT">
-        <summary class="accordion-summary">
-          <span class="tag agent">🤖 AGENT</span>
-          <div class="accordion-summary-content">
-            <div class="accordion-card-title">Claude исполнилось 3 года — от экспериментального чат-бота до агентной платформы</div>
-            <div class="accordion-card-preview">Путь от Claude 1 (март 2023) до Opus 4.6 с Agent Teams и 1M контекстом</div>
-          </div>
-          <div class="accordion-chevron">▼</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="card-text">
-            14 марта 2026 — ровно 3 года с момента запуска первого Claude. За это время: Claude 1 → 2 → 3 → 3.5 → Opus 4.6 с 1M контекстом, Agent Teams, Code Review и Auto Mode. От чат-бота до полноценной агентной платформы.
-          </div>
-          <div class="card-source"><a href="https://reddit.com/r/ClaudeAI/" target="_blank" rel="noopener">r/ClaudeAI</a></div>
-          <div class="feedback-buttons">
-            <button class="feedback-btn" data-card-id="card_6" data-action="like">👍</button>
-            <button class="feedback-btn" data-card-id="card_6" data-action="dislike">👎</button>
-            <button class="feedback-btn" data-card-id="card_6" data-action="backlog">📋 В бэклог</button>
-          </div>
-        </div>
+      <details class="accordion-card" data-card-id="card_6" data-card-title="Claude.ai inline визуализатор — виджеты прямо в чате" data-card-category="🤖 AGENT">
+        <summary class="accordion-summary"><span class="tag agent">🤖 AGENT</span><div class="accordion-summary-content"><div class="accordion-card-title">Claude.ai inline визуализатор — виджеты прямо в чате</div><div class="accordion-card-preview">Интерактивные кнопки и визуалы внутри ответа Claude</div></div><div class="accordion-chevron">▼</div></summary>
+        <div class="accordion-body"><div class="card-text">Inline visuals в чате: кнопки, графики, формы прямо в ответе. Кнопка может отправить сообщение обратно в Claude — мини-приложения в чат-интерфейсе.</div><div class="card-source"><a href="https://reddit.com/r/ClaudeAI" target="_blank" rel="noopener">r/ClaudeAI</a></div><div class="feedback-buttons"><button class="feedback-btn" data-card-id="card_6" data-action="like">👍</button><button class="feedback-btn" data-card-id="card_6" data-action="dislike">👎</button><button class="feedback-btn" data-card-id="card_6" data-action="backlog">📋 В бэклог</button></div></div>
       </details>
 
-      <!-- Новость 7 -->
-      <details class="accordion-card" data-card-id="card_7" data-card-title="Meta Ads: качество трафика критично для малого бизнеса" data-card-category="💼 META">
-        <summary class="accordion-summary">
-          <span class="tag biz">💼 META</span>
-          <div class="accordion-summary-content">
-            <div class="accordion-card-title">Малый бизнес жалуется: Meta не понимает зависимость МСБ от качества трафика</div>
-            <div class="accordion-card-preview">Для многих компаний Meta — не «ещё один канал», а единственный источник клиентов</div>
-          </div>
-          <div class="accordion-chevron">▼</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="card-text">
-            Пост на r/FacebookAds набрал сотни апвотов: владельцы малого бизнеса зависят от качества Meta-трафика для выживания. Проблемы: bot traffic, низкокачественные клики, непрозрачность алгоритмов. Для многих Meta — не «ещё один канал», а единственный источник клиентов.
-          </div>
-          <div class="card-source"><a href="https://reddit.com/r/FacebookAds/comments/1rssdl2/i_dont_think_the_meta_ads_team_really_understands/" target="_blank" rel="noopener">r/FacebookAds</a></div>
-          <div class="feedback-buttons">
-            <button class="feedback-btn" data-card-id="card_7" data-action="like">👍</button>
-            <button class="feedback-btn" data-card-id="card_7" data-action="dislike">👎</button>
-            <button class="feedback-btn" data-card-id="card_7" data-action="backlog">📋 В бэклог</button>
-          </div>
-        </div>
+      <details class="accordion-card" data-card-id="card_7" data-card-title="Claudeskills.cc — маркетплейс скиллов для Claude/OpenAI" data-card-category="🛠 TOOL">
+        <summary class="accordion-summary"><span class="tag tool">🛠 TOOL</span><div class="accordion-summary-content"><div class="accordion-card-title">Claudeskills.cc — маркетплейс скиллов</div><div class="accordion-card-preview">Открытая платформа для обмена agent skills</div></div><div class="accordion-chevron">▼</div></summary>
+        <div class="accordion-body"><div class="card-text">Открытая платформа для обмена скиллами между Claude и OpenAI агентами. Публикуй, находи и переиспользуй готовые skills.</div><div class="card-source"><a href="https://claudeskills.cc" target="_blank" rel="noopener">HackerNews</a></div><div class="feedback-buttons"><button class="feedback-btn" data-card-id="card_7" data-action="like">👍</button><button class="feedback-btn" data-card-id="card_7" data-action="dislike">👎</button><button class="feedback-btn" data-card-id="card_7" data-action="backlog">📋 В бэклог</button></div></div>
       </details>
 
-      <!-- Новость 8 -->
-      <details class="accordion-card" data-card-id="card_8" data-card-title="Meta Ad Revenue +24%, ChatGPT Ads стартуют с $200K" data-card-category="💰 MONEY">
-        <summary class="accordion-summary">
-          <span class="tag money">💰 MONEY</span>
-          <div class="accordion-summary-content">
-            <div class="accordion-card-title">Meta: выручка от рекламы +24% в Q4, ChatGPT запускает рекламу с порогом $200K</div>
-            <div class="accordion-card-preview">Рекламный рынок растёт — AI-автоматизация ускоряет монетизацию</div>
-          </div>
-          <div class="accordion-chevron">▼</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="card-text">
-            Meta: рекламная выручка выросла на 24% в Q4 2025. Параллельно ChatGPT запускает собственную рекламу с минимальным бюджетом $200,000 — пока недоступно для МСБ, но сигнализирует о новом рекламном канале.
-          </div>
-          <div class="card-source"><a href="https://www.jonloomer.com/meta-ad-revenue-up-24-chatgpt-ads-200000/" target="_blank" rel="noopener">Jon Loomer</a></div>
-          <div class="feedback-buttons">
-            <button class="feedback-btn" data-card-id="card_8" data-action="like">👍</button>
-            <button class="feedback-btn" data-card-id="card_8" data-action="dislike">👎</button>
-            <button class="feedback-btn" data-card-id="card_8" data-action="backlog">📋 В бэклог</button>
-          </div>
-        </div>
+      <details class="accordion-card" data-card-id="card_8" data-card-title="NanoClaw — Claude Agent Swarms в контейнерах" data-card-category="🤖 AGENT">
+        <summary class="accordion-summary"><span class="tag agent">🤖 AGENT</span><div class="accordion-summary-content"><div class="accordion-card-title">NanoClaw — Agent Swarms в Docker</div><div class="accordion-card-preview">Изолированные агентные команды в контейнерах</div></div><div class="accordion-chevron">▼</div></summary>
+        <div class="accordion-body"><div class="card-text">NanoClaw поддерживает запуск Claude Agent Swarms в Docker-контейнерах. Каждый агент в изолированном окружении — для production deployment.</div><div class="card-source"><a href="https://twitter.com/Gavriel_Cohen/status/2020701159175155874" target="_blank" rel="noopener">HackerNews</a></div><div class="feedback-buttons"><button class="feedback-btn" data-card-id="card_8" data-action="like">👍</button><button class="feedback-btn" data-card-id="card_8" data-action="dislike">👎</button><button class="feedback-btn" data-card-id="card_8" data-action="backlog">📋 В бэклог</button></div></div>
       </details>
 
-      <!-- Новость 9 -->
-      <details class="accordion-card" data-card-id="card_9" data-card-title="Atlassian увольняет 1,600 человек ради AI" data-card-category="🌊 WAVE">
-        <summary class="accordion-summary">
-          <span class="tag wave">🌊 WAVE</span>
-          <div class="accordion-summary-content">
-            <div class="accordion-card-title">Atlassian сокращает 10% штата (1,600 человек) и перенаправляет бюджет на AI</div>
-            <div class="accordion-card-preview">Вслед за Block — AI-трансформация ускоряет реструктуризацию enterprise-компаний</div>
-          </div>
-          <div class="accordion-chevron">▼</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="card-text">
-            Atlassian (Jira, Confluence) уволила 10% сотрудников — около 1,600 человек. Причина: перенаправление ресурсов на AI. Компания следует примеру Block (Square) и других tech-компаний, проводящих реструктуризацию в пользу AI-автоматизации.
-          </div>
-          <div class="card-source"><a href="https://techcrunch.com/2026/03/12/atlassian-follows-blocks-footsteps-and-cuts-staff-in-the-name-of-ai/" target="_blank" rel="noopener">TechCrunch</a></div>
-          <div class="feedback-buttons">
-            <button class="feedback-btn" data-card-id="card_9" data-action="like">👍</button>
-            <button class="feedback-btn" data-card-id="card_9" data-action="dislike">👎</button>
-            <button class="feedback-btn" data-card-id="card_9" data-action="backlog">📋 В бэклог</button>
-          </div>
-        </div>
+      <details class="accordion-card" data-card-id="card_9" data-card-title="Atlassian уволил 1,600 человек ради AI" data-card-category="💰 MONEY">
+        <summary class="accordion-summary"><span class="tag money">💰 MONEY</span><div class="accordion-summary-content"><div class="accordion-card-title">Atlassian уволил 1,600 человек ради AI</div><div class="accordion-card-preview">10% штата сокращено — средства перенаправлены на AI</div></div><div class="accordion-chevron">▼</div></summary>
+        <div class="accordion-body"><div class="card-text">Atlassian сократил 10% штата (~1,600 человек) и перенаправил средства на AI. Тренд: крупные tech-компании оптимизируют через AI.</div><div class="card-source"><a href="https://techcrunch.com/2026/03/12/atlassian-follows-blocks-footsteps-and-cuts-staff-in-the-name-of-ai/" target="_blank" rel="noopener">TechCrunch</a></div><div class="feedback-buttons"><button class="feedback-btn" data-card-id="card_9" data-action="like">👍</button><button class="feedback-btn" data-card-id="card_9" data-action="dislike">👎</button><button class="feedback-btn" data-card-id="card_9" data-action="backlog">📋 В бэклог</button></div></div>
       </details>
 
-      <!-- Новость 10 -->
-      <details class="accordion-card" data-card-id="card_10" data-card-title="After two years of vibecoding, I'm back to writing by hand" data-card-category="🧠 AI">
-        <summary class="accordion-summary">
-          <span class="tag ai">🧠 AI</span>
-          <div class="accordion-summary-content">
-            <div class="accordion-card-title">«После двух лет вайб-кодинга вернулся к ручному написанию»</div>
-            <div class="accordion-card-preview">Пост набирает 200+ очков на HN — дискуссия о пределах AI-кодинга</div>
-          </div>
-          <div class="accordion-chevron">▼</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="card-text">
-            Пост на HackerNews: разработчик после двух лет активного использования AI для написания кода вернулся к ручному программированию. Аргументы: потеря понимания кодовой базы, снижение навыков дебага, «haunted codebase» эффект.
-          </div>
-          <div class="card-source"><a href="https://atmoio.substack.com/p/after-two-years-of-vibecoding-im" target="_blank" rel="noopener">HackerNews / Substack</a></div>
-          <div class="feedback-buttons">
-            <button class="feedback-btn" data-card-id="card_10" data-action="like">👍</button>
-            <button class="feedback-btn" data-card-id="card_10" data-action="dislike">👎</button>
-            <button class="feedback-btn" data-card-id="card_10" data-action="backlog">📋 В бэклог</button>
-          </div>
-        </div>
+      <details class="accordion-card" data-card-id="card_10" data-card-title="Meta Ad Revenue +24%, ChatGPT Ads от $200K" data-card-category="💰 MONEY">
+        <summary class="accordion-summary"><span class="tag money">💰 MONEY</span><div class="accordion-summary-content"><div class="accordion-card-title">Meta Ad Revenue +24%, ChatGPT Ads от $200K</div><div class="accordion-card-preview">Meta укрепляет AI-ads монополию, OpenAI выходит на рекламный рынок</div></div><div class="accordion-chevron">▼</div></summary>
+        <div class="accordion-body"><div class="card-text">Рекламная выручка Meta +24% в Q4. ChatGPT запустил рекламу с порогом $200,000. Два тренда: Meta укрепляет AI-ads, OpenAI пытается зайти.</div><div class="card-source"><a href="https://www.jonloomer.com/meta-ad-revenue-up-24-chatgpt-ads-200000/" target="_blank" rel="noopener">Jon Loomer</a></div><div class="feedback-buttons"><button class="feedback-btn" data-card-id="card_10" data-action="like">👍</button><button class="feedback-btn" data-card-id="card_10" data-action="dislike">👎</button><button class="feedback-btn" data-card-id="card_10" data-action="backlog">📋 В бэклог</button></div></div>
       </details>
 
-      <!-- Новость 11 -->
-      <details class="accordion-card" data-card-id="card_11" data-card-title="10 обязательных скиллов для Claude Code в 2026" data-card-category="🛠 TOOL">
-        <summary class="accordion-summary">
-          <span class="tag tool">🛠 TOOL</span>
-          <div class="accordion-summary-content">
-            <div class="accordion-card-title">10 Must-Have Skills для Claude Code и любого coding agent в 2026</div>
-            <div class="accordion-card-preview">Гайд по настройке agent skills — от TDD до multi-agent orchestration</div>
-          </div>
-          <div class="accordion-chevron">▼</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="card-text">
-            Гайд на Medium: 10 скиллов которые должен иметь каждый Claude Code агент — TDD, systematic debugging, brainstorming, code review, multi-agent orchestration. Применимо к любому coding agent.
-          </div>
-          <div class="card-source"><a href="https://medium.com/@unicodeveloper/10-must-have-skills-for-claude-and-any-coding-agent-in-2026-b5451b013051" target="_blank" rel="noopener">Medium / unicodeveloper</a></div>
-          <div class="feedback-buttons">
-            <button class="feedback-btn" data-card-id="card_11" data-action="like">👍</button>
-            <button class="feedback-btn" data-card-id="card_11" data-action="dislike">👎</button>
-            <button class="feedback-btn" data-card-id="card_11" data-action="backlog">📋 В бэклог</button>
-          </div>
-        </div>
+      <details class="accordion-card" data-card-id="card_11" data-card-title="10 Must-Have Skills для coding agents в 2026" data-card-category="🤖 AGENT">
+        <summary class="accordion-summary"><span class="tag agent">🤖 AGENT</span><div class="accordion-summary-content"><div class="accordion-card-title">10 Must-Have Skills для coding agents в 2026</div><div class="accordion-card-preview">Prompt engineering, CLAUDE.md, skills/hooks, worktrees, agent teams</div></div><div class="accordion-chevron">▼</div></summary>
+        <div class="accordion-body"><div class="card-text">Навыки для эффективной работы с Claude Code: prompt engineering, CLAUDE.md, skills/hooks, worktrees, agent teams, MCP integration.</div><div class="card-source"><a href="https://medium.com/@unicodeveloper/10-must-have-skills-for-claude-and-any-coding-agent-in-2026-b5451b013051" target="_blank" rel="noopener">Medium</a></div><div class="feedback-buttons"><button class="feedback-btn" data-card-id="card_11" data-action="like">👍</button><button class="feedback-btn" data-card-id="card_11" data-action="dislike">👎</button><button class="feedback-btn" data-card-id="card_11" data-action="backlog">📋 В бэклог</button></div></div>
       </details>
 
-      <!-- Новость 12 -->
-      <details class="accordion-card" data-card-id="card_12" data-card-title="Meta Ads Automation: 9 лучших инструментов 2026" data-card-category="💼 META">
-        <summary class="accordion-summary">
-          <span class="tag biz">💼 META</span>
-          <div class="accordion-summary-content">
-            <div class="accordion-card-title">9 лучших инструментов автоматизации Meta Ads в 2026 — от AdStellar до Revealbot</div>
-            <div class="accordion-card-preview">Сравнение pricing, фич и интеграций для автоматизации рекламных кампаний</div>
-          </div>
-          <div class="accordion-chevron">▼</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="card-text">
-            AdStellar опубликовал сравнение 9 лучших Meta Ads automation tools 2026: AdStellar, Revealbot, Smartly, Madgicx и другие. Покрытие: автоматические правила, AI-оптимизация ставок, креативный A/B тестинг, multi-platform управление.
-          </div>
-          <div class="card-source"><a href="https://www.adstellar.ai/blog/meta-ads-automation-software" target="_blank" rel="noopener">AdStellar</a></div>
-          <div class="feedback-buttons">
-            <button class="feedback-btn" data-card-id="card_12" data-action="like">👍</button>
-            <button class="feedback-btn" data-card-id="card_12" data-action="dislike">👎</button>
-            <button class="feedback-btn" data-card-id="card_12" data-action="backlog">📋 В бэклог</button>
-          </div>
-        </div>
+      <details class="accordion-card" data-card-id="card_12" data-card-title="Первый платящий клиент — $50 и паника саппорта" data-card-category="🌊 WAVE">
+        <summary class="accordion-summary"><span class="tag wave">🌊 WAVE</span><div class="accordion-summary-content"><div class="accordion-card-title">Первый платящий клиент — $50 и паника</div><div class="accordion-card-preview">6 месяцев SaaS через AI, $50 — и нужен суппорт</div></div><div class="accordion-chevron">▼</div></summary>
+        <div class="accordion-body"><div class="card-text">Вайбкодер 6 месяцев строил SaaS, получил $50 — и понял что нужна поддержка, документация и onboarding. «Как в фильме — сейф вскрыли, а сигнализация сработала».</div><div class="card-source"><a href="https://reddit.com/r/vibecoding" target="_blank" rel="noopener">r/vibecoding</a></div><div class="feedback-buttons"><button class="feedback-btn" data-card-id="card_12" data-action="like">👍</button><button class="feedback-btn" data-card-id="card_12" data-action="dislike">👎</button><button class="feedback-btn" data-card-id="card_12" data-action="backlog">📋 В бэклог</button></div></div>
       </details>
     </div>
 
-    <!-- ======== СЕКЦИЯ: ВНЕДРИТЬ (полноразмерные карточки) ======== -->
+    <!-- ======== СЕКЦИЯ: ВНЕДРИТЬ ======== -->
     <div class="section fade-in-up">
       <div class="section-header">
         <div class="section-title">🚀 Внедрить</div>
         <div class="section-line"></div>
       </div>
 
-      <!-- Внедрить 1 -->
-      <div class="card implement-card" data-card-id="impl_1" data-card-title="Подключить Claude Code Review к репозиториям" data-card-category="🚀 ВНЕДРИТЬ">
+      <div class="card" data-card-id="impl_1" data-card-title="Claude Code Review — подключи на все PR" data-card-category="🚀 ВНЕДРИТЬ">
         <div class="card-num"><span class="tag agent">🤖 AGENT</span></div>
-        <div class="card-title">Подключить Claude Code Review к Qadam и kodi-digest репозиториям</div>
-        <div class="card-text">
-          Claude Code Review dispatches агентную команду на каждый PR: параллельный поиск багов, верификация, ранжирование по severity. Заменяет ручной review для рутинных PR.
-        </div>
+        <div class="card-title">Claude Code Review — подключи на все PR</div>
+        <div class="card-text">Agent Teams-based review: команда агентов проверяет PR параллельно, верифицирует находки, фильтрует false positives. Один overview + inline-аннотации.</div>
         <div class="card-action">
-          <div class="card-action-label">Одно действие</div>
-          <div class="card-action-text">GitHub → Settings → Integrations → Claude Code Review. Настройка: 10 минут. Бесплатно для open source.</div>
+          <div class="card-action-label">Настроить за 10 минут</div>
+          <div class="card-action-text">gh extension install anthropic/code-review → настрой на GitHub Actions. Бесплатно для open source.</div>
         </div>
-        <div class="feedback-buttons">
-          <button class="feedback-btn" data-card-id="impl_1" data-action="like">👍</button>
-          <button class="feedback-btn" data-card-id="impl_1" data-action="dislike">👎</button>
-          <button class="feedback-btn" data-card-id="impl_1" data-action="backlog">📋 В бэклог</button>
-        </div>
+        <div class="card-source"><a href="https://claude.com/blog/code-review" target="_blank" rel="noopener">Anthropic</a></div>
+        <div class="feedback-buttons"><button class="feedback-btn" data-card-id="impl_1" data-action="like">👍</button><button class="feedback-btn" data-card-id="impl_1" data-action="dislike">👎</button><button class="feedback-btn" data-card-id="impl_1" data-action="backlog">📋 В бэклог</button></div>
       </div>
 
-      <!-- Внедрить 2 -->
-      <div class="card implement-card" data-card-id="impl_2" data-card-title="Протестировать Describe Your Audience для AiPlus" data-card-category="🚀 ВНЕДРИТЬ">
-        <div class="card-num"><span class="tag biz">💼 META</span></div>
-        <div class="card-title">A/B тест: Describe Your Audience vs ручной таргетинг для AiPlus кампаний</div>
-        <div class="card-text">
-          Meta «Describe Your Audience» позволяет описать аудиторию текстом вместо выбора интересов. Ранние тесты: -15-25% CPA. Стоит сравнить с текущим таргетингом.
-        </div>
+      <div class="card" data-card-id="impl_2" data-card-title="Context Mode MCP — сократи расход токенов x50" data-card-category="🚀 ВНЕДРИТЬ">
+        <div class="card-num"><span class="tag tool">🛠 TOOL</span></div>
+        <div class="card-title">Context Mode MCP — сократи расход токенов x50</div>
+        <div class="card-text">MCP-сервер кеширует контекст Claude Code. С 200K до 4K токенов на задачу. Работает на дельтах.</div>
         <div class="card-action">
-          <div class="card-action-label">Одно действие</div>
-          <div class="card-action-text">Ads Manager → новая кампания → Describe Your Audience → «Родители школьников в Казахстане, заинтересованные в подготовке к НИШ». Бюджет: $50/день на 2 недели. Время: 30 минут.</div>
+          <div class="card-action-label">Установить</div>
+          <div class="card-action-text">npm install context-mode-mcp → .claude/mcp.json. Замерь расход до/после на 3 задачах.</div>
         </div>
-        <div class="feedback-buttons">
-          <button class="feedback-btn" data-card-id="impl_2" data-action="like">👍</button>
-          <button class="feedback-btn" data-card-id="impl_2" data-action="dislike">👎</button>
-          <button class="feedback-btn" data-card-id="impl_2" data-action="backlog">📋 В бэклог</button>
-        </div>
+        <div class="card-source"><a href="https://mksg.lu/blog/context-mode" target="_blank" rel="noopener">mksg.lu</a></div>
+        <div class="feedback-buttons"><button class="feedback-btn" data-card-id="impl_2" data-action="like">👍</button><button class="feedback-btn" data-card-id="impl_2" data-action="dislike">👎</button><button class="feedback-btn" data-card-id="impl_2" data-action="backlog">📋 В бэклог</button></div>
       </div>
 
-      <!-- Внедрить 3 -->
-      <div class="card implement-card" data-card-id="impl_3" data-card-title="Добавить clickable links в AiPlus Reels" data-card-category="🚀 ВНЕДРИТЬ">
+      <div class="card" data-card-id="impl_3" data-card-title="Reels link overlay — трафик без «ссылка в bio»" data-card-category="🚀 ВНЕДРИТЬ">
         <div class="card-num"><span class="tag biz">🎬 CONTENT</span></div>
-        <div class="card-title">Добавить clickable link overlays в следующие 3 Reels AiPlus</div>
-        <div class="card-text">
-          Instagram Reels теперь поддерживает clickable links прямо в видео. Воронка: Reel → клик → лендинг записи. Потенциально заменяет «link in bio» для конверсий.
-        </div>
+        <div class="card-title">Reels link overlay — трафик без «ссылка в bio»</div>
+        <div class="card-text">Instagram добавил кликабельные ссылки в Reels. Больше не нужно «ссылка в шапке».</div>
         <div class="card-action">
-          <div class="card-action-label">Одно действие</div>
-          <div class="card-action-text">При создании Reel → Add Link Overlay → URL страницы записи. Измерить CTR через Insights. Время: 5 минут на Reel. Стоимость: $0.</div>
+          <div class="card-action-label">A/B тест</div>
+          <div class="card-action-text">3 рилса с link overlay vs 3 без. CTR >2% — масштабируй.</div>
         </div>
-        <div class="feedback-buttons">
-          <button class="feedback-btn" data-card-id="impl_3" data-action="like">👍</button>
-          <button class="feedback-btn" data-card-id="impl_3" data-action="dislike">👎</button>
-          <button class="feedback-btn" data-card-id="impl_3" data-action="backlog">📋 В бэклог</button>
-        </div>
+        <div class="card-source"><a href="https://www.socialmediaexaminer.com/what-clickable-reels-links-and-hashtag-limits-mean-for-your-2026-instagram-strategy/" target="_blank" rel="noopener">Social Media Examiner</a></div>
+        <div class="feedback-buttons"><button class="feedback-btn" data-card-id="impl_3" data-action="like">👍</button><button class="feedback-btn" data-card-id="impl_3" data-action="dislike">👎</button><button class="feedback-btn" data-card-id="impl_3" data-action="backlog">📋 В бэклог</button></div>
       </div>
 
-      <!-- Внедрить 4 -->
-      <div class="card implement-card" data-card-id="impl_4" data-card-title="Изучить Hightouch как референс для Qadam CDP" data-card-category="🚀 ВНЕДРИТЬ">
-        <div class="card-num"><span class="tag biz">📊 CDP</span></div>
-        <div class="card-title">Изучить архитектуру Hightouch (composable CDP) как референс для Qadam</div>
-        <div class="card-text">
-          Hightouch вошёл в Gartner MQ 2026 без классической CDP-инфраструктуры — работает поверх data warehouse (reverse ETL). Архитектурно ближе к Qadam чем Salesforce или Segment.
-        </div>
+      <div class="card" data-card-id="impl_4" data-card-title="Проверь атрибуцию Meta Ads — цифры могли упасть" data-card-category="🚀 ВНЕДРИТЬ">
+        <div class="card-num"><span class="tag biz">💼 META</span></div>
+        <div class="card-title">Проверь атрибуцию Meta Ads — цифры могли упасть</div>
+        <div class="card-text">Meta изменила click-through атрибуцию. Падение конверсий = пересчёт метрики, не реальное падение.</div>
         <div class="card-action">
-          <div class="card-action-label">Одно действие</div>
-          <div class="card-action-text">Прочитать Hightouch Composable CDP docs: hightouch.com/docs. Выписать паттерны применимые к Qadam. Время: 2 часа. Стоимость: $0.</div>
+          <div class="card-action-label">Проверить сейчас</div>
+          <div class="card-action-text">Ads Manager → сравни 1-day click vs 7-day click. Расхождение >20% = пересчёт атрибуции.</div>
         </div>
-        <div class="feedback-buttons">
-          <button class="feedback-btn" data-card-id="impl_4" data-action="like">👍</button>
-          <button class="feedback-btn" data-card-id="impl_4" data-action="dislike">👎</button>
-          <button class="feedback-btn" data-card-id="impl_4" data-action="backlog">📋 В бэклог</button>
-        </div>
+        <div class="card-source"><a href="https://www.jonloomer.com/qvt/conversions-lost-due-to-attribution-changes/" target="_blank" rel="noopener">Jon Loomer</a></div>
+        <div class="feedback-buttons"><button class="feedback-btn" data-card-id="impl_4" data-action="like">👍</button><button class="feedback-btn" data-card-id="impl_4" data-action="dislike">👎</button><button class="feedback-btn" data-card-id="impl_4" data-action="backlog">📋 В бэклог</button></div>
       </div>
 
-      <!-- Внедрить 5 -->
-      <div class="card implement-card" data-card-id="impl_5" data-card-title="Настроить MCP Context Mode для длинных сессий" data-card-category="🚀 ВНЕДРИТЬ">
-        <div class="card-num"><span class="tag agent">🤖 AGENT</span></div>
-        <div class="card-title">Установить MCP Context Mode для снижения потребления контекста на 98%</div>
-        <div class="card-text">
-          Context Mode MCP-сервер кэширует контекст между вызовами. Критично для Qadam (200+ файлов) — вместо 2-3 итераций до исчерпания контекста, получаешь 50+.
-        </div>
+      <div class="card" data-card-id="impl_5" data-card-title="Customer Experience → Revenue: retention важнее acquisition" data-card-category="🚀 ВНЕДРИТЬ">
+        <div class="card-num"><span class="tag money">💰 MONEY</span></div>
+        <div class="card-title">Customer Experience → Revenue: retention важнее acquisition</div>
+        <div class="card-text">Удержание клиента в 5-7x дешевле привлечения нового. Большинство бюджетов уходит на привлечение, пока существующие клиенты уходят.</div>
         <div class="card-action">
-          <div class="card-action-label">Одно действие</div>
-          <div class="card-action-text">npm install -g context-mode-mcp → добавить в claude_desktop_config.json. Время: 15 минут. Стоимость: open source.</div>
+          <div class="card-action-label">Посчитать</div>
+          <div class="card-action-text">Сколько стоит привлечение vs удержание. Retention-бюджет <20% от acquisition — перебалансируй.</div>
         </div>
-        <div class="feedback-buttons">
-          <button class="feedback-btn" data-card-id="impl_5" data-action="like">👍</button>
-          <button class="feedback-btn" data-card-id="impl_5" data-action="dislike">👎</button>
-          <button class="feedback-btn" data-card-id="impl_5" data-action="backlog">📋 В бэклог</button>
-        </div>
+        <div class="card-source"><a href="https://www.socialmediaexaminer.com/improving-customer-experience-how-to-increase-revenue-and-profitability/" target="_blank" rel="noopener">Social Media Examiner</a></div>
+        <div class="feedback-buttons"><button class="feedback-btn" data-card-id="impl_5" data-action="like">👍</button><button class="feedback-btn" data-card-id="impl_5" data-action="dislike">👎</button><button class="feedback-btn" data-card-id="impl_5" data-action="backlog">📋 В бэклог</button></div>
       </div>
     </div>
 
-    <!-- ======== СЕКЦИЯ: КОНТР-СИГНАЛ (красноватый акцент) ======== -->
+    <!-- ======== СЕКЦИЯ: КОНТР-СИГНАЛ ======== -->
     <div class="section fade-in-up">
       <div class="section-header">
         <div class="section-title counter-signal-title">⚠️ Контр-сигнал</div>
         <div class="section-line"></div>
       </div>
 
-      <!-- Контр-сигнал 1 -->
-      <details class="accordion-card counter-signal" data-card-id="risk_1" data-card-title="Вайб-кодер потерял $87,500: API ключи в фронтенде" data-card-category="⚠️ КОНТР-СИГНАЛ">
-        <summary class="accordion-summary">
-          <span class="tag risk">⚠️ РИСК</span>
-          <div class="accordion-summary-content">
-            <div class="accordion-card-title">Фаундер вайб-закодил SaaS с Claude Code: хакеры нашли Stripe API ключи и украли $87,500</div>
-            <div class="accordion-card-preview">Без security review, без тестов — API ключи лежали прямо во frontend-коде</div>
-          </div>
-          <div class="accordion-chevron">▼</div>
-        </summary>
+      <details class="accordion-card counter-signal" data-card-id="risk_1" data-card-title="Большинство вайбкод-проектов проваливаются" data-card-category="⚠️ КОНТР-СИГНАЛ">
+        <summary class="accordion-summary"><span class="tag risk">⚠️ РИСК</span><div class="accordion-summary-content"><div class="accordion-card-title">Большинство вайбкод-проектов проваливаются</div><div class="accordion-card-preview">AI ускоряет создание, но не заменяет инженерную дисциплину</div></div><div class="accordion-chevron">▼</div></summary>
         <div class="accordion-body">
-          <div class="card-text">
-            Реальный инцидент: фаундер полностью построил SaaS с Claude Code — без security review, без тестов. Хакеры нашли Stripe API ключи в frontend-коде и вывели $87,500. «AI ускоряет не только разработку, но и создание уязвимостей» — все major AI coding agents генерируют OWASP Top-10 уязвимости.
-          </div>
-          <div class="card-risk">
-            <div class="card-risk-label">Контр-сигнал</div>
-            <div class="card-risk-text">CLAUDE.md уже содержит security rules (no hardcoded secrets, parameterized SQL). Но это работает только если TDD + review layer на месте. Проверь: нет ли в Qadam фронтенде exposed API keys через `grep -r "sk_" src/`.</div>
-          </div>
-          <div class="card-source"><a href="https://reddit.com/r/vibecoding/comments/1rt4r7z/a_founder_vibecoded_his_entire_saas_with_ai/" target="_blank" rel="noopener">r/vibecoding</a></div>
-          <div class="feedback-buttons">
-            <button class="feedback-btn" data-card-id="risk_1" data-action="like">👍</button>
-            <button class="feedback-btn" data-card-id="risk_1" data-action="dislike">👎</button>
-            <button class="feedback-btn" data-card-id="risk_1" data-action="backlog">📋 В бэклог</button>
-          </div>
+          <div class="card-text">Вайбкод-проекты проваливаются из-за отсутствия тестов, code review, понимания архитектуры. Нужен баланс: AI для скорости + ревью для качества.</div>
+          <div class="card-risk"><div class="card-risk-label">Контр-сигнал</div><div class="card-risk-text">Если строишь на AI без тестов — посчитай tech debt. Каждый месяц без ревью = экспоненциальный рост стоимости фикса.</div></div>
+          <div class="card-source"><a href="https://reddit.com/r/ClaudeAI" target="_blank" rel="noopener">r/ClaudeAI</a></div>
+          <div class="feedback-buttons"><button class="feedback-btn" data-card-id="risk_1" data-action="like">👍</button><button class="feedback-btn" data-card-id="risk_1" data-action="dislike">👎</button><button class="feedback-btn" data-card-id="risk_1" data-action="backlog">📋 В бэклог</button></div>
         </div>
       </details>
 
-      <!-- Контр-сигнал 2 -->
-      <details class="accordion-card counter-signal" data-card-id="risk_2" data-card-title="AI coding agents повторяют 10-летние ошибки безопасности" data-card-category="⚠️ КОНТР-СИГНАЛ">
-        <summary class="accordion-summary">
-          <span class="tag risk">⚠️ РИСК</span>
-          <div class="accordion-summary-content">
-            <div class="accordion-card-title">Help Net Security: все AI coding agents (Claude, Codex, Gemini) генерируют уязвимый код</div>
-            <div class="accordion-card-preview">SQL injection, XSS, hardcoded credentials — скорость без безопасности</div>
-          </div>
-          <div class="accordion-chevron">▼</div>
-        </summary>
+      <details class="accordion-card counter-signal" data-card-id="risk_2" data-card-title="Юрист по AI-психозам предупреждает о массовых рисках" data-card-category="⚠️ КОНТР-СИГНАЛ">
+        <summary class="accordion-summary"><span class="tag risk">⚠️ РИСК</span><div class="accordion-summary-content"><div class="accordion-card-title">Юрист по AI-психозам предупреждает о массовых рисках</div><div class="accordion-card-preview">AI-чатботы связывают с суицидами, регуляторный риск растёт</div></div><div class="accordion-chevron">▼</div></summary>
         <div class="accordion-body">
-          <div class="card-text">
-            Исследование Help Net Security (13 марта): Claude Code, OpenAI Codex и Google Gemini систематически генерируют код с уязвимостями. SQL injection, XSS, hardcoded secrets — те же ошибки безопасности что делали разработчики десять лет назад, но теперь в 10x масштабе.
-          </div>
-          <div class="card-risk">
-            <div class="card-risk-label">Контр-сигнал</div>
-            <div class="card-risk-text">Superpowers workflow уже включает security rules и TDD. Но стоит добавить автоматический semgrep scan на pre-commit hook для Qadam. 15 минут настройки = защита от 90% уязвимостей.</div>
-          </div>
-          <div class="card-source"><a href="https://www.helpnetsecurity.com/2026/03/13/claude-code-openai-codex-google-gemini-ai-coding-agent-security/" target="_blank" rel="noopener">Help Net Security</a></div>
-          <div class="feedback-buttons">
-            <button class="feedback-btn" data-card-id="risk_2" data-action="like">👍</button>
-            <button class="feedback-btn" data-card-id="risk_2" data-action="dislike">👎</button>
-            <button class="feedback-btn" data-card-id="risk_2" data-action="backlog">📋 В бэклог</button>
-          </div>
+          <div class="card-text">AI-чатботы связывают с суицидами уже несколько лет. Технология опережает защитные механизмы. Регуляторный риск растёт — может затронуть все AI-компании.</div>
+          <div class="card-risk"><div class="card-risk-label">Контр-сигнал</div><div class="card-risk-text">Строишь продукт с AI-чатботом для уязвимых аудиторий? Добавь safety guardrails сейчас, до регуляции.</div></div>
+          <div class="card-source"><a href="https://techcrunch.com/2026/03/13/lawyer-behind-ai-psychosis-cases-warns-of-mass-casualty-risks/" target="_blank" rel="noopener">TechCrunch</a></div>
+          <div class="feedback-buttons"><button class="feedback-btn" data-card-id="risk_2" data-action="like">👍</button><button class="feedback-btn" data-card-id="risk_2" data-action="dislike">👎</button><button class="feedback-btn" data-card-id="risk_2" data-action="backlog">📋 В бэклог</button></div>
         </div>
       </details>
     </div>
 
   </div>
 
-  <!-- Sticky панель фидбэка создаётся автоматически через initFeedbackButtons() в feedback.js -->
-
   <script src="../js/feedback.js"></script>
   <script src="../js/app.js"></script>
   <script>
-    initFeedbackButtons('2026-03-14');
+    if (typeof initFeedbackButtons === 'function') initFeedbackButtons('2026-03-14');
   </script>
 </body>
 </html>
