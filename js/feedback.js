@@ -223,7 +223,7 @@ function generateFeedbackMessage(date) {
 function openTelegram(message) {
   if (!message) return;
   const encoded = encodeURIComponent(message);
-  window.open(`tg://msg?text=${encoded}`, '_self');
+  window.open(`https://t.me/esya_st?text=${encoded}`, '_blank');
 }
 
 // Получить статистику для index.html
@@ -327,9 +327,9 @@ async function sendFeedback(date) {
   // Пометить как отправленное
   FeedbackStore.markSent(date);
 
-  // Попробовать Telegram deep link напрямую
+  // Telegram web link с предзаполненным текстом
   const encoded = encodeURIComponent(text);
-  const tgUrl = `tg://msg?text=${encoded}`;
+  const tgUrl = `https://t.me/esya_st?text=${encoded}`;
 
   // Попробовать Web Share API (нативный share sheet на мобилке)
   if (navigator.share) {
@@ -359,14 +359,10 @@ async function sendFeedback(date) {
 
   updateFeedbackPanel(date);
   updateSyncStatus('📋 Скопировано — вставь в чат ↓', 'ok');
-  // Открываем Telegram
+  // Открываем Telegram с предзаполненным текстом
   setTimeout(() => {
-    window.open(tgUrl, '_self');
+    window.open(tgUrl, '_blank');
   }, 300);
-  // Fallback — если tg:// не сработал, открыть веб-версию
-  setTimeout(() => {
-    window.open('https://t.me/Kodi_v2_bot', '_blank');
-  }, 1500);
   setTimeout(() => updateSyncStatus('', ''), 5000);
 }
 
