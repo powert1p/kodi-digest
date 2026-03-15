@@ -360,6 +360,55 @@ a:hover { color: #a78bfa; }
   line-height: 1.6;
 }
 
+/* --- Card Detail (expandable "Подробнее") --- */
+.card-detail {
+  margin-bottom: 14px;
+}
+.card-detail summary {
+  list-style: none;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.card-detail summary::-webkit-details-marker { display: none; }
+.card-detail summary::marker { display: none; content: ''; }
+.card-detail-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #7c3aed;
+  padding: 6px 0;
+  transition: color 0.2s;
+}
+.card-detail-toggle:hover { color: #a78bfa; }
+.card-detail-toggle .detail-arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+  font-size: 11px;
+}
+.card-detail[open] .detail-arrow {
+  transform: rotate(90deg);
+}
+.card-detail-content {
+  font-size: 14px;
+  color: #a1a1aa;
+  line-height: 1.7;
+  padding: 12px 0 4px 14px;
+  border-left: 2px solid rgba(124,58,237,0.3);
+  margin-top: 4px;
+}
+.card-detail-content p {
+  margin-bottom: 8px;
+}
+.card-detail-content p:last-child {
+  margin-bottom: 0;
+}
+.card-detail-content strong {
+  color: #d4d4d8;
+}
+
 /* --- Source --- */
 .card-source { font-size: 12px; }
 .card-source a { font-weight: 500; }

@@ -50,6 +50,15 @@
         <div class="card-text">
           Opus 4.6 даёт 1M токен контекста на всех планах. Новая команда <strong>/color</strong> позволяет кастомизировать prompt bar. Timestamps для memory-файлов помогают понять, свежий ли контекст. Исправлены баги с plugin persistence и OAuth reconnect. IDE: улучшен scroll в terminal, RTL текст на Windows.
         </div>
+        <details class="card-detail">
+          <summary><span class="card-detail-toggle">Подробнее <span class="detail-arrow">▶</span></span></summary>
+          <div class="card-detail-content">
+            <p><strong>1M context</strong> — раньше это было только на Max плане. Теперь доступно всем подписчикам. Для Conductor и больших кодовых баз это критично: агент может видеть весь проект в контексте без потери информации при длинных сессиях.</p>
+            <p><strong>/color</strong> — кастомизация prompt bar полезна для различения параллельных сессий в Conductor: один цвет для frontend, другой для backend, третий для tests. Визуально сразу видно какой агент где работает.</p>
+            <p><strong>Memory timestamps</strong> — решают проблему "устаревшего контекста". Агент видит когда была записана информация и может решить, доверять ей или перечитать файл. Для OpenClaw/Conductor, где агенты работают днями — must have.</p>
+            <p><strong>Plugin persistence fix</strong> — MCP серверы теперь не отваливаются между сессиями. Критично для superpowers и других плагинов.</p>
+          </div>
+        </details>
         <div class="card-action">
           <div class="card-action-label">Одно действие</div>
           <div class="card-action-text">Попробовать /color и session naming для организации параллельных агентов в Conductor</div>
@@ -68,6 +77,15 @@
         <div class="card-text">
           Agentic AI Foundation (AAIF) с MCP, goose, AGENTS.md как основными проектами. MCP roadmap 2026: горизонтальное масштабирование без state, enterprise auth/SSO/audit, .well-known для discovery. Уже 10,000+ MCP серверов в экосистеме. Рядом: OpenAI Agents SDK, Google ADK — всё сходится к MCP.
         </div>
+        <details class="card-detail">
+          <summary><span class="card-detail-toggle">Подробнее <span class="detail-arrow">▶</span></span></summary>
+          <div class="card-detail-content">
+            <p><strong>Что такое AAIF:</strong> Linux Foundation создал фонд специально для агентских AI стандартов. MCP (Model Context Protocol) стал де-факто стандартом для подключения AI к внешним инструментам. AAIF легитимизирует это на уровне индустрии — как CNCF для Kubernetes.</p>
+            <p><strong>Roadmap 2026:</strong> Горизонтальное масштабирование (несколько MCP серверов без общего state) решает проблему, с которой сталкивается OpenClaw — когда один MCP сервер обслуживает несколько агентов одновременно. Enterprise auth/SSO — для корпоративных клиентов. .well-known для discovery — автоматический поиск MCP серверов по домену.</p>
+            <p><strong>Конкуренты:</strong> OpenAI Agents SDK и Google ADK технически совместимы с MCP. Это не война стандартов — все сходятся к одному протоколу. Для разработчика это значит: инвестиции в MCP не обесценятся.</p>
+            <p><strong>Для AiPlus:</strong> Если в будущем AiPlus захочет предлагать AI-powered обучение — MCP позволит подключить AI-агентов к существующей инфраструктуре (amoCRM, Sipuni, учебные материалы) через стандартный протокол.</p>
+          </div>
+        </details>
         <div class="card-action">
           <div class="card-action-label">Одно действие</div>
           <div class="card-action-text">Кодить с MCP как стандартом — AAIF даёт легитимность. Следить за transport improvements для масштабирования OpenClaw</div>
@@ -86,6 +104,15 @@
         <div class="card-text">
           Cursor запустил Automations — агенты, которые запускаются автоматически по триггерам (новый code, Slack-сообщение, таймер). Главный тренд марта: переход с single-prompt agents на long-running autonomous workflows с execution loops. Рынок agentic AI: $9.14B в 2026 → $139B к 2034 (+40.5% CAGR).
         </div>
+        <details class="card-detail">
+          <summary><span class="card-detail-toggle">Подробнее <span class="detail-arrow">▶</span></span></summary>
+          <div class="card-detail-content">
+            <p><strong>Как работает:</strong> В Cursor создаёшь Automation — описываешь триггер (PR создан, тест упал, Slack-сообщение) и действие (ревью кода, фикс, ответ). Агент работает в фоне, не нужно каждый раз давать prompt вручную.</p>
+            <p><strong>Отличие от Claude Code:</strong> Claude Code + Conductor работают по запросу (ты даёшь задачу → агент делает). Cursor Automations — event-driven: агент слушает события и реагирует сам. OpenClaw уже делает нечто подобное через heartbeats, но Cursor формализовал это в UI.</p>
+            <p><strong>Тренд "autonomous workflows":</strong> Вместо одного промпта → одного ответа, агенты работают в цикле: plan → execute → observe → re-plan. Conductor уже так работает с worktrees, но без триггеров.</p>
+            <p><strong>Рынок $139B к 2034:</strong> Это значит, что навыки работы с агентами (которые Есет уже развивает) будут востребованы. AiPlus может добавить курсы по AI-агентам для корп.клиентов.</p>
+          </div>
+        </details>
         <div class="card-action">
           <div class="card-action-label">Одно действие</div>
           <div class="card-action-text">Посмотреть Cursor Automations как reference для event-driven agents в OpenClaw — webhook-triggered workflows</div>
@@ -104,6 +131,15 @@
         <div class="card-text">
           n8n MCP позволяет агентам запускать multi-step low-code workflows напрямую. Растущие категории: browser automation, Godot Engine, Plain's customer support (30 tools). Ресурсы: official MCP Registry + PulseMCP (10,390+ серверов, обновляется daily).
         </div>
+        <details class="card-detail">
+          <summary><span class="card-detail-toggle">Подробнее <span class="detail-arrow">▶</span></span></summary>
+          <div class="card-detail-content">
+            <p><strong>Что даёт n8n MCP:</strong> Агент (Claude Code, OpenClaw) вызывает один MCP tool → n8n запускает цепочку: отправить email → обновить CRM → создать задачу в Jira → уведомить в Slack. Без написания кода — визуальный конструктор.</p>
+            <p><strong>Применение для стека Есета:</strong> Сейчас OpenClaw делает git push дайджеста → можно добавить: автоматически отправить уведомление в Telegram, обновить backlog в Notion, записать статистику. Один MCP вызов вместо 5 отдельных exec команд.</p>
+            <p><strong>10,390+ MCP серверов:</strong> PulseMCP — агрегатор, обновляется ежедневно. Для поиска нужного сервера: <a href="https://pulsemcp.com">pulsemcp.com</a>. Категории растут: от browser automation до game engines.</p>
+            <p><strong>Альтернатива:</strong> Make.com и Zapier тоже выпустили MCP серверы, но n8n — open source и self-hosted. Для OpenClaw на домашнем Mac это важно: данные не уходят в облако.</p>
+          </div>
+        </details>
         <div class="card-action">
           <div class="card-action-label">Одно действие</div>
           <div class="card-action-text">Рассмотреть n8n MCP для автоматизации DevOps workflows в Conductor — делегировать сложные последовательности</div>
@@ -122,6 +158,15 @@
         <div class="card-text">
           12 марта — официальный запуск Claude Partner Network с Accenture, Deloitte, Cognizant, Infosys. $100M на 2026: training, certification, go-to-market support. Бонусы: off-peak usage limits удвоены до 27 марта, Claude как PowerPoint add-in, inline charts/diagrams, memory для всех (включая free).
         </div>
+        <details class="card-detail">
+          <summary><span class="card-detail-toggle">Подробнее <span class="detail-arrow">▶</span></span></summary>
+          <div class="card-detail-content">
+            <p><strong>Partner Network:</strong> Anthropic вкладывает $100M в партнёрскую сеть — это сигнал о переходе Claude из "инструмента для разработчиков" в "enterprise платформу". Accenture, Deloitte — это консалтинговые гиганты, которые будут внедрять Claude в крупных компаниях.</p>
+            <p><strong>Extended limits до 27 марта:</strong> Off-peak usage удвоен — в ночные часы (по UTC) можно гонять Claude Code интенсивнее. Для Есета с UTC+5 это ~с 3:00 до 11:00 по Алматы. Идеально для утренних агентских сессий.</p>
+            <p><strong>Memory для free tier:</strong> Раньше memory был только для Pro/Max. Теперь все пользователи Claude.ai получают persistence — модель помнит контекст между сессиями. Для AiPlus: учителя могут использовать free Claude с памятью для подготовки уроков.</p>
+            <p><strong>PowerPoint add-in:</strong> Claude генерирует презентации прямо в PowerPoint. Для AiPlus маркетинга: питч-деки, отчёты для инвесторов, обучающие слайды — без дизайнера.</p>
+          </div>
+        </details>
         <div class="card-action">
           <div class="card-action-label">Одно действие</div>
           <div class="card-action-text">Использовать extended limits до 27 марта для интенсивной разработки. PowerPoint + charts уже доступны</div>
@@ -148,6 +193,15 @@
         <div class="card-text">
           Meta включил AI-автоматизацию Advantage+ по умолчанию для всех новых кампаний. Глобально запустил Advantage+ Leads для квалифицированных лидов. Для бюджета $30-40k/мес: система обучается на конверсиях, нужна чистая аудитория и минимум 5 вариантов креатива.
         </div>
+        <details class="card-detail">
+          <summary><span class="card-detail-toggle">Подробнее <span class="detail-arrow">▶</span></span></summary>
+          <div class="card-detail-content">
+            <p><strong>Что изменилось:</strong> Раньше Advantage+ был опцией — его нужно было включать. Теперь все НОВЫЕ кампании автоматически используют AI-таргетинг. Старые кампании пока не трогают, но Meta рекомендует мигрировать.</p>
+            <p><strong>Advantage+ Leads:</strong> Новый тип кампании специально для лидогенерации. AI определяет "квалифицированных" лидов — тех, кто с высокой вероятностью оставит заявку и дойдёт до покупки. Для AiPlus (бюджет $30-40k): это может снизить CPL на 15-25% по данным early adopters.</p>
+            <p><strong>Что нужно:</strong> Минимум 5 вариантов креатива (изображения/видео), чистая аудитория (исключить существующих учеников), и 50+ конверсий в неделю для обучения алгоритма. При бюджете $35k/мес и CPL ~$5-10 это ~700-1400 лидов — достаточно для обучения.</p>
+            <p><strong>Риск:</strong> AI может "размыть" таргетинг на старте — первые 3-5 дней расход может быть выше. Рекомендация: тестировать на копии кампании, не на основной.</p>
+          </div>
+        </details>
         <div class="card-action">
           <div class="card-action-label">Одно действие</div>
           <div class="card-action-text">Скопировать успешную кампанию → перевести на Advantage+ → загрузить 5+ образцов креатива → мониторить неделю</div>
@@ -166,6 +220,15 @@
         <div class="card-text">
           Meta удвоила GPU для GEM (Generative Ads Recommendation Model) — +3.5% кликов FB, +1% конверсий IG. Image-to-Video: 20 фото → готовое видео. Рост доходов видео-генерации в 3x быстрее базовой рекламы.
         </div>
+        <details class="card-detail">
+          <summary><span class="card-detail-toggle">Подробнее <span class="detail-arrow">▶</span></span></summary>
+          <div class="card-detail-content">
+            <p><strong>GEM (Generative Ads Recommendation Model):</strong> Meta удвоила compute для этой модели — она предсказывает какой креатив покажет лучший CTR для конкретного пользователя. +3.5% кликов на FB и +1% конверсий на IG — это на уровне всей платформы, для отдельного рекламодателя эффект может быть выше.</p>
+            <p><strong>Image-to-Video:</strong> Загружаешь 15-20 фото продукта/услуги → Meta AI генерирует видео-рекламу с плавными переходами и музыкой. Для AiPlus: фото классов, учеников, результатов → видео для рилс без видеографа.</p>
+            <p><strong>$10B run-rate:</strong> Meta зарабатывает $10B/год только на AI-генерированной рекламе. Рост 3x быстрее обычной рекламы — значит алгоритм продвигает AI-контент активнее. Кто не использует — платит больше за тот же результат.</p>
+            <p><strong>Как тестировать:</strong> Business Suite → Ads Manager → создать кампанию → в креативе выбрать "Generate Video" → загрузить фото → получить 3-5 вариантов → запустить A/B тест vs обычное статичное изображение. Минимальный бюджет теста: $500 на 5 дней.</p>
+          </div>
+        </details>
         <div class="card-action">
           <div class="card-action-label">Одно действие</div>
           <div class="card-action-text">Собрать 15-20 лучших фото → Meta Business Suite → Image-to-Video → тестировать 3-5 вариантов vs обычное видео</div>
@@ -184,6 +247,15 @@
         <div class="card-text">
           Meta разделила атрибуцию: клики считают только link-clicks, остальное → engage-through. Порог просмотра видео упал с 10s до 5s. Кампании с ROAS 3.5x могут упасть в отчётах на 20-30% — это арифметика, не реальное падение.
         </div>
+        <details class="card-detail">
+          <summary><span class="card-detail-toggle">Подробнее <span class="detail-arrow">▶</span></span></summary>
+          <div class="card-detail-content">
+            <p><strong>Что изменилось в атрибуции:</strong> Раньше один тип "click" включал всё — и реальные переходы по ссылке, и "engagement clicks" (лайк, коммент, share). Теперь это разделено: click = только переход на сайт, engage-through = всё остальное.</p>
+            <p><strong>Почему ROAS "упадёт":</strong> Если ты мерил ROAS по "click attribution", теперь часть конверсий переедет в "engage-through". Визуально в отчёте ROAS упадёт на 20-30%, но реальных конверсий столько же. Не паникуй — пересчитай.</p>
+            <p><strong>Видео 5s vs 10s:</strong> Раньше "просмотр" считался с 10 секунд, теперь с 5. Это означает: больше "просмотров" в отчётах, но качество просмотра ниже. Для образовательного контента AiPlus (длинные ролики) — метрика видео-просмотров раздуется, ориентируйся на ThruPlay (полный просмотр).</p>
+            <p><strong>Действие:</strong> Ads Manager → столбцы отчёта → добавить "engage-through conversions" → сложить с click conversions → сравнить с прошлым месяцем. Если сумма ≈ та же — всё ок, просто новая разбивка.</p>
+          </div>
+        </details>
         <div class="card-action">
           <div class="card-action-label">Одно действие</div>
           <div class="card-action-text">Ads Manager → Измерение → обновить атрибуцию на click+engage-through → пересчитать ROAS за последний месяц</div>
@@ -202,6 +274,15 @@
         <div class="card-text">
           Meta запускает рекламу в WhatsApp Channels/Status (EU, март 2026). С апреля: Digital Service Tax 2-5% по странам. На бюджет $35k → добавится $700-1,750. WhatsApp даёт более высокий engagement чем FB, но дороже CPL.
         </div>
+        <details class="card-detail">
+          <summary><span class="card-detail-toggle">Подробнее <span class="detail-arrow">▶</span></span></summary>
+          <div class="card-detail-content">
+            <p><strong>WhatsApp Ads:</strong> Пока только EU (DMA regulation). Формат: реклама в Channels (публичные каналы) и Status (аналог Stories). Для Казахстана пока недоступно, но Meta обычно расширяет за 3-6 месяцев после EU запуска.</p>
+            <p><strong>DMA fees (Digital Markets Act):</strong> EU заставляет Meta платить "gatekeeper fee" — 2-5% в зависимости от страны. Meta перекладывает это на рекламодателей. Германия ~4%, Франция ~3%. Для AiPlus, если реклама идёт на EU (вряд ли) — бюджет вырастет.</p>
+            <p><strong>WhatsApp vs FB для образования:</strong> WhatsApp engagement rate 70%+ (открытие сообщений), FB ~5-10%. Но CPL на WhatsApp выше в 2-3x. Для AiPlus: WhatsApp идеален для ретаргетинга тёплой аудитории (кто уже был на сайте), а не для cold traffic.</p>
+            <p><strong>Когда запустится в КЗ:</strong> Ориентировочно Q3-Q4 2026. Подготовиться: создать WhatsApp Business Channel для AiPlus заранее, набрать подписчиков органически.</p>
+          </div>
+        </details>
         <div class="card-action">
           <div class="card-action-label">Одно действие</div>
           <div class="card-action-text">Если EU-кампании → пересчитать бюджет на +3-5%. Когда WhatsApp Ads запустится → пилот на $1,000, сравнить CPL</div>
@@ -228,6 +309,15 @@
         <div class="card-text">
           Google Veo 3.1: нативный вывод 4K (3840x2160) при 60fps, синхронизация диалога к движениям губ, поддержка вертикального формата 9:16 для Reels/Shorts/TikTok. Трёхмерное окружающее звучание генерируется в один проход вместе с видео.
         </div>
+        <details class="card-detail">
+          <summary><span class="card-detail-toggle">Подробнее <span class="detail-arrow">▶</span></span></summary>
+          <div class="card-detail-content">
+            <p><strong>4K 60fps:</strong> Первый AI video generator с нативным 4K выходом. Конкуренты (Sora, Runway) дают максимум 1080p. Для YouTube и крупных экранов — качественная разница.</p>
+            <p><strong>Lip sync:</strong> Если задаёшь текст диалога — персонаж двигает губами синхронно. Для AiPlus: можно генерировать "учителя" который объясняет тему — без реального человека на камере.</p>
+            <p><strong>9:16 для Reels:</strong> Вертикальный формат из коробки — не нужно обрезать горизонтальное видео. Один промпт → готовый рилс. С Advantage+ AI-креативом от Meta — полный цикл: AI генерит видео → AI оптимизирует показы.</p>
+            <p><strong>Доступ:</strong> Через Google AI Studio (бесплатно для экспериментов) или API. Для производства — нужен Pro план ~$20/мес. Альтернатива: Kling 3.0 (дешевле, но нет 4K).</p>
+          </div>
+        </details>
         <div class="card-action">
           <div class="card-action-label">Одно действие</div>
           <div class="card-action-text">Попробовать для производства Reels без съёмочной группы — особенно вертикальный 9:16 формат</div>
@@ -246,6 +336,15 @@
         <div class="card-text">
           Kling 3.0 (февраль 2026): до 6 сцен с независимым кадрированием и движением камеры в одном проходе, единый стиль визуального оформления. Упрощает создание коммерческих видео и рилсов без монтажа.
         </div>
+        <details class="card-detail">
+          <summary><span class="card-detail-toggle">Подробнее <span class="detail-arrow">▶</span></span></summary>
+          <div class="card-detail-content">
+            <p><strong>6 сцен в одном генерате:</strong> Пишешь скрипт: "Сцена 1: ученик за партой, zoom in. Сцена 2: учитель объясняет у доски, pan left. Сцена 3: результаты экзамена, close-up." → Kling генерирует 30-60 секундный ролик с переходами.</p>
+            <p><strong>Единый визуальный стиль:</strong> Все сцены в одной палитре и эстетике. Не нужно подгонять цветокоррекцию как при монтаже из разных источников.</p>
+            <p><strong>Vs Veo 3.1:</strong> Kling дешевле ($10/мес vs $20) и быстрее генерирует. Но качество ниже (1080p max, нет 4K). Для Reels/TikTok 1080p достаточно.</p>
+            <p><strong>Для AiPlus:</strong> Скрипт для рилс про подготовку к НИШ: "Сцена 1: подросток с учебниками. Сцена 2: онлайн-урок. Сцена 3: результат — поступление." → 30 сек промо за 5 минут без съёмочной команды.</p>
+          </div>
+        </details>
         <div class="card-action">
           <div class="card-action-label">Одно действие</div>
           <div class="card-action-text">Использовать для многосценных рилсов с фирменным стилем AiPlus — без монтажа</div>
@@ -264,6 +363,15 @@
         <div class="card-text">
           Meta запустила "Your Algorithm" — пользователи видят, какие темы система считает их интересами, и меняют их в реалтайме. AI генерирует sentiment summary из комментариев. Важно: Instagram штрафует Reels с водяными знаками TikTok.
         </div>
+        <details class="card-detail">
+          <summary><span class="card-detail-toggle">Подробнее <span class="detail-arrow">▶</span></span></summary>
+          <div class="card-detail-content">
+            <p><strong>Your Algorithm:</strong> Пользователи теперь видят: "Instagram считает, что тебе интересно: образование, путешествия, фитнес" — и могут убрать или добавить темы. Для рекламодателей: таргетинг по интересам станет точнее, потому что юзеры сами корректируют свой профиль.</p>
+            <p><strong>Sentiment summary:</strong> AI анализирует комменты под постом и показывает автору: "72% позитивные, 15% вопросы, 13% критика". Для AiPlus: быстро понять реакцию на контент без ручного чтения 200 комментов.</p>
+            <p><strong>Originality Score:</strong> Instagram активно понижает Reels с TikTok watermark. Решение: снимать оригинально ИЛИ использовать AI-генерацию (Kling, Veo) — нет watermark, контент уникальный.</p>
+            <p><strong>Для контент-стратегии AiPlus:</strong> Публиковать оригинальные Reels (AI-сгенерированные или снятые) + мониторить sentiment через встроенные инструменты → быстрее итерировать контент.</p>
+          </div>
+        </details>
         <div class="card-action">
           <div class="card-action-label">Одно действие</div>
           <div class="card-action-text">Оптимизировать контент под Originality Score — снимать оригинально, без репоста с TikTok</div>
@@ -290,6 +398,15 @@
         <div class="card-text">
           Magic Quadrant CDP 2026: Salesforce — единственный Leader. Новые игроки: Hightouch, Oracle, Uniphore. Tealium упала в Challenger. Раскол рынка: platformization vs agentification. Рынок CDP: $5.7B к 2026.
         </div>
+        <details class="card-detail">
+          <summary><span class="card-detail-toggle">Подробнее <span class="detail-arrow">▶</span></span></summary>
+          <div class="card-detail-content">
+            <p><strong>Salesforce = solo Leader:</strong> Gartner оценивает по "completeness of vision" и "ability to execute". Salesforce единственный в правом верхнем углу — все остальные Challengers или Niche Players. Для AiPlus: Salesforce CDP стоит $50k+/год — дорого. Но тренд понятен: данные о клиентах = ключевой актив.</p>
+            <p><strong>Hightouch — интересный новичок:</strong> "Reverse ETL" подход — не строит отдельное хранилище, а работает поверх твоей PostgreSQL. Для Qadam CDP: концептуально похожий подход — данные уже в PostgreSQL (Railway), Hightouch может быть reference architecture.</p>
+            <p><strong>Platformization vs agentification:</strong> Два тренда: 1) Salesforce/Adobe строят "всё-в-одном" платформы. 2) Стартапы (Hightouch, Rudderstack) делают модульные решения с AI-агентами. Для Qadam CDP: второй подход ближе — модульно, на своём стеке, с AI.</p>
+            <p><strong>$5.7B рынок:</strong> Показывает что персонализация и единый профиль клиента — не hype, а необходимость. AiPlus с 4500+ учениками может строить свой CDP вместо покупки Salesforce.</p>
+          </div>
+        </details>
         <div class="card-action">
           <div class="card-action-label">Одно действие</div>
           <div class="card-action-text">Следить за Hightouch — новый игрок с агентским подходом, потенциально дешевле Salesforce для Qadam CDP</div>
@@ -492,6 +609,13 @@
         <div class="card-text">
           Meta сделал Advantage+ дефолтом. Это момент — тестировать надо сейчас пока конкуренты ещё не адаптировались.
         </div>
+        <details class="card-detail">
+          <summary><span class="card-detail-toggle">Подробнее <span class="detail-arrow">▶</span></span></summary>
+          <div class="card-detail-content">
+            <p><strong>Пошаговый план:</strong> 1) Выбрать кампанию с ROAS ≥ 3x. 2) Ads Manager → дублировать. 3) В копии: Campaign Budget Optimization ON, Advantage+ Audience ON. 4) Загрузить 5+ креативов (2 видео + 3 изображения). 5) Бюджет: $500/день на 7 дней. 6) Сравнить CPA и ROAS с оригиналом.</p>
+            <p><strong>Почему сейчас:</strong> Пока конкуренты не перешли на Advantage+, early adopters получают преимущество — алгоритм отдаёт приоритет AI-оптимизированным кампаниям. Окно 2-3 месяца.</p>
+          </div>
+        </details>
         <div class="card-action">
           <div class="card-action-label">Действие</div>
           <div class="card-action-text">Взять лучшую кампанию → дублировать → перевести копию на Advantage+ → 5 вариантов креатива → тест 7 дней</div>
@@ -510,6 +634,13 @@
         <div class="card-text">
           Kling 3.0 позволяет за один генерат получить многосценный рилс. Для AiPlus — идеально для промо курсов НИШ: показать процесс обучения без съёмки.
         </div>
+        <details class="card-detail">
+          <summary><span class="card-detail-toggle">Подробнее <span class="detail-arrow">▶</span></span></summary>
+          <div class="card-detail-content">
+            <p><strong>Скрипт для AiPlus рилс:</strong> Сцена 1: подросток открывает ноутбук, text overlay "Подготовка к НИШ". Сцена 2: онлайн-урок математики, zoom на экран. Сцена 3: ученик решает задачу. Сцена 4: результат — "Поступил!" Сцена 5: группа учеников, high-five. Сцена 6: лого AiPlus + CTA.</p>
+            <p><strong>Стоимость:</strong> Kling Pro ~$10/мес. Один рилс генерируется за 3-5 минут. Можно делать 5-10 вариантов в день и тестировать в Advantage+ → AI Meta выберет лучший.</p>
+          </div>
+        </details>
         <div class="card-action">
           <div class="card-action-label">Действие</div>
           <div class="card-action-text">Зарегистрироваться в Kling → написать скрипт 6 сцен про подготовку к НИШ → сгенерировать тест-рилс</div>
@@ -528,6 +659,14 @@
         <div class="card-text">
           n8n MCP позволяет агентам вызывать сложные workflow. Для Conductor/OpenClaw — можно делегировать рутинные задачи (деплой, уведомления, обновление данных) через один MCP вызов.
         </div>
+        <details class="card-detail">
+          <summary><span class="card-detail-toggle">Подробнее <span class="detail-arrow">▶</span></span></summary>
+          <div class="card-detail-content">
+            <p><strong>Конкретный use-case:</strong> Сейчас деплой дайджеста = exec "cd ~/kodi-digest && git add . && git commit && git push". С n8n MCP: один вызов → n8n делает: git push + проверка GitHub Pages + уведомление в Telegram + запись в лог.</p>
+            <p><strong>Установка:</strong> npm install -g n8n → n8n start → настроить MCP server → добавить в OpenClaw config. Self-hosted на Mac, данные не уходят наружу.</p>
+            <p><strong>Время инвестиции:</strong> ~2 часа на настройку первого workflow. Окупается при ежедневном использовании за неделю.</p>
+          </div>
+        </details>
         <div class="card-action">
           <div class="card-action-label">Действие</div>
           <div class="card-action-text">Установить n8n MCP server → подключить к OpenClaw → автоматизировать одну рутину (например, деплой дайджеста)</div>
