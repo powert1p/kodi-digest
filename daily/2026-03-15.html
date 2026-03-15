@@ -14,7 +14,7 @@
     <div class="header-badge">◆ Коди Дайджест</div>
     <h1>15 марта 2026</h1>
     <div class="header-meta">
-      <span>33 карточек · 16 мин</span>
+      <span>27 карточек · 9 мин</span>
     </div>
   </div>
 
@@ -27,785 +27,580 @@
   </nav>
 
   <div class="container">
-    <!-- TL;DR (один viewport) -->
+    <!-- TL;DR -->
     <div class="tldr tldr-section tldr-viewport fade-in-up">
       <div class="tldr-label">За 15 секунд</div>
       <ul>
-        <li>MCP-сервер экономит 98% контекста Claude Code → Подключи к своим проектам для x50 экономии на длинных сессиях</li>
-        <li>Claude получил 1М контекст по стандартной цене → Загружай весь кодбейс Qadam целиком, без потери контекста</li>
-        <li>Meta планирует уволить 20% ради AI → Готовься к полной автоматизации таргетинга в Ads Manager</li>
+        <li><strong>Anthropic:</strong> Claude Code теперь 1M context + Partner Network $100M → экосистема агентов ускоряется</li>
+        <li><strong>Meta:</strong> Advantage+ стал дефолтом для всех кампаний + видео-генерация даёт $10B run-rate → пора тестировать</li>
+        <li><strong>OpenAI</strong> закрыл $110B раунд при оценке $730B, Cursor запустил always-on Automations → агентский рынок взрывает</li>
       </ul>
     </div>
 
-    <!-- Секция: AI & Агенты (полноразмерные карточки) -->
+    <!-- AI & Агенты -->
     <div class="section fade-in-up">
       <div class="section-header">
         <div class="section-title">🤖 AI & Агенты</div>
         <div class="section-line"></div>
       </div>
-      
-<div class="card" data-card-id="agent_1" data-card-title="После двух лет вайб-кодинга я вернулся к ручному коду" data-card-category="🧠 AI">
-  <div class="card-num"><span class="tag ai">🧠 AI</span></div>
-  <div class="card-title">После двух лет вайб-кодинга я вернулся к ручному коду</div>
-  <div class="card-text">Разработчик два года писал код исключительно через AI-ассистентов, а потом понял, что теряет навык понимания собственного кода. Статья набрала 865 очков на HN — тема резонирует с сообществом. Ключевой вывод: вайб-кодинг отлично работает для прототипов, но для продакшена нужно понимать каждую строку.</div>
-  <div class="card-action">
-    <div class="card-action-label">Одно действие</div>
-    <div class="card-action-text">Проверь свои последние PR в Qadam — понимаешь ли ты каждую строку, которую сгенерировал Claude Code? Если нет, добавь code review в workflow.</div>
-  </div>
-  <div class="card-source"><a href="https://atmoio.substack.com/p/after-two-years-of-vibecoding-im" target="_blank" rel="noopener">HN: vibe coding</a></div>
-  <div class="feedback-buttons">
-    <button class="feedback-btn" data-card-id="agent_1" data-action="like">👍</button>
-    <button class="feedback-btn" data-card-id="agent_1" data-action="dislike">👎</button>
-    <button class="feedback-btn" data-card-id="agent_1" data-action="backlog">📋 В бэклог</button>
-  </div>
-</div>
 
-<div class="card" data-card-id="agent_2" data-card-title="MCP-сервер снижает потребление контекста Claude Code на 98%" data-card-category="🤖 AGENT">
-  <div class="card-num"><span class="tag agent">🤖 AGENT</span></div>
-  <div class="card-title">MCP-сервер снижает потребление контекста Claude Code на 98%</div>
-  <div class="card-text">Context Mode — MCP-сервер, который кеширует и сжимает контекст. Вместо перечитывания файлов при каждом запросе, агент работает с дельтами. Реальные замеры автора: с 200K токенов до 4K на типичную задачу. Это x50 экономия на длинных сессиях.</div>
-  <div class="card-action">
-    <div class="card-action-label">Одно действие</div>
-    <div class="card-action-text">Установи context-mode MCP-сервер и замерь потребление на Qadam. Если работает — это экономия x50 на длинных сессиях с Claude Code.</div>
-  </div>
-  <div class="card-source"><a href="https://mksg.lu/blog/context-mode" target="_blank" rel="noopener">HN: MCP server</a></div>
-  <div class="feedback-buttons">
-    <button class="feedback-btn" data-card-id="agent_2" data-action="like">👍</button>
-    <button class="feedback-btn" data-card-id="agent_2" data-action="dislike">👎</button>
-    <button class="feedback-btn" data-card-id="agent_2" data-action="backlog">📋 В бэклог</button>
-  </div>
-</div>
+      <div class="card" data-card-id="agent_1" data-card-title="Claude Code: 1M context + /color + memory timestamps" data-card-category="AI & Агенты">
+        <div class="card-num"><span class="tag ai">🤖 AGENT</span></div>
+        <div class="card-title">Claude Code: 1M context + /color + memory timestamps</div>
+        <div class="card-text">
+          Opus 4.6 даёт 1M токен контекста на всех планах. Новая команда <strong>/color</strong> позволяет кастомизировать prompt bar. Timestamps для memory-файлов помогают понять, свежий ли контекст. Исправлены баги с plugin persistence и OAuth reconnect. IDE: улучшен scroll в terminal, RTL текст на Windows.
+        </div>
+        <div class="card-action">
+          <div class="card-action-label">Одно действие</div>
+          <div class="card-action-text">Попробовать /color и session naming для организации параллельных агентов в Conductor</div>
+        </div>
+        <div class="card-source"><a href="https://releasebot.io/updates/anthropic/claude-code">Claude Code Release Notes</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="agent_1" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="agent_1" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="agent_1" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
 
-<div class="card" data-card-id="agent_3" data-card-title="1М контекст теперь доступен для Claude Opus 4.6 и Sonnet 4.6" data-card-category="🤖 AGENT">
-  <div class="card-num"><span class="tag agent">🤖 AGENT</span></div>
-  <div class="card-title">1М контекст теперь доступен для Claude Opus 4.6 и Sonnet 4.6</div>
-  <div class="card-text">Anthropic открыл окно контекста в 1 миллион токенов по стандартной цене. Opus 4.6 показывает 78.3% на MRCR v2 — лучший результат среди frontier-моделей. Теперь можно загружать целые кодбейзы, большие наборы документов и запускать долгие агентские сессии. Лимит медиа — 600 изображений или PDF-страниц за запрос.</div>
-  <div class="card-action">
-    <div class="card-action-label">Одно действие</div>
-    <div class="card-action-text">Загрузи весь кодбейс Qadam в одну сессию Claude Code с 1М контекстом. Проверь, насколько лучше агент держит архитектуру в голове.</div>
-  </div>
-  <div class="card-source"><a href="https://i.redd.it/o7jrde2tnuog1.png" target="_blank" rel="noopener">r/ClaudeAI</a></div>
-  <div class="feedback-buttons">
-    <button class="feedback-btn" data-card-id="agent_3" data-action="like">👍</button>
-    <button class="feedback-btn" data-card-id="agent_3" data-action="dislike">👎</button>
-    <button class="feedback-btn" data-card-id="agent_3" data-action="backlog">📋 В бэклог</button>
-  </div>
-</div>
+      <div class="card" data-card-id="agent_2" data-card-title="Linux Foundation учредил AAIF — MCP как стандарт" data-card-category="AI & Агенты">
+        <div class="card-num"><span class="tag ai">🤖 AGENT</span></div>
+        <div class="card-title">Linux Foundation учредил AAIF — MCP как стандарт</div>
+        <div class="card-text">
+          Agentic AI Foundation (AAIF) с MCP, goose, AGENTS.md как основными проектами. MCP roadmap 2026: горизонтальное масштабирование без state, enterprise auth/SSO/audit, .well-known для discovery. Уже 10,000+ MCP серверов в экосистеме. Рядом: OpenAI Agents SDK, Google ADK — всё сходится к MCP.
+        </div>
+        <div class="card-action">
+          <div class="card-action-label">Одно действие</div>
+          <div class="card-action-text">Кодить с MCP как стандартом — AAIF даёт легитимность. Следить за transport improvements для масштабирования OpenClaw</div>
+        </div>
+        <div class="card-source"><a href="https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation">Linux Foundation</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="agent_2" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="agent_2" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="agent_2" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
 
-<div class="card" data-card-id="agent_4" data-card-title="fast.ai: Развеиваем мифы о вайб-кодинге" data-card-category="🧠 AI">
-  <div class="card-num"><span class="tag ai">🧠 AI</span></div>
-  <div class="card-title">fast.ai: Развеиваем мифы о вайб-кодинге</div>
-  <div class="card-text">Джереми Ховард из fast.ai разбирает проблемы вайб-кодинга: накопление технического долга, иллюзия продуктивности и потеря контроля над кодом. 434 очка на HN. Статья не анти-AI, а про осознанное использование — знать, когда AI помогает, а когда мешает.</div>
-  <div class="card-action">
-    <div class="card-action-label">Одно действие</div>
-    <div class="card-action-text">Прочитай статью и сравни с твоим workflow в Claude Code. Какие из описанных проблем ты уже замечал в Qadam?</div>
-  </div>
-  <div class="card-source"><a href="https://www.fast.ai/posts/2026-01-28-dark-flow/" target="_blank" rel="noopener">HN: vibe coding</a></div>
-  <div class="feedback-buttons">
-    <button class="feedback-btn" data-card-id="agent_4" data-action="like">👍</button>
-    <button class="feedback-btn" data-card-id="agent_4" data-action="dislike">👎</button>
-    <button class="feedback-btn" data-card-id="agent_4" data-action="backlog">📋 В бэклог</button>
-  </div>
-</div>
+      <div class="card" data-card-id="agent_3" data-card-title="Cursor Automations — агенты с триггерами внутри IDE" data-card-category="AI & Агенты">
+        <div class="card-num"><span class="tag tool">🎯 TOOL</span></div>
+        <div class="card-title">Cursor Automations — агенты с триггерами внутри IDE</div>
+        <div class="card-text">
+          Cursor запустил Automations — агенты, которые запускаются автоматически по триггерам (новый code, Slack-сообщение, таймер). Главный тренд марта: переход с single-prompt agents на long-running autonomous workflows с execution loops. Рынок agentic AI: $9.14B в 2026 → $139B к 2034 (+40.5% CAGR).
+        </div>
+        <div class="card-action">
+          <div class="card-action-label">Одно действие</div>
+          <div class="card-action-text">Посмотреть Cursor Automations как reference для event-driven agents в OpenClaw — webhook-triggered workflows</div>
+        </div>
+        <div class="card-source"><a href="https://techcrunch.com/2026/03/05/cursor-is-rolling-out-a-new-system-for-agentic-coding/">TechCrunch</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="agent_3" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="agent_3" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="agent_3" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
 
-<div class="card" data-card-id="agent_5" data-card-title="Повторит ли вайб-кодинг судьбу движения мейкеров?" data-card-category="🛠 TOOL">
-  <div class="card-num"><span class="tag tool">🛠 TOOL</span></div>
-  <div class="card-title">Повторит ли вайб-кодинг судьбу движения мейкеров?</div>
-  <div class="card-text">Автор проводит параллель между вайб-кодингом и maker movement 2010-х: обе волны обещали демократизацию, но в итоге нишевые инструменты не вытеснили профессионалов. 405 очков на HN. Вопрос: станет ли вайб-кодинг мейнстримом или останется хобби?</div>
-  <div class="card-action">
-    <div class="card-action-label">Одно действие</div>
-    <div class="card-action-text">Подумай о стратегии AiPlus: если вайб-кодинг останется нишевым, какие курсы будут востребованы через 2 года? Профессиональный AI-инжиниринг или промпт-кодинг?</div>
-  </div>
-  <div class="card-source"><a href="https://read.technically.dev/p/vibe-coding-and-the-maker-movement" target="_blank" rel="noopener">HN: vibe coding</a></div>
-  <div class="feedback-buttons">
-    <button class="feedback-btn" data-card-id="agent_5" data-action="like">👍</button>
-    <button class="feedback-btn" data-card-id="agent_5" data-action="dislike">👎</button>
-    <button class="feedback-btn" data-card-id="agent_5" data-action="backlog">📋 В бэклог</button>
-  </div>
-</div>
+      <div class="card" data-card-id="agent_4" data-card-title="n8n запустил native MCP — агенты вызывают workflows" data-card-category="AI & Агенты">
+        <div class="card-num"><span class="tag tool">⚙️ MCP</span></div>
+        <div class="card-title">n8n запустил native MCP — агенты вызывают workflows</div>
+        <div class="card-text">
+          n8n MCP позволяет агентам запускать multi-step low-code workflows напрямую. Растущие категории: browser automation, Godot Engine, Plain's customer support (30 tools). Ресурсы: official MCP Registry + PulseMCP (10,390+ серверов, обновляется daily).
+        </div>
+        <div class="card-action">
+          <div class="card-action-label">Одно действие</div>
+          <div class="card-action-text">Рассмотреть n8n MCP для автоматизации DevOps workflows в Conductor — делегировать сложные последовательности</div>
+        </div>
+        <div class="card-source"><a href="https://www.builder.io/blog/best-mcp-servers-2026">Builder.io</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="agent_4" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="agent_4" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="agent_4" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
+
+      <div class="card" data-card-id="agent_5" data-card-title="Anthropic: Claude Partner Network + $100M инвестиция" data-card-category="AI & Агенты">
+        <div class="card-num"><span class="tag business">📊 BIZ</span></div>
+        <div class="card-title">Anthropic: Claude Partner Network + $100M инвестиция</div>
+        <div class="card-text">
+          12 марта — официальный запуск Claude Partner Network с Accenture, Deloitte, Cognizant, Infosys. $100M на 2026: training, certification, go-to-market support. Бонусы: off-peak usage limits удвоены до 27 марта, Claude как PowerPoint add-in, inline charts/diagrams, memory для всех (включая free).
+        </div>
+        <div class="card-action">
+          <div class="card-action-label">Одно действие</div>
+          <div class="card-action-text">Использовать extended limits до 27 марта для интенсивной разработки. PowerPoint + charts уже доступны</div>
+        </div>
+        <div class="card-source"><a href="https://thenextweb.com/news/anthropic-commits-100m-to-claude-partner-network">The Next Web</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="agent_5" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="agent_5" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="agent_5" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
     </div>
 
-    <!-- Секция: Meta & Креативы (полноразмерные карточки) -->
+    <!-- Meta/FB реклама -->
     <div class="section fade-in-up">
       <div class="section-header">
         <div class="section-title">💼 Meta/FB реклама</div>
         <div class="section-line"></div>
       </div>
-      
-<div class="card" data-card-id="meta_1" data-card-title="Открытое письмо к Meta: рекламная платформа — ваш единственный продукт" data-card-category="💼 META">
-  <div class="card-num"><span class="tag biz">💼 META</span></div>
-  <div class="card-title">Открытое письмо к Meta: рекламная платформа — ваш единственный продукт</div>
-  <div class="card-text">Рекламодатель с многолетним опытом напоминает: Meta не создала ничего оригинального — Instagram, Stories, Reels, WhatsApp всё было куплено или скопировано. Единственная их инновация — рекламная платформа. И она деградирует: таргетинг хуже, интерфейс запутаннее, поддержка нулевая.</div>
-  <div class="card-action">
-    <div class="card-action-label">Одно действие</div>
-    <div class="card-action-text">Проверь свои кампании AiPlus в Ads Manager. Если видишь деградацию — протестируй Advantage+ Shopping с минимальными настройками: бюджет + креатив, без детального таргетинга.</div>
-  </div>
-  <div class="card-source"><a href="https://reddit.com/r/FacebookAds/comments/1rt8799/i_hope_somebody_from_meta_reads_this/" target="_blank" rel="noopener">r/FacebookAds</a></div>
-  <div class="feedback-buttons">
-    <button class="feedback-btn" data-card-id="meta_1" data-action="like">👍</button>
-    <button class="feedback-btn" data-card-id="meta_1" data-action="dislike">👎</button>
-    <button class="feedback-btn" data-card-id="meta_1" data-action="backlog">📋 В бэклог</button>
-  </div>
-</div>
 
-<div class="card" data-card-id="meta_2" data-card-title="Мартовский сбой Meta: как реклама восстанавливается после 14 марта" data-card-category="💼 META">
-  <div class="card-num"><span class="tag biz">💼 META</span></div>
-  <div class="card-title">Мартовский сбой Meta: как реклама восстанавливается после 14 марта</div>
-  <div class="card-text">После масштабного сбоя Meta в начале марта рекламодатели фиксируют просадку показателей. Тред собирает данные: у кого CPM вернулся в норму, у кого нет. Общий совет — не трогать кампании 48 часов после сбоя, дать алгоритму переобучиться.</div>
-  <div class="card-action">
-    <div class="card-action-label">Одно действие</div>
-    <div class="card-action-text">Проверь CPM и CPA в кампаниях AiPlus за последние 7 дней. Если видишь аномалии после 10 марта — не паникуй, дай кампаниям ещё 2-3 дня на восстановление.</div>
-  </div>
-  <div class="card-source"><a href="https://reddit.com/r/FacebookAds/comments/1rtjqk0/how_is_performance_today_314/" target="_blank" rel="noopener">r/FacebookAds</a></div>
-  <div class="feedback-buttons">
-    <button class="feedback-btn" data-card-id="meta_2" data-action="like">👍</button>
-    <button class="feedback-btn" data-card-id="meta_2" data-action="dislike">👎</button>
-    <button class="feedback-btn" data-card-id="meta_2" data-action="backlog">📋 В бэклог</button>
-  </div>
-</div>
+      <div class="card" data-card-id="meta_1" data-card-title="Advantage+ стал дефолтом для всех новых кампаний" data-card-category="Meta/FB реклама">
+        <div class="card-num"><span class="tag ai">🤖 AI</span></div>
+        <div class="card-title">Advantage+ стал дефолтом для всех новых кампаний</div>
+        <div class="card-text">
+          Meta включил AI-автоматизацию Advantage+ по умолчанию для всех новых кампаний. Глобально запустил Advantage+ Leads для квалифицированных лидов. Для бюджета $30-40k/мес: система обучается на конверсиях, нужна чистая аудитория и минимум 5 вариантов креатива.
+        </div>
+        <div class="card-action">
+          <div class="card-action-label">Одно действие</div>
+          <div class="card-action-text">Скопировать успешную кампанию → перевести на Advantage+ → загрузить 5+ образцов креатива → мониторить неделю</div>
+        </div>
+        <div class="card-source"><a href="https://socialbee.com/blog/facebook-updates/">SocialBee</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="meta_1" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="meta_1" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="meta_1" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
 
-<div class="card" data-card-id="meta_3" data-card-title="Meta планирует увольнения до 20% сотрудников ради AI-инвестиций" data-card-category="💼 META">
-  <div class="card-num"><span class="tag biz">💼 META</span></div>
-  <div class="card-title">Meta планирует увольнения до 20% сотрудников ради AI-инвестиций</div>
-  <div class="card-text">TechCrunch сообщает: Meta рассматривает масштабные увольнения, чтобы компенсировать агрессивные расходы на AI-инфраструктуру. Это может затронуть 20% компании. Для рекламодателей это означает: меньше поддержки, но больше AI-автоматизации в Ads Manager.</div>
-  <div class="card-action">
-    <div class="card-action-label">Одно действие</div>
-    <div class="card-action-text">Следи за обновлениями Ads Manager в ближайший месяц. Увольнения = ускорение автоматизации. Готовься к тому, что ручной таргетинг скоро полностью заменит AI.</div>
-  </div>
-  <div class="card-source"><a href="https://techcrunch.com/2026/03/14/meta-reportedly-considering-layoffs-that-could-affect-20-of-the-company/" target="_blank" rel="noopener">TechCrunch AI</a></div>
-  <div class="feedback-buttons">
-    <button class="feedback-btn" data-card-id="meta_3" data-action="like">👍</button>
-    <button class="feedback-btn" data-card-id="meta_3" data-action="dislike">👎</button>
-    <button class="feedback-btn" data-card-id="meta_3" data-action="backlog">📋 В бэклог</button>
-  </div>
-</div>
+      <div class="card" data-card-id="meta_2" data-card-title="Meta видео-генерация: $10B run-rate, +3.5% кликов" data-card-category="Meta/FB реклама">
+        <div class="card-num"><span class="tag tool">📹 TOOL</span></div>
+        <div class="card-title">Meta видео-генерация: $10B run-rate, +3.5% кликов</div>
+        <div class="card-text">
+          Meta удвоила GPU для GEM (Generative Ads Recommendation Model) — +3.5% кликов FB, +1% конверсий IG. Image-to-Video: 20 фото → готовое видео. Рост доходов видео-генерации в 3x быстрее базовой рекламы.
+        </div>
+        <div class="card-action">
+          <div class="card-action-label">Одно действие</div>
+          <div class="card-action-text">Собрать 15-20 лучших фото → Meta Business Suite → Image-to-Video → тестировать 3-5 вариантов vs обычное видео</div>
+        </div>
+        <div class="card-source"><a href="https://about.fb.com/news/2026/01/2026-ai-drives-performance/">Meta Newsroom</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="meta_2" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="meta_2" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="meta_2" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
+
+      <div class="card" data-card-id="meta_3" data-card-title="Attribution изменилась: click-only vs engage-through" data-card-category="Meta/FB реклама">
+        <div class="card-num"><span class="tag data">📊 MEASURE</span></div>
+        <div class="card-title">Attribution изменилась: click-only vs engage-through</div>
+        <div class="card-text">
+          Meta разделила атрибуцию: клики считают только link-clicks, остальное → engage-through. Порог просмотра видео упал с 10s до 5s. Кампании с ROAS 3.5x могут упасть в отчётах на 20-30% — это арифметика, не реальное падение.
+        </div>
+        <div class="card-action">
+          <div class="card-action-label">Одно действие</div>
+          <div class="card-action-text">Ads Manager → Измерение → обновить атрибуцию на click+engage-through → пересчитать ROAS за последний месяц</div>
+        </div>
+        <div class="card-source"><a href="https://searchengineland.com/meta-introduces-click-and-engage-through-attribution-updates-470629">Search Engine Land</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="meta_3" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="meta_3" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="meta_3" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
+
+      <div class="card" data-card-id="meta_4" data-card-title="WhatsApp Ads (EU, март) + DMA fees 4-5% с апреля" data-card-category="Meta/FB реклама">
+        <div class="card-num"><span class="tag business">💰 COMP</span></div>
+        <div class="card-title">WhatsApp Ads (EU, март) + DMA fees 4-5% с апреля</div>
+        <div class="card-text">
+          Meta запускает рекламу в WhatsApp Channels/Status (EU, март 2026). С апреля: Digital Service Tax 2-5% по странам. На бюджет $35k → добавится $700-1,750. WhatsApp даёт более высокий engagement чем FB, но дороже CPL.
+        </div>
+        <div class="card-action">
+          <div class="card-action-label">Одно действие</div>
+          <div class="card-action-text">Если EU-кампании → пересчитать бюджет на +3-5%. Когда WhatsApp Ads запустится → пилот на $1,000, сравнить CPL</div>
+        </div>
+        <div class="card-source"><a href="https://ppc.land/metas-2026-dma-report-reveals-whatsapp-ads-a-eu200m-fine-and-a-defiant-stance-on-personalized-advertising/">PPC.land</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="meta_4" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="meta_4" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="meta_4" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
     </div>
 
-    <!-- Секция: Контент и рилсы (полноразмерные карточки) -->
+    <!-- Контент и рилсы -->
     <div class="section fade-in-up">
       <div class="section-header">
         <div class="section-title">🎬 Контент и рилсы</div>
         <div class="section-line"></div>
       </div>
-      <!-- нет данных -->
+
+      <div class="card" data-card-id="content_1" data-card-title="Google Veo 3.1 — 4K 60fps + синхронный звук" data-card-category="Контент и рилсы">
+        <div class="card-num"><span class="tag tool">🛠 TOOL</span></div>
+        <div class="card-title">Google Veo 3.1 — 4K 60fps + синхронный звук</div>
+        <div class="card-text">
+          Google Veo 3.1: нативный вывод 4K (3840x2160) при 60fps, синхронизация диалога к движениям губ, поддержка вертикального формата 9:16 для Reels/Shorts/TikTok. Трёхмерное окружающее звучание генерируется в один проход вместе с видео.
+        </div>
+        <div class="card-action">
+          <div class="card-action-label">Одно действие</div>
+          <div class="card-action-text">Попробовать для производства Reels без съёмочной группы — особенно вертикальный 9:16 формат</div>
+        </div>
+        <div class="card-source"><a href="https://www.heygen.com/blog/ai-video-generators-transforming-video-production-2026">HeyGen Blog</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="content_1" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="content_1" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="content_1" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
+
+      <div class="card" data-card-id="content_2" data-card-title="Kling 3.0 — 6 сцен с разными движениями за один генерат" data-card-category="Контент и рилсы">
+        <div class="card-num"><span class="tag tool">🛠 TOOL</span></div>
+        <div class="card-title">Kling 3.0 — 6 сцен с разными движениями за один генерат</div>
+        <div class="card-text">
+          Kling 3.0 (февраль 2026): до 6 сцен с независимым кадрированием и движением камеры в одном проходе, единый стиль визуального оформления. Упрощает создание коммерческих видео и рилсов без монтажа.
+        </div>
+        <div class="card-action">
+          <div class="card-action-label">Одно действие</div>
+          <div class="card-action-text">Использовать для многосценных рилсов с фирменным стилем AiPlus — без монтажа</div>
+        </div>
+        <div class="card-source"><a href="https://www.companionlink.com/blog/2026/03/10-best-ai-video-creation-platforms-in-2026-tested-and-ranked/">CompanionLink</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="content_2" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="content_2" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="content_2" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
+
+      <div class="card" data-card-id="content_3" data-card-title="Instagram: юзеры видят и меняют свой алгоритм" data-card-category="Контент и рилсы">
+        <div class="card-num"><span class="tag product">🔧 ПЛАТФОРМА</span></div>
+        <div class="card-title">Instagram: юзеры видят и меняют свой алгоритм</div>
+        <div class="card-text">
+          Meta запустила "Your Algorithm" — пользователи видят, какие темы система считает их интересами, и меняют их в реалтайме. AI генерирует sentiment summary из комментариев. Важно: Instagram штрафует Reels с водяными знаками TikTok.
+        </div>
+        <div class="card-action">
+          <div class="card-action-label">Одно действие</div>
+          <div class="card-action-text">Оптимизировать контент под Originality Score — снимать оригинально, без репоста с TikTok</div>
+        </div>
+        <div class="card-source"><a href="https://www.techbuzz.ai/articles/instagram-gives-users-direct-control-over-reels-algorithm">TechBuzz.AI</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="content_3" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="content_3" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="content_3" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
     </div>
 
-    <!-- Секция: CDP и данные (полноразмерные карточки) -->
+    <!-- CDP и данные -->
     <div class="section fade-in-up">
       <div class="section-header">
         <div class="section-title">📊 CDP и данные</div>
         <div class="section-line"></div>
       </div>
-      <!-- нет данных -->
+
+      <div class="card" data-card-id="cdp_1" data-card-title="Gartner CDP 2026: Salesforce = solo Leader, рынок $5.7B" data-card-category="CDP и данные">
+        <div class="card-num"><span class="tag data">📊 CDP</span></div>
+        <div class="card-title">Gartner CDP 2026: Salesforce = solo Leader, рынок $5.7B</div>
+        <div class="card-text">
+          Magic Quadrant CDP 2026: Salesforce — единственный Leader. Новые игроки: Hightouch, Oracle, Uniphore. Tealium упала в Challenger. Раскол рынка: platformization vs agentification. Рынок CDP: $5.7B к 2026.
+        </div>
+        <div class="card-action">
+          <div class="card-action-label">Одно действие</div>
+          <div class="card-action-text">Следить за Hightouch — новый игрок с агентским подходом, потенциально дешевле Salesforce для Qadam CDP</div>
+        </div>
+        <div class="card-source"><a href="https://www.cxtoday.com/customer-analytics-intelligence/gartner-magic-quadrant-cdp-2026/">CX Today</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="cdp_1" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="cdp_1" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="cdp_1" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
     </div>
 
-    <!-- Секция: Новости (accordion) -->
+    <!-- Новости (accordion) -->
     <div class="section fade-in-up">
       <div class="section-header">
         <div class="section-title">📰 Новости</div>
         <div class="section-line"></div>
       </div>
-      
-<details class="accordion-card" data-card-id="card_1" data-card-title="Вайб-код приложения в одной картинке" data-card-category="🧠 AI">
-  <summary class="accordion-summary">
-    <span class="tag ai">🧠 AI</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">Вайб-код приложения в одной картинке</div>
-      <div class="accordion-card-preview">Мем из r/vibecoding — наглядно показывает разницу между ожиданиями от вайб-кодинга и реальностью. Лёгкий юмор для тех...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">Мем из r/vibecoding — наглядно показывает разницу между ожиданиями от вайб-кодинга и реальностью. Лёгкий юмор для тех, кто в теме.</div>
-    <div class="card-action">
-      <div class="card-action-label">Применить</div>
-      <div class="card-action-text">Улыбнись и покажи команде — полезно для внутренней культуры.</div>
-    </div>
-    <div class="card-source"><a href="https://i.redd.it/kz11m2tsfvog1.png" target="_blank" rel="noopener">r/vibecoding</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="card_1" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="card_1" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="card_1" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
 
-<details class="accordion-card" data-card-id="card_2" data-card-title="Claude исполнилось 3 года!" data-card-category="🤖 AGENT">
-  <summary class="accordion-summary">
-    <span class="tag agent">🤖 AGENT</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">Claude исполнилось 3 года!</div>
-      <div class="accordion-card-preview">Anthropic отмечает третий день рождения Claude. От первой версии до Opus 4.6 с 1М контекстом — за три года модель...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">Anthropic отмечает третий день рождения Claude. От первой версии до Opus 4.6 с 1М контекстом — за три года модель прошла путь от чат-бота до агентской платформы.</div>
-    <div class="card-action">
-      <div class="card-action-label">Применить</div>
-      <div class="card-action-text">Оцени, как изменился твой workflow за эти 3 года. Что Claude делает сейчас, что было невозможно год назад?</div>
-    </div>
-    <div class="card-source"><a href="https://i.redd.it/fioinuzhbzog1.png" target="_blank" rel="noopener">r/ClaudeAI</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="card_2" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="card_2" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="card_2" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
+      <details class="accordion-card" data-card-id="card_1" data-card-title="OpenAI GPT-5.4 + $110B раунд при оценке $730B" data-card-category="Новости">
+        <summary class="accordion-summary">
+          <span class="tag ai">🧠 AI</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">OpenAI GPT-5.4 + $110B раунд при оценке $730B</div>
+            <div class="accordion-card-preview">Amazon, Nvidia, SoftBank инвестировали. GPT-5.4 — 83% на GDPVal, API $2.50/млн токенов</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">GPT-5.4 набрала 83% на GDPVal benchmark (уровень экспертов), 33% меньше ошибок. API с $2.50/млн входящих токенов. 1M токен контекст. Valuation $730B pre-money.</div>
+          <div class="card-action">
+            <div class="card-action-label">Применить</div>
+            <div class="card-action-text">Сравнить цену с Claude API — если задача не требует агентов, GPT-5.4 может быть дешевле</div>
+          </div>
+          <div class="card-source"><a href="https://fortune.com/2026/03/13/elon-musk-morgan-stanley-ai-leap-2026/">Fortune</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_1" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_1" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_1" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
 
-<details class="accordion-card" data-card-id="card_3" data-card-title="Промпт-инженер — мем дня" data-card-category="🧠 AI">
-  <summary class="accordion-summary">
-    <span class="tag ai">🧠 AI</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">Промпт-инженер — мем дня</div>
-      <div class="accordion-card-preview">Юмористическая картинка из r/vibecoding про промпт-инженеров. Классический мем о том, как выглядит «программирование» в...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">Юмористическая картинка из r/vibecoding про промпт-инженеров. Классический мем о том, как выглядит «программирование» в 2026 году.</div>
-    <div class="card-action">
-      <div class="card-action-label">Применить</div>
-      <div class="card-action-text">Сохрани для контента в соцсетях AiPlus — тема промпт-инженерии хорошо заходит у аудитории.</div>
-    </div>
-    <div class="card-source"><a href="https://i.redd.it/c6xcxjvxkyog1.jpeg" target="_blank" rel="noopener">r/vibecoding</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="card_3" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="card_3" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="card_3" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
+      <details class="accordion-card" data-card-id="card_2" data-card-title="Apple Siri переизобретается — iOS 26.4 + Google Gemini" data-card-category="Новости">
+        <summary class="accordion-summary">
+          <span class="tag ai">🍎 TECH</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Apple Siri переизобретается — iOS 26.4 + Google Gemini</div>
+            <div class="accordion-card-preview">On-screen awareness, кросс-приложенческая интеграция, Private Cloud Compute</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">Полностью переработанная Siri в iOS 26.4 (март 2026): on-screen awareness, кросс-приложенческая интеграция, партнёрство Google Gemini для LLM-части. Private Cloud Compute для приватности.</div>
+          <div class="card-action">
+            <div class="card-action-label">Применить</div>
+            <div class="card-action-text">Следить за релизом — новая Siri может открыть API для автоматизации на iPhone</div>
+          </div>
+          <div class="card-source"><a href="https://fortune.com/2026/03/13/elon-musk-morgan-stanley-ai-leap-2026/">Fortune</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_2" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_2" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_2" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
 
-<details class="accordion-card" data-card-id="card_4" data-card-title="Opus теперь по умолчанию с 1М контекстом" data-card-category="🤖 AGENT">
-  <summary class="accordion-summary">
-    <span class="tag agent">🤖 AGENT</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">Opus теперь по умолчанию с 1М контекстом</div>
-      <div class="accordion-card-preview">Скриншот из терминала: Opus автоматически переключился на 1 миллион токенов контекста. «В 5 раз больше места, та же...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">Скриншот из терминала: Opus автоматически переключился на 1 миллион токенов контекста. «В 5 раз больше места, та же цена» — главный апдейт недели для пользователей Claude Code.</div>
-    <div class="card-action">
-      <div class="card-action-label">Применить</div>
-      <div class="card-action-text">Открой терминал и убедись, что твой Claude Code уже обновился до 1М. Если нет — обнови CLI.</div>
-    </div>
-    <div class="card-source"><a href="https://i.redd.it/60elqqwixuog1.jpeg" target="_blank" rel="noopener">r/ClaudeAI</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="card_4" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="card_4" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="card_4" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
+      <details class="accordion-card" data-card-id="card_3" data-card-title="Block (Jack Dorsey) сократил 40% персонала — AI вместо людей" data-card-category="Новости">
+        <summary class="accordion-summary">
+          <span class="tag business">⚖️ IMPACT</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Block (Jack Dorsey) сократил 40% персонала — AI вместо людей</div>
+            <div class="accordion-card-preview">45,000 сокращений в tech за март. Dorsey: AI инструменты → меньше, эффективнее</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">Block сократил 4,000+ человек (40%). CEO Dorsey: AI инструменты позволяют работать с меньшей командой. Март 2026: 45,000 сокращений в tech, 9,200+ из них связаны с AI/автоматизацией.</div>
+          <div class="card-action">
+            <div class="card-action-label">Применить</div>
+            <div class="card-action-text">Для AiPlus: оценить где AI может заменить рутинные роли — поддержка, контент, рассылки</div>
+          </div>
+          <div class="card-source"><a href="https://opentools.ai/news/2026-tech-layoffs-hit-45000-in-march-ai-and-automation-take-the-lead">OpenTools.ai</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_3" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_3" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_3" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
 
-<details class="accordion-card" data-card-id="card_5" data-card-title="claude-code-best-practice — 15K звёзд на GitHub Trending" data-card-category="🤖 AGENT">
-  <summary class="accordion-summary">
-    <span class="tag agent">🤖 AGENT</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">claude-code-best-practice — 15K звёзд на GitHub Trending</div>
-      <div class="accordion-card-preview">Репозиторий с лучшими практиками Claude Code вышел в тренды GitHub (месячный рейтинг). 15 000 звёзд. Содержит советы по...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">Репозиторий с лучшими практиками Claude Code вышел в тренды GitHub (месячный рейтинг). 15 000 звёзд. Содержит советы по workflow, скиллам и промптам от создателя и сообщества.</div>
-    <div class="card-action">
-      <div class="card-action-label">Применить</div>
-      <div class="card-action-text">Загляни в репо и сравни с твоим CLAUDE.md. Возможно, найдёшь новые скиллы или паттерны для workflow.</div>
-    </div>
-    <div class="card-source"><a href="https://i.redd.it/g2h37iipevog1.png" target="_blank" rel="noopener">r/ClaudeAI</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="card_5" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="card_5" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="card_5" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
+      <details class="accordion-card" data-card-id="card_4" data-card-title="NVIDIA Rubin суперкомпьютер + 12 новых моделей за неделю" data-card-category="Новости">
+        <summary class="accordion-summary">
+          <span class="tag ai">🧠 MODELS</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">NVIDIA Rubin суперкомпьютер + 12 новых моделей за неделю</div>
+            <div class="accordion-card-preview">Gemini 3.1 Flash-Lite, Alibaba Qwen 3.5, Meta, Tencent — avalanche моделей</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">NVIDIA GTC 2026: анонс Rubin суперкомпьютера. За неделю 1-8 марта: 12+ новых моделей (видео, язык, 3D). Google Gemini 3.1 Flash-Lite — быстрее и дешевле. Alibaba Qwen 3.5, Tencent, Meta — всё одновременно.</div>
+          <div class="card-action">
+            <div class="card-action-label">Применить</div>
+            <div class="card-action-text">Gemini 3.1 Flash-Lite — проверить для недорогих задач в пайплайне дайджеста</div>
+          </div>
+          <div class="card-source"><a href="https://www.analyticsinsight.net/news/nvidia-gtc-2026-keynote-major-announcements-on-ai-gaming-cpus-and-computing/">Analytics Insight</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_4" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_4" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_4" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
 
-<details class="accordion-card" data-card-id="card_6" data-card-title="Встроенные визуализации в Claude.ai — впечатляет" data-card-category="🤖 AGENT">
-  <summary class="accordion-summary">
-    <span class="tag agent">🤖 AGENT</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">Встроенные визуализации в Claude.ai — впечатляет</div>
-      <div class="accordion-card-preview">Новое обновление Claude позволяет создавать интерактивные визуализации прямо в чате. Кнопки и виджеты могут отправлять...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">Новое обновление Claude позволяет создавать интерактивные визуализации прямо в чате. Кнопки и виджеты могут отправлять сообщения в диалог. Полезно для быстрого прототипирования UI.</div>
-    <div class="card-action">
-      <div class="card-action-label">Применить</div>
-      <div class="card-action-text">Попробуй попросить Claude визуализировать воронку студентов AiPlus прямо в чате — быстрый способ получить инсайты без дашборда.</div>
-    </div>
-    <div class="card-source"><a href="https://reddit.com/r/ClaudeAI/comments/1rsvfv5/claudeai_inline_visualiserwidget_is_pretty_cool/" target="_blank" rel="noopener">r/ClaudeAI</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="card_6" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="card_6" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="card_6" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
+      <details class="accordion-card" data-card-id="card_5" data-card-title="Colorado AI Act (июнь 2026) — первый обязывающий закон в США" data-card-category="Новости">
+        <summary class="accordion-summary">
+          <span class="tag strategy">⚖️ REG</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Colorado AI Act (июнь 2026) — первый обязывающий закон в США</div>
+            <div class="accordion-card-preview">Требует reasonable care от разработчиков, risk management, bias assessment</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">Первый binding US state AI law: reasonable care от разработчиков, risk management, bias assessment. EU AI Act transparency — август 2026. Федеральные vs state законы в конфликте (FTC statement 11.03.2026).</div>
+          <div class="card-action">
+            <div class="card-action-label">Применить</div>
+            <div class="card-action-text">Для SaaS/AI продуктов ориентированных на US рынок — начать документировать AI-решения сейчас</div>
+          </div>
+          <div class="card-source"><a href="https://www.kslaw.com/news-and-insights/new-state-ai-laws-are-effective-on-january-1-2026-but-a-new-executive-order-signals-disruption">K&S Law</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_5" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_5" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_5" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
 
-<details class="accordion-card" data-card-id="card_7" data-card-title="Перекрёстная проверка моделей — Claude самый строгий критик" data-card-category="🤖 AGENT">
-  <summary class="accordion-summary">
-    <span class="tag agent">🤖 AGENT</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">Перекрёстная проверка моделей — Claude самый строгий критик</div>
-      <div class="accordion-card-preview">Пользователь проверяет выходные данные одной модели через другую, чтобы отсеять «восторженные» но бесполезные...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">Пользователь проверяет выходные данные одной модели через другую, чтобы отсеять «восторженные» но бесполезные предложения. Claude оказался самым критичным ревьюером из всех.</div>
-    <div class="card-action">
-      <div class="card-action-label">Применить</div>
-      <div class="card-action-text">Добавь в свой workflow шаг: после генерации кода одним агентом — отправляй на ревью другому. Claude Code уже поддерживает это через Agent Teams.</div>
-    </div>
-    <div class="card-source"><a href="https://i.redd.it/liropl7p3wog1.png" target="_blank" rel="noopener">r/ClaudeAI</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="card_7" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="card_7" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="card_7" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
+      <details class="accordion-card" data-card-id="card_6" data-card-title="EdTech 2026: цифровые badges + AI персонализация" data-card-category="Новости">
+        <summary class="accordion-summary">
+          <span class="tag product">🎓 EDTECH</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">EdTech 2026: цифровые badges + AI персонализация</div>
+            <div class="accordion-card-preview">Основной рост — в корпоративном обучении. AI находит skill gaps и строит персональный путь</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">EdTech 2026 фокус: цифровые сертификаты выровненные под workplace demand, AI-персонализированные пути обучения. Работодатели переходят на внутреннее обучение. Основной рост EdTech — в корпоративном секторе, не школьном.</div>
+          <div class="card-action">
+            <div class="card-action-label">Применить</div>
+            <div class="card-action-text">Для AiPlus: рассмотреть цифровые badges за прохождение курсов НИШ — конкурентное преимущество</div>
+          </div>
+          <div class="card-source"><a href="https://www.edtechinnovationhub.com/news/etih-edtech-predictions-for-2026-as-education-moves-into-a-more-intentional-digital-phase">EdTech Innovation Hub</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_6" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_6" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_6" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
 
-<details class="accordion-card" data-card-id="card_8" data-card-title="1М контекст — самая ожидаемая фича, наконец здесь" data-card-category="🤖 AGENT">
-  <summary class="accordion-summary">
-    <span class="tag agent">🤖 AGENT</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">1М контекст — самая ожидаемая фича, наконец здесь</div>
-      <div class="accordion-card-preview">Ещё один пост о запуске миллионного контекстного окна. Сообщество в восторге — это была самая запрашиваемая функция для...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">Ещё один пост о запуске миллионного контекстного окна. Сообщество в восторге — это была самая запрашиваемая функция для Claude.</div>
-    <div class="card-action">
-      <div class="card-action-label">Применить</div>
-      <div class="card-action-text">Контекст уже есть — начни использовать. Загрузи крупный файл или документацию и оцени качество ответов.</div>
-    </div>
-    <div class="card-source"><a href="https://i.redd.it/vhhmdep0qyog1.png" target="_blank" rel="noopener">r/ClaudeAI</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="card_8" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="card_8" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="card_8" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
-
-<details class="accordion-card" data-card-id="card_9" data-card-title="Claude ведёт себя как мой учитель" data-card-category="🤖 AGENT">
-  <summary class="accordion-summary">
-    <span class="tag agent">🤖 AGENT</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">Claude ведёт себя как мой учитель</div>
-      <div class="accordion-card-preview">Пользователь, который годами использовал ChatGPT, впервые попробовал Claude и поразился разнице: Claude не просто...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">Пользователь, который годами использовал ChatGPT, впервые попробовал Claude и поразился разнице: Claude не просто отвечает, а учит думать. Пост набрал много откликов в r/ClaudeAI.</div>
-    <div class="card-action">
-      <div class="card-action-label">Применить</div>
-      <div class="card-action-text">Используй этот инсайт для маркетинга AiPlus: AI как наставник, а не просто инструмент — такой нарратив резонирует.</div>
-    </div>
-    <div class="card-source"><a href="https://i.redd.it/usm28vsj3yog1.jpeg" target="_blank" rel="noopener">r/ClaudeAI</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="card_9" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="card_9" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="card_9" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
-
-<details class="accordion-card" data-card-id="card_10" data-card-title="Фаундер собрал SaaS на вайб-кодинге — хакеры украли $87,500" data-card-category="🤖 AGENT">
-  <summary class="accordion-summary">
-    <span class="tag agent">🤖 AGENT</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">Фаундер собрал SaaS на вайб-кодинге — хакеры украли $87,500</div>
-      <div class="accordion-card-preview">Реальный случай: основатель использовал Claude Code для сборки стартапа без тестов и security review. Хакеры нашли...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">Реальный случай: основатель использовал Claude Code для сборки стартапа без тестов и security review. Хакеры нашли ключи Stripe во фронтенде и списали с 175 клиентов по $500. Фикс был бы одной строкой в промпте: «Никогда не выноси секреты на клиент».</div>
-    <div class="card-action">
-      <div class="card-action-label">Применить</div>
-      <div class="card-action-text">Прямо сейчас проверь Qadam: grep -r &#x27;STRIPE\|SECRET\|API_KEY&#x27; в frontend-коде. Убедись, что все секреты в .env и не попадают в бандл.</div>
-    </div>
-    <div class="card-source"><a href="https://reddit.com/r/vibecoding/comments/1rt4r7z/a_founder_vibecoded_his_entire_saas_with_ai/" target="_blank" rel="noopener">r/vibecoding</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="card_10" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="card_10" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="card_10" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
-
-<details class="accordion-card" data-card-id="card_11" data-card-title="NanoClaw — рои агентов Claude в контейнерах" data-card-category="🤖 AGENT">
-  <summary class="accordion-summary">
-    <span class="tag agent">🤖 AGENT</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">NanoClaw — рои агентов Claude в контейнерах</div>
-      <div class="accordion-card-preview">NanoClaw добавил поддержку Agent Swarms: несколько экземпляров Claude работают параллельно в изолированных контейнерах...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">NanoClaw добавил поддержку Agent Swarms: несколько экземпляров Claude работают параллельно в изолированных контейнерах. Релевантно для масштабирования агентских задач.</div>
-    <div class="card-action">
-      <div class="card-action-label">Применить</div>
-      <div class="card-action-text">Если используешь агентов для параллельных задач — посмотри NanoClaw как альтернативу Agent Teams для CI/CD пайплайнов.</div>
-    </div>
-    <div class="card-source"><a href="https://twitter.com/Gavriel_Cohen/status/2020701159175155874" target="_blank" rel="noopener">HN: claude agent</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="card_11" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="card_11" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="card_11" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
-
-<details class="accordion-card" data-card-id="card_12" data-card-title="Разрыв между хайпом AI-кодинга и реальностью" data-card-category="🧠 AI">
-  <summary class="accordion-summary">
-    <span class="tag ai">🧠 AI</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">Разрыв между хайпом AI-кодинга и реальностью</div>
-      <div class="accordion-card-preview">Опытный разработчик и power user AI делится разочарованием: маркетинг обещает «код за секунды», а реальность — это часы...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">Опытный разработчик и power user AI делится разочарованием: маркетинг обещает «код за секунды», а реальность — это часы отладки, нестабильные результаты и костыли. При этом автор не против AI, он за честные ожидания.</div>
-    <div class="card-action">
-      <div class="card-action-label">Применить</div>
-      <div class="card-action-text">Перечитай и откалибруй ожидания команды от AI-инструментов. Честность = меньше разочарований.</div>
-    </div>
-    <div class="card-source"><a href="https://reddit.com/r/vibecoding/comments/1rti51a/venting_about_ai_coding_hype/" target="_blank" rel="noopener">r/vibecoding</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="card_12" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="card_12" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="card_12" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
-
-<details class="accordion-card" data-card-id="card_13" data-card-title="ClaudeSkills.cc — маркетплейс навыков для Claude" data-card-category="🤖 AGENT">
-  <summary class="accordion-summary">
-    <span class="tag agent">🤖 AGENT</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">ClaudeSkills.cc — маркетплейс навыков для Claude</div>
-      <div class="accordion-card-preview">Платформа для обмена, поиска и переиспользования скиллов Claude и OpenAI агентов. Можно найти готовые скиллы для своего...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">Платформа для обмена, поиска и переиспользования скиллов Claude и OpenAI агентов. Можно найти готовые скиллы для своего workflow.</div>
-    <div class="card-action">
-      <div class="card-action-label">Применить</div>
-      <div class="card-action-text">Зайди на claudeskills.cc и найди скиллы для FastAPI, React или PostgreSQL — возможно, кто-то уже сделал то, что тебе нужно.</div>
-    </div>
-    <div class="card-source"><a href="https://claudeskills.cc" target="_blank" rel="noopener">HN: claude agent</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="card_13" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="card_13" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="card_13" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
-
-<details class="accordion-card" data-card-id="card_14" data-card-title="Первый платящий клиент: $50 в Stripe — и вот ты уже саппорт" data-card-category="💰 MONEY">
-  <summary class="accordion-summary">
-    <span class="tag money">💰 MONEY</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">Первый платящий клиент: $50 в Stripe — и вот ты уже саппорт</div>
-      <div class="accordion-card-preview">Инди-разработчик 6 месяцев строил, 5 месяцев маркетил. Массовый контент не работал — помогли истории вместо питчей...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">Инди-разработчик 6 месяцев строил, 5 месяцев маркетил. Массовый контент не работал — помогли истории вместо питчей. Первый клиент заплатил $50 — и тут же пришёл баг-репорт. Реальность инди-хакерства.</div>
-    <div class="card-action">
-      <div class="card-action-label">Применить</div>
-      <div class="card-action-text">Запомни для AiPlus: истории студентов работают лучше рекламных питчей. Собери 3-5 кейсов и используй в Meta Ads.</div>
-    </div>
-    <div class="card-source"><a href="https://reddit.com/r/vibecoding/comments/1rt1gcv/got_my_first_paying_customer_opened_stripe_50/" target="_blank" rel="noopener">r/vibecoding</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="card_14" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="card_14" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="card_14" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
-
-<details class="accordion-card" data-card-id="card_15" data-card-title="r/vibecoding тонет в самопиаре — где полезный контент?" data-card-category="🧠 AI">
-  <summary class="accordion-summary">
-    <span class="tag ai">🧠 AI</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">r/vibecoding тонет в самопиаре — где полезный контент?</div>
-      <div class="accordion-card-preview">Пользователь жалуется: сабреддит r/vibecoding превратился в площадку самопродвижения. Полезные советы теряются среди...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">Пользователь жалуется: сабреддит r/vibecoding превратился в площадку самопродвижения. Полезные советы теряются среди постов «What are you building?». Предлагают мегатред для самопиара.</div>
-    <div class="card-action">
-      <div class="card-action-label">Применить</div>
-      <div class="card-action-text">Если постишь в r/vibecoding — делай полезные посты, не рекламные. Это работает и для бренда AiPlus.</div>
-    </div>
-    <div class="card-source"><a href="https://reddit.com/r/vibecoding/comments/1rsyhsr/whats_going_on_with_selfpromtion_rules_why_not/" target="_blank" rel="noopener">r/vibecoding</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="card_15" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="card_15" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="card_15" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
-
-<details class="accordion-card" data-card-id="card_16" data-card-title="Монтана приняла закон о праве на вычисления" data-card-category="🧠 AI">
-  <summary class="accordion-summary">
-    <span class="tag ai">🧠 AI</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">Монтана приняла закон о праве на вычисления</div>
-      <div class="accordion-card-preview">Штат Монтана первым в США принял Right to Compute Act. Закон защищает право граждан на использование вычислительных...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">Штат Монтана первым в США принял Right to Compute Act. Закон защищает право граждан на использование вычислительных ресурсов без ограничений. 135 очков на HN, 89 комментариев.</div>
-    <div class="card-action">
-      <div class="card-action-label">Применить</div>
-      <div class="card-action-text">Следи за подобным законодательством — оно может повлиять на доступность облачных GPU для AI-задач.</div>
-    </div>
-    <div class="card-source"><a href="https://www.westernmt.news/2025/04/21/montana-leads-the-nation-with-groundbreaking-right-to-compute-act/" target="_blank" rel="noopener">HackerNews 100+</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="card_16" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="card_16" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="card_16" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
-
-<details class="accordion-card" data-card-id="card_17" data-card-title="ChatGPT получил интеграции с DoorDash, Spotify, Uber и другими" data-card-category="🧠 AI">
-  <summary class="accordion-summary">
-    <span class="tag ai">🧠 AI</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">ChatGPT получил интеграции с DoorDash, Spotify, Uber и другими</div>
-      <div class="accordion-card-preview">OpenAI запустил App Integrations: теперь из ChatGPT можно управлять Spotify, Canva, Figma, Expedia и другими сервисами...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">OpenAI запустил App Integrations: теперь из ChatGPT можно управлять Spotify, Canva, Figma, Expedia и другими сервисами напрямую. Это шаг к AI как универсальному интерфейсу.</div>
-    <div class="card-action">
-      <div class="card-action-label">Применить</div>
-      <div class="card-action-text">Подумай: какие интеграции были бы полезны для студентов AiPlus? Если ChatGPT станет «операционной системой» — как это влияет на учебные программы?</div>
-    </div>
-    <div class="card-source"><a href="https://techcrunch.com/2026/03/14/how-to-use-the-new-chatgpt-app-integrations-including-doordash-spotify-uber-and-others/" target="_blank" rel="noopener">TechCrunch AI</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="card_17" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="card_17" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="card_17" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
-
-<details class="accordion-card" data-card-id="card_18" data-card-title="prompt-optimizer — инструмент для улучшения промптов" data-card-category="🛠 TOOL">
-  <summary class="accordion-summary">
-    <span class="tag tool">🛠 TOOL</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">prompt-optimizer — инструмент для улучшения промптов</div>
-      <div class="accordion-card-preview">Open-source инструмент для оптимизации промптов. Поддерживает Web, десктоп, Chrome-расширение и Docker. Помогает писать...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">Open-source инструмент для оптимизации промптов. Поддерживает Web, десктоп, Chrome-расширение и Docker. Помогает писать более качественные промпты для AI — полезно для стандартизации промптов в команде.</div>
-    <div class="card-action">
-      <div class="card-action-label">Применить</div>
-      <div class="card-action-text">Попробуй prompt-optimizer для стандартизации промптов в CLAUDE.md и скиллах. Chrome-расширение удобно для быстрой проверки.</div>
-    </div>
-    <div class="card-source"><a href="https://github.com/linshenkx/prompt-optimizer" target="_blank" rel="noopener">GitHub Trending TypeScript</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="card_18" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="card_18" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="card_18" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
-
-<details class="accordion-card" data-card-id="card_19" data-card-title="XML как дешёвый DSL" data-card-category="🧠 AI">
-  <summary class="accordion-summary">
-    <span class="tag ai">🧠 AI</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">XML как дешёвый DSL</div>
-      <div class="accordion-card-preview">Автор аргументирует: XML — это готовый domain-specific language, который не требует написания парсера. 182 очка на HN...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">Автор аргументирует: XML — это готовый domain-specific language, который не требует написания парсера. 182 очка на HN. Для тех, кто проектирует конфиги и промпты — интересный угол зрения.</div>
-    <div class="card-action">
-      <div class="card-action-label">Применить</div>
-      <div class="card-action-text">Если проектируешь формат данных для Qadam (конфиги, шаблоны) — подумай: может, XML/YAML проще кастомного формата?</div>
-    </div>
-    <div class="card-source"><a href="https://unplannedobsolescence.com/blog/xml-cheap-dsl/" target="_blank" rel="noopener">HackerNews 100+</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="card_19" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="card_19" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="card_19" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
-
-<details class="accordion-card" data-card-id="card_20" data-card-title="Поддельная RAM в комплекте с настоящей — новый вид мошенничества" data-card-category="🧠 AI">
-  <summary class="accordion-summary">
-    <span class="tag ai">🧠 AI</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">Поддельная RAM в комплекте с настоящей — новый вид мошенничества</div>
-      <div class="accordion-card-preview">Tom&#x27;s Hardware обнаружил: продавцы комплектуют настоящую планку RAM с фейковой для «иллюзии производительности» на...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">Tom&#x27;s Hardware обнаружил: продавцы комплектуют настоящую планку RAM с фейковой для «иллюзии производительности» на AMD-системах. Дефицит памяти порождает креативные схемы обмана.</div>
-    <div class="card-action">
-      <div class="card-action-label">Применить</div>
-      <div class="card-action-text">Если закупаешь серверное железо — проверяй поставщиков вдвойне. Дефицит RAM — реальная проблема.</div>
-    </div>
-    <div class="card-source"><a href="https://www.tomshardware.com/pc-components/ram/fake-ram-bundled-with-real-ram-to-create-a-performance-illusion-for-amd-users-1-1-value-pack-offers-desperate-psychological-relief-as-the-memory-shortage-worsens" target="_blank" rel="noopener">HackerNews 100+</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="card_20" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="card_20" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="card_20" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
+      <details class="accordion-card" data-card-id="card_7" data-card-title="Synthesia: AI аватары на 120+ языках для EdTech" data-card-category="Новости">
+        <summary class="accordion-summary">
+          <span class="tag tool">🎓 EDTECH</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Synthesia: AI аватары на 120+ языках для EdTech</div>
+            <div class="accordion-card-preview">Скрипт → профессиональное видео с AI аватарами. L&D команды экономят 8+ часов в неделю</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">L&D команды используют Synthesia для обучающих видео. Одна команда создаёт курс → система локализует на любой язык без пересъёмок. Реальный результат: 8+ часов экономии в неделю на разработчика курса.</div>
+          <div class="card-action">
+            <div class="card-action-label">Применить</div>
+            <div class="card-action-text">Для масштабирования курсов AiPlus на Казахстан — создать на русском, локализовать на казахский без пересъёмки</div>
+          </div>
+          <div class="card-source"><a href="https://360learning.com/blog/ai-learning-platforms/">360Learning</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="card_7" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="card_7" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="card_7" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
     </div>
 
-    <!-- Секция: Внедрить (полноразмерные) -->
+    <!-- Внедрить -->
     <div class="section fade-in-up">
       <div class="section-header">
         <div class="section-title">🚀 Внедрить</div>
         <div class="section-line"></div>
       </div>
-      
-<div class="card" data-card-id="impl_1" data-card-title="Как я организовал сайд-проект и не сошёл с ума" data-card-category="🧠 AI">
-  <div class="card-num"><span class="tag ai">🧠 AI</span></div>
-  <div class="card-title">Как я организовал сайд-проект и не сошёл с ума</div>
-  <div class="card-text">Автор перепробовал Trello, Google Sheets и заметки — хаос. Перешёл на Notion Business + AI и наконец навёл порядок: фичи, фидбек пользователей и задачи в одном месте. Пост из r/vibecoding, полезен для организации работы над проектами.</div>
-  <div class="card-action">
-    <div class="card-action-label">Одно действие</div>
-    <div class="card-action-text">Попробуй Notion AI для организации бэклога Qadam. 3 месяца бесплатно на Business-плане — достаточно, чтобы понять, подходит ли инструмент.</div>
-  </div>
-  <div class="card-source"><a href="https://reddit.com/r/vibecoding/comments/1rtc54g/how_i_finally_organized_my_side_project_without/" target="_blank" rel="noopener">r/vibecoding</a></div>
-  <div class="feedback-buttons">
-    <button class="feedback-btn" data-card-id="impl_1" data-action="like">👍</button>
-    <button class="feedback-btn" data-card-id="impl_1" data-action="dislike">👎</button>
-    <button class="feedback-btn" data-card-id="impl_1" data-action="backlog">📋 В бэклог</button>
-  </div>
-</div>
 
-<div class="card" data-card-id="impl_2" data-card-title="Крейг Мод за 5 дней написал кастомную бухгалтерию с помощью AI" data-card-category="🧠 AI">
-  <div class="card-num"><span class="tag ai">🧠 AI</span></div>
-  <div class="card-title">Крейг Мод за 5 дней написал кастомную бухгалтерию с помощью AI</div>
-  <div class="card-text">Писатель и разработчик Craig Mod рассказывает: никакой готовый софт не подходил для его задач — мультивалютность, специфичная отчётность. За 5 дней с AI он написал идеальную для себя бухгалтерию: быстрая, локальная, с автоматическим пересчётом курсов. Цитата через блог Simon Willison.</div>
-  <div class="card-action">
-    <div class="card-action-label">Одно действие</div>
-    <div class="card-action-text">Подумай: какой внутренний инструмент AiPlus ты мог бы собрать за 5 дней с Claude Code? Калькулятор unit-экономики? Дашборд по студентам?</div>
-  </div>
-  <div class="card-source"><a href="https://simonwillison.net/2026/Mar/13/craig-mod/#atom-everything" target="_blank" rel="noopener">Simon Willison</a></div>
-  <div class="feedback-buttons">
-    <button class="feedback-btn" data-card-id="impl_2" data-action="like">👍</button>
-    <button class="feedback-btn" data-card-id="impl_2" data-action="dislike">👎</button>
-    <button class="feedback-btn" data-card-id="impl_2" data-action="backlog">📋 В бэклог</button>
-  </div>
-</div>
+      <div class="card" data-card-id="impl_1" data-card-title="Advantage+ тест: перевести 1 кампанию на AI-автоматизацию" data-card-category="Внедрить">
+        <div class="card-num"><span class="tag business">💼 META</span></div>
+        <div class="card-title">Advantage+ тест: перевести 1 кампанию на AI-автоматизацию</div>
+        <div class="card-text">
+          Meta сделал Advantage+ дефолтом. Это момент — тестировать надо сейчас пока конкуренты ещё не адаптировались.
+        </div>
+        <div class="card-action">
+          <div class="card-action-label">Действие</div>
+          <div class="card-action-text">Взять лучшую кампанию → дублировать → перевести копию на Advantage+ → 5 вариантов креатива → тест 7 дней</div>
+        </div>
+        <div class="card-source"><a href="https://socialbee.com/blog/facebook-updates/">SocialBee</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="impl_1" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="impl_1" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="impl_1" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
 
-<div class="card" data-card-id="impl_3" data-card-title="Глава робототехники OpenAI ушёл из-за сделки с Пентагоном" data-card-category="🧠 AI">
-  <div class="card-num"><span class="tag ai">🧠 AI</span></div>
-  <div class="card-title">Глава робототехники OpenAI ушёл из-за сделки с Пентагоном</div>
-  <div class="card-text">Руководитель направления робототехники покинул OpenAI в знак протеста против сотрудничества с военными. Дополнительно в рассылке: гайд по созданию AI-генератора кейс-стади. The Rundown AI.</div>
-  <div class="card-action">
-    <div class="card-action-label">Одно действие</div>
-    <div class="card-action-text">Используй идею AI-генератора кейсов: создай шаблон, который генерирует истории успеха студентов AiPlus для лендингов и рекламы.</div>
-  </div>
-  <div class="card-source"><a href="https://www.therundown.ai/p/openai-robotics-lead-exits-over-pentagon-deal" target="_blank" rel="noopener">The Rundown AI</a></div>
-  <div class="feedback-buttons">
-    <button class="feedback-btn" data-card-id="impl_3" data-action="like">👍</button>
-    <button class="feedback-btn" data-card-id="impl_3" data-action="dislike">👎</button>
-    <button class="feedback-btn" data-card-id="impl_3" data-action="backlog">📋 В бэклог</button>
-  </div>
-</div>
+      <div class="card" data-card-id="impl_2" data-card-title="Kling 3.0: сделать первый AI-рилс для AiPlus" data-card-category="Внедрить">
+        <div class="card-num"><span class="tag tool">🎬 КОНТЕНТ</span></div>
+        <div class="card-title">Kling 3.0: сделать первый AI-рилс для AiPlus</div>
+        <div class="card-text">
+          Kling 3.0 позволяет за один генерат получить многосценный рилс. Для AiPlus — идеально для промо курсов НИШ: показать процесс обучения без съёмки.
+        </div>
+        <div class="card-action">
+          <div class="card-action-label">Действие</div>
+          <div class="card-action-text">Зарегистрироваться в Kling → написать скрипт 6 сцен про подготовку к НИШ → сгенерировать тест-рилс</div>
+        </div>
+        <div class="card-source"><a href="https://www.companionlink.com/blog/2026/03/10-best-ai-video-creation-platforms-in-2026-tested-and-ranked/">CompanionLink</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="impl_2" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="impl_2" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="impl_2" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
+
+      <div class="card" data-card-id="impl_3" data-card-title="n8n MCP: автоматизировать 1 DevOps workflow" data-card-category="Внедрить">
+        <div class="card-num"><span class="tag tool">⚙️ MCP</span></div>
+        <div class="card-title">n8n MCP: автоматизировать 1 DevOps workflow</div>
+        <div class="card-text">
+          n8n MCP позволяет агентам вызывать сложные workflow. Для Conductor/OpenClaw — можно делегировать рутинные задачи (деплой, уведомления, обновление данных) через один MCP вызов.
+        </div>
+        <div class="card-action">
+          <div class="card-action-label">Действие</div>
+          <div class="card-action-text">Установить n8n MCP server → подключить к OpenClaw → автоматизировать одну рутину (например, деплой дайджеста)</div>
+        </div>
+        <div class="card-source"><a href="https://www.builder.io/blog/best-mcp-servers-2026">Builder.io</a></div>
+        <div class="feedback-buttons">
+          <button class="feedback-btn" data-card-id="impl_3" data-action="like">👍</button>
+          <button class="feedback-btn" data-card-id="impl_3" data-action="dislike">👎</button>
+          <button class="feedback-btn" data-card-id="impl_3" data-action="backlog">📋 В бэклог</button>
+        </div>
+      </div>
     </div>
 
-    <!-- Секция: Контр-сигнал (красный акцент) -->
+    <!-- Контр-сигнал -->
     <div class="section fade-in-up">
       <div class="section-header">
         <div class="section-title counter-signal-title">⚠️ Контр-сигнал</div>
         <div class="section-line"></div>
       </div>
-      
-<details class="accordion-card counter-signal" data-card-id="risk_1" data-card-title="Почему большинство вайб-код проектов проваливаются" data-card-category="⚠️ КОНТР-СИГНАЛ">
-  <summary class="accordion-summary">
-    <span class="tag risk">⚠️ РИСК</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">Почему большинство вайб-код проектов проваливаются</div>
-      <div class="accordion-card-preview">Вирусный пост с 4840 апвотами. Автор разбирает типичные ошибки: отсутствие тестов, API-ключи во фронтенде, нулевая...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">Вирусный пост с 4840 апвотами. Автор разбирает типичные ошибки: отсутствие тестов, API-ключи во фронтенде, нулевая безопасность, технический долг с первого дня. Для вайб-кодеров это отрезвляющий чек-лист.</div>
-    <div class="card-risk">
-      <div class="card-risk-label">Контр-сигнал</div>
-      <div class="card-risk-text">Если собираешь Qadam через вайб-кодинг — проверь: нет ли API-ключей во фронтенде, есть ли тесты, настроен ли CORS. Один пропущенный секрет = $87K потерь (см. карточку в новостях).</div>
-    </div>
-    <div class="card-source"><a href="https://i.redd.it/uxpmxlbmawog1.jpeg" target="_blank" rel="noopener">r/ClaudeAI</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="risk_1" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="risk_1" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="risk_1" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
 
-<details class="accordion-card counter-signal" data-card-id="risk_2" data-card-title="15 часов с 1М контекстом — ощущения как от наркотика" data-card-category="⚠️ КОНТР-СИГНАЛ">
-  <summary class="accordion-summary">
-    <span class="tag risk">⚠️ РИСК</span>
-    <div class="accordion-summary-content">
-      <div class="accordion-card-title">15 часов с 1М контекстом — ощущения как от наркотика</div>
-      <div class="accordion-card-preview">Пользователь MAX-плана делится восторгом: контекст 1М токенов автоматически включился без доплаты. После 15 часов...</div>
-    </div>
-    <div class="accordion-chevron">▼</div>
-  </summary>
-  <div class="accordion-body">
-    <div class="card-text">Пользователь MAX-плана делится восторгом: контекст 1М токенов автоматически включился без доплаты. После 15 часов работы — агент больше не забывает контекст, не перечитывает файлы, работает как напарник. 192 апвота.</div>
-    <div class="card-risk">
-      <div class="card-risk-label">Контр-сигнал</div>
-      <div class="card-risk-text">Эйфория от нового инструмента — классический hype cycle. Проверь реально: насколько 1М контекст ускоряет работу на Qadam? Замерь время на типичную задачу до и после.</div>
-    </div>
-    <div class="card-source"><a href="https://reddit.com/r/ClaudeAI/comments/1rtgq1o/15_or_so_hours_later_since_1m_context_included_in/" target="_blank" rel="noopener">r/ClaudeAI</a></div>
-    <div class="feedback-buttons">
-      <button class="feedback-btn" data-card-id="risk_2" data-action="like">👍</button>
-      <button class="feedback-btn" data-card-id="risk_2" data-action="dislike">👎</button>
-      <button class="feedback-btn" data-card-id="risk_2" data-action="backlog">📋 В бэклог</button>
-    </div>
-  </div>
-</details>
-    </div>
-  </div>
+      <details class="accordion-card counter-signal" data-card-id="risk_1" data-card-title="Дефицит электричества 9-18 GW к 2028 — AI-инфра не готова" data-card-category="⚠️ КОНТР-СИГНАЛ">
+        <summary class="accordion-summary">
+          <span class="tag risk">⚠️ РИСК</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Дефицит электричества 9-18 GW к 2028 — AI-инфра не готова</div>
+            <div class="accordion-card-preview">Morgan Stanley: дефицит на 12-25% к 2028 для обслуживания AI compute</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">Morgan Stanley предупреждает: дефицит электричества 9-18 GW к 2028 для обслуживания AI compute. Разработчики конвертируют Bitcoin майнинг в HPC, но батарейки и турбины не успеют. Чёрный лебедь: энергокризис AI.</div>
+          <div class="card-risk">
+            <div class="card-risk-label">Контр-сигнал</div>
+            <div class="card-risk-text">AI-сервисы могут резко подорожать или стать недоступны в 2027-2028. Вся автоматизация на AI APIs = зависимость от нестабильной инфры</div>
+          </div>
+          <div class="card-source"><a href="https://fortune.com/2026/03/13/elon-musk-morgan-stanley-ai-leap-2026/">Fortune / Morgan Stanley</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="risk_1" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="risk_1" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="risk_1" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
 
-  <!-- Sticky панель фидбэка создаётся автоматически через initFeedbackButtons() в feedback.js -->
+      <details class="accordion-card counter-signal" data-card-id="risk_2" data-card-title="Юридический хаос: федеральный US vs state AI законы" data-card-category="⚠️ КОНТР-СИГНАЛ">
+        <summary class="accordion-summary">
+          <span class="tag risk">⚠️ РИСК</span>
+          <div class="accordion-summary-content">
+            <div class="accordion-card-title">Юридический хаос: федеральный US vs state AI законы</div>
+            <div class="accordion-card-preview">Executive Order закрывает Colorado AI Act. EU требует одно, US — другое</div>
+          </div>
+          <div class="accordion-chevron">▼</div>
+        </summary>
+        <div class="accordion-body">
+          <div class="card-text">Federal litigation task force пытается закрыть Colorado AI Act. Компании в ловушке: EU AI Act требует обязательства, US федерал их отменяет. Конституционные вопросы не решены. Compliance = юридическая рулетка.</div>
+          <div class="card-risk">
+            <div class="card-risk-label">Контр-сигнал</div>
+            <div class="card-risk-text">Если запускаешь AI-продукт для US/EU рынков — юридические требования непредсказуемы. Инвестиции в compliance сейчас могут обесцениться через 6 месяцев</div>
+          </div>
+          <div class="card-source"><a href="https://www.ropesgray.com/en/insights/alerts/2026/03/examining-the-landscape-and-limitations-of-the-federal-push-to-override-state-ai-regulation">Ropes & Gray</a></div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn" data-card-id="risk_2" data-action="like">👍</button>
+            <button class="feedback-btn" data-card-id="risk_2" data-action="dislike">👎</button>
+            <button class="feedback-btn" data-card-id="risk_2" data-action="backlog">📋 В бэклог</button>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
 
   <script src="../js/feedback.js"></script>
   <script src="../js/app.js"></script>
   <script>
-    // Инициализация кнопок фидбэка с привязкой к дате дайджеста
     if (typeof initFeedbackButtons === 'function') initFeedbackButtons('2026-03-15');
   </script>
 </body>
